@@ -17,3 +17,6 @@ rules:
   n/shebang: off
   n/hashbang: off
   prefer-destructuring: off
+  unicorn/prefer-node-protocol: off
+  unicorn/no-negated-condition: off
+  no-return-await: off
