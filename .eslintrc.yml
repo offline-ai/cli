@@ -1,0 +1,19 @@
+extends: ["oclif", "oclif-typescript", "prettier"]
+rules:
+  tsdoc/syntax: off
+  no-cond-assign: off
+  yml/plain-scalar: off
+  yml/quotes: off
+  unicorn/prefer-number-properties: off
+  '@typescript-eslint/no-explicit-any': off
+  perfectionist/sort-imports: off
+  perfectionist/sort-classes: off
+  perfectionist/sort-objects: off
+  perfectionist/sort-object-types: off
+  padding-line-between-statements: off
+  "@typescript-eslint/no-unused-vars": off
+  object-shorthand: off
+  n/no-unpublished-bin: off
+  n/shebang: off
+  n/hashbang: off
+  prefer-destructuring: off

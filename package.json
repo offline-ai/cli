@@ -1,0 +1,89 @@
+{
+  "name": "@isdk/ai-agent",
+  "description": "Your local Offline AI-Agent",
+  "version": "0.0.0",
+  "author": "Riceball LEE @snowyu",
+  "bin": {
+    "ai": "./bin/run.js"
+  },
+  "bugs": "https://github.com/snowyu/ai-agent/issues",
+  "dependencies": {
+    "@isdk/ai-tool": "workspace:*",
+    "@isdk/ai-tool-agent": "workspace:*",
+    "@isdk/ai-tool-llm": "workspace:*",
+    "@isdk/ai-tool-llm-llamacpp": "workspace:*",
+    "@isdk/ai-tool-prompt": "workspace:*",
+    "@oclif/core": "^3",
+    "@oclif/plugin-autocomplete": "^3.0.17",
+    "@oclif/plugin-help": "^6",
+    "@oclif/plugin-not-found": "^3.1.8",
+    "@oclif/plugin-plugins": "^5",
+    "@oclif/plugin-version": "^2.1.0",
+    "console-log-colors": "^0.5.0",
+    "figlet": "^1.7.0",
+    "util-ex": "2.0.0-alpha.18"
+  },
+  "devDependencies": {
+    "@oclif/prettier-config": "^0.2.1",
+    "@oclif/test": "^3",
+    "@types/chai": "^4",
+    "@types/figlet": "^1.5.8",
+    "@types/mocha": "^10",
+    "@types/node": "^18",
+    "chai": "^4",
+    "eslint": "^8",
+    "eslint-config-oclif": "^5",
+    "eslint-config-oclif-typescript": "^3",
+    "eslint-config-prettier": "^9",
+    "mocha": "^10",
+    "oclif": "^4",
+    "shx": "^0.3.3",
+    "ts-node": "^10",
+    "tsx": "^4.9.4",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "/bin",
+    "/dist",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/snowyu/ai-agent",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "type": "module",
+  "oclif": {
+    "bin": "ai",
+    "dirname": "ai",
+    "commands": "./dist/oclif/commands",
+    "helpClass": "./dist/oclif/lib/help",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins",
+      "@oclif/plugin-not-found",
+      "@oclif/plugin-version"
+    ],
+    "topicSeparator": " ",
+    "topics": {
+      "hello": {
+        "description": "Say hello to the world and others"
+      }
+    }
+  },
+  "repository": "snowyu/ai-agent",
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "lint": "eslint . --ext .ts",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "pnpm run lint",
+    "prepack": "oclif manifest && oclif readme",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif readme && git add README.md"
+  },
+  "types": "dist/index.d.ts"
+}

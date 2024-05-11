@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "target": "es2022",
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types",
+      "./node_modules/@microsoft"
+    ],
+    "strictPropertyInitialization": false,
+    "useDefineForClassFields": false,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noImplicitThis": false,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+  },
+  "include": ["src/**/*"],
+  "ts-node": {
+    "esm": true
+  }
+}
