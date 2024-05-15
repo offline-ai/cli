@@ -29,7 +29,7 @@ class AIScriptEx extends AIScript {
         script = scripts[_id]
         if (!script) {
           const content = loadScriptFromFile(filename, this.searchPaths)
-          const script = new AIScriptEx(content)
+          script = new AIScriptEx(content)
           if (!script.id) {
             script.id = _id
           } else if (scripts[script.id]) {
@@ -43,7 +43,7 @@ class AIScriptEx extends AIScript {
     } else {
       throw new TypeError('filename or id is required')
     }
-    return await script.exec(params.args)
+    return super.$exec({args: params.args, script})
   }
 }
 
@@ -53,7 +53,7 @@ export async function runScript(filename: string, options?: {logLevel?: LogLevel
   if (Array.isArray(searchPaths)) AIScriptEx.searchPaths = searchPaths
   const content = loadScriptFromFile(filename, searchPaths)
   if (content) {
-    const script = new AIScript(content)
+    const script = new AIScriptEx(content)
     if (level !== undefined) {
       script.logLevel = level
     }
