@@ -20,3 +20,9 @@ rules:
   unicorn/prefer-node-protocol: off
   unicorn/no-negated-condition: off
   no-return-await: off
+  no-await-in-loop: off
+  perfectionist/sort-named-imports: off
+  unicorn/prefer-ternary: off
+  dot-notation: off
+  max-depth: ['warn', 6]
+

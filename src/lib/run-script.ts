@@ -4,6 +4,7 @@ import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
 import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 import { AIScript, LogLevel, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
+import { prompt, BottomBar } from './prompt.js'
 
 const apiUrl = 'http://localhost:8080'
 llamaCpp.apiUrl = apiUrl
@@ -47,17 +48,52 @@ class AIScriptEx extends AIScript {
   }
 }
 
-export async function runScript(filename: string, options?: {logLevel?: LogLevel, data?: any, apiUrl?: string, searchPaths?: string[]}) {
-  const {logLevel: level, data, apiUrl, searchPaths} = options ?? {}
+export async function runScript(filename: string, options?: {stream?: boolean, interactive?: boolean, logLevel?: LogLevel, data?: any, apiUrl?: string, searchPaths?: string[]}) {
+  const {logLevel: level, data, apiUrl, searchPaths, interactive, stream} = options ?? {}
   if (apiUrl) { llamaCpp.apiUrl = apiUrl }
   if (Array.isArray(searchPaths)) AIScriptEx.searchPaths = searchPaths
   const content = loadScriptFromFile(filename, searchPaths)
   if (content) {
     const script = new AIScriptEx(content)
+    const uiBottom = new BottomBar()
+
     if (level !== undefined) {
       script.logLevel = level
     }
-    const result = await script.exec(data)
+    if (stream !== undefined) {
+      script.llmStream = stream
+    }
+    if (interactive) {
+      script.autoRunLLMIfPromptAvailable = false
+    }
+
+    let result = await script.exec(data)
+    if (stream) {
+      script._runtime.on('llm-stream', (_, result: string) => {
+        if (result) {uiBottom.updateBottomBar(result)}
+      })
+    }
+
+    if (interactive) {
+      let quit = false
+      do {
+        const answer = await prompt([
+          {
+            type: 'input',
+            name: 'input',
+            message: '>',
+            suffix: '',
+            prefix: '',
+          },
+        ])
+        quit = answer.input === 'quit' || answer.input === 'exit'
+        if (!quit) {
+          result = await script.interact({message: answer.input})
+          if (stream) { result = '' }
+          console.log(result)
+        }
+      } while (!quit)
+    }
     return result
   }
 }
