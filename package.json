@@ -21,6 +21,7 @@
     "@oclif/plugin-version": "^2.1.0",
     "console-log-colors": "^0.5.0",
     "figlet": "^1.7.0",
+    "inquirer": "^9.2.22",
     "util-ex": "2.0.0-alpha.18"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "@oclif/test": "^3",
     "@types/chai": "^4",
     "@types/figlet": "^1.5.8",
+    "@types/inquirer": "^9.0.7",
     "@types/mocha": "^10",
     "@types/node": "^18",
     "chai": "^4",
