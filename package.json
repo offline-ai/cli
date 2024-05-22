@@ -29,7 +29,6 @@
     "@oclif/test": "^3",
     "@types/chai": "^4",
     "@types/figlet": "^1.5.8",
-    "@types/inquirer": "^9.0.7",
     "@types/mocha": "^10",
     "@types/node": "^18",
     "chai": "^4",

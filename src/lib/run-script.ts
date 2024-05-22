@@ -69,8 +69,10 @@ export async function runScript(filename: string, options?: {stream?: boolean, i
 
     let result = await script.exec(data)
     if (stream) {
-      script._runtime.on('llm-stream', (_, result: string) => {
-        if (result) {uiBottom.updateBottomBar(result)}
+      script._runtime.on('llm-stream', (result, content: string) => {
+        if (result?.content) {
+          uiBottom.write(result.content)
+        }
       })
     }
 

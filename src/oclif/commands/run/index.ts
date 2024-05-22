@@ -28,7 +28,7 @@ export default class RunScript extends Command {
   static flags = {
     apiUrl: Flags.url({char: 'u', description: 'the api URL', default: new URL('http://localhost:8080')}),
     searchPaths: Flags.directory({char: 'p', description: 'the search paths for ai-agent script file', exists: true, multiple: true}),
-    logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace'], default: 'warn'}),
+    logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
     interactive: Flags.boolean({char: 'i', description: 'interactive mode'}),
     stream: Flags.boolean({char: 's', description: 'stream mode'}),
   }
@@ -41,7 +41,7 @@ export default class RunScript extends Command {
     logLevel.json = isJson
     const interactive = flags.interactive
     let level = flags.logLevel as any
-    if (interactive && LogLevelMap[level]  < LogLevelMap.error) {
+    if (interactive && !level) {
       level = 'error'
     }
     let result = await runScript(args.script, {
