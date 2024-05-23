@@ -1,3 +1,5 @@
+import colors from 'ansi-colors'
+// import cliSpinners from 'cli-spinners';
 import { Config } from '@oclif/core';
 import path from 'path'
 import { ToolFunc, wait } from '@isdk/ai-tool'
@@ -6,7 +8,6 @@ import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 import { AIScript, LogLevel, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
-import cliSpinners from 'cli-spinners';
 
 const apiUrl = 'http://localhost:8080'
 llamaCpp.apiUrl = apiUrl
@@ -71,21 +72,34 @@ export async function runScript(filename: string, options?: {config: Config, str
     let result = await script.exec(data)
 
     if (interactive) {
-      const spinner = cliSpinners.dots
+      // const spinner = cliSpinners.dots
       let quit = false
       const aiName = script._runtime.prompt?.character?.name || 'ai'
       const store = new HistoryStore(path.join(config?.configDir ?? '.', path.basename(filename, path.extname(filename)), '.ai-history.json'))
       setHistoryStore(store)
+      if (stream) {
+        script._runtime.on('llm-stream', async (llmResult, content: string) => {
+          const s = llmResult.content
+          if (s) {process.stdout.write(s)}
+        })
+      }
       do {
         const input = prompt({prefix: 'You:'})
         const message = await input.run()
         quit = message === 'quit' || message === 'exit'
-        console.log()
+        // console.log()
 
         if (!quit) {
+          input.write(colors.yellow(aiName+ ': '))
+          result = await script.interact({message: message})
+          input.write('\n')
+
+          /*
           let isThinking = true
           const aiOutput = prompt({
             prefix: aiName+':',
+            keypressTimeout,
+            multiline: true,
             separator(state) {
               const timer = state.timer
               if (!isThinking) {timer.stop()}
@@ -99,15 +113,19 @@ export async function runScript(filename: string, options?: {config: Config, str
 
           aiOutput.once('run', async() => {
             if (stream) {
+              let count = 0
               script._runtime.on('llm-stream', async (llmResult, content: string) => {
                 const s = llmResult.content
                 if (s) {
                   isThinking = false
+                  count += s.length
+                  if (count > 20) {aiOutput.write('\n')}
+                  // aiOutput.write(s)
                   await typeToPrompt(aiOutput, s)
                 }
-                // if (llmResult.stop) {
-                //   aiOutput.submit()
-                // }
+                if (llmResult.stop) {
+                  aiOutput.input = content
+                }
               })
             }
             result = await script.interact({message: message})
@@ -118,6 +136,7 @@ export async function runScript(filename: string, options?: {config: Config, str
           })
 
           await aiOutput.run()
+          */
 
         }
 
@@ -170,13 +189,14 @@ export async function runScript(filename: string, options?: {config: Config, str
   }
 }
 
-function getFrame(arr, i) {
+export function getFrame(arr, i) {
   return arr[i % arr.length]
 };
 
-async function typeToPrompt(prompt: any, input: string) {
+export const keypressTimeout = 5
+export async function typeToPrompt(prompt: any, input: string) {
   for (const char of input) {
     await prompt.keypress(char)
-    await wait(10)
+    await wait(keypressTimeout+ 10)
   }
 }

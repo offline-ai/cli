@@ -32,10 +32,12 @@ export function prompt(options: any = {}, useStore = true) {
     // symbols: { prefix: ']',  },
     separator() {return ''},
     styles: {
-      primary: colors.yellow,
-      get submitted() {
-        return this.complement;
-      }
+      // primary: colors.yellow,
+      // submitted: colors.yellow,
+      prefix: colors.yellow,
+      // get submitted() {
+      //   return this.complement;
+      // }
     }
   }
   options = {...defaultOptions, ...options}
