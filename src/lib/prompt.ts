@@ -1,44 +1,101 @@
-import inquirer, { createPromptModule } from 'inquirer';
+import fs from 'fs'
+import path from 'path'
+import enquier from 'enquirer'
+import colors from 'ansi-colors'
+const Input = (enquier as any).Input
 
-export const prompt = createPromptModule()
+let GlobalStore: HistoryStore|undefined
 
-export const BottomBar = inquirer.ui.BottomBar
-
-export class Input extends prompt.prompts['input'] {
-  declare getQuestion
-  declare opt
-  declare status
-  declare answer
-  declare answers
-  declare rl
-  declare screen
-
-  render(error) {
-    let bottomContent = '';
-    let appendContent = '';
-    let message = this.getQuestion();
-    const { transformer } = this.opt;
-    const isFinal = this.status === 'answered';
-
-    appendContent = isFinal ? this.answer : this.rl.line;
-    // console.log('🚀 ~ Input ~ render ~ appendContent:', appendContent)
-
-    if (transformer) {
-      const s = transformer(appendContent, this.answers, { isFinal });
-      if (s) {
-        message += s;
-      }
-    } else {
-      message += appendContent;
-    }
-
-    if (error) {
-      bottomContent =  error;
-    }
-
-    // if (isFinal) bottomContent += 'Done'
-    this.screen.render(message, bottomContent);
+function save() {
+  if (GlobalStore) {
+    GlobalStore.save()
   }
 }
 
-prompt.registerPrompt('input', Input)
+process.on('exit', function () {
+  save()
+});
+
+// catch ctrl+c event and exit normally
+process.on('SIGINT', function () {
+  save()
+});
+
+export function setHistoryStore(store?: HistoryStore) {
+  GlobalStore = store
+}
+
+export function prompt(options: any = {}, useStore = true) {
+  const defaultOptions = {
+    message: '',
+    initial: '',
+    // symbols: { prefix: ']',  },
+    separator() {return ''},
+    styles: {
+      primary: colors.yellow,
+      get submitted() {
+        return this.complement;
+      }
+    }
+  }
+  options = {...defaultOptions, ...options}
+  if (GlobalStore && useStore) {
+    if (!options.history) {options.history = {}}
+    options.history.store = GlobalStore
+    options.history.autosave = true
+  }
+  const result = new Input(options);
+
+  if (GlobalStore && useStore) {
+    result.on('keypress', (s, key) => {
+      switch (key.action) {
+        case 'up': {
+          result.altUp()
+          break
+        }
+        case 'down': {
+          result.altDown()
+          break
+        }
+        case 'cancel': {
+          if (result.input) {
+            key.action = 'reset'
+          }
+          break
+        }
+      }
+    })
+  }
+
+  return result
+}
+
+export class HistoryStore {
+  store: {[name: string]: any} = {}
+
+  constructor(public path: string) {
+    if (path) {this.load(path)}
+  }
+
+  get(key: string) {
+    return this.store[key]
+  }
+
+  set(key: string, value: any) {
+    this.store[key] = value
+  }
+
+  save(filepath: string = this.path) {
+    const dirpath = path.dirname(filepath)
+    if (!fs.existsSync(dirpath)) {
+      fs.mkdirSync(dirpath, {recursive: true})
+    }
+    fs.writeFileSync(filepath, JSON.stringify(this.store, null, 2))
+  }
+
+  load(filepath = this.path) {
+    if (fs.existsSync(filepath)) {
+      Object.assign(this.store, JSON.parse(fs.readFileSync(filepath, 'utf8')))
+    }
+  }
+}

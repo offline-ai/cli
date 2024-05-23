@@ -35,6 +35,7 @@ export default class RunScript extends Command {
 
   async run(): Promise<any> {
     showBanner()
+    const config = this.config
     const {args, flags} = await this.parse(RunScript)
     // console.log('🚀 ~ RunScript ~ run ~ flags:', flags)
     const isJson = this.jsonEnabled()
@@ -44,18 +45,25 @@ export default class RunScript extends Command {
     if (interactive && !level) {
       level = 'error'
     }
-    let result = await runScript(args.script, {
-      logLevel: level,
-      apiUrl: flags.apiUrl.toString(),
-      searchPaths: flags.searchPaths,
-      interactive,
-      stream: flags.stream,
-      data: args.data,
-    })
-    if (LogLevelMap[level] >= LogLevelMap.info && result.content) {
-      result = result.content
+    try {
+      let result = await runScript(args.script, {
+        logLevel: level,
+        apiUrl: flags.apiUrl.toString(),
+        searchPaths: flags.searchPaths,
+        interactive,
+        stream: flags.stream,
+        data: args.data,
+        config,
+      })
+      if (LogLevelMap[level] >= LogLevelMap.info && result.content) {
+        result = result.content
+      }
+      this.log(typeof result === 'string' ? result : JSON.stringify(result, null, 2))
+      return result
+    } catch (error: any) {
+      if (error) {
+        this.error(error.message)
+      }
     }
-    this.log(typeof result === 'string' ? result : JSON.stringify(result, null, 2))
-    return result
   }
 }

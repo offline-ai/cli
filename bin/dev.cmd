@@ -1,3 +1,3 @@
 @echo off
 
-node "%~dp0\dev" %*
+node --no-warnings "%~dp0\dev" %*

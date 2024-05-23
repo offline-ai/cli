@@ -25,4 +25,14 @@ rules:
   unicorn/prefer-ternary: off
   dot-notation: off
   max-depth: ['warn', 6]
+  unicorn/escape-case: off
+  import/no-named-as-default-member: off
+  unicorn/catch-error-name: off
+  prefer-arrow-callback: off
+  n/no-process-exit: off
+  arrow-body-style: off
+  unicorn/consistent-function-scoping: off
+  unicorn/prefer-top-level-await: off
+  unicorn/prefer-module: off
+  # no-undef: off
 
