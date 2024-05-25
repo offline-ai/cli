@@ -69,17 +69,28 @@ export async function runScript(filename: string, options?: {config: Config, str
       script.autoRunLLMIfPromptAvailable = false
     }
 
+    let quit = false
+
+    const interrupted = () => {
+      // quit = true
+      script._runtime.abort()
+    }
+    process.on('SIGINT', interrupted)
+
     let result = await script.exec(data)
 
     if (interactive) {
       // const spinner = cliSpinners.dots
-      let quit = false
       const aiName = script._runtime.prompt?.character?.name || 'ai'
       const store = new HistoryStore(path.join(config?.configDir ?? '.', path.basename(filename, path.extname(filename)), '.ai-history.json'))
       setHistoryStore(store)
       if (stream) {
-        script._runtime.on('llm-stream', async (llmResult, content: string) => {
+        script._runtime.on('llm-stream', async function(llmResult, content: string) {
           const s = llmResult.content
+          if (quit) {
+            this.target.abort()
+            process.exit(0)
+          }
           if (s) {process.stdout.write(s)}
         })
       }
