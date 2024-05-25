@@ -60,7 +60,9 @@ export function prompt(options: any = {}, useStore = true) {
           break
         }
         case 'cancel': {
-          if (result.input) {
+          if (key.ctrl && key.name === 'c') {
+            process.exit(0)
+          } else if (result.input) {
             key.action = 'reset'
           }
           break

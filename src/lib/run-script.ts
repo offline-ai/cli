@@ -73,7 +73,11 @@ export async function runScript(filename: string, options?: {config: Config, str
 
     const interrupted = () => {
       // quit = true
-      script._runtime.abort()
+      if (script._runtime.isAborted()) {
+        process.exit(0)
+      } else {
+        script._runtime.abort()
+      }
     }
     process.on('SIGINT', interrupted)
 
