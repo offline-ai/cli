@@ -99,27 +99,44 @@ export async function runScript(filename: string, options?: {config: Config, str
 
       const store = new HistoryStore(path.join(config?.configDir ?? '.', path.basename(filename, path.extname(filename)), '.ai-history.json'))
       setHistoryStore(store)
+      let retryCount = 0
       if (stream) {
-        runtime.on('llm-stream', async function(llmResult, content: string) {
+        runtime.on('llm-stream', async function(llmResult, content: string, count: number) {
           const s = llmResult.content
           if (quit) {
             this.target.abort()
             process.exit(0)
           }
+          if (count !== retryCount) {
+            retryCount = count
+            process.stdout.write(colors.blue(`<续:>`))
+          }
           if (s) {process.stdout.write(s)}
         })
       }
       do {
+        retryCount = 0
         const input = prompt({prefix: 'You:'})
-        const message = await input.run()
+        const message = (await input.run()).trim()
+        const llmOptions = {} as any
+        if (message) {
+          llmOptions.message = message
+          delete llmOptions.shouldAppendResponse
+          delete llmOptions.add_generation_prompt
+        } else {
+          llmOptions.shouldAppendResponse = false
+          llmOptions.add_generation_prompt = false
+          input.clear()
+        }
         quit = message === 'quit' || message === 'exit'
         // console.log()
 
         if (!quit) {
-          input.write(colors.yellow(aiName+ ': '))
+          if (message) {input.write(colors.yellow(aiName+ ': '))}
           try {
-            result = await script.interact({message: message})
+            result = await runtime.$interact(llmOptions)
           } catch(error: any) {
+            console.log('🚀 ~ runScript ~ error:', error)
             if (error.code !== ErrorCode.Aborted) {throw error}
           }
           input.write('\n')
