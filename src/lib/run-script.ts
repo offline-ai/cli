@@ -2,7 +2,7 @@ import colors from 'ansi-colors'
 // import cliSpinners from 'cli-spinners';
 import { Config } from '@oclif/core';
 import path from 'path'
-import { ToolFunc, wait } from '@isdk/ai-tool'
+import { ErrorCode, ToolFunc, wait } from '@isdk/ai-tool'
 import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
 import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
@@ -106,7 +106,11 @@ export async function runScript(filename: string, options?: {config: Config, str
 
         if (!quit) {
           input.write(colors.yellow(aiName+ ': '))
-          result = await script.interact({message: message})
+          try {
+            result = await script.interact({message: message})
+          } catch(error: any) {
+            if (error.code !== ErrorCode.Aborted) {throw error}
+          }
           input.write('\n')
 
           /*
