@@ -81,15 +81,26 @@ export async function runScript(filename: string, options?: {config: Config, str
     }
     process.on('SIGINT', interrupted)
 
-    let result = await script.exec(data)
+    const runtime = await script.run(data)
+    let result = runtime.result
 
     if (interactive) {
       // const spinner = cliSpinners.dots
-      const aiName = script._runtime.prompt?.character?.name || 'ai'
+      const aiName = runtime.prompt?.character?.name || 'ai'
+
+      const latestMessages = await runtime.getLatestMessages()
+      if (latestMessages && latestMessages.length > 0) {
+        for (const msg of latestMessages) {
+          const char = msg.role === 'user' ? colors.blue('You') : (msg.role === 'assistant' ? colors.yellow(aiName): undefined)
+          if (!char) {continue}
+          console.log(char + ':', msg.content)
+        }
+      }
+
       const store = new HistoryStore(path.join(config?.configDir ?? '.', path.basename(filename, path.extname(filename)), '.ai-history.json'))
       setHistoryStore(store)
       if (stream) {
-        script._runtime.on('llm-stream', async function(llmResult, content: string) {
+        runtime.on('llm-stream', async function(llmResult, content: string) {
           const s = llmResult.content
           if (quit) {
             this.target.abort()

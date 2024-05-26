@@ -25,6 +25,7 @@ rules:
   unicorn/prefer-ternary: off
   dot-notation: off
   max-depth: ['warn', 6]
+  complexity: ['warn', 30]
   unicorn/escape-case: off
   import/no-named-as-default-member: off
   unicorn/catch-error-name: off
