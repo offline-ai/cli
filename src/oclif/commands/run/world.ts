@@ -26,6 +26,8 @@ export default class World extends Command {
 
   static description = 'Say hello world'
 
+  static hidden = true
+
   static examples = [
     `<%= config.bin %> <%= command.id %>
 hello world! (./src/commands/run/world.ts)
