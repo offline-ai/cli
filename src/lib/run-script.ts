@@ -54,7 +54,9 @@ class AIScriptEx extends AIScript {
 export async function runScript(filename: string, options?: {config: Config, stream?: boolean, interactive?: boolean, logLevel?: LogLevel, data?: any, apiUrl?: string, searchPaths?: string[]}) {
   const {logLevel: level, data, apiUrl, searchPaths, interactive, stream, config} = options ?? {}
   if (apiUrl) { llamaCpp.apiUrl = apiUrl }
-  if (Array.isArray(searchPaths)) AIScriptEx.searchPaths = searchPaths
+
+  AIScriptEx.searchPaths = Array.isArray(searchPaths) ? searchPaths: ['.']
+
   const content = loadScriptFromFile(filename, searchPaths)
   if (content) {
     const script = new AIScriptEx(content)
