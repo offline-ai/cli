@@ -9,24 +9,26 @@ export default class RunScript extends Command {
   public static enableJsonFlag = true
 
   static args = {
-    script: Args.file({description: 'the ai-agent script file name', exists: true, required: true}),
+    script: Args.string({description: 'the ai-agent script file name', required: true}),
     data: Args.string({
-      description: 'the data which will be passed to the ai-agent script',
+      description: 'the json data which will be passed to the ai-agent script',
       parse: (input: string) => parseJsJson(input),
     })
   }
 
-  static description = 'Run ai-agent script file'
+  static summary = '💻 Run ai-agent script file.'
+
+  static description = 'Execute ai-agent script file and return result.'
 
   static examples = [
-    `<%= config.bin %> <%= command.id %> ./script.yaml
+    `<%= config.bin %> <%= command.id %> ./script.yaml "{content: 'hello world'}"
 ┌────────────────────
 │[info]:Start Script: ...
 `,
   ]
 
   static flags = {
-    apiUrl: Flags.url({char: 'u', description: 'the api URL', default: new URL('http://localhost:8080')}),
+    api: Flags.url({char: 'u', description: 'the api URL', default: new URL('http://localhost:8080')}),
     searchPaths: Flags.directory({char: 'p', description: 'the search paths for ai-agent script file', exists: true, multiple: true}),
     logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
     interactive: Flags.boolean({char: 'i', description: 'interactive mode'}),
@@ -48,7 +50,7 @@ export default class RunScript extends Command {
     try {
       let result = await runScript(args.script, {
         logLevel: level,
-        apiUrl: flags.apiUrl.toString(),
+        apiUrl: flags.api.toString(),
         searchPaths: flags.searchPaths,
         interactive,
         stream: flags.stream,
