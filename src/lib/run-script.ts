@@ -3,7 +3,7 @@ import colors from 'ansi-colors'
 import { get as getByPath } from 'lodash-es'
 import { Config } from '@oclif/core';
 import path from 'path'
-import { parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
+import { createEndWithRepetitionDetector, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
 import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
 import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
@@ -106,11 +106,12 @@ export async function runScript(filename: string, options?: {config: Config, str
       setHistoryStore(store)
       let retryCount = 0
       if (stream) {
+        const endWithRepeatedSequence = createEndWithRepetitionDetector(6)
         runtime.on('llm-stream', async function(llmResult, content: string, count: number) {
           const s = llmResult.content
           llmContentChunk += s
           llmLastContent += s
-          if (/([\S\s]+)(\1{5,})$/.test(llmContentChunk)) {
+          if (endWithRepeatedSequence(llmContentChunk)) {
             // repeat content found
             this.target.abort()
             return
