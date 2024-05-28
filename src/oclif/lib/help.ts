@@ -3,7 +3,8 @@ import { uText } from '../../lib/u-text.js';
 
 
 export function showBanner() {
-  console.log(uText('AI Agent', 'blue', 'ANSI Shadow'));
+  console.log(uText('AI Agent', {color: 'blue', })); // font: 'ANSI Shadow'
+  // uText('AI Agent', {font: 'block', colors:['yellow', 'white'], gradient: 'yellow,red'})
 }
 
 export default class CustomHelp extends Help {

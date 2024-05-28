@@ -20,6 +20,7 @@
     "@oclif/plugin-plugins": "^5",
     "@oclif/plugin-version": "^2.1.0",
     "ansi-colors": "^4.1.3",
+    "cfonts": "^3.2.0",
     "cli-spinners": "^3.0.0",
     "enquirer": "^2.4.1",
     "figlet": "^1.7.0",
@@ -71,11 +72,7 @@
       "@oclif/plugin-version"
     ],
     "topicSeparator": " ",
-    "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
-      }
-    }
+    "repositoryPrefix": ""
   },
   "repository": "snowyu/ai-agent",
   "scripts": {
@@ -83,7 +80,7 @@
     "lint": "eslint . --ext .ts",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
-    "prepack": "oclif manifest && oclif readme",
+    "prepack": "NODE_OPTIONS='--trace-warnings --no-warnings=ExperimentalWarning' oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md"
   },

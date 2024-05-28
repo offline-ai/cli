@@ -1,5 +1,4 @@
-ai-agent
-=================
+# ai-agent
 
 ai-agent CLI
 
@@ -10,25 +9,29 @@ ai-agent CLI
 
 
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+* [ai-agent](#ai-agent)
 <!-- tocstop -->
-# Usage
+
+## Usage
+
 <!-- usage -->
 ```sh-session
 $ npm install -g @isdk/ai-agent
 $ ai COMMAND
 running command...
 $ ai (--version)
-@isdk/ai-agent/0.0.0 linux-x64 node-v20.11.1
+@isdk/ai-agent/0.0.0 linux-x64 node-v20.13.1
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
 ...
 ```
 <!-- usagestop -->
-# Commands
+
+## Commands
+
 <!-- commands -->
+* [`ai brain`](#ai-brain)
 * [`ai help [COMMAND]`](#ai-help-command)
 * [`ai plugins`](#ai-plugins)
 * [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
@@ -41,8 +44,25 @@ USAGE
 * [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
 * [`ai plugins update`](#ai-plugins-update)
 * [`ai run SCRIPT [DATA]`](#ai-run-script-data)
-* [`ai run world`](#ai-run-world)
 * [`ai version`](#ai-version)
+
+## `ai brain`
+
+🧠 The AI Agent Brains(LLM) Manager
+
+```
+USAGE
+  $ ai brain
+
+DESCRIPTION
+  🧠 The AI Agent Brains(LLM) Manager
+
+EXAMPLES
+  $ ai brain list
+      ai brain download <brain-name>
+```
+
+_See code: [src/commands/brain/index.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/brain/index.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -355,53 +375,40 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 
 ## `ai run SCRIPT [DATA]`
 
-Run ai-agent script file
+💻 Run ai-agent script file.
 
 ```
 USAGE
-  $ ai run SCRIPT [DATA] [--json] [-u <value>] [-s <value>] [-l silence|fatal|error|warn|info|debug|trace]
+  $ ai run SCRIPT [DATA] [--json] [-u <value>] [-p <value>] [-l
+    silence|fatal|error|warn|info|debug|trace] [-i] [-s]
 
 ARGUMENTS
   SCRIPT  the ai-agent script file name
-  DATA    the data which will be passed to the ai-agent script
+  DATA    the json data which will be passed to the ai-agent script
 
 FLAGS
-  -l, --logLevel=<option>       [default: info] the log level
+  -i, --interactive             interactive mode
+  -l, --logLevel=<option>       the log level
                                 <options: silence|fatal|error|warn|info|debug|trace>
-  -s, --searchPaths=<value>...  the search paths for ai-agent script file
-  -u, --apiUrl=<value>          [default: http://localhost:8080/] the api URL
+  -p, --searchPaths=<value>...  the search paths for ai-agent script file
+  -s, --stream                  stream mode
+  -u, --api=<value>             [default: http://localhost:8080/] the api URL
 
 GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  Run ai-agent script file
+  💻 Run ai-agent script file.
+
+  Execute ai-agent script file and return result.
 
 EXAMPLES
-  $ ai run ./script.yaml
+  $ ai run ./script.yaml "{content: 'hello world'}"
   ┌────────────────────
   │[info]:Start Script: ...
 ```
 
 _See code: [src/commands/run/index.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/run/index.ts)_
-
-## `ai run world`
-
-Say hello world
-
-```
-USAGE
-  $ ai run world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ ai run world
-  hello world! (./src/commands/run/world.ts)
-```
-
-_See code: [src/commands/run/world.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/run/world.ts)_
 
 ## `ai version`
 

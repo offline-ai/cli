@@ -22,7 +22,7 @@
     "noImplicitAny": false,
     "resolveJsonModule": true,
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "index copy.ts.back"],
   "ts-node": {
     "esm": true
   }
