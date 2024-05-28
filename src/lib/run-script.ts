@@ -3,7 +3,7 @@ import colors from 'ansi-colors'
 import { get as getByPath } from 'lodash-es'
 import { Config } from '@oclif/core';
 import path from 'path'
-import { ErrorCode, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
+import { parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
 import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
 import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
@@ -86,6 +86,8 @@ export async function runScript(filename: string, options?: {config: Config, str
 
     const runtime = await script.run(data)
     let result = runtime.result
+    let llmContentChunk = ''
+    let llmLastContent = ''
 
     if (interactive) {
       // const spinner = cliSpinners.dots
@@ -106,18 +108,29 @@ export async function runScript(filename: string, options?: {config: Config, str
       if (stream) {
         runtime.on('llm-stream', async function(llmResult, content: string, count: number) {
           const s = llmResult.content
+          llmContentChunk += s
+          llmLastContent += s
+          if (/([\S\s]+)(\1{5,})$/.test(llmContentChunk)) {
+            // repeat content found
+            this.target.abort()
+            return
+          }
+
           if (quit) {
             this.target.abort()
             process.exit(0)
           }
           if (count !== retryCount) {
             retryCount = count
-            process.stdout.write(colors.blue(`<续:>`))
+            llmContentChunk = ''
+            process.stdout.write(colors.blue(`<续:${count}>`))
           }
           if (s) {process.stdout.write(s)}
         })
       }
       do {
+        llmContentChunk = ''
+        llmLastContent = ''
         retryCount = 0
         const input = prompt({prefix: 'You:'})
         const message = (await input.run()).trim()
@@ -165,8 +178,17 @@ export async function runScript(filename: string, options?: {config: Config, str
           try {
             result = await runtime.$interact(llmOptions)
           } catch(error: any) {
-            console.log('🚀 ~ runScript ~ error:', error)
-            if (error.code !== ErrorCode.Aborted) {throw error}
+            if (error.name !== 'AbortError') {throw error}
+            const what = error.data?.what ? ':'+error.data.what : ''
+            input.write(colors.magentaBright(`<${error.name+what}>`))
+            if (llmLastContent) {
+              const lastMsg = await runtime.$getMessage(-1)
+              if (lastMsg && lastMsg.role === 'assistant') {
+                lastMsg.content += llmLastContent
+              } else {
+                runtime.$pushMessage({message: {role: 'assistant', content: llmLastContent}})
+              }
+            }
           }
           input.write('\n')
 

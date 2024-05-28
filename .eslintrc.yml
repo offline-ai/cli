@@ -40,7 +40,4 @@ rules:
   camelcase: off
   unicorn/no-array-for-each: off
   unicorn/prefer-optional-catch-binding: off
-
-
-
-
+  func-names: off
