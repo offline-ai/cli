@@ -1,8 +1,9 @@
 import colors from 'ansi-colors'
 // import cliSpinners from 'cli-spinners';
+import { get as getByPath } from 'lodash-es'
 import { Config } from '@oclif/core';
 import path from 'path'
-import { ErrorCode, ToolFunc, wait } from '@isdk/ai-tool'
+import { ErrorCode, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
 import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
 import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
@@ -122,6 +123,32 @@ export async function runScript(filename: string, options?: {config: Config, str
         const message = (await input.run()).trim()
         const llmOptions = {} as any
         if (message) {
+          if (message[0] === '/') {
+            const command = message.slice(1)
+            switch (command) {
+              case 'quit':
+              case 'exit': {
+                quit = true
+                break
+              }
+              default: {
+                if (command[0] === '.') {
+                  const r = getByPath(runtime, command.slice(1))
+                  console.log(command, '=', r)
+                } else {
+                  const {command: cmd, args} = parseCommandString(command)
+                  try {
+                    const r = await runtime[cmd](args)
+                    if (r) {console.log(r)}
+                  } catch(e: any) {
+                    console.error('command error:', e)
+                  }
+                }
+              }
+            }
+            continue;
+          }
+
           llmOptions.message = message
           delete llmOptions.shouldAppendResponse
           delete llmOptions.add_generation_prompt
@@ -187,6 +214,8 @@ export async function runScript(filename: string, options?: {config: Config, str
           await aiOutput.run()
           */
 
+        } else {
+          console.log('bye!')
         }
 
       } while (!quit)
@@ -248,4 +277,19 @@ export async function typeToPrompt(prompt: any, input: string) {
     await prompt.keypress(char)
     await wait(keypressTimeout+ 10)
   }
+}
+
+export function parseCommandString(commandString: string): { command: string, args: string[] } {
+  const regex = /^([\w$]+)(?:\((.*)\))?$/i;
+  const match = commandString.match(regex);
+
+  if (!match) {
+    throw new Error('Invalid command format');
+  }
+
+  const command = match[1]
+  const argsString = match[2] ? '[' + match[2].trim() + ']' : undefined;
+  const args: any[] = argsString ? parseJsJson(argsString) : []
+
+  return { command, args };
 }

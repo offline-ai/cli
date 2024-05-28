@@ -24,6 +24,7 @@
     "cli-spinners": "^3.0.0",
     "enquirer": "^2.4.1",
     "figlet": "^1.7.0",
+    "lodash-es": "^4.17.21",
     "util-ex": "2.0.0-alpha.18"
   },
   "devDependencies": {
@@ -31,6 +32,7 @@
     "@oclif/test": "^3",
     "@types/chai": "^4",
     "@types/figlet": "^1.5.8",
+    "@types/lodash-es": "^4.17.12",
     "@types/mocha": "^10",
     "@types/node": "^18",
     "chai": "^4",

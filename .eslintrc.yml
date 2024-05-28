@@ -24,8 +24,8 @@ rules:
   perfectionist/sort-named-imports: off
   unicorn/prefer-ternary: off
   dot-notation: off
-  max-depth: ['warn', 6]
-  complexity: ['warn', 30]
+  max-depth: ['warn', 10]
+  complexity: ['warn', 40]
   unicorn/escape-case: off
   import/no-named-as-default-member: off
   unicorn/catch-error-name: off
@@ -39,6 +39,8 @@ rules:
   unicorn/no-process-exit: off
   camelcase: off
   unicorn/no-array-for-each: off
+  unicorn/prefer-optional-catch-binding: off
+
 
 
 
