@@ -86,8 +86,8 @@ export async function runScript(filename: string, options?: {config: Config, str
 
     const runtime = await script.run(data)
     let result = runtime.result
-    let llmContentChunk = ''
-    let llmLastContent = ''
+    let llmContentChunk = '' // check endWithRepeatedSequence
+    // let llmLastContent = ''
 
     if (interactive) {
       // const spinner = cliSpinners.dots
@@ -110,7 +110,7 @@ export async function runScript(filename: string, options?: {config: Config, str
         runtime.on('llm-stream', async function(llmResult, content: string, count: number) {
           const s = llmResult.content
           llmContentChunk += s
-          llmLastContent += s
+          // llmLastContent += s
           if (endWithRepeatedSequence(llmContentChunk)) {
             // repeat content found
             this.target.abort()
@@ -131,7 +131,7 @@ export async function runScript(filename: string, options?: {config: Config, str
       }
       do {
         llmContentChunk = ''
-        llmLastContent = ''
+        // llmLastContent = ''
         retryCount = 0
         const input = prompt({prefix: 'You:'})
         const message = (await input.run()).trim()
@@ -182,109 +182,21 @@ export async function runScript(filename: string, options?: {config: Config, str
             if (error.name !== 'AbortError') {throw error}
             const what = error.data?.what ? ':'+error.data.what : ''
             input.write(colors.magentaBright(`<${error.name+what}>`))
-            if (llmLastContent) {
-              const lastMsg = await runtime.$getMessage(-1)
-              if (lastMsg && lastMsg.role === 'assistant') {
-                lastMsg.content += llmLastContent
-              } else {
-                runtime.$pushMessage({message: {role: 'assistant', content: llmLastContent}})
-              }
-            }
+            // if (llmLastContent) {
+            //   const lastMsg = await runtime.$getMessage(-1)
+            //   if (lastMsg && lastMsg.role === 'assistant') {
+            //     lastMsg.content += llmLastContent
+            //   } else {
+            //     runtime.$pushMessage({message: {role: 'assistant', content: llmLastContent}})
+            //   }
+            // }
           }
           input.write('\n')
-
-          /*
-          let isThinking = true
-          const aiOutput = prompt({
-            prefix: aiName+':',
-            keypressTimeout,
-            multiline: true,
-            separator(state) {
-              const timer = state.timer
-              if (!isThinking) {timer.stop()}
-              return timer.loading ? getFrame(timer.frames, state.timer.tick) : '';
-            },
-            timers: {
-              // prefix: 250,
-              separator: spinner,
-            },
-          }, false)
-
-          aiOutput.once('run', async() => {
-            if (stream) {
-              let count = 0
-              script._runtime.on('llm-stream', async (llmResult, content: string) => {
-                const s = llmResult.content
-                if (s) {
-                  isThinking = false
-                  count += s.length
-                  if (count > 20) {aiOutput.write('\n')}
-                  // aiOutput.write(s)
-                  await typeToPrompt(aiOutput, s)
-                }
-                if (llmResult.stop) {
-                  aiOutput.input = content
-                }
-              })
-            }
-            result = await script.interact({message: message})
-            if (!stream) {
-              await typeToPrompt(aiOutput, result)
-            }
-            if (!aiOutput.state.submitted) { aiOutput.submit() }
-          })
-
-          await aiOutput.run()
-          */
-
         } else {
           console.log('bye!')
         }
 
       } while (!quit)
-
-
-      // const answer = await prompt([
-      //   {
-      //     type: 'input',
-      //     name: 'input',
-      //     message: color.magenta('You')+':',
-      //     // suffix: '',
-      //     prefix: '',
-      //     async validate(value) {
-      //       if (value === 'exit' || value === 'quit') {
-      //         return true
-      //       }
-      //       uiBottom.write(color.blue.bold(aiName) + ':')
-      //       result = await script.interact({message: value})
-
-      //       return false
-      //     },
-      //   },
-      // ])
-
-      // return answer
-
-      /*
-      do {
-        const answer = await prompt([
-          {
-            type: 'input',
-            name: 'input',
-            message: color.magenta('You')+':',
-            // suffix: '',
-            prefix: '',
-          },
-        ])
-        quit = answer.input === 'quit' || answer.input === 'exit'
-        if (!quit) {
-          uiBottom.write(color.blue.bold(aiName) + ':')
-          result = await script.interact({message: answer.input})
-          if (stream) { result = '' }
-          console.log(result)
-        }
-      } while (!quit)
-      //  */
     }
     return result
   }
