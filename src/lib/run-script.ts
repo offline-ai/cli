@@ -9,6 +9,7 @@ import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 import { AIScript, LogLevel, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
+import { detectLang } from './detect-lang.js'
 
 const apiUrl = 'http://localhost:8080'
 llamaCpp.apiUrl = apiUrl
@@ -49,6 +50,10 @@ class AIScriptEx extends AIScript {
       throw new TypeError('filename or id is required')
     }
     return super.$exec({args: params.args, script})
+  }
+
+  $detectLang(text: string) {
+    return detectLang(text)
   }
 }
 

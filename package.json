@@ -1,12 +1,12 @@
 {
-  "name": "@isdk/ai-agent",
+  "name": "@isdk/ai",
   "description": "Your local Offline AI-Agent",
   "version": "0.0.0",
   "author": "Riceball LEE @snowyu",
   "bin": {
     "ai": "./bin/run.js"
   },
-  "bugs": "https://github.com/snowyu/ai-agent/issues",
+  "bugs": "https://github.com/@isdk/ai/issues",
   "dependencies": {
     "@isdk/ai-tool": "workspace:*",
     "@isdk/ai-tool-agent": "workspace:*",
@@ -24,6 +24,8 @@
     "cli-spinners": "^3.0.0",
     "enquirer": "^2.4.1",
     "figlet": "^1.7.0",
+    "franc-all": "^7.2.0",
+    "iso-639-3": "^3.0.1",
     "lodash-es": "^4.17.21",
     "util-ex": "2.0.0-alpha.18"
   },
