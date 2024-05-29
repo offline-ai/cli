@@ -47,8 +47,8 @@ export default class RunScript extends Command {
     if (hasBanner) {showBanner()}
 
     let level = flags.logLevel as any
-    if (interactive && !level) {
-      level = 'error'
+    if (!level) {
+      level = interactive ? 'error' : 'warn'
     }
     try {
       let result = await runScript(args.script, {
