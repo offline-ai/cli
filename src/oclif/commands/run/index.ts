@@ -33,16 +33,19 @@ export default class RunScript extends Command {
     logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
     interactive: Flags.boolean({char: 'i', description: 'interactive mode'}),
     stream: Flags.boolean({char: 's', description: 'stream mode'}),
+    banner: Flags.boolean({char: 'b', description: 'show banner', allowNo: true}),
   }
 
   async run(): Promise<any> {
-    showBanner()
     const config = this.config
     const {args, flags} = await this.parse(RunScript)
     // console.log('🚀 ~ RunScript ~ run ~ flags:', flags)
     const isJson = this.jsonEnabled()
     logLevel.json = isJson
     const interactive = flags.interactive
+    const hasBanner = flags.banner ?? interactive
+    if (hasBanner) {showBanner()}
+
     let level = flags.logLevel as any
     if (interactive && !level) {
       level = 'error'
