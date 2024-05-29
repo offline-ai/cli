@@ -60,7 +60,7 @@ export default class RunScript extends Command {
       if (LogLevelMap[level] >= LogLevelMap.info && result.content) {
         result = result.content
       }
-      this.log(typeof result === 'string' ? result : JSON.stringify(result, null, 2))
+      if (!interactive) {this.log(typeof result === 'string' ? result : JSON.stringify(result, null, 2))}
       return result
     } catch (error: any) {
       if (error) {
