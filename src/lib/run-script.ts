@@ -3,8 +3,9 @@ import colors from 'ansi-colors'
 import { get as getByPath } from 'lodash-es'
 import { Config } from '@oclif/core';
 import path from 'path'
-import { createEndWithRepetitionDetector, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
-import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
+import fs from 'fs'
+import { createEndWithRepetitionDetector, loadTextFromPaths, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
+import { AIPromptsFunc, AIPromptsName, parseYaml, stringifyYaml } from '@isdk/ai-tool-prompt'
 import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 import { AIScript, LogLevel, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
@@ -57,8 +58,8 @@ class AIScriptEx extends AIScript {
   }
 }
 
-export async function runScript(filename: string, options?: {config: Config, stream?: boolean, interactive?: boolean, logLevel?: LogLevel, data?: any, apiUrl?: string, searchPaths?: string[]}) {
-  const {logLevel: level, data, apiUrl, searchPaths, interactive, stream, config} = options ?? {}
+export async function runScript(filename: string, options?: {config: Config, chatsFilename?: string, stream?: boolean, interactive?: boolean, logLevel?: LogLevel, data?: any, apiUrl?: string, searchPaths?: string[]}) {
+  const {logLevel: level, data, apiUrl, searchPaths, interactive, stream, config, chatsFilename} = options ?? {}
   if (apiUrl) { llamaCpp.apiUrl = apiUrl }
 
   AIScriptEx.searchPaths = Array.isArray(searchPaths) ? searchPaths: ['.']
@@ -79,15 +80,22 @@ export async function runScript(filename: string, options?: {config: Config, str
 
     let quit = false
 
-    const interrupted = () => {
-      // quit = true
-      if (script._runtime.isAborted()) {
+    const saveChatHistory = async () => {
+      if (interactive && chatsFilename) {
+        await runtime.$saveChats(chatsFilename)
+      }
+    }
+
+    const interrupted = async () => {
+      if (runtime.isAborted()) {
+        await saveChatHistory()
         process.exit(0)
       } else {
-        script._runtime.abort()
+        runtime.abort()
       }
     }
     process.on('SIGINT', interrupted)
+    process.on('beforeExit', saveChatHistory)
 
     const runtime = await script.run(data)
     let result = runtime.result
@@ -95,6 +103,38 @@ export async function runScript(filename: string, options?: {config: Config, str
     // let llmLastContent = ''
 
     if (interactive) {
+      runtime.on('ready', async function(isReady: boolean) {
+        if (isReady && chatsFilename) {
+          // we should load chat history here
+          await this.target.$loadChats(chatsFilename)
+        }
+      })
+
+      runtime.on('load-chats', function(filename: string) {
+        if (filename) {
+          if (!path.extname(filename)) {filename += '.yaml'}
+          if (fs.existsSync(filename)) {
+            const searchPath = ['.']
+            if (config?.dataDir) {searchPath.push(config.dataDir)}
+            const s = loadTextFromPaths(filename, searchPath)
+            if (s) {
+              this.result = parseYaml(s)
+            }
+          }
+        }
+      })
+
+      runtime.on('save-chats', (messages: any[], filename: string) => {
+        if (filename) {
+          const s = stringifyYaml(messages)
+          if (s) {
+            if (!path.extname(filename)) {filename += '.yaml'}
+            fs.writeFileSync(filename, s, {encoding: 'utf8'})
+          }
+        }
+      })
+      runtime.$ready(true)
+
       // const spinner = cliSpinners.dots
       const aiName = runtime.prompt?.character?.name || 'ai'
 
