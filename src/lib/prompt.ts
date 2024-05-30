@@ -12,7 +12,7 @@ function save() {
   }
 }
 
-process.on('exit', function () {
+process.on('beforeExit', function () {
   save()
 });
 
@@ -61,7 +61,7 @@ export function prompt(options: any = {}, useStore = true) {
         }
         case 'cancel': {
           if (key.ctrl && key.name === 'c') {
-            process.exit(0)
+            process.emit('SIGINT')
           } else if (result.input) {
             key.action = 'reset'
           }
