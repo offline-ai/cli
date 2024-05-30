@@ -1,12 +1,14 @@
-import {Args, Command, Flags} from '@oclif/core'
+import cj from 'color-json'
+import {Args, Flags} from '@oclif/core'
 import { parseJsJson } from '@isdk/ai-tool'
 import { LogLevelMap, logLevel } from '@isdk/ai-tool-agent'
 
+import { AICommand } from '../ai-command.js'
 import {runScript} from '../../../lib/run-script.js'
 import { showBanner } from '../../lib/help.js'
 
-export default class RunScript extends Command {
-  public static enableJsonFlag = true
+export default class RunScript extends AICommand {
+  static enableJsonFlag = true
 
   static args = {
     script: Args.string({description: 'the ai-agent script file name', required: true}),
@@ -31,9 +33,10 @@ export default class RunScript extends Command {
     api: Flags.url({char: 'u', description: 'the api URL', default: new URL('http://localhost:8080')}),
     searchPaths: Flags.directory({char: 'p', description: 'the search paths for ai-agent script file', exists: true, multiple: true}),
     logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
-    interactive: Flags.boolean({char: 'i', description: 'interactive mode'}),
-    stream: Flags.boolean({char: 's', description: 'stream mode'}),
+    interactive: Flags.boolean({char: 'i', description: 'interactive mode', allowNo: true}),
+    stream: Flags.boolean({char: 's', description: 'stream mode', allowNo: true}),
     banner: Flags.boolean({char: 'b', description: 'show banner', allowNo: true}),
+    ...AICommand.flags,
   }
 
   async run(): Promise<any> {
@@ -63,7 +66,9 @@ export default class RunScript extends Command {
       if (LogLevelMap[level] >= LogLevelMap.info && result.content) {
         result = result.content
       }
-      if (!interactive) {this.log(typeof result === 'string' ? result : JSON.stringify(result, null, 2))}
+      if (!interactive) {
+        this.log(typeof result === 'string' ? result : cj(result))
+      }
       return result
     } catch (error: any) {
       if (error) {

@@ -22,6 +22,7 @@
     "ansi-colors": "^4.1.3",
     "cfonts": "^3.2.0",
     "cli-spinners": "^3.0.0",
+    "color-json": "^3.0.5",
     "enquirer": "^2.4.1",
     "figlet": "^1.7.0",
     "franc-all": "^7.2.0",
@@ -75,6 +76,8 @@
       "@oclif/plugin-not-found",
       "@oclif/plugin-version"
     ],
+    "scope": "isdk",
+    "pluginPrefix": "ai-plugin",
     "topicSeparator": " ",
     "repositoryPrefix": ""
   },
