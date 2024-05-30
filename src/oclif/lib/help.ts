@@ -16,7 +16,7 @@ export default class CustomHelp extends Help {
   }
 
   async showCommandHelp(command: Command.Loadable) {
-    showBanner();
+    // showBanner();
     super.showCommandHelp(command);
     // console.log('This will be displayed in single-command CLIs');
   }
