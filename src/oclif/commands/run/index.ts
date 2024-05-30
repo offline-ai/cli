@@ -34,6 +34,7 @@ export default class RunScript extends AICommand {
     searchPaths: Flags.directory({char: 'p', description: 'the search paths for ai-agent script file', exists: true, multiple: true}),
     logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
     interactive: Flags.boolean({char: 'i', description: 'interactive mode', allowNo: true}),
+    history: Flags.file({char: 'h', description: 'the chat history file for interactive mode to record', dependsOn: ['interactive']}),
     stream: Flags.boolean({char: 's', description: 'stream mode', allowNo: true}),
     banner: Flags.boolean({char: 'b', description: 'show banner', allowNo: true}),
     ...AICommand.flags,
@@ -59,11 +60,12 @@ export default class RunScript extends AICommand {
         apiUrl: flags.api.toString(),
         searchPaths: flags.searchPaths,
         interactive,
+        chatsFilename: flags.history,
         stream: flags.stream,
         data: args.data,
         config,
       })
-      if (LogLevelMap[level] >= LogLevelMap.info && result.content) {
+      if (LogLevelMap[level] >= LogLevelMap.info && result?.content) {
         result = result.content
       }
       if (!interactive) {
