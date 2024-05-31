@@ -6,12 +6,13 @@ import { LogLevelMap, logLevel } from '@isdk/ai-tool-agent'
 import { AICommand } from '../ai-command.js'
 import {runScript} from '../../../lib/run-script.js'
 import { showBanner } from '../../lib/help.js'
+import { loadAIConfig, loadConfigFile } from '../../../lib/load-config.js'
+import { defaultsDeep } from 'lodash-es'
 
 export default class RunScript extends AICommand {
   static enableJsonFlag = true
 
   static args = {
-    script: Args.string({description: 'the ai-agent script file name', required: true}),
     data: Args.string({
       description: 'the json data which will be passed to the ai-agent script',
       parse: (input: string) => parseJsJson(input),
@@ -30,14 +31,16 @@ export default class RunScript extends AICommand {
   ]
 
   static flags = {
-    api: Flags.url({char: 'u', description: 'the api URL', default: new URL('http://localhost:8080')}),
+    ...AICommand.flags,
+    api: Flags.url({char: 'u', description: 'the api URL'}),
     searchPaths: Flags.directory({char: 'p', description: 'the search paths for ai-agent script file', exists: true, multiple: true}),
     logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
     interactive: Flags.boolean({char: 'i', description: 'interactive mode', allowNo: true}),
     history: Flags.file({char: 'h', description: 'the chat history file for interactive mode to record', dependsOn: ['interactive']}),
     stream: Flags.boolean({char: 's', description: 'stream mode', allowNo: true}),
     banner: Flags.boolean({char: 'b', description: 'show banner', allowNo: true}),
-    ...AICommand.flags,
+    script: Flags.string({char: 'f', description: 'the ai-agent script file name or id'}),
+    dataFile: Flags.file({char: 'd', description: 'the data file which will be passed to the ai-agent script'}),
   }
 
   async run(): Promise<any> {
@@ -45,30 +48,53 @@ export default class RunScript extends AICommand {
     const {args, flags} = await this.parse(RunScript)
     // console.log('🚀 ~ RunScript ~ run ~ flags:', flags)
     const isJson = this.jsonEnabled()
+    const userConfig = loadAIConfig(config)
     logLevel.json = isJson
-    const interactive = flags.interactive
-    const hasBanner = flags.banner ?? interactive
+    const interactive = flags.interactive ?? userConfig.interactive
+    const hasBanner = flags.banner ?? userConfig.banner ?? interactive
+    const apiUrl = flags.api?.toString() ?? userConfig.apiUrl ?? 'http://localhost:8080'
+    const script = flags.script ?? userConfig.script
+    const searchPaths = flags.searchPaths ?? userConfig.agentDir
+    const chatsFilename = flags.history ?? userConfig.history
+    const stream = flags.stream ?? userConfig.stream
+    let data = args.data
+    if (flags.dataFile) {
+      const _data = loadConfigFile(flags.dataFile)
+      if (_data) {
+        if (data) {
+          data = defaultsDeep(data, _data)
+        } else {
+          data = _data
+        }
+      }
+    }
+    data = data ? defaultsDeep(data, userConfig.data) : userConfig.data
+
+    if (!script) {
+      this.error('missing script to run! require argument: `-f <script_file_name>`')
+    }
+
     if (hasBanner) {showBanner()}
 
-    let level = flags.logLevel as any
+    let level: any = flags.logLevel ?? userConfig.logLevel
     if (!level) {
       level = interactive ? 'error' : 'warn'
     }
     try {
-      let result = await runScript(args.script, {
+      let result = await runScript(script, {
         logLevel: level,
-        apiUrl: flags.api.toString(),
-        searchPaths: flags.searchPaths,
+        apiUrl,
+        searchPaths,
         interactive,
-        chatsFilename: flags.history,
-        stream: flags.stream,
-        data: args.data,
+        chatsFilename,
+        stream,
+        data,
         config,
       })
       if (LogLevelMap[level] >= LogLevelMap.info && result?.content) {
         result = result.content
       }
-      if (!interactive) {
+      if (!interactive && result != null) {
         this.log(typeof result === 'string' ? result : cj(result))
       }
       return result
