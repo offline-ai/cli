@@ -1,0 +1,10 @@
+configDir:
+  - $XDG_BIN_HOME
+  - $XDG_CONFIG_HOME
+  - $HOME
+brainDir: ${XDG_DATA_HOME}/brain
+agentDir:
+  - ${XDG_DATA_HOME}/agent
+  - $PWD
+promptDir:
+  - ${XDG_DATA_HOME}/prompt
