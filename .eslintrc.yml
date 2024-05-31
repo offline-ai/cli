@@ -1,4 +1,4 @@
-extends: ["oclif", "oclif-typescript", "prettier"]
+extends: ["prettier"]
 rules:
   tsdoc/syntax: off
   no-cond-assign: off
@@ -41,3 +41,5 @@ rules:
   unicorn/no-array-for-each: off
   unicorn/prefer-optional-catch-binding: off
   func-names: off
+  no-eq-null: off
+  eqeqeq: off
