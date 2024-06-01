@@ -5,7 +5,7 @@ const textSync = figlet.textSync
 
 const excludeFonts = new Set([
   'Gradient', 'Hex', 'Trek', 'Term', 'Runic', 'Runyc', 'Rot13', 'Octal', 'Mshebrew210', 'Mike', '1Row', 'DWhistled',
-  'Tengwar', 'Small Tengwar',
+  'Tengwar', 'Small Tengwar', 'Benjamin',
 ])
 
 const fonts = figlet.fontsSync().filter((f: string) => !excludeFonts.has(f))
