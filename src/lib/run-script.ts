@@ -9,7 +9,7 @@ import { loadTextFromPaths, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
 import { AIPromptsFunc, AIPromptsName, parseYaml, stringifyYaml } from '@isdk/ai-tool-prompt'
 import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
-import { AIScript, LogLevel, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
+import { AIScript, LogLevel, LogLevelMap, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
 import { detectLang } from './detect-lang.js'
 
@@ -82,9 +82,13 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
   AIScriptEx.searchPaths = Array.isArray(searchPaths) ? searchPaths: ['.']
 
   const script = AIScriptEx.load(filename)
+  let isSilence = false
 
   if (level !== undefined) {
     script.logLevel = level
+    if (LogLevelMap[level] >= LogLevelMap['silence']) {
+      isSilence = true
+    }
   }
   if (stream !== undefined) {
     script.llmStream = stream
@@ -140,14 +144,14 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
         llmLastContent += colors.blue(`<续:${count}>`)
       }
       // if (s) {process.stdout.write(s)}
-      logUpdate(llmLastContent)
+      if (!isSilence) {logUpdate(llmLastContent)}
     })
   }
 
   try {
     await runtime.run(data)
   } finally {
-    logUpdate.clear()
+    if (!isSilence) {logUpdate.clear()}
   }
 
   let result = runtime.result
@@ -263,7 +267,7 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
           //   }
           // }
         } finally {
-          logUpdate.clear()
+          if (!isSilence) {logUpdate.clear()}
         }
         if (result) {
           input.write(colors.yellow(aiName+ ': ') + result + '\n')
