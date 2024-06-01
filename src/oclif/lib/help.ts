@@ -4,7 +4,7 @@ import { uText } from '../../lib/u-text.js';
 const defaultBanner = 'AI'
 
 export function showBanner(s?: string) {
-  if (s) {s = defaultBanner + ' ' + s} else {s = defaultBanner}
+  if (s) {s = defaultBanner + ' ' + s} else {s = defaultBanner + ' Agent'}
   console.log(uText(s, {color: 'blue', })); // font: 'ANSI Shadow'
   // uText('AI Agent', {font: 'block', colors:['yellow', 'white'], gradient: 'yellow,red'})
 }
