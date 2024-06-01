@@ -1,6 +1,6 @@
 {
   "name": "@isdk/ai",
-  "description": "Your local Offline AI-Agent",
+  "description": "Your local Offline AI Agents",
   "version": "0.0.0",
   "author": "Riceball LEE @snowyu",
   "bin": {
