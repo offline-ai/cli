@@ -1,9 +1,11 @@
 import { type Command, Help } from '@oclif/core';
 import { uText } from '../../lib/u-text.js';
 
+const defaultBanner = 'AI Agent'
 
-export function showBanner() {
-  console.log(uText('AI Agent', {color: 'blue', })); // font: 'ANSI Shadow'
+export function showBanner(s?: string) {
+  if (s) {s = defaultBanner + ':' + s} else {s = defaultBanner}
+  console.log(uText(s, {color: 'blue', })); // font: 'ANSI Shadow'
   // uText('AI Agent', {font: 'block', colors:['yellow', 'white'], gradient: 'yellow,red'})
 }
 
