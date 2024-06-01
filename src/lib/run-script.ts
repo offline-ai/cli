@@ -117,22 +117,14 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
   process.on('SIGINT', interrupted)
   process.on('beforeExit', saveChatHistory)
 
-  // let llmContentChunk = '' // check endWithRepeatedSequence
   let llmLastContent = ''
   let retryCount = 0
 
   if (stream) {
-    // const endWithRepeatedSequence = createEndWithRepetitionDetector(5)
     runtime.on('llm-stream', async function(llmResult, content: string, count: number) {
       const runtime = this.target as AIScriptEx
       const s = llmResult.content
-      // llmContentChunk += s
       llmLastContent += s
-      // if (endWithRepeatedSequence(llmContentChunk)) {
-      //   // repeat content found
-      //   runtime.abort('endWithRepeatedSequence')
-      //   return
-      // }
 
       if (quit) {
         runtime.abort('quit')
@@ -140,10 +132,8 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
       }
       if (count !== retryCount) {
         retryCount = count
-        // process.stdout.write(colors.blue(`<续:${count}>`))
         llmLastContent += colors.blue(`<续:${count}>`)
       }
-      // if (s) {process.stdout.write(s)}
       if (!isSilence) {logUpdate(llmLastContent)}
     })
   }
