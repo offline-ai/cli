@@ -15,12 +15,8 @@ export function loadConfigFile(filename: string, searchPaths: string[] = ['.']) 
  return defaultsDeep({}, ...configs)
 }
 
-export function expandConfig(config: any, data: Config) {
-  const processEnv = { ...process.env }
-  processEnv.XDG_CONFIG_HOME = data.configDir
-  processEnv.XDG_DATA_HOME = data.dataDir
-  processEnv.XDG_CACHE_HOME = data.cacheDir
-  processEnv.XDG_BIN_HOME = data.binPath ?? data.options.root
+export function expandConfig(config: any, defaultConfig: any) {
+  const processEnv = { ...process.env, ...defaultConfig }
 
   return expandObjEnv(config, {
     processEnv,
@@ -32,16 +28,35 @@ export function loadConfig(filename: string, config: Config) {
   let defaultConfig = ConfigFile.loadSync(path.resolve(config.configDir, filename))
   if (!defaultConfig) {
     defaultConfig = {
-      configDir: ['$XDG_BIN_HOME', config.configDir, '$HOME'],
+      configDirs: ['$XDG_BIN_HOME', config.configDir, '$HOME'],
       brainDir: [path.join(config.dataDir, 'brain')],
-      agentDir: [path.join(config.dataDir, 'agent'), '$PWD'],
-      promptDir: [path.join(config.dataDir, 'prompt')],
+      agentDirs: [path.join(config.dataDir, 'agent'), '$PWD'],
+      promptDirs: [path.join(config.dataDir, 'prompt')],
     }
   }
-  const searchPaths = defaultConfig.configDir
-  return expandConfig(loadConfigFile(filename, searchPaths), config)
+
+  for (const [key, value] of Object.entries(getXDGConfigs(config))) {
+    defaultConfig[key] = value
+  }
+
+  expandConfig(defaultConfig, defaultConfig)
+  const searchPaths = defaultConfig.configDirs
+  if (defaultConfig.AI_CONFIG_BASENAME) {
+    filename = defaultConfig.AI_CONFIG_BASENAME
+  }
+  return expandConfig(loadConfigFile(filename, searchPaths), defaultConfig)
 }
 
 export function loadAIConfig(config: Config) {
   return loadConfig(DEFAULT_CONFIG_NAME, config)
+}
+
+export function getXDGConfigs(config: Config) {
+  const result = {
+    XDG_CONFIG_HOME: config.configDir,
+    XDG_DATA_HOME: config.dataDir,
+    XDG_CACHE_HOME: config.cacheDir,
+    XDG_BIN_HOME: path.dirname(config.options.root),
+  }
+  return result
 }
