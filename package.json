@@ -28,6 +28,7 @@
     "franc-all": "^7.2.0",
     "iso-639-3": "^3.0.1",
     "lodash-es": "^4.17.21",
+    "log-update": "^6.0.0",
     "util-ex": "2.0.0-alpha.18"
   },
   "devDependencies": {

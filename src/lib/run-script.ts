@@ -1,10 +1,11 @@
 import colors from 'ansi-colors'
-// import cliSpinners from 'cli-spinners';
+// import cliSpinners from 'cli-spinners'
+import logUpdate from 'log-update'
 import { get as getByPath } from 'lodash-es'
-import { Config } from '@oclif/core';
+import { Config } from '@oclif/core'
 import path from 'path'
 import fs from 'fs'
-import { createEndWithRepetitionDetector, loadTextFromPaths, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
+import { loadTextFromPaths, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
 import { AIPromptsFunc, AIPromptsName, parseYaml, stringifyYaml } from '@isdk/ai-tool-prompt'
 import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
@@ -112,10 +113,44 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
   process.on('SIGINT', interrupted)
   process.on('beforeExit', saveChatHistory)
 
-  await runtime.run(data)
+  // let llmContentChunk = '' // check endWithRepeatedSequence
+  let llmLastContent = ''
+  let retryCount = 0
+
+  if (stream) {
+    // const endWithRepeatedSequence = createEndWithRepetitionDetector(5)
+    runtime.on('llm-stream', async function(llmResult, content: string, count: number) {
+      const runtime = this.target as AIScriptEx
+      const s = llmResult.content
+      // llmContentChunk += s
+      llmLastContent += s
+      // if (endWithRepeatedSequence(llmContentChunk)) {
+      //   // repeat content found
+      //   runtime.abort('endWithRepeatedSequence')
+      //   return
+      // }
+
+      if (quit) {
+        runtime.abort('quit')
+        process.emit('SIGINT')
+      }
+      if (count !== retryCount) {
+        retryCount = count
+        // process.stdout.write(colors.blue(`<续:${count}>`))
+        llmLastContent += colors.blue(`<续:${count}>`)
+      }
+      // if (s) {process.stdout.write(s)}
+      logUpdate(llmLastContent)
+    })
+  }
+
+  try {
+    await runtime.run(data)
+  } finally {
+    logUpdate.clear()
+  }
+
   let result = runtime.result
-  let llmContentChunk = '' // check endWithRepeatedSequence
-  // let llmLastContent = ''
 
   if (interactive) {
     runtime.on('ready', async function(isReady: boolean) {
@@ -164,36 +199,12 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
 
     const store = new HistoryStore(path.join(config?.configDir ?? '.', path.basename(filename, path.extname(filename)), '.ai-history.json'))
     setHistoryStore(store)
-    let retryCount = 0
-    if (stream) {
-      const endWithRepeatedSequence = createEndWithRepetitionDetector(5)
-      runtime.on('llm-stream', async function(llmResult, content: string, count: number) {
-        const runtime = this.target as AIScriptEx
-        const s = llmResult.content
-        llmContentChunk += s
-        // llmLastContent += s
-        if (endWithRepeatedSequence(llmContentChunk)) {
-          // repeat content found
-          runtime.abort('endWithRepeatedSequence')
-          return
-        }
 
-        if (quit) {
-          runtime.abort('quit')
-          process.emit('SIGINT')
-        }
-        if (count !== retryCount) {
-          retryCount = count
-          llmContentChunk = ''
-          process.stdout.write(colors.blue(`<续:${count}>`))
-        }
-        if (s) {process.stdout.write(s)}
-      })
-    }
     do {
-      llmContentChunk = ''
-      // llmLastContent = ''
+      // llmContentChunk = ''
+      llmLastContent = ''
       retryCount = 0
+      result = ''
       const input = prompt({prefix: 'You:'})
       const message = (await input.run()).trim()
       const llmOptions = {} as any
@@ -236,7 +247,7 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
       // console.log()
 
       if (!quit) {
-        if (message) {input.write(colors.yellow(aiName+ ': '))}
+        // if (message) {input.write(colors.yellow(aiName+ ': '))}
         try {
           result = await runtime.$interact(llmOptions)
         } catch(error: any) {
@@ -251,8 +262,12 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
           //     runtime.$pushMessage({message: {role: 'assistant', content: llmLastContent}})
           //   }
           // }
+        } finally {
+          logUpdate.clear()
         }
-        input.write('\n')
+        if (result) {
+          input.write(colors.yellow(aiName+ ': ') + result + '\n')
+        }
       } else {
         console.log('bye!')
       }
