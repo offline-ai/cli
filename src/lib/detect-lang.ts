@@ -1,4 +1,4 @@
-import { franc } from 'franc-all'
+import { franc } from 'franc'
 import {iso6393} from 'iso-639-3'
 
 export function detectLang(text: string, options: any= {}): string|undefined {

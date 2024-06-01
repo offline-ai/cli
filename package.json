@@ -25,7 +25,7 @@
     "color-json": "^3.0.5",
     "enquirer": "^2.4.1",
     "figlet": "^1.7.0",
-    "franc-all": "^7.2.0",
+    "franc": "^6.2.0",
     "iso-639-3": "^3.0.1",
     "lodash-es": "^4.17.21",
     "log-update": "^6.0.0",
