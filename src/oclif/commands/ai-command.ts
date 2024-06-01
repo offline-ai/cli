@@ -6,6 +6,7 @@ import { defaultsDeep } from 'lodash-es'
 // const CONFIG_BASE_NAME = '.ai'
 
 export abstract class AICommand extends Command {
+  static enableJsonFlag = true
 
   static flags : Record<string, any> = {
     config: Flags.file({char: 'c', description: 'the config file', exists: true})
