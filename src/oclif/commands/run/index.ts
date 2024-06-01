@@ -6,7 +6,7 @@ import { LogLevelMap, logLevel } from '@isdk/ai-tool-agent'
 import { AICommand } from '../ai-command.js'
 import {runScript} from '../../../lib/run-script.js'
 import { showBanner } from '../../lib/help.js'
-import { loadAIConfig, loadConfigFile } from '../../../lib/load-config.js'
+import { loadConfigFile } from '../../../lib/load-config.js'
 import { defaultsDeep } from 'lodash-es'
 
 export default class RunScript extends AICommand {
@@ -48,7 +48,7 @@ export default class RunScript extends AICommand {
     const {args, flags} = await this.parse(RunScript)
     // console.log('🚀 ~ RunScript ~ run ~ flags:', flags)
     const isJson = this.jsonEnabled()
-    const userConfig = loadAIConfig(config)
+    const userConfig = this.loadConfig(flags.config)
     logLevel.json = isJson
     const interactive = flags.interactive ?? userConfig.interactive
     const hasBanner = flags.banner ?? userConfig.banner ?? interactive
@@ -56,16 +56,20 @@ export default class RunScript extends AICommand {
     const script = flags.script ?? userConfig.script
     const searchPaths = flags.searchPaths ?? userConfig.agentDir
     const chatsFilename = flags.history ?? userConfig.history
-    const stream = flags.stream ?? userConfig.stream
+    const stream = flags.stream ?? userConfig.stream ?? true
     let data = args.data
-    if (flags.dataFile) {
-      const _data = loadConfigFile(flags.dataFile)
+    const dataFile = flags.dataFile ?? userConfig.dataFile
+    if (dataFile) {
+      const _data = loadConfigFile(dataFile)
       if (_data) {
         if (data) {
           data = defaultsDeep(data, _data)
         } else {
           data = _data
         }
+      } else {
+        const whetherInFile = flags.dataFile ? '' : ' in config file'
+        this.error(`The data file "${dataFile}" not found${whetherInFile}!`)
       }
     }
     data = data ? defaultsDeep(data, userConfig.data) : userConfig.data
