@@ -1,10 +1,11 @@
-configDir:
+AI_CONFIG_BASENAME: .ai
+configDirs:
   - $XDG_BIN_HOME
   - $XDG_CONFIG_HOME
   - $HOME
 brainDir: ${XDG_DATA_HOME}/brain
-agentDir:
+agentDirs:
   - ${XDG_DATA_HOME}/agent
   - $PWD
-promptDir:
+promptDirs:
   - ${XDG_DATA_HOME}/prompt
