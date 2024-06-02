@@ -43,3 +43,6 @@ rules:
   func-names: off
   no-eq-null: off
   eqeqeq: off
+  no-case-declarations: off
+  no-fallthrough: off
+  no-prototype-builtins: off

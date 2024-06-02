@@ -9,3 +9,6 @@ agentDirs:
   - $PWD
 promptDirs:
   - ${XDG_DATA_HOME}/prompt
+  - $PWD
+chatsDir: ${XDG_DATA_HOME}/log/chats
+inputsDir: ${XDG_DATA_HOME}/log/inputs

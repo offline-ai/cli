@@ -2,16 +2,15 @@ import colors from 'ansi-colors'
 // import cliSpinners from 'cli-spinners'
 import logUpdate from 'log-update'
 import { get as getByPath } from 'lodash-es'
-import { Config } from '@oclif/core'
 import path from 'path'
-import fs from 'fs'
-import { loadTextFromPaths, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
-import { AIPromptsFunc, AIPromptsName, parseYaml, stringifyYaml } from '@isdk/ai-tool-prompt'
+import { getMultiLevelExtname, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
+import { AIPromptsFunc, AIPromptsName, ConfigFile } from '@isdk/ai-tool-prompt'
 import { llm } from '@isdk/ai-tool-llm';
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 import { AIScript, LogLevel, LogLevelMap, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
 import { detectLang } from './detect-lang.js'
+import { saveConfigFile } from './load-config.js'
 
 const apiUrl = 'http://localhost:8080'
 llamaCpp.apiUrl = apiUrl
@@ -65,21 +64,25 @@ class AIScriptEx extends AIScript {
 }
 
 interface IRunScriptOptions {
-  config: Config,
-  chatsFilename?: string,
+  chatsDir?: string,
+  inputsDir?: string,
   stream?: boolean,
   interactive?: boolean,
   logLevel?: LogLevel,
   data?: any,
   apiUrl?: string,
-  searchPaths?: string[]
+  agentDirs?: string[]
 }
 
-export async function runScript(filename: string, options?: IRunScriptOptions) {
-  const {logLevel: level, data, apiUrl, searchPaths, interactive, stream, config, chatsFilename} = options ?? {}
-  if (apiUrl) { llamaCpp.apiUrl = apiUrl }
+export async function runScript(filename: string, options: IRunScriptOptions) {
+  const { logLevel: level, interactive, stream } = options
 
-  AIScriptEx.searchPaths = Array.isArray(searchPaths) ? searchPaths: ['.']
+  if (options.apiUrl) { llamaCpp.apiUrl = options.apiUrl }
+  const scriptExtName = getMultiLevelExtname(filename, 2)
+  const scriptBasename = path.basename(filename, scriptExtName)
+  const chatsFilename = options.chatsDir ? path.join(options.chatsDir, scriptBasename, 'history.yaml') : undefined
+
+  AIScriptEx.searchPaths = Array.isArray(options.agentDirs) ? options.agentDirs : ['.']
 
   const script = AIScriptEx.load(filename)
   let isSilence = false
@@ -139,7 +142,7 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
   }
 
   try {
-    await runtime.run(data)
+    await runtime.run(options.data)
   } finally {
     if (!isSilence) {logUpdate.clear()}
   }
@@ -156,25 +159,14 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
 
     runtime.on('load-chats', function(filename: string) {
       if (filename) {
-        if (!path.extname(filename)) {filename += '.yaml'}
-        if (fs.existsSync(filename)) {
-          const searchPath = ['.']
-          if (config?.dataDir) {searchPath.push(config.dataDir)}
-          const s = loadTextFromPaths(filename, searchPath)
-          if (s) {
-            this.result = parseYaml(s)
-          }
-        }
+        const content = ConfigFile.loadSync(filename )
+        if (content) {this.result = content}
       }
     })
 
     runtime.on('save-chats', (messages: any[], filename: string) => {
       if (filename) {
-        const s = stringifyYaml(messages)
-        if (s) {
-          if (!path.extname(filename)) {filename += '.yaml'}
-          fs.writeFileSync(filename, s, {encoding: 'utf8'})
-        }
+        saveConfigFile(filename, messages)
       }
     })
     runtime.$ready(true)
@@ -191,7 +183,8 @@ export async function runScript(filename: string, options?: IRunScriptOptions) {
       }
     }
 
-    const store = new HistoryStore(path.join(config?.configDir ?? '.', path.basename(filename, path.extname(filename)), '.ai-history.json'))
+    const inputsHistoryFilename = options.inputsDir ? path.join(options.inputsDir, scriptBasename, 'history.yaml') : undefined
+    const store = new HistoryStore(inputsHistoryFilename)
     setHistoryStore(store)
 
     do {

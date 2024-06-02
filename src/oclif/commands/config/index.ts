@@ -7,7 +7,7 @@ export default class AIConfigCommand extends AICommand {
 
   static summary = '🛠️  Manage the AI Configuration.'
 
-  static description = 'show current configuration in file.'
+  static description = 'show current configuration if no commands.'
 
   static flags = {
     ...AICommand.flags,
