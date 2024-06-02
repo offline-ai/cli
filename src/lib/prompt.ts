@@ -84,7 +84,7 @@ export function prompt(options: any = {}, useStore = true) {
 export class HistoryStore {
   store: {[name: string]: any} = {}
 
-  constructor(public path: string) {
+  constructor(public path?: string) {
     if (path) {this.load(path)}
   }
 
@@ -96,7 +96,8 @@ export class HistoryStore {
     this.store[key] = value
   }
 
-  save(filepath: string = this.path) {
+  save(filepath = this.path) {
+    if (!filepath) {return}
     const dirpath = path.dirname(filepath)
     if (!fs.existsSync(dirpath)) {
       fs.mkdirSync(dirpath, {recursive: true})
@@ -105,6 +106,7 @@ export class HistoryStore {
   }
 
   load(filepath = this.path) {
+    if (!filepath) {return}
     if (fs.existsSync(filepath)) {
       Object.assign(this.store, JSON.parse(fs.readFileSync(filepath, 'utf8')))
     }
