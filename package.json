@@ -29,6 +29,8 @@
     "iso-639-3": "^3.0.1",
     "lodash-es": "^4.17.21",
     "log-update": "^6.0.0",
+    "mime-db": "^1.52.0",
+    "mime-type": "5.0.0-alpha.1",
     "util-ex": "2.0.0-alpha.18"
   },
   "devDependencies": {
