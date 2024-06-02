@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import enquier from 'enquirer'
 import colors from 'ansi-colors'
+// Input extends StringPrompt
 const Input = (enquier as any).Input
 
 let GlobalStore: HistoryStore|undefined
@@ -46,7 +47,7 @@ export function prompt(options: any = {}, useStore = true) {
     options.history.store = GlobalStore
     options.history.autosave = true
   }
-  const result = new Input(options);
+  const result = new InputEx(options);
 
   if (GlobalStore && useStore) {
     result.on('keypress', (s, key) => {
@@ -64,6 +65,12 @@ export function prompt(options: any = {}, useStore = true) {
             process.emit('SIGINT')
           } else if (result.input) {
             key.action = 'reset'
+          }
+          break
+        }
+        default: {
+          if (key.name === 'tab') {
+            key.action = 'tab'
           }
           break
         }
@@ -100,6 +107,103 @@ export class HistoryStore {
   load(filepath = this.path) {
     if (fs.existsSync(filepath)) {
       Object.assign(this.store, JSON.parse(fs.readFileSync(filepath, 'utf8')))
+    }
+  }
+}
+
+export class InputEx extends Input {
+  constructor(options) {
+    super(options)
+  }
+
+  completion(action: string) {
+    if (!this.store) return this.alert();
+    this.data = completer(action, this.data, this.input);
+    if (!this.data.present) return this.alert();
+    this.input = this.data.present;
+    this.cursor = this.input.length;
+    return this.render();
+  }
+
+  reset(input, key) {
+    this.data.result = undefined
+    return super.reset(input, key);
+  }
+
+  delete(input, key) {
+    super.delete(input, key);
+  }
+
+  tab(input, key) {
+    this.completion('tab')
+  }
+}
+
+function unique(arr: any[]) {return arr.filter((v, i) => arr.lastIndexOf(v) === i);}
+function compact(arr: any[]) {return unique(arr).filter(Boolean);}
+
+function completer(action: string, data:{result?: string[], past?: string[], present?: string} = {}, value = '') {
+  let { past = [], present = '' } = data;
+  let result: any = data.result || past;
+  const filtered = result !== past
+  let rest, prev;
+
+  switch (action) {
+    case 'reset':
+      return {
+        past,
+        present,
+        result: undefined,
+      };
+    case 'prev':
+    case 'undo':
+      rest = result.slice(0, result.length - 1);
+      prev = result[result.length - 1] || '';
+      if (!filtered) {
+        past = result
+      }
+      return {
+        past,
+        present: prev,
+        result: compact([value, ...rest]),
+      };
+
+    case 'tab':
+      // auto completion for present
+      if (value) {
+        result = past.filter((s)=> s.startsWith(value))
+      }
+    case 'next':
+    case 'redo':
+      rest = result.slice(1);
+      prev = result[0] || '';
+      return {
+        result: compact([...rest, value]),
+        present: prev,
+        past,
+      };
+
+    case 'save':
+      return {
+        past: compact([...past, value]),
+        present: '',
+      };
+
+    case 'remove':
+      prev = compact(past.filter(v => v !== value));
+      present = '';
+
+      if (prev.length) {
+        present = prev.pop();
+      }
+
+      return {
+        past: prev,
+        present,
+      };
+
+    default: {
+      throw new Error(`Invalid action: "${action}"`);
     }
   }
 }
