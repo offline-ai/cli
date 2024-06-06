@@ -2,6 +2,7 @@ import path from 'path'
 import {Command, Flags} from '@oclif/core'
 import { DEFAULT_CONFIG_NAME, loadAIConfig, loadConfigFile } from '../../lib/load-config.js'
 import { defaultsDeep } from 'lodash-es'
+import { parseJsJson } from '@isdk/ai-tool'
 
 // const CONFIG_BASE_NAME = '.ai'
 
@@ -9,7 +10,8 @@ export abstract class AICommand extends Command {
   static enableJsonFlag = true
 
   static flags : Record<string, any> = {
-    config: Flags.file({char: 'c', description: 'the config file', exists: true})
+    config: Flags.file({char: 'c', description: 'the config file', exists: true}),
+    banner: Flags.boolean({description: 'show banner', allowNo: true}),
   }
 
   loadConfig(configFile?: string, {args, flags}: any = {}) {
@@ -24,7 +26,8 @@ export abstract class AICommand extends Command {
     }
     if (flags) {
       if (flags.interactive !== undefined) {result.interactive = flags.interactive}
-      if (flags.searchPaths) {result.agentDirs = flags.searchPaths}
+      if (flags.brainDir) {result.brainDir = flags.brainDir}
+      if (flags.agentDirs) {result.agentDirs = flags.agentDirs}
       if (flags.histories) {result.chatsDir = flags.histories}
       if (flags['no-chats']) {result.chatsDir = undefined}
       if (flags.inputs) {result.inputsDir = flags.inputs}
@@ -89,7 +92,7 @@ export abstract class AICommand extends Command {
 
 export const AICommonFlags = {
   api: Flags.url({char: 'u', description: 'the api URL'}),
-  searchPaths: Flags.directory({char: 's', description: 'the search paths for ai-agent script file', exists: true, multiple: true}),
+  agentDirs: Flags.directory({char: 's', description: 'the search paths for ai-agent script file', exists: true, multiple: true}),
   logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
   interactive: Flags.boolean({char: 'i', description: 'interactive mode', allowNo: true}),
   histories: Flags.directory({char: 'h', description: 'the chat histories folder for interactive mode to record', exists: true, dependsOn: ['interactive']}),
@@ -97,8 +100,12 @@ export const AICommonFlags = {
   'no-chats': Flags.boolean({description: 'disable chat histories, defaults to false', dependsOn: ['interactive']}),
   'no-inputs': Flags.boolean({description: 'disable input histories, defaults to false', dependsOn: ['interactive']}),
   stream: Flags.boolean({char: 'm', description: 'stream mode, defaults to true', allowNo: true}),
-  banner: Flags.boolean({char: 'b', description: 'show banner', allowNo: true}),
   script: Flags.string({char: 'f', description: 'the ai-agent script file name or id'}),
   dataFile: Flags.file({char: 'd', description: 'the data file which will be passed to the ai-agent script'}),
-  arguments: Flags.string({char: 'a', description: 'the json data which will be passed to the ai-agent script'}),
+  arguments: Flags.string({
+    char: 'a', description: 'the json data which will be passed to the ai-agent script',
+    parse: (input: string) => parseJsJson(input),
+  }),
+  brainDir: Flags.directory({char: 'b', description: 'the brains(LLM) directory', exists: true}),
+  promptDirs: Flags.directory({char: 'p', description: 'the prompts template directory', exists: true, multiple: true}),
 }
