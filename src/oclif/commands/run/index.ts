@@ -17,7 +17,7 @@ export default class RunScript extends AICommand {
 
   static summary = '💻 Run ai-agent script file.'
 
-  static description = 'Execute ai-agent script file and return result.'
+  static description = 'Execute ai-agent script file and return result. with `-i` to interactive.'
 
   static examples = [
     `<%= config.bin %> <%= command.id %> -f ./script.yaml "{content: 'hello world'}"

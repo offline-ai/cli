@@ -1,24 +1,17 @@
+import fs from 'fs'
+import path from 'path'
+import { DateTime } from 'luxon'
 import colors from 'ansi-colors'
 // import cliSpinners from 'cli-spinners'
 import logUpdate from 'log-update'
 import { get as getByPath } from 'lodash-es'
-import path from 'path'
 import { ConfigFile, getMultiLevelExtname, parseJsJson, wait } from '@isdk/ai-tool'
 import { AIScript, LogLevel, LogLevelMap, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
 import { detectLang } from './detect-lang.js'
 import { saveConfigFile } from './load-config.js'
 import { initTools } from './init-tools.js'
-
-// const apiUrl = 'http://localhost:8080'
-// llamaCpp.apiUrl = apiUrl
-
-// const promptsFunc = new AIPromptsFunc(AIPromptsName, {dbPath: ':memory:'})
-
-// ToolFunc.register(promptsFunc)
-// ToolFunc.register(llm)
-// llamaCpp.register()
-// llm.setCurrentProvider(LlamaCppProviderName)
+import { ux } from '@oclif/core'
 
 class AIScriptEx extends AIScript {
   static load(filename: string) {
@@ -69,9 +62,22 @@ interface IRunScriptOptions {
   logLevel?: LogLevel,
   data?: any,
   apiUrl?: string,
-  agentDirs?: string[]
+  newChat?: boolean,
+  agentDirs?: string[],
+  theme?: any,
 }
 
+function renameOldFile(filename: string) {
+  if (fs.existsSync(filename)) {
+    const content = ConfigFile.loadSync(filename)
+    const createdAt = content?.length ? DateTime.fromISO(content[0].createdAt) : DateTime.now()
+    const dirname = path.dirname(filename)
+    const extName = path.extname(filename)
+    const basename = path.basename(filename, extName)
+    // rename to history-2023-01-01T00_00_00_000Z.yaml
+    fs.renameSync(filename, path.join(dirname, `${basename}-${createdAt.toString().replace(/[:.]/g, '_')}${extName}`))
+  }
+}
 export async function runScript(filename: string, options: IRunScriptOptions) {
   initTools(options)
 
@@ -80,6 +86,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   const scriptExtName = getMultiLevelExtname(filename, 2)
   const scriptBasename = path.basename(filename, scriptExtName)
   const chatsFilename = options.chatsDir ? path.join(options.chatsDir, scriptBasename, 'history.yaml') : undefined
+  if (options.newChat && chatsFilename) { renameOldFile(chatsFilename) }
 
   AIScriptEx.searchPaths = Array.isArray(options.agentDirs) ? options.agentDirs : ['.']
 
@@ -158,7 +165,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
 
     runtime.on('load-chats', function(filename: string) {
       if (filename) {
-        const content = ConfigFile.loadSync(filename )
+        const content = ConfigFile.loadSync(filename)
         if (content) {this.result = content}
       }
     })
@@ -240,18 +247,11 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
           if (error.name !== 'AbortError') {throw error}
           const what = error.data?.what ? ':'+error.data.what : ''
           input.write(colors.magentaBright(`<${error.name+what}>`))
-          // if (llmLastContent) {
-          //   const lastMsg = await runtime.$getMessage(-1)
-          //   if (lastMsg && lastMsg.role === 'assistant') {
-          //     lastMsg.content += llmLastContent
-          //   } else {
-          //     runtime.$pushMessage({message: {role: 'assistant', content: llmLastContent}})
-          //   }
-          // }
         } finally {
           if (!isSilence) {logUpdate.clear()}
         }
         if (result) {
+          if (typeof result !== 'string') { result = ux.colorizeJson(result, {pretty: true, theme: options.theme?.json})}
           input.write(colors.yellow(aiName+ ': ') + result + '\n')
         }
       } else {

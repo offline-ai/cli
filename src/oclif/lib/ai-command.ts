@@ -1,7 +1,7 @@
 import path from 'path'
 import {Command, Flags} from '@oclif/core'
 import { DEFAULT_CONFIG_NAME, loadAIConfig, loadConfigFile } from '../../lib/load-config.js'
-import { defaultsDeep } from 'lodash-es'
+import { cloneDeep, defaultsDeep } from 'lodash-es'
 import { parseJsJson } from '@isdk/ai-tool'
 
 // const CONFIG_BASE_NAME = '.ai'
@@ -24,11 +24,13 @@ export abstract class AICommand extends Command {
       }
       result = defaultsDeep(config, result)
     }
+    result.theme = this.config.theme
     if (flags) {
       if (flags.interactive !== undefined) {result.interactive = flags.interactive}
       if (flags.brainDir) {result.brainDir = flags.brainDir}
       if (flags.agentDirs) {result.agentDirs = flags.agentDirs}
       if (flags.histories) {result.chatsDir = flags.histories}
+      if (flags.newChat) {result.newChat = flags.newChat}
       if (flags['no-chats']) {result.chatsDir = undefined}
       if (flags.inputs) {result.inputsDir = flags.inputs}
       if (flags['no-inputs']) {result.inputsDir = undefined}
@@ -62,6 +64,7 @@ export abstract class AICommand extends Command {
       Object.defineProperty(result, 'data', {
         value: data,
         enumerable: false,
+        writable: true,
       })
     }
 
@@ -82,6 +85,7 @@ export abstract class AICommand extends Command {
         Object.defineProperty(result, 'data', {
           value: args.data,
           enumerable: false,
+          writable: true,
         })
       }
     }
@@ -96,6 +100,7 @@ export const AICommonFlags = {
   logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
   interactive: Flags.boolean({char: 'i', description: 'interactive mode', allowNo: true}),
   histories: Flags.directory({char: 'h', description: 'the chat histories folder for interactive mode to record', exists: true, dependsOn: ['interactive']}),
+  newChat: Flags.boolean({char:'n', aliases:['new-chat'], description: 'whether to start a new chat history, defaults to false', dependsOn: ['interactive']}),
   inputs: Flags.directory({char: 't', description: 'the input histories folder for interactive mode to record', exists: true, dependsOn: ['interactive']}),
   'no-chats': Flags.boolean({description: 'disable chat histories, defaults to false', dependsOn: ['interactive']}),
   'no-inputs': Flags.boolean({description: 'disable input histories, defaults to false', dependsOn: ['interactive']}),
