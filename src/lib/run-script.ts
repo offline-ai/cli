@@ -3,24 +3,22 @@ import colors from 'ansi-colors'
 import logUpdate from 'log-update'
 import { get as getByPath } from 'lodash-es'
 import path from 'path'
-import { getMultiLevelExtname, parseJsJson, ToolFunc, wait } from '@isdk/ai-tool'
-import { AIPromptsFunc, AIPromptsName, ConfigFile } from '@isdk/ai-tool-prompt'
-import { llm } from '@isdk/ai-tool-llm';
-import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
+import { ConfigFile, getMultiLevelExtname, parseJsJson, wait } from '@isdk/ai-tool'
 import { AIScript, LogLevel, LogLevelMap, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
 import { detectLang } from './detect-lang.js'
 import { saveConfigFile } from './load-config.js'
+import { initTools } from './init-tools.js'
 
-const apiUrl = 'http://localhost:8080'
-llamaCpp.apiUrl = apiUrl
+// const apiUrl = 'http://localhost:8080'
+// llamaCpp.apiUrl = apiUrl
 
-const promptsFunc = new AIPromptsFunc(AIPromptsName, {dbPath: ':memory:'})
+// const promptsFunc = new AIPromptsFunc(AIPromptsName, {dbPath: ':memory:'})
 
-ToolFunc.register(promptsFunc)
-ToolFunc.register(llm)
-llamaCpp.register()
-llm.setCurrentProvider(LlamaCppProviderName)
+// ToolFunc.register(promptsFunc)
+// ToolFunc.register(llm)
+// llamaCpp.register()
+// llm.setCurrentProvider(LlamaCppProviderName)
 
 class AIScriptEx extends AIScript {
   static load(filename: string) {
@@ -75,9 +73,10 @@ interface IRunScriptOptions {
 }
 
 export async function runScript(filename: string, options: IRunScriptOptions) {
+  initTools(options)
+
   const { logLevel: level, interactive, stream } = options
 
-  if (options.apiUrl) { llamaCpp.apiUrl = options.apiUrl }
   const scriptExtName = getMultiLevelExtname(filename, 2)
   const scriptBasename = path.basename(filename, scriptExtName)
   const chatsFilename = options.chatsDir ? path.join(options.chatsDir, scriptBasename, 'history.yaml') : undefined
