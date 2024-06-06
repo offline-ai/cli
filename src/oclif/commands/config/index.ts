@@ -14,10 +14,12 @@ export default class AIConfigCommand extends AICommand {
   }
 
   async run(): Promise<any> {
-    const {flags} = await this.parse(AIConfigCommand)
-    const userConfig = this.loadConfig(flags.config)
+    const opts = await this.parse(AIConfigCommand)
+    const {flags} = opts
+    const isJson = this.jsonEnabled()
+    const userConfig = this.loadConfig(flags.config, opts)
     const hasBanner = flags.banner ?? userConfig.banner ?? true
-    if (hasBanner) {showBanner('Config')}
+    if (hasBanner && !isJson) {showBanner('Config')}
     this.log('AI Configuration Envs:')
     this.logJson(getXDGConfigs(this.config))
     if (userConfig) {

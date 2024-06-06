@@ -26,8 +26,9 @@ export default class AIConfigSaveCommand extends AICommand {
   async run(): Promise<any> {
     const opts = await this.parse(AIConfigSaveCommand)
     const {flags} = opts
+    const isJson = this.jsonEnabled()
     const userConfig = this.loadConfig(flags.config, opts)
-    if (userConfig.banner) {showBanner('Config')}
+    if (userConfig.banner && !isJson) {showBanner('Config')}
 
     saveConfigFile(userConfig.configFile, userConfig)
     this.log(`Saved config to "${userConfig.configFile}"`)
