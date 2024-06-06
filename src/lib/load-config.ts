@@ -1,7 +1,6 @@
 export const DEFAULT_CONFIG_NAME = '.ai'
 
-import { expandObjEnv, getMultiLevelExtname } from "@isdk/ai-tool";
-import { ConfigFile, stringifyYaml } from "@isdk/ai-tool-prompt"
+import { ConfigFile, expandObjEnv, getMultiLevelExtname, stringifyYaml } from "@isdk/ai-tool";
 import { defaultsDeep, omit } from "lodash-es"
 import fs from 'fs'
 import path from 'path'
