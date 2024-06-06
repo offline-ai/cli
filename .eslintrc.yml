@@ -46,3 +46,5 @@ rules:
   no-case-declarations: off
   no-fallthrough: off
   no-prototype-builtins: off
+  "@typescript-eslint/ban-types": off
+  prefer-rest-params: off
