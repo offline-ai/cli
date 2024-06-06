@@ -4,7 +4,7 @@ import { Args, Flags } from '@oclif/core'
 import { initTools } from '../../../lib/init-tools.js'
 import { AICommand } from '../../lib/ai-command.js'
 import { showBanner } from '../../lib/help.js'
-import { downloadBrain, getQuantsFromBrain, listBrains, printBrains } from '../../../lib/brain.js'
+import { downloadBrain, getQuantsFromBrain, listBrains } from '../../../lib/brain.js'
 import { AIModelQuantType } from '@isdk/ai-tool-llm'
 import logUpdate from 'log-update'
 
