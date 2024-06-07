@@ -1,7 +1,7 @@
 import path from 'path'
 import {Command, Flags} from '@oclif/core'
 import { DEFAULT_CONFIG_NAME, loadAIConfig, loadConfigFile } from '../../lib/load-config.js'
-import { cloneDeep, defaultsDeep } from 'lodash-es'
+import { defaultsDeep } from 'lodash-es'
 import { parseJsJson } from '@isdk/ai-tool'
 
 // const CONFIG_BASE_NAME = '.ai'
@@ -100,7 +100,7 @@ export const AICommonFlags = {
   logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
   interactive: Flags.boolean({char: 'i', description: 'interactive mode', allowNo: true}),
   histories: Flags.directory({char: 'h', description: 'the chat histories folder for interactive mode to record', exists: true, dependsOn: ['interactive']}),
-  newChat: Flags.boolean({char:'n', aliases:['new-chat'], description: 'whether to start a new chat history, defaults to false', dependsOn: ['interactive']}),
+  newChat: Flags.boolean({char:'n', aliases:['new-chat'], description: 'whether to start a new chat history, defaults to false'}),
   inputs: Flags.directory({char: 't', description: 'the input histories folder for interactive mode to record', exists: true, dependsOn: ['interactive']}),
   'no-chats': Flags.boolean({description: 'disable chat histories, defaults to false', dependsOn: ['interactive']}),
   'no-inputs': Flags.boolean({description: 'disable input histories, defaults to false', dependsOn: ['interactive']}),

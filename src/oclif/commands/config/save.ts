@@ -1,8 +1,7 @@
 import { AICommand, AICommonFlags } from '../../lib/ai-command.js'
-import { saveConfigFile } from '../../../lib/load-config.js'
 import { showBanner } from '../../lib/help.js'
 import { Args } from '@oclif/core'
-import { parseJsJson } from '@isdk/ai-tool'
+import { parseJsJson, saveConfigFile } from '@isdk/ai-tool'
 
 export default class AIConfigSaveCommand extends AICommand {
   static enableJsonFlag = true

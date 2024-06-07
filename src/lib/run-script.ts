@@ -6,49 +6,13 @@ import colors from 'ansi-colors'
 import logUpdate from 'log-update'
 import { get as getByPath } from 'lodash-es'
 import { ConfigFile, getMultiLevelExtname, parseJsJson, wait } from '@isdk/ai-tool'
-import { AIScript, LogLevel, LogLevelMap, SimpleScript, loadScriptFromFile } from '@isdk/ai-tool-agent'
+import { AIScriptServer, LogLevel, LogLevelMap } from '@isdk/ai-tool-agent'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
 import { detectLang } from './detect-lang.js'
-import { saveConfigFile } from './load-config.js'
 import { initTools } from './init-tools.js'
 import { ux } from '@oclif/core'
 
-class AIScriptEx extends AIScript {
-  static load(filename: string) {
-    const content = loadScriptFromFile(filename, this.searchPaths)
-    if (!content) { throw new TypeError(`script file ${filename} not found`) }
-    return new AIScriptEx(content)
-  }
-
-  async $exec(params: {id?: string, filename?: string, args?: any}) {
-    const scripts = (this.constructor as typeof AIScript).scripts
-    const filename = params.filename
-    let script: SimpleScript | undefined
-    const id = params.id
-    if (filename) {
-      if (id) {
-        throw new TypeError('filename and id cannot be set at the same time')
-      } else {
-        const _id = path.basename(filename, path.extname(filename))
-        script = scripts[_id]
-        if (!script) {
-          const content = loadScriptFromFile(filename, this.searchPaths)
-          script = new AIScriptEx(content)
-          if (!script.id) {
-            script.id = _id
-          } else if (scripts[script.id]) {
-            throw new TypeError(`script id ${script.id} already exists`)
-          }
-        }
-      }
-    } else if (id) {
-      script = scripts[id]
-    } else {
-      throw new TypeError('filename or id is required')
-    }
-    return super.$exec({args: params.args, script})
-  }
-
+class AIScriptEx extends AIScriptServer {
   $detectLang(text: string) {
     return detectLang(text)
   }
@@ -90,7 +54,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
 
   AIScriptEx.searchPaths = Array.isArray(options.agentDirs) ? options.agentDirs : ['.']
 
-  const script = AIScriptEx.load(filename)
+  const script = AIScriptEx.load(filename, {chatsDir: options.chatsDir})
   let isSilence = false
 
   if (level !== undefined) {
@@ -156,25 +120,6 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   let result = runtime.result
 
   if (interactive) {
-    runtime.on('ready', async function(isReady: boolean) {
-      if (isReady && chatsFilename) {
-        // we should load chat history here
-        await this.target.$loadChats(chatsFilename)
-      }
-    })
-
-    runtime.on('load-chats', function(filename: string) {
-      if (filename) {
-        const content = ConfigFile.loadSync(filename)
-        if (content) {this.result = content}
-      }
-    })
-
-    runtime.on('save-chats', (messages: any[], filename: string) => {
-      if (filename) {
-        saveConfigFile(filename, messages)
-      }
-    })
     runtime.$ready(true)
 
     // const spinner = cliSpinners.dots
