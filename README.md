@@ -32,6 +32,7 @@ USAGE
 
 <!-- commands -->
 * [`ai agent`](#ai-agent)
+* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
 * [`ai brain [NAME]`](#ai-brain-name)
 * [`ai brain dn [NAME]`](#ai-brain-dn-name)
 * [`ai brain down [NAME]`](#ai-brain-down-name)
@@ -70,7 +71,38 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/ai/blob/v0.0.0/src/commands/agent/index.ts)_
+
+## `ai autocomplete [SHELL]`
+
+Display autocomplete installation instructions.
+
+```
+USAGE
+  $ ai autocomplete [SHELL] [-r]
+
+ARGUMENTS
+  SHELL  (zsh|bash|powershell) Shell type
+
+FLAGS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+DESCRIPTION
+  Display autocomplete installation instructions.
+
+EXAMPLES
+  $ ai autocomplete
+
+  $ ai autocomplete bash
+
+  $ ai autocomplete zsh
+
+  $ ai autocomplete powershell
+
+  $ ai autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v3.1.2/src/commands/autocomplete/index.ts)_
 
 ## `ai brain [NAME]`
 
@@ -110,7 +142,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [src/commands/brain/index.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/brain/index.ts)_
+_See code: [src/commands/brain/index.ts](https://github.com/offline-ai/ai/blob/v0.0.0/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -238,7 +270,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [src/commands/brain/download.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/brain/download.ts)_
+_See code: [src/commands/brain/download.ts](https://github.com/offline-ai/ai/blob/v0.0.0/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -265,7 +297,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/brain/list.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/brain/list.ts)_
+_See code: [src/commands/brain/list.ts](https://github.com/offline-ai/ai/blob/v0.0.0/src/commands/brain/list.ts)_
 
 ## `ai config`
 
@@ -288,7 +320,7 @@ DESCRIPTION
   show current configuration if no commands.
 ```
 
-_See code: [src/commands/config/index.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/config/index.ts)_
+_See code: [src/commands/config/index.ts](https://github.com/offline-ai/ai/blob/v0.0.0/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -328,7 +360,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/config/save.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/config/save.ts)_
+_See code: [src/commands/config/save.ts](https://github.com/offline-ai/ai/blob/v0.0.0/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -687,7 +719,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [src/commands/run/index.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/run/index.ts)_
+_See code: [src/commands/run/index.ts](https://github.com/offline-ai/ai/blob/v0.0.0/src/commands/run/index.ts)_
 
 ## `ai version`
 
