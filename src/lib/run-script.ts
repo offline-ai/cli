@@ -31,10 +31,20 @@ interface IRunScriptOptions {
   theme?: any,
 }
 
+function findCreatedAt(messages: any[]) {
+  if (Array.isArray(messages)) {
+    for (let i = messages.length - 1; i >= 0; i--) {
+      const message = messages[i]
+      if (message.createdAt) {
+        return message.createdAt
+      }
+    }
+  }
+}
 function renameOldFile(filename: string) {
   if (fs.existsSync(filename)) {
     const content = ConfigFile.loadSync(filename)
-    const createdAt = content?.length ? DateTime.fromISO(content[0].createdAt) : DateTime.now()
+    const createdAt = findCreatedAt(content) ?? DateTime.now()
     const dirname = path.dirname(filename)
     const extName = path.extname(filename)
     const basename = path.basename(filename, extName)
@@ -74,7 +84,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   const runtime = await script.getRuntime(false)
 
   const saveChatHistory = async () => {
-    if (interactive && chatsFilename) {
+    if (chatsFilename) {
       await runtime.$saveChats(chatsFilename)
     }
   }
