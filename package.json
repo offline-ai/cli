@@ -81,7 +81,8 @@
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins",
-      "@oclif/plugin-version"
+      "@oclif/plugin-version",
+      "@oclif/plugin-autocomplete"
     ],
     "scope": "isdk",
     "pluginPrefix": "ai-plugin",
@@ -93,6 +94,7 @@
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
+    "opack": "oclif pack",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
     "prepack": "NODE_OPTIONS='--trace-warnings --no-warnings=ExperimentalWarning' oclif manifest && oclif readme",
