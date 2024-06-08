@@ -5,7 +5,7 @@ import {
 import { AIModelQuantType, AIModelSettings, LlmModelsFunc } from '@isdk/ai-tool-llm'
 // import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 // import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
-import { DownloadProgressEventName, DownloadStatusEventName, FileDownloadStatus, download } from '@isdk/ai-tool-download'
+import { DownloadProgressEventName, DownloadStatusEventName, FileDownloadStatus, download } from '@isdk/ai-tool-downloader'
 import { BRAINS_FUNC_NAME } from './init-tools.js'
 import EventEmitter from 'events'
 

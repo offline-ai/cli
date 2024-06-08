@@ -7,7 +7,7 @@ import {
 import { LlmModelsFunc, llm } from '@isdk/ai-tool-llm'
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
-import { download } from '@isdk/ai-tool-download'
+import { download } from '@isdk/ai-tool-downloader'
 
 export const BRAINS_FUNC_NAME = 'llm.brains'
 
