@@ -1,6 +1,6 @@
 {
   "name": "@isdk/ai",
-  "description": "Your local AI agents client",
+  "description": "Your Offline(local) AI agents client",
   "version": "0.0.0",
   "author": "Riceball LEE @snowyu",
   "bin": {
@@ -33,8 +33,6 @@
     "lodash-es": "^4.17.21",
     "log-update": "^6.0.0",
     "luxon": "^3.4.4",
-    "mime-db": "^1.52.0",
-    "mime-type": "5.0.0-alpha.1",
     "util-ex": "2.0.0-alpha.18"
   },
   "devDependencies": {
@@ -66,7 +64,7 @@
     "/oclif.manifest.json",
     "/theme.json"
   ],
-  "homepage": "https://github.com/snowyu/ai-agent",
+  "homepage": "https://github.com/offline-ai/ai",
   "keywords": [
     "oclif"
   ],
@@ -90,14 +88,17 @@
     "topicSeparator": " ",
     "repositoryPrefix": ""
   },
-  "repository": "snowyu/ai-agent",
+  "repository": "https://github.com/offline-ai/ai",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
+    "clean": "shx rm -fr oclif.manifest.json dist",
     "lint": "eslint . --ext .ts",
     "opack": "oclif pack",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
     "prepack": "NODE_OPTIONS='--trace-warnings --no-warnings=ExperimentalWarning' oclif manifest && oclif readme",
+    "release": "pnpm run clean && pnpm run build && pnpm run prepack && git add -f README.md && git ci -m 'docs: update readme' && pnpm dlx commit-and-tag-version -s",
+    "release.alpha": "pnpm run release -- --prerelease alpha",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md"
   },
