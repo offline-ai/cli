@@ -1,6 +1,6 @@
 {
   "name": "@isdk/ai",
-  "description": "Your local Offline AI Agents",
+  "description": "Your local AI agents client",
   "version": "0.0.0",
   "author": "Riceball LEE @snowyu",
   "bin": {
@@ -10,7 +10,7 @@
   "dependencies": {
     "@isdk/ai-tool": "workspace:*",
     "@isdk/ai-tool-agent": "workspace:*",
-    "@isdk/ai-tool-download": "workspace:*",
+    "@isdk/ai-tool-downloader": "workspace:*",
     "@isdk/ai-tool-llm": "workspace:*",
     "@isdk/ai-tool-llm-llamacpp": "workspace:*",
     "@isdk/ai-tool-prompt": "workspace:*",
@@ -24,13 +24,12 @@
     "@oclif/plugin-version": "^2.2.2",
     "ansi-colors": "^4.1.3",
     "ansis": "^3.2.0",
+    "better-sqlite3": "^10.0.0",
     "cfonts": "^3.2.0",
     "cli-spinners": "^3.0.0",
     "color-json": "^3.0.5",
     "enquirer": "^2.4.1",
     "figlet": "^1.7.0",
-    "franc": "^6.2.0",
-    "iso-639-3": "^3.0.1",
     "lodash-es": "^4.17.21",
     "log-update": "^6.0.0",
     "luxon": "^3.4.4",
