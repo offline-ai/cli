@@ -44,12 +44,14 @@ function findCreatedAt(messages: any[]) {
 function renameOldFile(filename: string) {
   if (fs.existsSync(filename)) {
     const content = ConfigFile.loadSync(filename)
-    const createdAt = findCreatedAt(content) ?? DateTime.now()
+    let createdAtStr = findCreatedAt(content)
+    const createdAt = createdAtStr ? DateTime.fromISO(createdAtStr) : DateTime.now()
     const dirname = path.dirname(filename)
     const extName = path.extname(filename)
     const basename = path.basename(filename, extName)
     // rename to history-2023-01-01T00_00_00_000Z.yaml
-    fs.renameSync(filename, path.join(dirname, `${basename}-${createdAt.toString().replace(/[:.]/g, '_')}${extName}`))
+    createdAtStr = createdAt.toISO().replace(/[:.]/g, '_')
+    fs.renameSync(filename, path.join(dirname, `${basename}-${createdAtStr}${extName}`))
   }
 }
 export async function runScript(filename: string, options: IRunScriptOptions) {
