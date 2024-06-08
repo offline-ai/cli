@@ -38,6 +38,7 @@ hello world! (./src/commands/run/world.ts)
 
   async run(): Promise<void> {
     this.log('hello world! (./src/commands/run/world.ts)')
+    return
     let response: any
     // const rhythm = [red.dim, red, red.dim, red, red.dim, red];
     function getFrame(arr, i) {
