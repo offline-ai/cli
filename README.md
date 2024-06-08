@@ -16,11 +16,11 @@ ai-agent CLI
 
 <!-- usage -->
 ```sh-session
-$ npm install -g @isdk/ai-agent
+$ npm install -g @isdk/ai
 $ ai COMMAND
 running command...
 $ ai (--version)
-@isdk/ai-agent/0.0.0 linux-x64 node-v20.13.1
+@isdk/ai/0.0.0 linux-x64 node-v20.13.1
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -31,7 +31,14 @@ USAGE
 ## Commands
 
 <!-- commands -->
-* [`ai brain`](#ai-brain)
+* [`ai agent`](#ai-agent)
+* [`ai brain [NAME]`](#ai-brain-name)
+* [`ai brain dn [NAME]`](#ai-brain-dn-name)
+* [`ai brain down [NAME]`](#ai-brain-down-name)
+* [`ai brain download [NAME]`](#ai-brain-download-name)
+* [`ai brain list [NAME]`](#ai-brain-list-name)
+* [`ai config`](#ai-config)
+* [`ai config save [DATA]`](#ai-config-save-data)
 * [`ai help [COMMAND]`](#ai-help-command)
 * [`ai plugins`](#ai-plugins)
 * [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
@@ -43,26 +50,285 @@ USAGE
 * [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
 * [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
 * [`ai plugins update`](#ai-plugins-update)
-* [`ai run SCRIPT [DATA]`](#ai-run-script-data)
+* [`ai run [DATA]`](#ai-run-data)
 * [`ai version`](#ai-version)
 
-## `ai brain`
+## `ai agent`
 
-🧠 The AI Agent Brains(LLM) Manager
+🤖 The AI Agent Manager
 
 ```
 USAGE
-  $ ai brain
+  $ ai agent
 
 DESCRIPTION
-  🧠 The AI Agent Brains(LLM) Manager
+  🤖 The AI Agent Manager
 
 EXAMPLES
-  $ ai brain list
-      ai brain download <brain-name>
+  $ ai agent list
+  $ ai agent download <agent-name>
+  $ ai agent publish <agent-name>
+```
+
+_See code: [src/commands/agent/index.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/agent/index.ts)_
+
+## `ai brain [NAME]`
+
+🧠 The AI Agent Brains(LLM) Manager.
+
+```
+USAGE
+  $ ai brain [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-s <value>] [-n <value>]
+
+ARGUMENTS
+  NAME  the brain name to search
+
+FLAGS
+  -b, --brainDir=<value>  the brains(LLM) directory
+  -c, --config=<value>    the config file
+  -n, --count=<value>     [default: 100] the max number of brains to list, 0 means all.
+  -s, --search=<value>    the json filter to search for brains
+      --[no-]banner       show banner
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  🧠 The AI Agent Brains(LLM) Manager.
+
+
+  Manage AI Agent brains 🧠 here.
+  📜 List downloaded or online brains
+  🔎 search for brains
+  📥 download brains
+  ❌ delete brains
+
+
+EXAMPLES
+  $ ai brain               # list download brains
+  $ ai brain list --online # list online brains
+  $ ai brain download <brain-name>
 ```
 
 _See code: [src/commands/brain/index.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/brain/index.ts)_
+
+## `ai brain dn [NAME]`
+
+🧠 The AI Agent Brains(LLM) Downloader.
+
+```
+USAGE
+  $ ai brain dn [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-q
+    F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_
+    XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M] [-u <value>] [-d]
+
+ARGUMENTS
+  NAME  the brain name to download
+
+FLAGS
+  -b, --brainDir=<value>  the brains(LLM) directory
+  -c, --config=<value>    the config file
+  -d, --dryRun            dry run, do not download
+  -q, --quant=<option>    the quantization of the model, defaults to 4bit
+                          <options: F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M
+                          |Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|I
+                          Q4_XS|IQ1_M>
+  -u, --hubUrl=<value>    the hub mirror url
+      --[no-]banner       show banner
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  🧠 The AI Agent Brains(LLM) Downloader.
+
+
+  📥 download 🧠 brains to brainDir.
+
+
+ALIASES
+  $ ai brain dn
+  $ ai brain down
+
+EXAMPLES
+  $ ai brain dn <brain-name> [-q <QUANT>]
+```
+
+## `ai brain down [NAME]`
+
+🧠 The AI Agent Brains(LLM) Downloader.
+
+```
+USAGE
+  $ ai brain down [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-q
+    F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_
+    XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M] [-u <value>] [-d]
+
+ARGUMENTS
+  NAME  the brain name to download
+
+FLAGS
+  -b, --brainDir=<value>  the brains(LLM) directory
+  -c, --config=<value>    the config file
+  -d, --dryRun            dry run, do not download
+  -q, --quant=<option>    the quantization of the model, defaults to 4bit
+                          <options: F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M
+                          |Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|I
+                          Q4_XS|IQ1_M>
+  -u, --hubUrl=<value>    the hub mirror url
+      --[no-]banner       show banner
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  🧠 The AI Agent Brains(LLM) Downloader.
+
+
+  📥 download 🧠 brains to brainDir.
+
+
+ALIASES
+  $ ai brain dn
+  $ ai brain down
+
+EXAMPLES
+  $ ai brain down <brain-name> [-q <QUANT>]
+```
+
+## `ai brain download [NAME]`
+
+🧠 The AI Agent Brains(LLM) Downloader.
+
+```
+USAGE
+  $ ai brain download [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-q
+    F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_
+    XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M] [-u <value>] [-d]
+
+ARGUMENTS
+  NAME  the brain name to download
+
+FLAGS
+  -b, --brainDir=<value>  the brains(LLM) directory
+  -c, --config=<value>    the config file
+  -d, --dryRun            dry run, do not download
+  -q, --quant=<option>    the quantization of the model, defaults to 4bit
+                          <options: F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M
+                          |Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|I
+                          Q4_XS|IQ1_M>
+  -u, --hubUrl=<value>    the hub mirror url
+      --[no-]banner       show banner
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  🧠 The AI Agent Brains(LLM) Downloader.
+
+
+  📥 download 🧠 brains to brainDir.
+
+
+ALIASES
+  $ ai brain dn
+  $ ai brain down
+
+EXAMPLES
+  $ ai brain download <brain-name> [-q <QUANT>]
+```
+
+_See code: [src/commands/brain/download.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/brain/download.ts)_
+
+## `ai brain list [NAME]`
+
+📜 List downloaded or online brains, defaults to downloaded.
+
+```
+USAGE
+  $ ai brain list [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b <value>] [-f] [-s <value>] [-n <value>]
+
+ARGUMENTS
+  NAME  the brain name to search
+
+FLAGS
+  -a, --all                list all brains(include downloaded and online)
+  -b, --brainDir=<value>   the brains(LLM) directory
+  -c, --config=<value>     the config file
+  -d, --downloaded         list downloaded brains
+  -f, --[no-]onlyFeatured  only list featured brains, defaults to true for online
+  -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
+  -s, --search=<value>     the json filter to search for brains
+      --[no-]banner        show banner
+
+GLOBAL FLAGS
+  --json  Format output as json.
+```
+
+_See code: [src/commands/brain/list.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/brain/list.ts)_
+
+## `ai config`
+
+🛠️  Manage the AI Configuration.
+
+```
+USAGE
+  $ ai config [--json] [-c <value>] [--banner]
+
+FLAGS
+  -c, --config=<value>  the config file
+      --[no-]banner     show banner
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  🛠️  Manage the AI Configuration.
+
+  show current configuration if no commands.
+```
+
+_See code: [src/commands/config/index.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/config/index.ts)_
+
+## `ai config save [DATA]`
+
+💾 Save the configuration to file.
+
+```
+USAGE
+  $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s <value>...] [-l
+    silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats ] [--no-inputs ] [-m] [-f
+    <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
+
+ARGUMENTS
+  DATA  the json data which will be passed to the ai-agent script
+
+FLAGS
+  -a, --arguments=<value>      the json data which will be passed to the ai-agent script
+  -b, --brainDir=<value>       the brains(LLM) directory
+  -c, --config=<value>         the config file
+  -d, --dataFile=<value>       the data file which will be passed to the ai-agent script
+  -f, --script=<value>         the ai-agent script file name or id
+  -h, --histories=<value>      the chat histories folder to record
+  -i, --[no-]interactive       interactive mode
+  -l, --logLevel=<option>      the log level
+                               <options: silence|fatal|error|warn|info|debug|trace>
+  -m, --[no-]stream            stream mode, defaults to true
+  -n, --[no-]newChat           whether to start a new chat history, defaults to false in interactive mode, true in
+                               non-interactive
+  -p, --promptDirs=<value>...  the prompts template directory
+  -s, --agentDirs=<value>...   the search paths for ai-agent script file
+  -t, --inputs=<value>         the input histories folder for interactive mode to record
+  -u, --api=<value>            the api URL
+      --[no-]banner            show banner
+      --no-chats               disable chat histories, defaults to false
+      --no-inputs              disable input histories, defaults to false
+
+GLOBAL FLAGS
+  --json  Format output as json.
+```
+
+_See code: [src/commands/config/save.ts](https://github.com/snowyu/ai-agent/blob/v0.0.0/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -82,7 +348,7 @@ DESCRIPTION
   Display help for ai.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.0.21/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.1.0/src/commands/help.ts)_
 
 ## `ai plugins`
 
@@ -373,26 +639,39 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.0.19/src/commands/plugins/update.ts)_
 
-## `ai run SCRIPT [DATA]`
+## `ai run [DATA]`
 
 💻 Run ai-agent script file.
 
 ```
 USAGE
-  $ ai run SCRIPT [DATA] [--json] [-u <value>] [-p <value>] [-l
-    silence|fatal|error|warn|info|debug|trace] [-i] [-s]
+  $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s <value>...] [-l
+    silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats ] [--no-inputs ] [-m] [-f
+    <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
 
 ARGUMENTS
-  SCRIPT  the ai-agent script file name
-  DATA    the json data which will be passed to the ai-agent script
+  DATA  the json data which will be passed to the ai-agent script
 
 FLAGS
-  -i, --interactive             interactive mode
-  -l, --logLevel=<option>       the log level
-                                <options: silence|fatal|error|warn|info|debug|trace>
-  -p, --searchPaths=<value>...  the search paths for ai-agent script file
-  -s, --stream                  stream mode
-  -u, --api=<value>             [default: http://localhost:8080/] the api URL
+  -a, --arguments=<value>      the json data which will be passed to the ai-agent script
+  -b, --brainDir=<value>       the brains(LLM) directory
+  -c, --config=<value>         the config file
+  -d, --dataFile=<value>       the data file which will be passed to the ai-agent script
+  -f, --script=<value>         the ai-agent script file name or id
+  -h, --histories=<value>      the chat histories folder to record
+  -i, --[no-]interactive       interactive mode
+  -l, --logLevel=<option>      the log level
+                               <options: silence|fatal|error|warn|info|debug|trace>
+  -m, --[no-]stream            stream mode, defaults to true
+  -n, --[no-]newChat           whether to start a new chat history, defaults to false in interactive mode, true in
+                               non-interactive
+  -p, --promptDirs=<value>...  the prompts template directory
+  -s, --agentDirs=<value>...   the search paths for ai-agent script file
+  -t, --inputs=<value>         the input histories folder for interactive mode to record
+  -u, --api=<value>            the api URL
+      --[no-]banner            show banner
+      --no-chats               disable chat histories, defaults to false
+      --no-inputs              disable input histories, defaults to false
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -400,10 +679,10 @@ GLOBAL FLAGS
 DESCRIPTION
   💻 Run ai-agent script file.
 
-  Execute ai-agent script file and return result.
+  Execute ai-agent script file and return result. with `-i` to interactive.
 
 EXAMPLES
-  $ ai run ./script.yaml "{content: 'hello world'}"
+  $ ai run -f ./script.yaml "{content: 'hello world'}"
   ┌────────────────────
   │[info]:Start Script: ...
 ```
@@ -428,5 +707,5 @@ FLAG DESCRIPTIONS
     Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
 ```
 
-_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.1.0/src/commands/version.ts)_
+_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.2.2/src/commands/version.ts)_
 <!-- commandsstop -->
