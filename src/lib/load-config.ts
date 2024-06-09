@@ -62,3 +62,8 @@ export function getXDGConfigs(config: Config) {
   }
   return result
 }
+
+export function expandPath(path: string, config?: any) {
+  const result = expandConfig(path, config)
+  return result
+}
