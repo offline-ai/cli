@@ -6,6 +6,8 @@
   "bin": {
     "ai": "./bin/run.js"
   },
+  "homepage": "https://github.com/offline-ai/cli",
+  "repository": "https://github.com/offline-ai/cli",
   "bugs": "https://github.com/@offline-ai/cli/issues",
   "dependencies": {
     "@isdk/ai-tool": "workspace:*",
@@ -64,7 +66,6 @@
     "/oclif.manifest.json",
     "/theme.json"
   ],
-  "homepage": "https://github.com/offline-ai/ai",
   "keywords": [
     "oclif"
   ],
@@ -88,7 +89,6 @@
     "topicSeparator": " ",
     "repositoryPrefix": ""
   },
-  "repository": "https://github.com/offline-ai/ai",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "clean": "shx rm -fr oclif.manifest.json dist",
