@@ -43,7 +43,7 @@ $ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@offline-ai/cli/0.0.1 linux-x64 node-v20.14.0
+@offline-ai/cli/0.0.2 linux-x64 node-v20.14.0
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -209,7 +209,7 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/ai/blob/v0.0.1/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/ai/blob/v0.0.2/src/commands/agent/index.ts)_
 
 ## `ai autocomplete [SHELL]`
 
@@ -281,7 +281,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [src/commands/brain/index.ts](https://github.com/offline-ai/ai/blob/v0.0.1/src/commands/brain/index.ts)_
+_See code: [src/commands/brain/index.ts](https://github.com/offline-ai/ai/blob/v0.0.2/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -409,7 +409,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [src/commands/brain/download.ts](https://github.com/offline-ai/ai/blob/v0.0.1/src/commands/brain/download.ts)_
+_See code: [src/commands/brain/download.ts](https://github.com/offline-ai/ai/blob/v0.0.2/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -437,7 +437,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/brain/list.ts](https://github.com/offline-ai/ai/blob/v0.0.1/src/commands/brain/list.ts)_
+_See code: [src/commands/brain/list.ts](https://github.com/offline-ai/ai/blob/v0.0.2/src/commands/brain/list.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -474,7 +474,7 @@ EXAMPLES
   }
 ```
 
-_See code: [src/commands/config/index.ts](https://github.com/offline-ai/ai/blob/v0.0.1/src/commands/config/index.ts)_
+_See code: [src/commands/config/index.ts](https://github.com/offline-ai/ai/blob/v0.0.2/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -514,7 +514,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/config/save.ts](https://github.com/offline-ai/ai/blob/v0.0.1/src/commands/config/save.ts)_
+_See code: [src/commands/config/save.ts](https://github.com/offline-ai/ai/blob/v0.0.2/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -873,7 +873,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [src/commands/run/index.ts](https://github.com/offline-ai/ai/blob/v0.0.1/src/commands/run/index.ts)_
+_See code: [src/commands/run/index.ts](https://github.com/offline-ai/ai/blob/v0.0.2/src/commands/run/index.ts)_
 
 ## `ai version`
 
