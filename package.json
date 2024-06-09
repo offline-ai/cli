@@ -1,12 +1,12 @@
 {
-  "name": "@isdk/ai",
+  "name": "@offline-ai/cli",
   "description": "Your Offline(local) AI agents client",
   "version": "0.0.0",
   "author": "Riceball LEE @snowyu",
   "bin": {
     "ai": "./bin/run.js"
   },
-  "bugs": "https://github.com/@isdk/ai/issues",
+  "bugs": "https://github.com/@offline-ai/cli/issues",
   "dependencies": {
     "@isdk/ai-tool": "workspace:*",
     "@isdk/ai-tool-agent": "workspace:*",
