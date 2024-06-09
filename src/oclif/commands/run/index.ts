@@ -6,6 +6,7 @@ import { LogLevelMap, logLevel } from '@isdk/ai-tool-agent'
 import { AICommand, AICommonFlags } from '../../lib/ai-command.js'
 import {runScript} from '../../../lib/run-script.js'
 import { showBanner } from '../../lib/help.js'
+import { expandPath } from '../../../lib/load-config.js'
 
 export default class RunScript extends AICommand {
   static args = {
@@ -39,10 +40,12 @@ export default class RunScript extends AICommand {
     const userConfig = this.loadConfig(flags.config, opts)
     logLevel.json = isJson
     const hasBanner = userConfig.banner ?? userConfig.interactive
-    const script = userConfig.script
+    let script = userConfig.script
     if (!script) {
       this.error('missing script to run! require argument: `-f <script_file_name>`')
     }
+
+    script = expandPath(script, userConfig)
 
     if (hasBanner) {showBanner()}
 
