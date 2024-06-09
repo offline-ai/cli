@@ -26,11 +26,8 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 * Create the ai application's agent script file and debug prompts using the client (`@offline-ai/cli`): `ai run -f your_script --interactive --loglevel info`.
 * Integrate the script into your ai application.
 
-## TOC
-
 <!-- toc -->
 * [ai-agent](#ai-agent)
-* [provide the content and the json schema in output field, it will output the json data.](#provide-the-content-and-the-json-schema-in-output-field-it-will-output-the-json-data)
 <!-- tocstop -->
 
 ## Usage
@@ -43,7 +40,7 @@ $ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@offline-ai/cli/0.0.3 linux-x64 node-v20.14.0
+@offline-ai/cli/0.0.4 linux-x64 node-v20.14.0
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -97,7 +94,7 @@ Dobby: I am Dobby. Dobby is happy.
 You: intro yourself pls.
 Dobby: I am Dobby. I'm a brave and loyal house-elf, and I'm very proud to be a free elf. I love socks and wearing mismatched pairs.
 
-# provide the content and the json schema in output field, it will output the json data.
+#provide the content and the json schema in output field, it will output the json data.
 $ai run -f examples/json '{content: "I recently purchased the Razer BlackShark V2 X Gaming Headset, and it has significantly enhanced my gaming experience. This headset offers incredible sound quality, comfort, and features that are perfect for any serious gamer. Here’s why I highly recommend it: The 7.1 surround sound feature is a game-changer. The audio quality is superb, providing a truly immersive experience. I can clearly hear directional sounds, which is crucial for competitive gaming. The depth and clarity of the sound make it feel like I’m right in the middle of the action. The 50mm drivers deliver powerful, high-quality sound. The bass is deep and punchy without being overwhelming, while the mids and highs are crisp and clear. This balance makes the headset versatile, not only for gaming but also for listening to music and watching movies.", "output":{"type":"object","properties":{"sentiment":{"type":"string","description":"Sentiment (positive or negative)"},"products":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string","description":"Name of the product"},"brand":{"type":"string","description":"Company that made the product"}}},"description":"Products mentioned in the review"},"anger":{"type":"boolean","description":"Is the reviewer expressing anger?"}},"required":["sentiment","products","anger"]}}'
 
 {
@@ -169,28 +166,31 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 ## Commands
 
 <!-- commands -->
-* [`ai agent`](#ai-agent)
-* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-* [`ai brain [NAME]`](#ai-brain-name)
-* [`ai brain dn [NAME]`](#ai-brain-dn-name)
-* [`ai brain down [NAME]`](#ai-brain-down-name)
-* [`ai brain download [NAME]`](#ai-brain-download-name)
-* [`ai brain list [NAME]`](#ai-brain-list-name)
-* [`ai config [ITEM_NAME]`](#ai-config-item_name)
-* [`ai config save [DATA]`](#ai-config-save-data)
-* [`ai help [COMMAND]`](#ai-help-command)
-* [`ai plugins`](#ai-plugins)
-* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-* [`ai plugins link PATH`](#ai-plugins-link-path)
-* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-* [`ai plugins reset`](#ai-plugins-reset)
-* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-* [`ai plugins update`](#ai-plugins-update)
-* [`ai run [DATA]`](#ai-run-data)
-* [`ai version`](#ai-version)
+- [ai-agent](#ai-agent)
+  - [Usage](#usage)
+  - [Commands](#commands)
+  - [`ai agent`](#ai-agent-1)
+  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+  - [`ai brain [NAME]`](#ai-brain-name)
+  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
+  - [`ai brain down [NAME]`](#ai-brain-down-name)
+  - [`ai brain download [NAME]`](#ai-brain-download-name)
+  - [`ai brain list [NAME]`](#ai-brain-list-name)
+  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
+  - [`ai config save [DATA]`](#ai-config-save-data)
+  - [`ai help [COMMAND]`](#ai-help-command)
+  - [`ai plugins`](#ai-plugins)
+  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+  - [`ai plugins link PATH`](#ai-plugins-link-path)
+  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+  - [`ai plugins reset`](#ai-plugins-reset)
+  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+  - [`ai plugins update`](#ai-plugins-update)
+  - [`ai run [DATA]`](#ai-run-data)
+  - [`ai version`](#ai-version)
 
 ## `ai agent`
 
@@ -209,7 +209,7 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/ai/blob/v0.0.3/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/agent/index.ts)_
 
 ## `ai autocomplete [SHELL]`
 
@@ -281,7 +281,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [src/commands/brain/index.ts](https://github.com/offline-ai/ai/blob/v0.0.3/src/commands/brain/index.ts)_
+_See code: [src/commands/brain/index.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -409,7 +409,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [src/commands/brain/download.ts](https://github.com/offline-ai/ai/blob/v0.0.3/src/commands/brain/download.ts)_
+_See code: [src/commands/brain/download.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -437,7 +437,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/brain/list.ts](https://github.com/offline-ai/ai/blob/v0.0.3/src/commands/brain/list.ts)_
+_See code: [src/commands/brain/list.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/brain/list.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -474,7 +474,7 @@ EXAMPLES
   }
 ```
 
-_See code: [src/commands/config/index.ts](https://github.com/offline-ai/ai/blob/v0.0.3/src/commands/config/index.ts)_
+_See code: [src/commands/config/index.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -514,7 +514,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/config/save.ts](https://github.com/offline-ai/ai/blob/v0.0.3/src/commands/config/save.ts)_
+_See code: [src/commands/config/save.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -873,7 +873,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [src/commands/run/index.ts](https://github.com/offline-ai/ai/blob/v0.0.3/src/commands/run/index.ts)_
+_See code: [src/commands/run/index.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/run/index.ts)_
 
 ## `ai version`
 
