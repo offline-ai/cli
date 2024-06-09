@@ -1,9 +1,10 @@
+import util from 'util'
 import fs from 'fs'
 import path from 'path'
 import { DateTime } from 'luxon'
 import colors from 'ansi-colors'
 // import cliSpinners from 'cli-spinners'
-import logUpdate from 'log-update'
+import _logUpdate from 'log-update'
 import { get as getByPath } from 'lodash-es'
 import { ConfigFile, getMultiLevelExtname, parseJsJson, wait } from '@isdk/ai-tool'
 import { AIScriptServer, LogLevel, LogLevelMap } from '@isdk/ai-tool-agent'
@@ -29,6 +30,19 @@ interface IRunScriptOptions {
   newChat?: boolean,
   agentDirs?: string[],
   theme?: any,
+}
+
+function logUpdate(...text: string[]) {
+  logUpdate.dirt = true
+  _logUpdate(...text)
+}
+
+logUpdate.dirt = false
+logUpdate.clear = () => {
+  if (logUpdate.dirt) {
+    logUpdate.dirt = false
+    _logUpdate.clear()
+  }
 }
 
 function findCreatedAt(messages: any[]) {
@@ -119,7 +133,10 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
         retryCount = count
         llmLastContent += colors.blue(`<续:${count}>`)
       }
-      if (!isSilence) {logUpdate(llmLastContent)}
+      // if (llmLastContent.length > 100) {
+      //   llmLastContent = llmLastContent.slice(llmLastContent.length-100)
+      // }
+      if (!isSilence && llmLastContent) {logUpdate(llmLastContent)}
     })
   }
 
@@ -170,7 +187,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
             default: {
               if (command[0] === '.') {
                 const r = getByPath(runtime, command.slice(1))
-                console.log(command, '=', r)
+                console.log(command, '=', util.inspect(r, {showHidden: false, depth: 9, colors: true}))
               } else {
                 const {command: cmd, args} = parseCommandString(command)
                 try {

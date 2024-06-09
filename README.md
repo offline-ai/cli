@@ -1,12 +1,32 @@
 # ai-agent
 
-ai-agent CLI
-
+The AI agent script CLI
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/ai-agent.svg)](https://npmjs.org/package/ai-agent)
-[![Downloads/week](https://img.shields.io/npm/dw/ai-agent.svg)](https://npmjs.org/package/ai-agent)
+[![Version](https://img.shields.io/npm/v/ai-agent.svg)](https://npmjs.org/package/@offline-ai/ai)
+[![Downloads/week](https://img.shields.io/npm/dw/ai-agent.svg)](https://npmjs.org/package/@offline-ai/ai)
 
+Developing an intelligent application with AI Agent Script Engine involves just three steps:
+
+* Choose an appropriate brain🧠 (LLM Large Language Model)
+  * Select a parameter size based on your application's requirements; larger sizes offer better performance but consume more resources and increase response time...
+  * Choose the model's expertise: Different models are trained with distinct methods and datasets, resulting in unique capabilities...
+  * Optimize quantization: Higher levels of quantization (compression) result in faster speed and smaller size, but potentially lower accuracy...
+  * Decide on the optimal context window size (`content_size`): Typically, 2048 is sufficient; this parameter also influences model performance...
+  * Use the client (`@offline-ai/cli`) directly to download the AI brain: `ai brain download`
+* Create the ai application's agent script file and debug prompts using the client (`@offline-ai/cli`): `ai run -f your_script --interactive --loglevel info`.
+* Integrate the script into your ai application.
+
+**Features**:
+
+* User-friendly for ai development and creation of intelligent applications...
+* Low-code or even no-code solutions for rapid ai development...
+* Flexible, adding custom instructions within scripts and inter-script calls...
+* Data openness, granting access to input/output data and internal data within scripts...
+* Powerful, enabling event transmission seamlessly between client and server with numerous utility functions...
+* Secure, supporting encrypted execution and usage limits for scripts...
+
+## TOC
 
 <!-- toc -->
 * [ai-agent](#ai-agent)
@@ -14,19 +34,62 @@ ai-agent CLI
 
 ## Usage
 
+Install the CLI globally:
+
 <!-- usage -->
 ```sh-session
-$ npm install -g @isdk/ai
+$ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@isdk/ai/0.0.0 linux-x64 node-v20.13.1
+@offline-ai/cli/0.0.0 linux-x64 node-v20.14.0
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
 ...
 ```
 <!-- usagestop -->
+
+Search and Download a brain(LLM) on huggingface:
+
+```bash
+#Choose one to download, or type more to reduce the brain(models) list
+ai brain download llama3-8b
+
+#after download, get the brainDir from here:
+ai config brainDir
+{
+  "brainDir": "~/.local/share/ai/brain"
+}
+```
+
+You can create your config in `~/.config/ai/.ai.yaml` or using json format: `~/.config/ai/.ai.json`.
+
+Download and run the LLM backend Server: [llama.cpp](https://github.com/ggerganov/llama.cpp/releases/latest)
+
+```bash
+#eg, download
+mkdir llamacpp
+cd llamacpp
+wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-bin-ubuntu-x64.zip
+unzip llama-b3091-bin-ubuntu-x64.zip
+cd build/bin
+#run the server
+#`-ngl 33` means GPU layers to load, adjust it according to your GPU.
+#`-c 4096` means max context length
+#`-t 4` means thread count
+./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/your-brain-model.gguf
+```
+
+Now you can run your AI agent:
+
+```bash
+#the `.ai.yaml` extension is optional.
+#defaults will search current working dir. you can config the search paths in `agentDirs`.
+#`-f` means the agent file
+#`-i` means entering the interactive mode
+ai run -if your_ai_agent_script.ai.yaml
+```
 
 ## Commands
 
@@ -110,7 +173,8 @@ _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomp
 
 ```
 USAGE
-  $ ai brain [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-s <value>] [-n <value>]
+  $ ai brain [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-s
+    <value>] [-n <value>]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -278,7 +342,8 @@ _See code: [src/commands/brain/download.ts](https://github.com/offline-ai/ai/blo
 
 ```
 USAGE
-  $ ai brain list [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b <value>] [-f] [-s <value>] [-n <value>]
+  $ ai brain list [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b
+    <value>] [-f] [-s <value>] [-n <value>]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -328,9 +393,9 @@ _See code: [src/commands/config/index.ts](https://github.com/offline-ai/ai/blob/
 
 ```
 USAGE
-  $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s <value>...] [-l
-    silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats ] [--no-inputs ] [-m] [-f
-    <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
+  $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
+    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats ]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
@@ -677,9 +742,9 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 
 ```
 USAGE
-  $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s <value>...] [-l
-    silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats ] [--no-inputs ] [-m] [-f
-    <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
+  $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
+    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats ]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
