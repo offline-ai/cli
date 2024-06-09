@@ -166,31 +166,28 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 ## Commands
 
 <!-- commands -->
-- [ai-agent](#ai-agent)
-  - [Usage](#usage)
-  - [Commands](#commands)
-  - [`ai agent`](#ai-agent-1)
-  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-  - [`ai brain [NAME]`](#ai-brain-name)
-  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
-  - [`ai brain down [NAME]`](#ai-brain-down-name)
-  - [`ai brain download [NAME]`](#ai-brain-download-name)
-  - [`ai brain list [NAME]`](#ai-brain-list-name)
-  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
-  - [`ai config save [DATA]`](#ai-config-save-data)
-  - [`ai help [COMMAND]`](#ai-help-command)
-  - [`ai plugins`](#ai-plugins)
-  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-  - [`ai plugins link PATH`](#ai-plugins-link-path)
-  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-  - [`ai plugins reset`](#ai-plugins-reset)
-  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-  - [`ai plugins update`](#ai-plugins-update)
-  - [`ai run [DATA]`](#ai-run-data)
-  - [`ai version`](#ai-version)
+* [`ai agent`](#ai-agent)
+* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+* [`ai brain [NAME]`](#ai-brain-name)
+* [`ai brain dn [NAME]`](#ai-brain-dn-name)
+* [`ai brain down [NAME]`](#ai-brain-down-name)
+* [`ai brain download [NAME]`](#ai-brain-download-name)
+* [`ai brain list [NAME]`](#ai-brain-list-name)
+* [`ai config [ITEM_NAME]`](#ai-config-item_name)
+* [`ai config save [DATA]`](#ai-config-save-data)
+* [`ai help [COMMAND]`](#ai-help-command)
+* [`ai plugins`](#ai-plugins)
+* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+* [`ai plugins link PATH`](#ai-plugins-link-path)
+* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+* [`ai plugins reset`](#ai-plugins-reset)
+* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+* [`ai plugins update`](#ai-plugins-update)
+* [`ai run [DATA]`](#ai-run-data)
+* [`ai version`](#ai-version)
 
 ## `ai agent`
 
@@ -209,7 +206,7 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.0.4/src/commands/agent/index.ts)_
 
 ## `ai autocomplete [SHELL]`
 
@@ -281,7 +278,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [src/commands/brain/index.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/brain/index.ts)_
+_See code: [src/commands/brain/index.ts](https://github.com/offline-ai/cli/blob/v0.0.4/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -409,7 +406,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [src/commands/brain/download.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/brain/download.ts)_
+_See code: [src/commands/brain/download.ts](https://github.com/offline-ai/cli/blob/v0.0.4/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -437,7 +434,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/brain/list.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/brain/list.ts)_
+_See code: [src/commands/brain/list.ts](https://github.com/offline-ai/cli/blob/v0.0.4/src/commands/brain/list.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -474,7 +471,7 @@ EXAMPLES
   }
 ```
 
-_See code: [src/commands/config/index.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/config/index.ts)_
+_See code: [src/commands/config/index.ts](https://github.com/offline-ai/cli/blob/v0.0.4/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -514,7 +511,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/config/save.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/config/save.ts)_
+_See code: [src/commands/config/save.ts](https://github.com/offline-ai/cli/blob/v0.0.4/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -873,7 +870,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [src/commands/run/index.ts](https://github.com/offline-ai/ai/blob/v0.0.4/src/commands/run/index.ts)_
+_See code: [src/commands/run/index.ts](https://github.com/offline-ai/cli/blob/v0.0.4/src/commands/run/index.ts)_
 
 ## `ai version`
 
