@@ -6,6 +6,15 @@ The AI agent script CLI
 [![Version](https://img.shields.io/npm/v/ai-agent.svg)](https://npmjs.org/package/@offline-ai/ai)
 [![Downloads/week](https://img.shields.io/npm/dw/ai-agent.svg)](https://npmjs.org/package/@offline-ai/ai)
 
+**Features**:
+
+* User-friendly for ai development and creation of intelligent applications...
+* Low-code or even no-code solutions for rapid ai development...
+* Flexible, adding custom instructions within scripts and inter-script calls...
+* Data openness, granting access to input/output data and internal data within scripts...
+* Powerful, enabling event transmission seamlessly between client and server with numerous utility functions...
+* Secure, supporting encrypted execution and usage limits for scripts...
+
 Developing an intelligent application with AI Agent Script Engine involves just three steps:
 
 * Choose an appropriate brain🧠 (LLM Large Language Model)
@@ -16,15 +25,6 @@ Developing an intelligent application with AI Agent Script Engine involves just 
   * Use the client (`@offline-ai/cli`) directly to download the AI brain: `ai brain download`
 * Create the ai application's agent script file and debug prompts using the client (`@offline-ai/cli`): `ai run -f your_script --interactive --loglevel info`.
 * Integrate the script into your ai application.
-
-**Features**:
-
-* User-friendly for ai development and creation of intelligent applications...
-* Low-code or even no-code solutions for rapid ai development...
-* Flexible, adding custom instructions within scripts and inter-script calls...
-* Data openness, granting access to input/output data and internal data within scripts...
-* Powerful, enabling event transmission seamlessly between client and server with numerous utility functions...
-* Secure, supporting encrypted execution and usage limits for scripts...
 
 ## TOC
 
@@ -50,13 +50,17 @@ USAGE
 ```
 <!-- usagestop -->
 
-Search and Download a brain(LLM) on huggingface:
+Search and Download a brain(LLM) on huggingface.
+
+Choose one to download, or type more to reduce the brain(models) list
 
 ```bash
-#Choose one to download, or type more to reduce the brain(models) list
 ai brain download llama3-8b
+```
 
-#after download, get the brainDir from here:
+after download, get the brainDir from here:
+
+```bash
 ai config brainDir
 {
   "brainDir": "~/.local/share/ai/brain"
@@ -68,7 +72,6 @@ You can create your config in `~/.config/ai/.ai.yaml` or using json format: `~/.
 Download and run the LLM backend Server: [llama.cpp](https://github.com/ggerganov/llama.cpp/releases/latest)
 
 ```bash
-#eg, download
 mkdir llamacpp
 cd llamacpp
 wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-bin-ubuntu-x64.zip
@@ -88,34 +91,102 @@ Now you can run your AI agent:
 #defaults will search current working dir. you can config the search paths in `agentDirs`.
 #`-f` means the agent file
 #`-i` means entering the interactive mode
-ai run -if your_ai_agent_script.ai.yaml
+$ai run -if examples/char-dobby
+Dobby: I am Dobby. Dobby is happy.
+You: intro yourself pls.
+Dobby: I am Dobby. I'm a brave and loyal house-elf, and I'm very proud to be a free elf. I love socks and wearing mismatched pairs.
+
+# provide the content and the json schema in output field, it will output the json data.
+$ai run -f examples/json '{content: "I recently purchased the Razer BlackShark V2 X Gaming Headset, and it has significantly enhanced my gaming experience. This headset offers incredible sound quality, comfort, and features that are perfect for any serious gamer. Here’s why I highly recommend it: The 7.1 surround sound feature is a game-changer. The audio quality is superb, providing a truly immersive experience. I can clearly hear directional sounds, which is crucial for competitive gaming. The depth and clarity of the sound make it feel like I’m right in the middle of the action. The 50mm drivers deliver powerful, high-quality sound. The bass is deep and punchy without being overwhelming, while the mids and highs are crisp and clear. This balance makes the headset versatile, not only for gaming but also for listening to music and watching movies.", "output":{"type":"object","properties":{"sentiment":{"type":"string","description":"Sentiment (positive or negative)"},"products":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string","description":"Name of the product"},"brand":{"type":"string","description":"Company that made the product"}}},"description":"Products mentioned in the review"},"anger":{"type":"boolean","description":"Is the reviewer expressing anger?"}},"required":["sentiment","products","anger"]}}'
+
+{
+  "sentiment": "positive",
+  "products": [
+    {
+      "name": "Razer BlackShark V2 X Gaming Headset",
+      "brand": "Razer"
+    }
+  ],
+  "anger": false
+}
 ```
+
+Embed the script into your own code (locally) as follows:
+
+```ts
+import { AIScriptServer } from '@isdk/ai-tool-agent';
+
+// Configure your script search path
+AIScriptEx.searchPaths = ['.']
+const script = AIScriptServer.load('examples/json')
+// Set the default to large model streaming response
+script.llmStream = stream
+
+const content = "I recently purchased the Razer BlackShark V2 X Gaming Headset, and it has significantly enhanced my gaming experience. This headset offers incredible sound quality, comfort, and features that are perfect for any serious gamer. Here’s why I highly recommend it: The 7.1 surround sound feature is a game-changer. The audio quality is superb, providing a truly immersive experience. I can clearly hear directional sounds, which is crucial for competitive gaming. The depth and clarity of the sound make it feel like I’m right in the middle of the action. The 50mm drivers deliver powerful, high-quality sound. The bass is deep and punchy without being overwhelming, while the mids and highs are crisp and clear. This balance makes the headset versatile, not only for gaming but also for listening to music and watching movies."
+const output = {
+  "type":"object",
+  "properties":{
+    "sentiment":{"type":"string","description":"Sentiment (positive or negative)"},
+    "products":{
+      "type":"array",
+      "items":{
+        "type":"object",
+        "properties":{
+          "name":{"type":"string","description":"Name of the product"},
+          "brand":{"type":"string","description":"Company that made the product"}}
+      },
+      "description":"Products mentioned in the review"
+    },
+    "anger":{"type":"boolean","description":"Is the reviewer expressing anger?"}},
+  "required":["sentiment","products","anger"]
+}
+
+const result =await script.exec({content, output})
+console.log(result)
+// You can see the json results output by the large model:
+{
+  "sentiment": "positive",
+  "products": [
+    {
+      "name": "Razer BlackShark V2 X Gaming Headset",
+      "brand": "Razer"
+    }
+  ],
+  "anger": false
+}
+```
+
+Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/package/@isdk/ai-tool-agent)
 
 ## Commands
 
 <!-- commands -->
-* [`ai agent`](#ai-agent)
-* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-* [`ai brain [NAME]`](#ai-brain-name)
-* [`ai brain dn [NAME]`](#ai-brain-dn-name)
-* [`ai brain down [NAME]`](#ai-brain-down-name)
-* [`ai brain download [NAME]`](#ai-brain-download-name)
-* [`ai brain list [NAME]`](#ai-brain-list-name)
-* [`ai config`](#ai-config)
-* [`ai config save [DATA]`](#ai-config-save-data)
-* [`ai help [COMMAND]`](#ai-help-command)
-* [`ai plugins`](#ai-plugins)
-* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-* [`ai plugins link PATH`](#ai-plugins-link-path)
-* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-* [`ai plugins reset`](#ai-plugins-reset)
-* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-* [`ai plugins update`](#ai-plugins-update)
-* [`ai run [DATA]`](#ai-run-data)
-* [`ai version`](#ai-version)
+- [ai-agent](#ai-agent)
+  - [TOC](#toc)
+  - [Usage](#usage)
+  - [Commands](#commands)
+  - [`ai agent`](#ai-agent-1)
+  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+  - [`ai brain [NAME]`](#ai-brain-name)
+  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
+  - [`ai brain down [NAME]`](#ai-brain-down-name)
+  - [`ai brain download [NAME]`](#ai-brain-download-name)
+  - [`ai brain list [NAME]`](#ai-brain-list-name)
+  - [`ai config`](#ai-config)
+  - [`ai config save [DATA]`](#ai-config-save-data)
+  - [`ai help [COMMAND]`](#ai-help-command)
+  - [`ai plugins`](#ai-plugins)
+  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+  - [`ai plugins link PATH`](#ai-plugins-link-path)
+  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+  - [`ai plugins reset`](#ai-plugins-reset)
+  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+  - [`ai plugins update`](#ai-plugins-update)
+  - [`ai run [DATA]`](#ai-run-data)
+  - [`ai version`](#ai-version)
 
 ## `ai agent`
 
