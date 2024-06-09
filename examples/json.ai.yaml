@@ -1,0 +1,54 @@
+---
+_id: json|default
+templateFormat: hf
+type: extract  # 内容提取
+prompt:
+  add_generation_prompt: true
+  messages:
+    - role: system
+      content: |-
+        Extract THE CONTENT input by the user as a JSON object according to THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS specified by the user:
+    - role: user
+      content: |-
+        THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS:
+        {{output}}
+        ---
+        THE CONTENT:
+        {{content}}
+        ---
+input:
+  - content
+  - output
+  # - output: messages[1].content
+output:
+  type: "object"
+  properties:
+    sentiment:
+      type: "string"
+      description: "Sentiment (positive or negative)"
+    products:
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          name:
+            type: "string"
+            description: "Name of the product"
+          brand:
+            type: "string"
+            description: "Company that made the product"
+      description: "Products mentioned in the review"
+    anger:
+      type: "boolean"
+      description: "Is the reviewer expressing anger?"
+  required: ["sentiment", "products", "anger"]
+parameters:
+  stop_words: ['\n']
+  response_format:
+    type: "json_object"
+ProtectedStartup: [input, prompt.messages]
+content: >-
+  Needed a nice lamp for my bedroom, and this one had additional storage and not too high of a price point. Got it fast.
+  The string to our lamp broke during the transit and the company happily sent over a new one. Came within a few days as well. It was easy to put together.
+  I had a missing part, so I contacted their support and they very quickly got me the missing piece! Lumina seems to me to be a great company that cares about their customers and products!!
+---
