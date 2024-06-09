@@ -100,7 +100,11 @@ export abstract class AICommand extends Command {
 export const AICommonFlags = {
   api: Flags.url({char: 'u', description: 'the api URL'}),
   agentDirs: Flags.directory({char: 's', description: 'the search paths for ai-agent script file', exists: true, multiple: true}),
-  logLevel: Flags.string({char: 'l', description: 'the log level', options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace']}),
+  logLevel: Flags.string({
+    char: 'l', description: 'the log level',
+    aliases: ['loglevel', 'log-level'],
+    options: ['silence', 'fatal', 'error', 'warn', 'info', 'debug', 'trace'],
+  }),
   interactive: Flags.boolean({char: 'i', description: 'interactive mode', allowNo: true}),
   histories: Flags.directory({char: 'h', description: 'the chat histories folder to record', exists: true}),
   newChat: Flags.boolean({char:'n', aliases:['new-chat'], description: 'whether to start a new chat history, defaults to false in interactive mode, true in non-interactive', allowNo: true}),
