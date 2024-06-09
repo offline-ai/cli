@@ -110,7 +110,14 @@ $ai run -f examples/json '{content: "I recently purchased the Razer BlackShark V
 }
 ```
 
-在自己的代码中本地使用方式:
+注意:
+
+* 默认运行后的历史记录在`~/.local/share/ai/logs/chats/[script_file_basename]/history`目录下. 可以在这里检查`seeds`, `temperature`等信息.
+  * 在交互模式下默认会自动加载历史记录,如果不需要,可以用`--new-chat`
+  * 非交互模式下不会自动加载历史记录,每一次运行都会生成新的历史记录.
+  * 彻底禁用历史记录, 可以用`--no-chats`
+
+**嵌入到自己的代码中(本地方式)**:
 
 ```ts
 import { AIScriptServer } from '@isdk/ai-tool-agent';
