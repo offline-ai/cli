@@ -248,34 +248,28 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 ## Commands
 
 <!-- commands -->
-- [ai-agent](#ai-agent)
-  - [Quick Start](#quick-start)
-    - [Install](#install)
-    - [Run](#run)
-  - [Usage](#usage)
-  - [Commands](#commands)
-  - [`ai agent`](#ai-agent-1)
-  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-  - [`ai brain [NAME]`](#ai-brain-name)
-  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
-  - [`ai brain down [NAME]`](#ai-brain-down-name)
-  - [`ai brain download [NAME]`](#ai-brain-download-name)
-  - [`ai brain list [NAME]`](#ai-brain-list-name)
-  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
-  - [`ai config save [DATA]`](#ai-config-save-data)
-  - [`ai help [COMMAND]`](#ai-help-command)
-  - [`ai plugins`](#ai-plugins)
-  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-  - [`ai plugins link PATH`](#ai-plugins-link-path)
-  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-  - [`ai plugins reset`](#ai-plugins-reset)
-  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-  - [`ai plugins update`](#ai-plugins-update)
-  - [`ai run [DATA]`](#ai-run-data)
-  - [`ai version`](#ai-version)
+* [`ai agent`](#ai-agent)
+* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+* [`ai brain [NAME]`](#ai-brain-name)
+* [`ai brain dn [NAME]`](#ai-brain-dn-name)
+* [`ai brain down [NAME]`](#ai-brain-down-name)
+* [`ai brain download [NAME]`](#ai-brain-download-name)
+* [`ai brain list [NAME]`](#ai-brain-list-name)
+* [`ai config [ITEM_NAME]`](#ai-config-item_name)
+* [`ai config save [DATA]`](#ai-config-save-data)
+* [`ai help [COMMAND]`](#ai-help-command)
+* [`ai plugins`](#ai-plugins)
+* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+* [`ai plugins link PATH`](#ai-plugins-link-path)
+* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+* [`ai plugins reset`](#ai-plugins-reset)
+* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+* [`ai plugins update`](#ai-plugins-update)
+* [`ai run [DATA]`](#ai-run-data)
+* [`ai version`](#ai-version)
 
 ## `ai agent`
 
@@ -619,7 +613,7 @@ DESCRIPTION
   Display help for ai.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.1.0/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.1/src/commands/help.ts)_
 
 ## `ai plugins`
 
@@ -918,7 +912,7 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 USAGE
   $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats ]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [--noConsoleClear]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
@@ -943,6 +937,7 @@ FLAGS
       --[no-]banner            show banner
       --no-chats               disable chat histories, defaults to false
       --no-inputs              disable input histories, defaults to false
+      --noConsoleClear         disable console clear, debug purpose
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -978,5 +973,5 @@ FLAG DESCRIPTIONS
     Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
 ```
 
-_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.2.2/src/commands/version.ts)_
+_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.2.3/src/commands/version.ts)_
 <!-- commandsstop -->
