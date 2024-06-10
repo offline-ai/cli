@@ -222,6 +222,17 @@ wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-
 unzip llama-b3091-bin-ubuntu-x64.zip
 ```
 
+### 下载脑子🧠
+
+```bash
+ai brain download QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2 -q Q4_0
+Downloading to ~/.local/share/ai/brain
+Downloading https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf... 5.61% 121977704 bytes
+1. https://hf-mirror.com/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
+   ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
+done
+```
+
 ### Run
 
 首先需要运行 llama.cpp server:
