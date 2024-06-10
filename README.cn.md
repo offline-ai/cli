@@ -18,7 +18,7 @@ AI Agent 脚本引擎特点:
 使用AI Agent 脚本引擎开发一个智能应用只需要三步:
 
 1. 选择一个合适的脑子🧠(LLM大模型)
-   1. 参数规模的选择,根据自己应用的需求决定,参数规模越大,性能越高,但是也会消耗更多资源...响应时间也会变长...
+   1. 参数规模的选择,根据自己应用的需求决定,参数规模越大,输出质量越高,但是也会消耗更多资源...响应时间也会变长...
    2. 特长的选择,不同的脑子训练的方式不同,训练的素材(dataset)不同,特长也不同...
    3. 选择合适的量化程度,量化(压缩)程度越大,速度越快,体积越小,精度越差...
    4. 选择合适的最大窗口正文长度(`content_size`), 一般 2048 足够, 这个参数也会影响模型的性能...
@@ -47,16 +47,60 @@ USAGE
 
 运行如下命令执行下载命令, 选择一个下载, 或者输入更多来减少脑(模型)列表.
 
-注意: 所有的量化模型均为用户自行上传
+注意:
+
+* 所有的量化(压缩)大脑🧠模型均为用户自行上传,因此并不能保证这些用户自行量化(压缩)的大脑🧠模型都能使用
+* 目前已经存在的GGUF量化大脑🧠模型已经上万,有不少都是重复的
+* 列表中显示的大脑列表,默认是经过`featured`过滤了的一部分列表, 如果要显示所有的大脑列表,请输入`--no-onlyFeatured`
+
 
 ```bash
-ai brain download llama3-8b --hubUrl=huggingface-mirror-url-address
+#默认列出已经下载的大脑列表
+#等于 `ai brain list --downloaded`
+$ai brain
+$ai brain list --downloaded
+1. name: "deepseek-v2-chat", likes: 17, downloads: 1189, hf_repo: "leafspark/DeepSeek-V2-Chat-GGUF"
+   * IQ2_XXS: deepseek-v2-chat.IQ2_XXS-00001-of-00003.gguf (3 files)
+   * IQ3_XS: deepseek-v2-chat.IQ3_XS-00001-of-00008.gguf (8 files)
+   * Q2_K: deepseek-v2-chat.Q2_K-00001-of-00005.gguf (5 files)
+   * Q3_K_M: deepseek-v2-chat.Q3_K_M-00001-of-00006.gguf (6 files)
+   * Q5_K_M: deepseek-v2-chat.Q5_K_M-00001-of-00008.gguf (8 files)
+   * Q6_K: deepseek-v2-chat.Q6_K-00001-of-00010.gguf (10 files)
+   * Q8_0: deepseek-v2-chat.Q8_0-00001-of-00012.gguf (12 files)
+total: 1
+#可以指定大脑模型的关键字搜索
+$ai brain list qwen1.5
+1. name: "codeqwen1.5-7b-chat", likes: 84, downloads: 196977, hf_repo: "Qwen/CodeQwen1.5-7B-Chat-GGUF"
+   * Q2_K: codeqwen-1_5-7b-chat.Q2_K.gguf
+   * Q3_K_M: codeqwen-1_5-7b-chat.Q3_K_M.gguf
+   * Q4_0: codeqwen-1_5-7b-chat.Q4_0.gguf
+   * Q4_K_M: codeqwen-1_5-7b-chat.Q4_K_M.gguf
+   * Q5_0: codeqwen-1_5-7b-chat.Q5_0.gguf
+   * Q5_K_M: codeqwen-1_5-7b-chat.Q5_K_M.gguf
+   * Q6_K: codeqwen-1_5-7b-chat.Q6_K.gguf
+   * Q8_0: codeqwen-1_5-7b-chat.Q8_0.gguf
+2. name: "qwen1.5-72b-chat", likes: 62, downloads: 3657, hf_repo: "Qwen/Qwen1.5-72B-Chat-GGUF"
+   * Q2_K: qwen1_5-72b-chat.Q2_K.gguf
+   * Q3_K_M: qwen1_5-72b-chat.Q3_K_M.gguf
+   * Q4_0: qwen1_5-72b-chat.Q4_0-00001-of-00002.gguf (2 files)
+   * Q4_K_M: qwen1_5-72b-chat.Q4_K_M-00001-of-00002.gguf (2 files)
+   * Q5_0: qwen1_5-72b-chat.Q5_0-00001-of-00002.gguf (2 files)
+   * Q5_K_M: qwen1_5-72b-chat.Q5_K_M-00001-of-00002.gguf (2 files)
+   * Q6_K: qwen1_5-72b-chat.Q6_K-00001-of-00002.gguf (2 files)
+   * Q8_0: qwen1_5-72b-chat.Q8_0-00001-of-00003.gguf (3 files)
+...
+total: 35
+#下载大脑, 如果输入的关键字存在多个选择,会要求指定
+#llama3-8b 是待搜索的大脑模型名称
+#`-q Q4_0` 是下载的量化等级,如果没有提供,会提示指定
+#`--hubUrl` 是huggingface的镜像URL地址
+$ai brain download llama3-8b -q Q4_0 --hubUrl=huggingface-mirror-url-address
 ```
 
 下载后, 要知道大脑下载的位置,通过读取`brainDir`设置,可见:
 
 ```bash
-ai config brainDir
+$ai config brainDir
 {
   "brainDir": "~/.local/share/ai/brain"
 }
@@ -78,7 +122,7 @@ cd build/bin
 #`-ngl 33` means GPU layers to load, adjust it according to your GPU.
 #`-c 4096` means max context length
 #`-t 4` means thread count
-# `-m your-brain-model.gguf` means 你下载的大脑模型文件
+#`-m your-brain-model.gguf` means 你下载的大脑模型文件
 ./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/your-brain-model.gguf
 ```
 
@@ -94,8 +138,8 @@ Dobby: I am Dobby. Dobby is happy.
 You: intro yourself pls.
 Dobby: I am Dobby. I'm a brave and loyal house-elf, and I'm very proud to be a free elf. I love socks and wearing mismatched pairs.
 
-# 在命令行上输入内容(content)和内容的json schema 规范(output), 它就会产出该内容对应的json数据.
-# 注意其生成质量受所选脑子🧠的影响.
+#在命令行上输入内容(content)和内容的json schema 规范(output), 它就会产出该内容对应的json数据.
+#注意其生成质量受所选脑子🧠的影响.
 $ai run -f examples/json '{content: "I recently purchased the Razer BlackShark V2 X Gaming Headset, and it has significantly enhanced my gaming experience. This headset offers incredible sound quality, comfort, and features that are perfect for any serious gamer. Here’s why I highly recommend it: The 7.1 surround sound feature is a game-changer. The audio quality is superb, providing a truly immersive experience. I can clearly hear directional sounds, which is crucial for competitive gaming. The depth and clarity of the sound make it feel like I’m right in the middle of the action. The 50mm drivers deliver powerful, high-quality sound. The bass is deep and punchy without being overwhelming, while the mids and highs are crisp and clear. This balance makes the headset versatile, not only for gaming but also for listening to music and watching movies.", "output":{"type":"object","properties":{"sentiment":{"type":"string","description":"Sentiment (positive or negative)"},"products":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string","description":"Name of the product"},"brand":{"type":"string","description":"Company that made the product"}}},"description":"Products mentioned in the review"},"anger":{"type":"boolean","description":"Is the reviewer expressing anger?"}},"required":["sentiment","products","anger"]}}'
 
 {

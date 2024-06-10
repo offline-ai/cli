@@ -30,6 +30,36 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 * [ai-agent](#ai-agent)
 <!-- tocstop -->
 
+## Quick Start
+
+### Install
+
+```bash
+npm install -g @offline-ai/cli
+ai brain download QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2 -q Q4_0
+Downloading to ~/.local/share/ai/brain
+Downloading https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf... 5.61% 121977704 bytes
+1. https://hf-mirror.com/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
+   ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
+done
+mkdir llamacpp
+cd llamacpp
+wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-bin-ubuntu-x64.zip
+unzip llama-b3091-bin-ubuntu-x64.zip
+```
+
+### Run
+
+```bash
+#run llama.cpp server
+cd llamacpp/build/bin
+#set -ngl 0 if no gpu
+./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
+```
+
+
+
+
 ## Usage
 
 Install the CLI globally:
@@ -48,12 +78,64 @@ USAGE
 ```
 <!-- usagestop -->
 
+
 Search and Download a brain(LLM) on huggingface.
 
 Choose one to download, or type more to reduce the brain(models) list
 
+Note:
+
+* All quantification (compression) brain 🧠 models are uploaded by the user by themselves, so it cannot guarantee that these user quantitative (compressed) brain 🧠 models can be used
+* At present, the GGUF quantitative brain 🧠 model has been tens of thousands, and many of them are repeated.
+* `AI Brain List` Display the brain list, which is part of the list filtered by the`featured`. If you want to display all the brain list, use `--no-onlyFeatured` option.
+
 ```bash
-ai brain download llama3-8b
+#list the downloaded brain list
+#=`ai brain list --downloaded`
+$ai brain
+$ai brain list --downloaded
+1. name: "deepseek-v2-chat", likes: 17, downloads: 1189, hf_repo: "leafspark/DeepSeek-V2-Chat-GGUF"
+   * IQ2_XXS: deepseek-v2-chat.IQ2_XXS-00001-of-00003.gguf (3 files)
+   * IQ3_XS: deepseek-v2-chat.IQ3_XS-00001-of-00008.gguf (8 files)
+   * Q2_K: deepseek-v2-chat.Q2_K-00001-of-00005.gguf (5 files)
+   * Q3_K_M: deepseek-v2-chat.Q3_K_M-00001-of-00006.gguf (6 files)
+   * Q5_K_M: deepseek-v2-chat.Q5_K_M-00001-of-00008.gguf (8 files)
+   * Q6_K: deepseek-v2-chat.Q6_K-00001-of-00010.gguf (10 files)
+   * Q8_0: deepseek-v2-chat.Q8_0-00001-of-00012.gguf (12 files)
+total: 1
+
+#You can specify the keyword of the brain model to search
+$ai brain list qwen1.5
+1. name: "codeqwen1.5-7b-chat", likes: 84, downloads: 196977, hf_repo: "Qwen/CodeQwen1.5-7B-Chat-GGUF"
+   * Q2_K: codeqwen-1_5-7b-chat.Q2_K.gguf
+   * Q3_K_M: codeqwen-1_5-7b-chat.Q3_K_M.gguf
+   * Q4_0: codeqwen-1_5-7b-chat.Q4_0.gguf
+   * Q4_K_M: codeqwen-1_5-7b-chat.Q4_K_M.gguf
+   * Q5_0: codeqwen-1_5-7b-chat.Q5_0.gguf
+   * Q5_K_M: codeqwen-1_5-7b-chat.Q5_K_M.gguf
+   * Q6_K: codeqwen-1_5-7b-chat.Q6_K.gguf
+   * Q8_0: codeqwen-1_5-7b-chat.Q8_0.gguf
+2. name: "qwen1.5-72b-chat", likes: 62, downloads: 3657, hf_repo: "Qwen/Qwen1.5-72B-Chat-GGUF"
+   * Q2_K: qwen1_5-72b-chat.Q2_K.gguf
+   * Q3_K_M: qwen1_5-72b-chat.Q3_K_M.gguf
+   * Q4_0: qwen1_5-72b-chat.Q4_0-00001-of-00002.gguf (2 files)
+   * Q4_K_M: qwen1_5-72b-chat.Q4_K_M-00001-of-00002.gguf (2 files)
+   * Q5_0: qwen1_5-72b-chat.Q5_0-00001-of-00002.gguf (2 files)
+   * Q5_K_M: qwen1_5-72b-chat.Q5_K_M-00001-of-00002.gguf (2 files)
+   * Q6_K: qwen1_5-72b-chat.Q6_K-00001-of-00002.gguf (2 files)
+   * Q8_0: qwen1_5-72b-chat.Q8_0-00001-of-00003.gguf (3 files)
+...
+total: 35
+$ai brain list qwen1.5 --no-onlyFeatured
+1. name: "codeqwen1.5-7b-chat", likes: 84, downloads: 196977, hf_repo: "Qwen/CodeQwen1.5-7B-Chat-GGUF"
+...
+total: 144
+
+#Download the brain, if there are multiple choices in the input keywords, you will be required to specify
+#LLAMA3-8B is the name of the brain model to be searched
+#`-q q4_0` is the quantification level of download. If it is not provided, it will be prompted to specify
+#`--hubUrl` is the mirror URL address of Huggingface
+$ai brain download llama3-8b -q Q4_0 --hubUrl=huggingface-mirror-url-address
 ```
 
 after download, get the brainDir from here:
@@ -167,6 +249,9 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 
 <!-- commands -->
 - [ai-agent](#ai-agent)
+  - [Quick Start](#quick-start)
+    - [Install](#install)
+    - [Run](#run)
   - [Usage](#usage)
   - [Commands](#commands)
   - [`ai agent`](#ai-agent-1)
