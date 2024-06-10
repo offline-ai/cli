@@ -30,6 +30,7 @@ interface IRunScriptOptions {
   newChat?: boolean,
   agentDirs?: string[],
   theme?: any,
+  noConsoleClear?: boolean,
 }
 
 function logUpdate(...text: string[]) {
@@ -143,7 +144,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   try {
     await runtime.run(options.data)
   } finally {
-    if (!isSilence) {logUpdate.clear()}
+    if (!isSilence && !options.noConsoleClear) {logUpdate.clear()}
   }
 
   let result = runtime.result
@@ -222,7 +223,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
           const what = error.data?.what ? ':'+error.data.what : ''
           input.write(colors.magentaBright(`<${error.name+what}>`))
         } finally {
-          if (!isSilence) {logUpdate.clear()}
+          if (!isSilence && !options.noConsoleClear) {logUpdate.clear()}
         }
         if (result) {
           if (typeof result !== 'string') { result = ux.colorizeJson(result, {pretty: true, theme: options.theme?.json})}

@@ -1,5 +1,5 @@
 import cj from 'color-json'
-import {Args} from '@oclif/core'
+import {Args, Flags} from '@oclif/core'
 import { parseJsJson } from '@isdk/ai-tool'
 import { LogLevelMap, logLevel } from '@isdk/ai-tool-agent'
 
@@ -30,6 +30,7 @@ export default class RunScript extends AICommand {
   static flags = {
     ...AICommand.flags,
     ...AICommonFlags,
+    'noConsoleClear': Flags.boolean({description: 'disable console clear, debug purpose'}),
   }
 
   async run(): Promise<any> {
