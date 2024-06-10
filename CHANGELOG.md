@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.7](https://github.com/offline-ai/cli/compare/v0.0.6...v0.0.7) (2024-06-10)
+
+
+### Bug Fixes
+
+* noConsoleClear can not work ([b3d2323](https://github.com/offline-ai/cli/commit/b3d23230437d5fac3c75a357eaf917a4058574a1))
+
 ## [0.0.6](https://github.com/offline-ai/cli/compare/v0.0.5...v0.0.6) (2024-06-10)
 
 
