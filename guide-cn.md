@@ -146,7 +146,10 @@ cd llamacpp/build/bin
 确认完毕,现在试一试,翻译一段文字为葡萄牙语:
 
 ```bash
-ai run -f translator-simple.ai.yaml "{lang:'Chinese', content:'当我来到未来,首先看到的是城市中到处都是悬浮的飞行车,它们安静地在空中飞行,使道路不再拥堵。阳光透过智能玻璃照射进室内,天花板上是可以变换场景的投影。房间里弥漫着淡淡的芳香,这是嵌入墙壁的芳香发生器自动释放的。', target: '葡萄牙语'}"
+ai run -f translator-simple.ai.yaml "{\
+  lang:'Chinese',\
+  content:'当我来到未来,首先看到的是城市中到处都是悬浮的飞行车,它们安静地在空中飞行,使道路不再拥堵。阳光透过智能玻璃照射进室内,天花板上是可以变换场景的投影。房间里弥漫着淡淡的芳香,这是嵌入墙壁的芳香发生器自动释放的。',\
+  target: '葡萄牙语'}"
 {
   "lang": "中文",
   "original": "当我来到未来，首先看到的是城市中到处都是悬浮的飞行车，它们安静地在空中飞行，使道路不再拥堵。阳光透过智能玻璃照射进室内，天花板上是可以变换场景的投影。房间里弥漫着淡淡的芳香，这是嵌入墙壁的芳香发生器自动释放的。",
@@ -156,7 +159,11 @@ ai run -f translator-simple.ai.yaml "{lang:'Chinese', content:'当我来到未�
 
 #这里调用参数中设置了 forceJson: false, 不强制返回json, 让它自由发挥的结果
 #最后一直返回空行,被脚本引擎检测到后给强行终止了,这个检测参数endWithRepeatedSequence也是可以设置的.默认是末尾序列发现至少7次重复
-ai run -f translator-simple.ai.yaml "{lang:'Chinese', content:'当我来到未来,首先看到的是城市中到处都是悬浮的飞行车,它 们安静地在空中飞行,使道路不再拥堵。阳光透过智能玻璃照射进室内,天花板上是可以变换场景的投影。房间里弥漫着淡淡的芳香,这是嵌入墙壁的芳香发生器自动释放的。', target: '葡萄牙语',forceJson: false}"
+ai run -f translator-simple.ai.yaml "{\
+  forceJson: false, \
+  lang:'Chinese', \
+  content:'当我来到未来,首先看到的是城市中到处都是悬浮的飞行车,它 们安静地在空中飞行,使道路不再拥堵。阳光透过智能玻璃照射进室内,天花板上是可以变换场景的投影。房间里弥漫着淡淡的芳香,这是嵌入墙壁的芳香发生器自动释放的。', \
+  target: '葡萄牙语'}"
 {
   "translation": "Quando chegarei ao futuro, inicialmente verrei carros voadores que flutuam em todos os lugares da cidade, e eles voam calmadamente no céu, o que não mais causa congestionamento nas es
 tradas. A luz do sol penetra pelas janelas inteligentes, e na parede há um projetor de imagens que pode mudar o ambiente.",
