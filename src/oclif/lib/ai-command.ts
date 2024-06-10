@@ -69,6 +69,7 @@ export abstract class AICommand extends Command {
         enumerable: false,
         writable: true,
       })
+      defaultsDeep(result, flags)
     }
 
     if (!result.AI_CONFIG_BASENAME) {result.AI_CONFIG_BASENAME = DEFAULT_CONFIG_NAME}
