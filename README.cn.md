@@ -1,6 +1,6 @@
 # ai-agent(WIP)
 
-AI Agent Script Engine 代理体脚本客户端
+AI Agent Script Engine 智能体脚本客户端
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/ai-agent.svg)](https://npmjs.org/package/@offline-ai/cli)
@@ -8,7 +8,7 @@ AI Agent Script Engine 代理体脚本客户端
 
 AI Agent 脚本引擎特点:
 
-* 简单,方便代理开发,创建智能应用...
+* 简单,方便智能体开发,创建智能应用...
 * 低代码,少量代码,甚至无代码就能快速开发...
 * 灵活,可以在脚本中自由添加新的指令,脚本之间可以自由调用...
 * 数据开放,在脚本中可以自由访问输入输出数据,以及内部数据...
@@ -23,8 +23,35 @@ AI Agent 脚本引擎特点:
    3. 选择合适的量化程度,量化(压缩)程度越大,速度越快,体积越小,精度越差...
    4. 选择合适的最大窗口正文长度(`content_size`), 一般 2048 足够, 这个参数也会影响模型的性能...
    5. 然后直接使用客户端(`@offline-ai/cli`)下载: `ai brain download`
-2. 创建应用的智能代理脚本文件,使用客户端(`@offline-ai/cli`)调试代理提示词
+2. 创建应用的智能体脚本文件,使用客户端(`@offline-ai/cli`)调试智能体提示词
 3. 嵌入到自己的应用中
+
+## Quick Start
+
+### Install
+
+```bash
+npm install -g @offline-ai/cli
+ai brain download QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2 -q Q4_0
+Downloading to ~/.local/share/ai/brain
+Downloading https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf... 5.61% 121977704 bytes
+1. https://hf-mirror.com/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
+   ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
+done
+mkdir llamacpp
+cd llamacpp
+wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-bin-ubuntu-x64.zip
+unzip llama-b3091-bin-ubuntu-x64.zip
+```
+
+### Run
+
+```bash
+#run llama.cpp server
+cd llamacpp/build/bin
+#set -ngl 0 if no gpu
+./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
+```
 
 ## Usage
 
@@ -43,7 +70,7 @@ USAGE
 ```
 
 从huggingface上下载大脑🧠(LLM).
-如果本地无法访问huggingfaces, 请用代理或者Mirror.
+如果本地无法访问huggingface, 请用代理或者Mirror.
 
 运行如下命令执行下载命令, 选择一个下载, 或者输入更多来减少脑(模型)列表.
 
@@ -51,7 +78,8 @@ USAGE
 
 * 所有的量化(压缩)大脑🧠模型均为用户自行上传,因此并不能保证这些用户自行量化(压缩)的大脑🧠模型都能使用
 * 目前已经存在的GGUF量化大脑🧠模型已经上万,有不少都是重复的
-* 列表中显示的大脑列表,默认是经过`featured`过滤了的一部分列表, 如果要显示所有的大脑列表,请输入`--no-onlyFeatured`
+* `ai brain list` 列表中显示的大脑列表,默认是经过`featured`过滤了的一部分列表, 如果要显示所有的大脑列表,请输入`--no-onlyFeatured`
+* `ai brain download` 下载支持自动续传
 
 
 ```bash
@@ -132,7 +160,7 @@ cd build/bin
 #不用输入扩展名 `.ai.yaml`.
 #默认脚本的搜索路径是当前目录和`~/.local/share/ai/agent`目录 . 你可以在`agentDirs`中配置, 或者直接在命令行中指定,注意命令行指定将覆盖配置文件中的设置.
 #`-f` means the agent file
-#`-i` means 进入交互模式, char-dobby 是一个角色代理脚本,扮演哈利波特中的dobby.
+#`-i` means 进入交互模式, char-dobby 是一个角色智能体脚本,扮演哈利波特中的dobby.
 $ai run -if examples/char-dobby
 Dobby: I am Dobby. Dobby is happy.
 You: intro yourself pls.
