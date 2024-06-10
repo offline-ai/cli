@@ -50,11 +50,19 @@ unzip llama-b3091-bin-ubuntu-x64.zip
 
 ### Run
 
+First run llama.cpp server
+
 ```bash
 #run llama.cpp server
 cd llamacpp/build/bin
 #set -ngl 0 if no gpu
 ./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
+```
+
+Now you can run your ai agent script, eg:
+
+```bash
+$ai run --interactive --script examples/char-dobby
 ```
 
 ## Usage
@@ -67,7 +75,7 @@ $ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@offline-ai/cli/0.0.6 linux-x64 node-v20.14.0
+@offline-ai/cli/0.0.7 linux-x64 node-v20.14.0
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -245,28 +253,34 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 ## Commands
 
 <!-- commands -->
-* [`ai agent`](#ai-agent)
-* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-* [`ai brain [NAME]`](#ai-brain-name)
-* [`ai brain dn [NAME]`](#ai-brain-dn-name)
-* [`ai brain down [NAME]`](#ai-brain-down-name)
-* [`ai brain download [NAME]`](#ai-brain-download-name)
-* [`ai brain list [NAME]`](#ai-brain-list-name)
-* [`ai config [ITEM_NAME]`](#ai-config-item_name)
-* [`ai config save [DATA]`](#ai-config-save-data)
-* [`ai help [COMMAND]`](#ai-help-command)
-* [`ai plugins`](#ai-plugins)
-* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-* [`ai plugins link PATH`](#ai-plugins-link-path)
-* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-* [`ai plugins reset`](#ai-plugins-reset)
-* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-* [`ai plugins update`](#ai-plugins-update)
-* [`ai run [DATA]`](#ai-run-data)
-* [`ai version`](#ai-version)
+- [ai-agent](#ai-agent)
+  - [Quick Start](#quick-start)
+    - [Install](#install)
+    - [Run](#run)
+  - [Usage](#usage)
+  - [Commands](#commands)
+  - [`ai agent`](#ai-agent-1)
+  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+  - [`ai brain [NAME]`](#ai-brain-name)
+  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
+  - [`ai brain down [NAME]`](#ai-brain-down-name)
+  - [`ai brain download [NAME]`](#ai-brain-download-name)
+  - [`ai brain list [NAME]`](#ai-brain-list-name)
+  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
+  - [`ai config save [DATA]`](#ai-config-save-data)
+  - [`ai help [COMMAND]`](#ai-help-command)
+  - [`ai plugins`](#ai-plugins)
+  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+  - [`ai plugins link PATH`](#ai-plugins-link-path)
+  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+  - [`ai plugins reset`](#ai-plugins-reset)
+  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+  - [`ai plugins update`](#ai-plugins-update)
+  - [`ai run [DATA]`](#ai-run-data)
+  - [`ai version`](#ai-version)
 
 ## `ai agent`
 
@@ -285,7 +299,7 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.0.6/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.0.7/src/commands/agent/index.ts)_
 
 ## `ai autocomplete [SHELL]`
 
@@ -357,7 +371,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [src/commands/brain/index.ts](https://github.com/offline-ai/cli/blob/v0.0.6/src/commands/brain/index.ts)_
+_See code: [src/commands/brain/index.ts](https://github.com/offline-ai/cli/blob/v0.0.7/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -485,7 +499,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [src/commands/brain/download.ts](https://github.com/offline-ai/cli/blob/v0.0.6/src/commands/brain/download.ts)_
+_See code: [src/commands/brain/download.ts](https://github.com/offline-ai/cli/blob/v0.0.7/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -513,7 +527,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/brain/list.ts](https://github.com/offline-ai/cli/blob/v0.0.6/src/commands/brain/list.ts)_
+_See code: [src/commands/brain/list.ts](https://github.com/offline-ai/cli/blob/v0.0.7/src/commands/brain/list.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -550,7 +564,7 @@ EXAMPLES
   }
 ```
 
-_See code: [src/commands/config/index.ts](https://github.com/offline-ai/cli/blob/v0.0.6/src/commands/config/index.ts)_
+_See code: [src/commands/config/index.ts](https://github.com/offline-ai/cli/blob/v0.0.7/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -590,7 +604,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [src/commands/config/save.ts](https://github.com/offline-ai/cli/blob/v0.0.6/src/commands/config/save.ts)_
+_See code: [src/commands/config/save.ts](https://github.com/offline-ai/cli/blob/v0.0.7/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -950,7 +964,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [src/commands/run/index.ts](https://github.com/offline-ai/cli/blob/v0.0.6/src/commands/run/index.ts)_
+_See code: [src/commands/run/index.ts](https://github.com/offline-ai/cli/blob/v0.0.7/src/commands/run/index.ts)_
 
 ## `ai version`
 

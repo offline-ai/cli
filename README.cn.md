@@ -46,11 +46,19 @@ unzip llama-b3091-bin-ubuntu-x64.zip
 
 ### Run
 
+首先需要运行 llama.cpp server:
+
 ```bash
 #run llama.cpp server
 cd llamacpp/build/bin
 #set -ngl 0 if no gpu
 ./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
+```
+
+现在, 你可以运行智能体脚本了:
+
+```bash
+$ai run --interactive --script examples/char-dobby
 ```
 
 ## Usage
