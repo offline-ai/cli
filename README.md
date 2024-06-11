@@ -253,34 +253,28 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 ## Commands
 
 <!-- commands -->
-- [ai-agent](#ai-agent)
-  - [Quick Start](#quick-start)
-    - [Install](#install)
-    - [Run](#run)
-  - [Usage](#usage)
-  - [Commands](#commands)
-  - [`ai agent`](#ai-agent-1)
-  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-  - [`ai brain [NAME]`](#ai-brain-name)
-  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
-  - [`ai brain down [NAME]`](#ai-brain-down-name)
-  - [`ai brain download [NAME]`](#ai-brain-download-name)
-  - [`ai brain list [NAME]`](#ai-brain-list-name)
-  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
-  - [`ai config save [DATA]`](#ai-config-save-data)
-  - [`ai help [COMMAND]`](#ai-help-command)
-  - [`ai plugins`](#ai-plugins)
-  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-  - [`ai plugins link PATH`](#ai-plugins-link-path)
-  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-  - [`ai plugins reset`](#ai-plugins-reset)
-  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-  - [`ai plugins update`](#ai-plugins-update)
-  - [`ai run [DATA]`](#ai-run-data)
-  - [`ai version`](#ai-version)
+* [`ai agent`](#ai-agent)
+* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+* [`ai brain [NAME]`](#ai-brain-name)
+* [`ai brain dn [NAME]`](#ai-brain-dn-name)
+* [`ai brain down [NAME]`](#ai-brain-down-name)
+* [`ai brain download [NAME]`](#ai-brain-download-name)
+* [`ai brain list [NAME]`](#ai-brain-list-name)
+* [`ai config [ITEM_NAME]`](#ai-config-item_name)
+* [`ai config save [DATA]`](#ai-config-save-data)
+* [`ai help [COMMAND]`](#ai-help-command)
+* [`ai plugins`](#ai-plugins)
+* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+* [`ai plugins link PATH`](#ai-plugins-link-path)
+* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+* [`ai plugins reset`](#ai-plugins-reset)
+* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+* [`ai plugins update`](#ai-plugins-update)
+* [`ai run [DATA]`](#ai-run-data)
+* [`ai version`](#ai-version)
 
 ## `ai agent`
 
@@ -339,7 +333,7 @@ _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomp
 ```
 USAGE
   $ ai brain [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-s
-    <value>] [-n <value>]
+    <value>] [-n <value>] [-r]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -348,6 +342,7 @@ FLAGS
   -b, --brainDir=<value>  the brains(LLM) directory
   -c, --config=<value>    the config file
   -n, --count=<value>     [default: 100] the max number of brains to list, 0 means all.
+  -r, --refresh           refresh the online brains list
   -s, --search=<value>    the json filter to search for brains
       --[no-]banner       show banner
 
@@ -508,7 +503,7 @@ _See code: [src/commands/brain/download.ts](https://github.com/offline-ai/cli/bl
 ```
 USAGE
   $ ai brain list [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b
-    <value>] [-f] [-s <value>] [-n <value>]
+    <value>] [-f] [-s <value>] [-n <value>] [-r]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -520,6 +515,7 @@ FLAGS
   -d, --downloaded         list downloaded brains
   -f, --[no-]onlyFeatured  only list featured brains, defaults to true for online
   -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
+  -r, --refresh            refresh the online brains list
   -s, --search=<value>     the json filter to search for brains
       --[no-]banner        show banner
 
