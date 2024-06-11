@@ -1,6 +1,6 @@
 // import util from 'util'
 import { parseJsJson } from '@isdk/ai-tool'
-import { listBrains, printBrains } from '../../../lib/brain.js'
+import { listBrains, printBrains, upgradeBrains } from '../../../lib/brain.js'
 import { initTools } from '../../../lib/init-tools.js'
 import { AICommand } from '../../lib/ai-command.js'
 import { showBanner } from '../../lib/help.js'
@@ -46,6 +46,10 @@ export default class AIBrainListCommand extends AICommand {
       description: 'the max number of brains to list, 0 means all.',
       default: 100,
     }),
+    refresh: Flags.boolean({
+      char: 'r',
+      description: 'refresh the online brains list',
+    }),
   }
 
   async run(): Promise<any> {
@@ -54,6 +58,10 @@ export default class AIBrainListCommand extends AICommand {
     const {args, flags} = opts
     const userConfig = this.loadConfig(flags.config, opts)
     initTools(userConfig)
+
+    if (flags.refresh) {
+      upgradeBrains()
+    }
 
     if (userConfig.banner && !isJson) {showBanner('Brain')}
     flags.name = args.name

@@ -12,6 +12,11 @@ import EventEmitter from 'events'
 EventEmitter.defaultMaxListeners = 1000
 
 // note: need initTools() first
+export function upgradeBrains() {
+  const brains = ToolFunc.get(BRAINS_FUNC_NAME) as LlmModelsFunc
+  brains.updateDBFromDir()
+}
+
 export function listBrains(userConfig: any, flags: any) {
   const brainDir = userConfig.brainDir
   const result: any[] = searchBrains(brainDir, flags)
