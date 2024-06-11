@@ -76,12 +76,13 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
 
   const scriptExtName = getMultiLevelExtname(filename, 2)
   const scriptBasename = path.basename(filename, scriptExtName)
-  const chatsFilename = options.chatsDir ? path.join(options.chatsDir, scriptBasename, 'history.yaml') : undefined
-  if (options.newChat && chatsFilename) { renameOldFile(chatsFilename) }
 
   AIScriptEx.searchPaths = Array.isArray(options.agentDirs) ? options.agentDirs : ['.']
 
   const script = AIScriptEx.load(filename, {chatsDir: options.chatsDir})
+  const chatsFilename = script.getChatsFilename()
+  if (options.newChat && chatsFilename) { renameOldFile(chatsFilename) }
+
   let isSilence = false
 
   if (level !== undefined) {
