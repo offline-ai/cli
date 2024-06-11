@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.8](https://github.com/offline-ai/cli/compare/v0.0.7...v0.0.8) (2024-06-11)
+
+
+### Features
+
+* **brainCommand:** add refresh flag option ([129dd3f](https://github.com/offline-ai/cli/commit/129dd3fd622212b351a551e641da92aae91ad8d7))
+
 ## [0.0.7](https://github.com/offline-ai/cli/compare/v0.0.6...v0.0.7) (2024-06-10)
 
 
