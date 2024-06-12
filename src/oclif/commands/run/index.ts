@@ -12,7 +12,13 @@ export default class RunScript extends AICommand {
   static args = {
     data: Args.string({
       description: 'the json data which will be passed to the ai-agent script',
-      parse: (input: string) => parseJsJson(input),
+      parse: (input: string) => {
+        try {
+          return parseJsJson(input)
+        } catch(e) {
+          return input
+        }
+      },
     })
   }
 
