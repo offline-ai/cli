@@ -94,7 +94,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   if (stream !== undefined) {
     script.llmStream = stream
   }
-  if (interactive) {
+  if (interactive && script.autoRunLLMIfPromptAvailable === undefined) {
     script.autoRunLLMIfPromptAvailable = false
   }
 
