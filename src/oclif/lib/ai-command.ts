@@ -83,11 +83,12 @@ export abstract class AICommand extends Command {
     })
 
     if (args?.data) {
+      const data = args.data
       if (result.hasOwnProperty('data')) {
-        result.data = defaultsDeep(args.data, result.data)
+        result.data = typeof data !== 'string' ? defaultsDeep(data, result.data) : data
       } else {
         Object.defineProperty(result, 'data', {
-          value: args.data,
+          value: data,
           enumerable: false,
           writable: true,
         })
