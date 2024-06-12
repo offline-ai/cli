@@ -111,7 +111,7 @@ export const AICommonFlags = {
   histories: Flags.directory({char: 'h', description: 'the chat histories folder to record', exists: true}),
   newChat: Flags.boolean({char:'n', aliases:['new-chat'], description: 'whether to start a new chat history, defaults to false in interactive mode, true in non-interactive', allowNo: true}),
   inputs: Flags.directory({char: 't', description: 'the input histories folder for interactive mode to record', exists: true, dependsOn: ['interactive']}),
-  'no-chats': Flags.boolean({description: 'disable chat histories, defaults to false', dependsOn: ['interactive']}),
+  'no-chats': Flags.boolean({description: 'disable chat histories, defaults to false'}),
   'no-inputs': Flags.boolean({description: 'disable input histories, defaults to false', dependsOn: ['interactive']}),
   stream: Flags.boolean({char: 'm', description: 'stream mode, defaults to true', allowNo: true}),
   script: Flags.string({char: 'f', description: 'the ai-agent script file name or id'}),
