@@ -124,8 +124,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   if (stream) {
     runtime.on('llm-stream', async function(llmResult, content: string, count: number) {
       const runtime = this.target as AIScriptEx
-      const s = llmResult.content
-      llmLastContent += s
+      let s = llmResult.content
 
       if (quit) {
         runtime.abort('quit')
@@ -133,12 +132,19 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
       }
       if (count !== retryCount) {
         retryCount = count
-        llmLastContent += colors.blue(`<续:${count}>`)
+        s += colors.blue(`<续:${count}>`)
       }
+      llmLastContent += s
       // if (llmLastContent.length > 100) {
       //   llmLastContent = llmLastContent.slice(llmLastContent.length-100)
       // }
-      if (!isSilence && llmLastContent) {logUpdate(llmLastContent)}
+      if (!isSilence && llmLastContent) {
+        if (!options.noConsoleClear) {
+          logUpdate(llmLastContent)
+        } else {
+          process.stdout.write(s)
+        }
+      }
     })
   }
 
