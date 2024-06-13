@@ -287,6 +287,15 @@ USAGE
 DESCRIPTION
   🤖 The AI Agent Manager
 
+
+  Manage your AI Agents 🤖 here.
+  📜 List local or online agents
+  🔎 search for agents
+  📥 download agents
+  ❌ delete agents
+  🎉 publish agents
+
+
 EXAMPLES
   $ ai agent list
   $ ai agent download <agent-name>
@@ -569,7 +578,7 @@ _See code: [src/commands/config/index.ts](https://github.com/offline-ai/cli/blob
 ```
 USAGE
   $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
-    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats ]
+    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats]
     [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
 
 ARGUMENTS
@@ -918,7 +927,7 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 ```
 USAGE
   $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
-    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats ]
+    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats]
     [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [--noConsoleClear]
 
 ARGUMENTS
