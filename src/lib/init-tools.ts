@@ -1,3 +1,4 @@
+import './global-fetch-proxy.js'
 import {
   event, // event bus for server
   backendEventable,
