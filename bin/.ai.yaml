@@ -5,6 +5,7 @@ configDirs:
   - $HOME
 brainDir: ${XDG_DATA_HOME}/brain
 agentDirs:
+  - $XDG_BIN_HOME/../examples
   - ${XDG_DATA_HOME}/agent
   - $PWD
 promptDirs:

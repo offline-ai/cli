@@ -65,6 +65,7 @@
   "files": [
     "/bin",
     "/dist",
+    "/examples",
     "/oclif.manifest.json",
     "/theme.json"
   ],
