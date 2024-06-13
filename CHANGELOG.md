@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.9](https://github.com/offline-ai/cli/compare/v0.0.8...v0.0.9) (2024-06-13)
+
+
+### Features
+
+* add http proxy supports ([23c38f7](https://github.com/offline-ai/cli/commit/23c38f7784d2ed0e07c97e37cbad1a99d7bb3799))
+* pass data string as last user message in the script dynamically ([ccaa0e1](https://github.com/offline-ai/cli/commit/ccaa0e19dc3fc2638d410fefbaa442af66d5b82f))
+
+
+### Bug Fixes
+
+* args data could accept string ([d0d51f8](https://github.com/offline-ai/cli/commit/d0d51f855a37578d923a2d672f3d6f2e4d84b905))
+* can not save chat history for special id ([e4df600](https://github.com/offline-ai/cli/commit/e4df600e6ab74f4a03bec8efe13a6666458cca50))
+* do not use logUpdate if noConsoleClear ([bb5c825](https://github.com/offline-ai/cli/commit/bb5c8252bb805a0a20058766fd4cd89f9e1d41af))
+* no-chats should be use non-interactive mode ([68d8fff](https://github.com/offline-ai/cli/commit/68d8fff42ef3c1fa272b70390a01364d3c68dcaa))
+* **run:** should follow the option autoRunLLMIfPromptAvailable of script in interactive mode ([7e67c39](https://github.com/offline-ai/cli/commit/7e67c397e51443579ea0d9f3ce6519579c2975e3))
+
 ## [0.0.8](https://github.com/offline-ai/cli/compare/v0.0.7...v0.0.8) (2024-06-11)
 
 
