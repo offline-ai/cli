@@ -55,6 +55,7 @@
     "oclif": "^4.13.4",
     "shx": "^0.3.4",
     "ts-node": "^10",
+    "tsup": "^8.1.0",
     "tsx": "^4.15.1",
     "typescript": "^5"
   },
@@ -91,7 +92,7 @@
     "repositoryPrefix": ""
   },
   "scripts": {
-    "build": "shx rm -rf dist && tsc -b",
+    "build": "shx rm -rf dist && tsup",
     "clean": "shx rm -fr oclif.manifest.json dist",
     "lint": "eslint . --ext .ts",
     "opack": "oclif pack",
