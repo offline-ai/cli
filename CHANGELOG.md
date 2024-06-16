@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.10](https://github.com/offline-ai/cli/compare/v0.0.9...v0.0.10) (2024-06-16)
+
+
+### Features
+
+* add examples dir into agentsDir ([3093faa](https://github.com/offline-ai/cli/commit/3093faa324e6f632df9c1f66d300a1cb498de7f2))
+
 ## [0.0.9](https://github.com/offline-ai/cli/compare/v0.0.8...v0.0.9) (2024-06-13)
 
 
