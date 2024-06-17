@@ -79,7 +79,13 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
 
   AIScriptEx.searchPaths = Array.isArray(options.agentDirs) ? options.agentDirs : ['.']
 
-  const script = AIScriptEx.load(filename, {chatsDir: options.chatsDir})
+  let script
+  try {
+    script = AIScriptEx.load(filename, {chatsDir: options.chatsDir})
+  } catch(err) {
+    console.error('Load script error:',err)
+    process.exit(1)
+  }
   const chatsFilename = script.getChatsFilename()
   if (options.newChat && chatsFilename) { renameOldFile(chatsFilename) }
 
