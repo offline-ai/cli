@@ -101,24 +101,24 @@ llmReturnResult: content
 
 配置参数需要讲解么? 需要么? 不需要吧.
 
-* _id: 不用说了,该脚本的唯一识别标识
-* type: 脚本类型, char 表示脚色类型
-* prompt: 提示词相关配置
-  * character: 当 `char` 类型的时候,这里设置角色信息
-    * name: 角色名
-  * description: 你可以在这里自行定义提示词的模板变量,这里只是个示例,在消息中可以引用, 不过[jinja2](https://wsgzao.github.io/post/jinja/)的模板语法可能要学下.
-  * messages: 不用说了吧,与大脑模型交互的消息提示列表,兼容OpenAI的消息提示
-    * role: 消息的角色,有: user,表示用户(人)发的消息;assistant,表示ai发的消息;system表示系统提示消息
-    * content: 消息内容,这里就引用了提示中的模板变量`description`
-* input: 接下要约定这个脚本的输入,也就是待翻译的内容
-  * content: 待翻译的正文内容
-  * lang: 正文内容所用语言
-  * target: 目标语言
-* output: 然后我们需要约定脚本的输出,当然你可以简单的约定输出翻译后的内容也行,就不需要这个,这里约定的是返回Json对象
-  * translation: 这里返回翻译后的内容
-  * original: 原文放这里,这是为了验证某个大脑的指令遵循能力,可以不用的
-  * lang: 原文所用语言
-  * target: 目标语言
+* `_id`: 不用说了,该脚本的唯一识别标识
+* `type`: 脚本类型, char 表示脚色类型
+* `prompt`: 提示词相关配置
+  * `character`: 当 `char` 类型的时候,这里设置角色信息
+    * `name`: 角色名
+  * `description`: 你可以在这里自行定义提示词的模板变量,这里只是个示例,在消息中可以引用, 不过[jinja2](https://wsgzao.github.io/post/jinja/)的模板语法可能要学下.
+  * `messages`: 不用说了吧,与大脑模型交互的消息提示列表,兼容OpenAI的消息提示
+    * `role`: 消息的角色,有: `user`,表示用户(人)发的消息;`assistant`,表示ai发的消息;`system`表示系统提示消息
+    * `content`: 消息内容,这里就引用了提示中的模板变量`description`
+* `input`: 接下要约定这个脚本的输入,也就是待翻译的内容
+  * `content`: 待翻译的正文内容
+  * `lang`: 正文内容所用语言
+  * `target`: 目标语言
+* `output`: 然后我们需要约定脚本的输出,当然你可以简单的约定输出翻译后的内容也行,就不需要这个,这里约定的是返回Json对象
+  * `translation`: 这里返回翻译后的内容
+  * `original`: 原文放这里,这是为了验证某个大脑的指令遵循能力,可以不用的
+  * `lang`: 原文所用语言
+  * `target`: 目标语言
 
 好了,到这里配置就介绍得差不多了.
 
