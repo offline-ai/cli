@@ -1,7 +1,7 @@
 {
   "name": "@offline-ai/cli",
   "description": "Your Offline(local) AI agents client",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "author": "Riceball LEE @snowyu",
   "bin": {
     "ai": "./bin/run.js"
@@ -100,7 +100,7 @@
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
     "prepack": "NODE_OPTIONS='--trace-warnings --no-warnings=ExperimentalWarning' oclif manifest && oclif readme",
-    "release": "pnpm run clean && pnpm run build && pnpm run prepack && git add -f README.md && git ci -m 'docs: update readme' && pnpm dlx commit-and-tag-version -s",
+    "release": "pnpm run clean && pnpm run build && pnpm run prepack && git add -f README.md && git ci -m 'docs: update readme' || true && pnpm dlx commit-and-tag-version -s",
     "release.alpha": "pnpm run release -- --prerelease alpha",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md"

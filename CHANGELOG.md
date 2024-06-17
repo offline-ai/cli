@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.11](https://github.com/offline-ai/cli/compare/v0.0.10...v0.0.11) (2024-06-17)
+
+
+### Bug Fixes
+
+* should show load script error ([a001453](https://github.com/offline-ai/cli/commit/a0014532a19d3443a30ebe73eb3080746565799d))
+
 ## [0.0.10](https://github.com/offline-ai/cli/compare/v0.0.9...v0.0.10) (2024-06-16)
 
 
