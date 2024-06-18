@@ -156,6 +156,8 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
 
   try {
     await runtime.run(options.data)
+  } catch(error: any) {
+    if (error.name !== 'AbortError') {throw error}
   } finally {
     if (!isSilence && !options.noConsoleClear) {logUpdate.clear()}
   }
