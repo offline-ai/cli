@@ -30,7 +30,7 @@ interface IRunScriptOptions {
   newChat?: boolean,
   agentDirs?: string[],
   theme?: any,
-  noConsoleClear?: boolean,
+  consoleClear?: boolean,
 }
 
 function logUpdate(...text: string[]) {
@@ -73,6 +73,10 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   initTools(options)
 
   const { logLevel: level, interactive, stream } = options
+
+  if (options.consoleClear === undefined) {
+    options.consoleClear = interactive
+  }
 
   const scriptExtName = getMultiLevelExtname(filename, 2)
   const scriptBasename = path.basename(filename, scriptExtName)
@@ -145,7 +149,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
       //   llmLastContent = llmLastContent.slice(llmLastContent.length-100)
       // }
       if (!isSilence && llmLastContent) {
-        if (!options.noConsoleClear) {
+        if (options.consoleClear) {
           logUpdate(llmLastContent)
         } else {
           process.stdout.write(s)
@@ -159,7 +163,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   } catch(error: any) {
     if (error.name !== 'AbortError') {throw error}
   } finally {
-    if (!isSilence && !options.noConsoleClear) {logUpdate.clear()}
+    if (!isSilence && options.consoleClear) {logUpdate.clear()}
   }
 
   let result = runtime.result
@@ -238,7 +242,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
           const what = error.data?.what ? ':'+error.data.what : ''
           input.write(colors.magentaBright(`<${error.name+what}>`))
         } finally {
-          if (!isSilence && !options.noConsoleClear) {logUpdate.clear()}
+          if (!isSilence && options.consoleClear) {logUpdate.clear()}
         }
         if (result) {
           if (typeof result !== 'string') { result = ux.colorizeJson(result, {pretty: true, theme: options.theme?.json})}

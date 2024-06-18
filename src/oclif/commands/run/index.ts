@@ -36,7 +36,11 @@ export default class RunScript extends AICommand {
   static flags = {
     ...AICommand.flags,
     ...AICommonFlags,
-    'noConsoleClear': Flags.boolean({description: 'disable console clear, debug purpose'}),
+    'consoleClear': Flags.boolean({
+      aliases: ['console-clear'],
+      description: 'Whether console clear after stream output, default to true in interactive, false to non-interactive',
+      allowNo: true,
+    }),
   }
 
   async run(): Promise<any> {
