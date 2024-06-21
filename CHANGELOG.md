@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.13](https://github.com/offline-ai/cli/compare/v0.0.12...v0.0.13) (2024-06-21)
+
+
+### Bug Fixes
+
+* alias search error ([5187df1](https://github.com/offline-ai/cli/commit/5187df1b652d76da996e77d31cb4416b6b4c01f8))
+
 ## [0.0.12](https://github.com/offline-ai/cli/compare/v0.0.11...v0.0.12) (2024-06-21)
 
 
