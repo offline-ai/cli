@@ -8,6 +8,7 @@ import { Args, Flags } from '@oclif/core'
 
 export default class AIBrainListCommand extends AICommand {
   static summary = '📜 List downloaded or online brains, defaults to downloaded.'
+  static aliases = ['search']
 
   // static description = ''
 
@@ -33,7 +34,7 @@ export default class AIBrainListCommand extends AICommand {
     onlyFeatured: Flags.boolean({
       char: 'f',
       aliases: ['only-featured'],
-      description: 'only list featured brains, defaults to true for online',
+      description: 'only list featured brains',
       allowNo: true,
     }),
     search: Flags.string({

@@ -26,7 +26,7 @@ export function listBrains(userConfig: any, flags: any) {
 export function searchBrains(brainDir: string, flags: any) {
   const brains = ToolFunc.get(BRAINS_FUNC_NAME) as LlmModelsFunc
   const filter:any = flags.search ?? {}
-  let onlyFeatured = flags.onlyFeatured
+  const onlyFeatured = flags.onlyFeatured
   if (!flags.all) {
     if (flags.downloaded) {
       filter.downloaded = {'=': true}
@@ -34,10 +34,10 @@ export function searchBrains(brainDir: string, flags: any) {
       filter.$or = [{downloaded: {'!=': true}}, {downloaded: null}]
     }
     // filter.downloaded = flags.downloaded ? {'=': true} : {'!=': true}
-    if (!flags.downloaded && onlyFeatured === undefined) {
-      // the defaults for online is true
-      onlyFeatured = true
-    }
+    // if (!flags.downloaded && onlyFeatured === undefined) {
+    //   // the defaults for online is true
+    //   onlyFeatured = true
+    // }
 
     if (onlyFeatured) {
       filter.featured = true
