@@ -39,10 +39,14 @@ function logUpdate(...text: string[]) {
 }
 
 logUpdate.dirt = false
-logUpdate.clear = () => {
+logUpdate.clear = (consoleClear: boolean|undefined) => {
   if (logUpdate.dirt) {
     logUpdate.dirt = false
-    _logUpdate.clear()
+    if (consoleClear) {
+      _logUpdate.clear()
+    } else {
+      console.log(`\n${colors.magenta('<---STREAMING END--->')}\n\n`)
+    }
   }
 }
 
@@ -153,6 +157,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
           logUpdate(llmLastContent)
         } else {
           process.stdout.write(s)
+          logUpdate.dirt = true
         }
       }
     })
@@ -163,7 +168,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   } catch(error: any) {
     if (error.name !== 'AbortError') {throw error}
   } finally {
-    if (!isSilence && options.consoleClear) {logUpdate.clear()}
+    if (!isSilence) {logUpdate.clear(options.consoleClear)}
   }
 
   let result = runtime.result
@@ -242,7 +247,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
           const what = error.data?.what ? ':'+error.data.what : ''
           input.write(colors.magentaBright(`<${error.name+what}>`))
         } finally {
-          if (!isSilence && options.consoleClear) {logUpdate.clear()}
+          if (!isSilence) {logUpdate.clear(options.consoleClear)}
         }
         if (result) {
           if (typeof result !== 'string') { result = ux.colorizeJson(result, {pretty: true, theme: options.theme?.json})}
