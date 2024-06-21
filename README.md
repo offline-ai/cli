@@ -260,6 +260,7 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 * [`ai brain down [NAME]`](#ai-brain-down-name)
 * [`ai brain download [NAME]`](#ai-brain-download-name)
 * [`ai brain list [NAME]`](#ai-brain-list-name)
+* [`ai brain search [NAME]`](#ai-brain-search-name)
 * [`ai config [ITEM_NAME]`](#ai-config-item_name)
 * [`ai config save [DATA]`](#ai-config-save-data)
 * [`ai help [COMMAND]`](#ai-help-command)
@@ -274,7 +275,6 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 * [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
 * [`ai plugins update`](#ai-plugins-update)
 * [`ai run [DATA]`](#ai-run-data)
-* [`ai search [NAME]`](#ai-search-name)
 * [`ai version`](#ai-version)
 
 ## `ai agent`
@@ -533,10 +533,40 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ ai search
+  $ ai brain search
 ```
 
 _See code: [src/commands/brain/list.ts](https://github.com/offline-ai/cli/blob/v0.0.12/src/commands/brain/list.ts)_
+
+## `ai brain search [NAME]`
+
+📜 List downloaded or online brains, defaults to downloaded.
+
+```
+USAGE
+  $ ai brain search [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b
+    <value>] [-f] [-s <value>] [-n <value>] [-r]
+
+ARGUMENTS
+  NAME  the brain name to search
+
+FLAGS
+  -a, --all                list all brains(include downloaded and online)
+  -b, --brainDir=<value>   the brains(LLM) directory
+  -c, --config=<value>     the config file
+  -d, --downloaded         list downloaded brains
+  -f, --[no-]onlyFeatured  only list featured brains
+  -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
+  -r, --refresh            refresh the online brains list
+  -s, --search=<value>     the json filter to search for brains
+      --[no-]banner        show banner
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+ALIASES
+  $ ai brain search
+```
 
 ## `ai config [ITEM_NAME]`
 
@@ -975,36 +1005,6 @@ EXAMPLES
 ```
 
 _See code: [src/commands/run/index.ts](https://github.com/offline-ai/cli/blob/v0.0.12/src/commands/run/index.ts)_
-
-## `ai search [NAME]`
-
-📜 List downloaded or online brains, defaults to downloaded.
-
-```
-USAGE
-  $ ai search [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b
-    <value>] [-f] [-s <value>] [-n <value>] [-r]
-
-ARGUMENTS
-  NAME  the brain name to search
-
-FLAGS
-  -a, --all                list all brains(include downloaded and online)
-  -b, --brainDir=<value>   the brains(LLM) directory
-  -c, --config=<value>     the config file
-  -d, --downloaded         list downloaded brains
-  -f, --[no-]onlyFeatured  only list featured brains
-  -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
-  -r, --refresh            refresh the online brains list
-  -s, --search=<value>     the json filter to search for brains
-      --[no-]banner        show banner
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-ALIASES
-  $ ai search
-```
 
 ## `ai version`
 
