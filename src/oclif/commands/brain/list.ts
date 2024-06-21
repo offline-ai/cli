@@ -8,7 +8,7 @@ import { Args, Flags } from '@oclif/core'
 
 export default class AIBrainListCommand extends AICommand {
   static summary = '📜 List downloaded or online brains, defaults to downloaded.'
-  static aliases = ['search']
+  static aliases = ['brain:search']
 
   // static description = ''
 
