@@ -274,6 +274,7 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 * [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
 * [`ai plugins update`](#ai-plugins-update)
 * [`ai run [DATA]`](#ai-run-data)
+* [`ai search [NAME]`](#ai-search-name)
 * [`ai version`](#ai-version)
 
 ## `ai agent`
@@ -522,7 +523,7 @@ FLAGS
   -b, --brainDir=<value>   the brains(LLM) directory
   -c, --config=<value>     the config file
   -d, --downloaded         list downloaded brains
-  -f, --[no-]onlyFeatured  only list featured brains, defaults to true for online
+  -f, --[no-]onlyFeatured  only list featured brains
   -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
   -r, --refresh            refresh the online brains list
   -s, --search=<value>     the json filter to search for brains
@@ -530,6 +531,9 @@ FLAGS
 
 GLOBAL FLAGS
   --json  Format output as json.
+
+ALIASES
+  $ ai search
 ```
 
 _See code: [src/commands/brain/list.ts](https://github.com/offline-ai/cli/blob/v0.0.11/src/commands/brain/list.ts)_
@@ -928,7 +932,7 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 USAGE
   $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [--noConsoleClear]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [--consoleClear]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
@@ -951,9 +955,10 @@ FLAGS
   -t, --inputs=<value>         the input histories folder for interactive mode to record
   -u, --api=<value>            the api URL
       --[no-]banner            show banner
+      --[no-]consoleClear      Whether console clear after stream output, default to true in interactive, false to
+                               non-interactive
       --no-chats               disable chat histories, defaults to false
       --no-inputs              disable input histories, defaults to false
-      --noConsoleClear         disable console clear, debug purpose
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -970,6 +975,36 @@ EXAMPLES
 ```
 
 _See code: [src/commands/run/index.ts](https://github.com/offline-ai/cli/blob/v0.0.11/src/commands/run/index.ts)_
+
+## `ai search [NAME]`
+
+📜 List downloaded or online brains, defaults to downloaded.
+
+```
+USAGE
+  $ ai search [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b
+    <value>] [-f] [-s <value>] [-n <value>] [-r]
+
+ARGUMENTS
+  NAME  the brain name to search
+
+FLAGS
+  -a, --all                list all brains(include downloaded and online)
+  -b, --brainDir=<value>   the brains(LLM) directory
+  -c, --config=<value>     the config file
+  -d, --downloaded         list downloaded brains
+  -f, --[no-]onlyFeatured  only list featured brains
+  -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
+  -r, --refresh            refresh the online brains list
+  -s, --search=<value>     the json filter to search for brains
+      --[no-]banner        show banner
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+ALIASES
+  $ ai search
+```
 
 ## `ai version`
 
