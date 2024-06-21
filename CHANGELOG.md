@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.12](https://github.com/offline-ai/cli/compare/v0.0.11...v0.0.12) (2024-06-21)
+
+
+### Features
+
+* add a seperator "<---STREAMING END--->" when no consoleClear ([bd8770c](https://github.com/offline-ai/cli/commit/bd8770cf2b9e7619c2a05b21fb7879815a57f6e4))
+* show brain file size ([0f36ee8](https://github.com/offline-ai/cli/commit/0f36ee85d03d9d787c789a0841a556f3b32c2fae))
+
+
+### Bug Fixes
+
+* can not save history if abort on non-interactive mode ([212ae5d](https://github.com/offline-ai/cli/commit/212ae5d1b13185661e46ae233616e7a85e04b120))
+
+
+### Refactor
+
+* change default onlyFeatured to false ([0a1d28e](https://github.com/offline-ai/cli/commit/0a1d28e77ed8c2d0516d75d72af9bde317316466))
+* change noConsoleClear flag to consoleClear and default to true for interactive mode, false for non-interactive mode ([5e1fc1a](https://github.com/offline-ai/cli/commit/5e1fc1a19765d309a01ce57504b7b7c1826acb37))
+
 ## [0.0.11](https://github.com/offline-ai/cli/compare/v0.0.10...v0.0.11) (2024-06-17)
 
 
