@@ -57,7 +57,6 @@ export function printBrains(brains: AIModelSettings[], flags?: {count?: number})
   if (maxArrayLength >= 0) {maxArrayLength--}
   for (let i=0; i<brains.length; i++) {
     const brain = brains[i]
-    brain.files
     console.log((i+1)+'. '+sprintBrainInfo(brain))
     console.log(sprintBrainFileInfo(brain))
     if ((maxArrayLength > 0) && (i >= maxArrayLength)) {break}
@@ -149,10 +148,12 @@ function getFileInfo(brain: AIModelSettings) {
   for (let file of files) {
     if (Array.isArray(file)) {
       if (file[0]) {
-        file = {...file[0], count: file.length}
+        // calc total files size
+        const file_size = file.reduce((acc, cur) => acc + cur.file_size!, 0)
+        file = {...file[0], count: file.length, file_size}
       } else {continue}
     }
-    result.push({quant: AIModelQuantType[file.quant!],file_name: path.basename(file.file_name!), count: file.count})
+    result.push({quant: AIModelQuantType[file.quant!],file_name: path.basename(file.file_name!), count: file.count, file_size: file.file_size!})
   }
   return result
 }
@@ -166,9 +167,23 @@ function sprintBrainFileInfo(brain: AIModelSettings) {
     if (item.count > 1) {
       result += ` (${item.count} files)`
     }
+    const fileSize = item.file_size
+    if (fileSize > 0) {
+      result += ' - ' + sizeToStr(fileSize)
+    }
     if (i < info.length - 1) {
       result += '\n'
     }
   }
+  return result
+}
+
+function sizeToStr(num: number, fractionDigits = 2) {
+  let result = ''
+  if (num >= 1e12) { result = (num / 1e12).toFixed(fractionDigits) + 'T' }
+  else if (num >= 1e9) { result = (num / 1e9).toFixed(fractionDigits) + 'G' }
+  else if (num >= 1e6) { result = (num / 1e6).toFixed(fractionDigits) + 'M' }
+  else if (num >= 1e3) { result = (num / 1e3).toFixed(fractionDigits) + 'K' }
+  else { result = num.toFixed(fractionDigits) }
   return result
 }
