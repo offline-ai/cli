@@ -163,12 +163,18 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
     })
   }
 
+  let lastError: any
   try {
     await runtime.run(options.data)
   } catch(error: any) {
     if (error.name !== 'AbortError') {throw error}
-  } finally {
+    lastError = error.name + (error.data?.what ? ':'+error.data.what : '')
+} finally {
     if (!isSilence) {logUpdate.clear(options.consoleClear)}
+    if (lastError) {
+      console.log(colors.magentaBright(`<${lastError}>`))
+      lastError = undefined
+    }
   }
 
   let result = runtime.result
@@ -244,10 +250,13 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
           result = await runtime.$interact(llmOptions)
         } catch(error: any) {
           if (error.name !== 'AbortError') {throw error}
-          const what = error.data?.what ? ':'+error.data.what : ''
-          input.write(colors.magentaBright(`<${error.name+what}>`))
+          lastError = error.name + (error.data?.what ? ':'+error.data.what : '')
         } finally {
           if (!isSilence) {logUpdate.clear(options.consoleClear)}
+          if (lastError) {
+            input.write(colors.magentaBright(`<${lastError}>\n`))
+            lastError = undefined
+          }
         }
         if (result) {
           if (typeof result !== 'string') { result = ux.colorizeJson(result, {pretty: true, theme: options.theme?.json})}

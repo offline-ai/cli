@@ -37,7 +37,7 @@ export default class RunScript extends AICommand {
     ...AICommand.flags,
     ...AICommonFlags,
     'consoleClear': Flags.boolean({
-      aliases: ['console-clear'],
+      aliases: ['console-clear', 'ConsoleClear', 'Console-clear', 'Console-Clear'],
       description: 'Whether console clear after stream output, default to true in interactive, false to non-interactive',
       allowNo: true,
     }),
