@@ -10,7 +10,7 @@ import { ConfigFile, getMultiLevelExtname, parseJsJson, wait } from '@isdk/ai-to
 import { AIScriptServer, LogLevel, LogLevelMap } from '@isdk/ai-tool-agent'
 import { detectTextLanguage as detectLang } from '@isdk/detect-text-language'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
-import { initTools } from './init-tools.js'
+// import { initTools } from './init-tools.js'
 import { ux } from '@oclif/core'
 
 class AIScriptEx extends AIScriptServer {
@@ -74,7 +74,7 @@ function renameOldFile(filename: string) {
   }
 }
 export async function runScript(filename: string, options: IRunScriptOptions) {
-  initTools(options)
+  // initTools(options)
 
   const { logLevel: level, interactive, stream } = options
 

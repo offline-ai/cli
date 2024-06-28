@@ -1,7 +1,6 @@
 // import util from 'util'
 import { parseJsJson } from '@isdk/ai-tool'
 import { listBrains, printBrains, upgradeBrains } from '../../../lib/brain.js'
-import { initTools } from '../../../lib/init-tools.js'
 import { AICommand } from '../../lib/ai-command.js'
 import { showBanner } from '../../lib/help.js'
 import { Args, Flags } from '@oclif/core'
@@ -58,7 +57,7 @@ export default class AIBrainListCommand extends AICommand {
     const isJson = this.jsonEnabled()
     const {args, flags} = opts
     const userConfig = this.loadConfig(flags.config, opts)
-    initTools(userConfig)
+    this.config.runHook('init_tools', {id: 'brain', userConfig})
 
     if (flags.refresh) {
       upgradeBrains()

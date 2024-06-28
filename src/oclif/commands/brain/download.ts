@@ -1,7 +1,6 @@
 import path from 'path'
 import enquier from 'enquirer'
 import { Args, Flags } from '@oclif/core'
-import { initTools } from '../../../lib/init-tools.js'
 import { AICommand } from '../../lib/ai-command.js'
 import { showBanner } from '../../lib/help.js'
 import { downloadBrain, getQuantsFromBrain, listBrains } from '../../../lib/brain.js'
@@ -55,7 +54,7 @@ export default class DownloadBrainCommand extends AICommand {
     const isJson = this.jsonEnabled()
     const {args, flags} = opts
     const userConfig = this.loadConfig(flags.config, opts)
-    initTools(userConfig)
+    this.config.runHook('init_tools', {id: 'brain:download', userConfig})
 
     process.on('SIGINT', ()=>{
       process.exit(0)

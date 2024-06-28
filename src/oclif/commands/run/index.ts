@@ -27,7 +27,7 @@ export default class RunScript extends AICommand {
   static description = 'Execute ai-agent script file and return result. with `-i` to interactive.'
 
   static examples = [
-    `<%= config.bin %> <%= command.id %> -f ./script.yaml "{content: 'hello world'}"
+    `<%= config.bin %> <%= command.id %> -f ./script.yaml "{content: 'hello world'}" -l info
 ┌────────────────────
 │[info]:Start Script: ...
 `,
@@ -65,6 +65,7 @@ export default class RunScript extends AICommand {
     }
 
     try {
+      this.config.runHook('init_tools', {id: 'run', userConfig})
       let result = await runScript(script, userConfig)
       if (LogLevelMap[userConfig.logLevel] >= LogLevelMap.info && result?.content) {
         result = result.content
