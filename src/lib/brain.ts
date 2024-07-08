@@ -1,6 +1,6 @@
 import path from 'path'
 import {
-  ToolFunc,
+  ServerTools as ToolFunc,
 } from '@isdk/ai-tool'
 import { AIModelQuantType, AIModelSettings, LlmModelsFunc } from '@isdk/ai-tool-llm'
 // import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
@@ -72,7 +72,10 @@ export function getQuantsFromBrain(brain: AIModelSettings) {
   return getFileInfo(brain).map(item => item.quant)
 }
 
-export async function downloadBrain(brain: AIModelSettings, options: {quant: number, url?: string, dryRun?: boolean, onStatus?: Function, onProgress?: Function}) {
+export async function downloadBrain(brain: AIModelSettings, options: {
+  quant: number, url?: string, dryRun?: boolean, onStatus?: Function, onProgress?: Function,
+  logLevel?: string,
+}) {
   const quant = options.quant
   const brains = ToolFunc.get(BRAINS_FUNC_NAME) as LlmModelsFunc
   const dryRun = options.dryRun
@@ -86,8 +89,8 @@ export async function downloadBrain(brain: AIModelSettings, options: {quant: num
 
   return new Promise<any>((resolve, reject) => {
     if (downTasks) {
-      if (!Array.isArray(downTasks)) {downTasks = [downTasks]}
-      downTasks = downTasks.filter(Boolean)
+      // if (!Array.isArray(downTasks)) {downTasks = [downTasks]}
+      // downTasks = downTasks.filter(Boolean)
       let leftCount = downTasks.length
       const errs: string[] = []
       for (const downTask of downTasks) {
@@ -146,14 +149,24 @@ function getFileInfo(brain: AIModelSettings) {
   const files = brain.files!
   const result: any[] = []
   for (let file of files) {
+    let downloaded = ''
     if (Array.isArray(file)) {
       if (file[0]) {
         // calc total files size
         const file_size = file.reduce((acc, cur) => acc + cur.file_size!, 0)
+        const downloadedCount = file.filter(item => item.downloaded).length
+        if (downloadedCount === file.length) {
+          downloaded = '[downloaded]'
+        } else if (downloadedCount > 0) {
+          downloaded = `[${downloadedCount}/${file.length} downloaded]`
+        }
+
         file = {...file[0], count: file.length, file_size}
       } else {continue}
+    } else {
+      downloaded = file.downloaded ? '[downloaded]' : ''
     }
-    result.push({quant: AIModelQuantType[file.quant!],file_name: path.basename(file.file_name!), count: file.count, file_size: file.file_size!})
+    result.push({quant: AIModelQuantType[file.quant!],file_name: path.basename(file.file_name!), count: file.count, file_size: file.file_size!, downloaded})
   }
   return result
 }
@@ -171,6 +184,10 @@ function sprintBrainFileInfo(brain: AIModelSettings) {
     if (fileSize > 0) {
       result += ' - ' + sizeToStr(fileSize)
     }
+    if (item.downloaded) {
+      result += ' - ' + item.downloaded
+    }
+
     if (i < info.length - 1) {
       result += '\n'
     }
