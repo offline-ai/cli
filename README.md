@@ -334,7 +334,7 @@ EXAMPLES
   $ ai autocomplete --refresh-cache
 ```
 
-_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v3.1.2/src/commands/autocomplete/index.ts)_
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v3.1.5/src/commands/autocomplete/index.ts)_
 
 ## `ai brain [NAME]`
 
@@ -663,7 +663,7 @@ DESCRIPTION
   Display help for ai.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.1/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.4/src/commands/help.ts)_
 
 ## `ai plugins`
 
@@ -999,7 +999,7 @@ DESCRIPTION
   Execute ai-agent script file and return result. with `-i` to interactive.
 
 EXAMPLES
-  $ ai run -f ./script.yaml "{content: 'hello world'}"
+  $ ai run -f ./script.yaml "{content: 'hello world'}" -l info
   ┌────────────────────
   │[info]:Start Script: ...
 ```
@@ -1024,5 +1024,5 @@ FLAG DESCRIPTIONS
     Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
 ```
 
-_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.2.3/src/commands/version.ts)_
+_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.2.5/src/commands/version.ts)_
 <!-- commandsstop -->
