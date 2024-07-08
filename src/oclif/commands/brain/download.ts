@@ -54,7 +54,7 @@ export default class DownloadBrainCommand extends AICommand {
     const isJson = this.jsonEnabled()
     const {args, flags} = opts
     const userConfig = this.loadConfig(flags.config, opts)
-    this.config.runHook('init_tools', {id: 'brain:download', userConfig})
+    await this.config.runHook('init_tools', {id: 'brain:download', userConfig})
 
     process.on('SIGINT', ()=>{
       process.exit(0)
@@ -127,7 +127,10 @@ export default class DownloadBrainCommand extends AICommand {
     this.log('Downloading to ' + userConfig.brainDir)
     let result: any[]
     try {
-      result = await downloadBrain(brain, {quant, onProgress, url: flags.hubUrl, dryRun: flags.dryRun})
+      result = await downloadBrain(brain, {
+        quant, onProgress, url: flags.hubUrl, dryRun: flags.dryRun,
+        logLevel: userConfig.logLevel,
+      })
     } finally {
       logUpdate.clear()
     }

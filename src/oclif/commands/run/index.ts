@@ -65,7 +65,7 @@ export default class RunScript extends AICommand {
     }
 
     try {
-      this.config.runHook('init_tools', {id: 'run', userConfig})
+      await this.config.runHook('init_tools', {id: 'run', userConfig})
       let result = await runScript(script, userConfig)
       if (LogLevelMap[userConfig.logLevel] >= LogLevelMap.info && result?.content) {
         result = result.content
