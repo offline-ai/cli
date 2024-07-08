@@ -28,7 +28,7 @@ parameters:
   max_tokens: 512
   timeout: 300000
   # model: "qwen1.5-4b-chat.Q4_0.gguf"
-  # top_k: 1/.
+  # top_k: 1
   # temperature: 0.01
   # stop_words: ['\nDobby:']
   # model: "phi-3-mini-4k-instruct.Q8_0.gguf"
