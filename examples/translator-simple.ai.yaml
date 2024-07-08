@@ -1,0 +1,51 @@
+---
+_id: translatorSimple
+templateFormat: hf
+type: char
+prompt:
+  character:
+    name: "Translator"
+  description: |-
+    You are the best translator in the world.
+
+    Output high-quality translation results in the JSON object and stop immediately:
+    {
+      "translation": "the context after translation",
+      "original": "the original context to be translated",
+      "lang": "the original language in the context",
+      "target_lang": "the target language",
+    }
+  messages:
+    - role: system
+      content: |-
+        {{description}}
+    - role: user
+      content: "{{content}}\nTranslate the above content {% if lang %}from {{lang}} {% endif %}to {{target}}."
+parameters:
+  continueOnLengthLimit: true
+  maxRetry: 60
+  response_format:
+    type: "json"
+llmReturnResult: content
+input:
+  # The content that needs to be translated.
+  - content
+  # The language of the content. "auto" means auto detect
+  - lang
+  # The target language.
+  - target
+output:
+  type: "object"
+  properties:
+    translation:
+      type: "string"
+    original:
+      type: "string"
+    lang:
+      type: "string"
+    target_lang:
+      type: "string"
+    reason:
+      type: "string"
+  required: ["translation", "original", "lang", "target_lang"]
+---
