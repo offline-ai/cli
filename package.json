@@ -1,7 +1,7 @@
 {
   "name": "@offline-ai/cli",
   "description": "Your Offline(local) AI agents client",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "author": "Riceball LEE @snowyu",
   "bin": {
     "ai": "./bin/run.js"
@@ -18,7 +18,7 @@
     "@isdk/ai-tool-prompt": "workspace:*",
     "@isdk/ai-tool-sqlite": "workspace:*",
     "@isdk/detect-text-language": "^0.1.0",
-    "@oclif/core": "^4",
+    "@oclif/core": "^4.0.8",
     "@oclif/plugin-autocomplete": "^3.1.5",
     "@oclif/plugin-help": "^6.2.4",
     "@oclif/plugin-not-found": "^3.2.8",

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.14](https://github.com/offline-ai/cli/compare/v0.0.13...v0.0.14) (2024-07-08)
+
+
+### Features
+
+* register hook supports ([c8c12da](https://github.com/offline-ai/cli/commit/c8c12da862c5dac8848156e5c6c57419b916ed8e))
+
+
+### Bug Fixes
+
+* show error always after logUpdate.clear ([26494c9](https://github.com/offline-ai/cli/commit/26494c9af3b8a84a467c00643a82bf56e0e84572))
+
 ## [0.0.13](https://github.com/offline-ai/cli/compare/v0.0.12...v0.0.13) (2024-06-21)
 
 
