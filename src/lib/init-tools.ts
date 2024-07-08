@@ -17,25 +17,30 @@ export function initTools(userConfig: any) {
   if (initialized) return
 
   initialized = true
-  const promptsFunc = new AIPromptsFunc(AIPromptsName, {dbPath: ':memory:', initDir: userConfig.promptsDir})
+  try {
+    const promptsFunc = new AIPromptsFunc(AIPromptsName, {dbPath: ':memory:', initDir: userConfig.promptsDir})
 
-  ServerTools.register(promptsFunc)
-  ServerTools.register(llm)
-  llamaCpp.register()
-  llm.setCurrentProvider(LlamaCppProviderName)
+    ServerTools.register(promptsFunc)
+    ServerTools.register(llm)
+    llamaCpp.register()
+    llm.setCurrentProvider(LlamaCppProviderName)
 
-  // the event-bus for server
-  ResServerTools.register(event)
-  backendEventable(ResServerTools)
-  ResServerTools.register(download)
+    // the event-bus for server
+    ResServerTools.register(event)
+    backendEventable(ResServerTools)
+    ResServerTools.register(download)
 
-  if (userConfig.brainDir) {
-    const brainsFunc = new LlmModelsFunc(BRAINS_FUNC_NAME, {rootDir: userConfig.brainDir, dbPath: '.brainsdb'})
-    ResServerTools.register(brainsFunc)
-    // brainsFunc.updateDBFromDir()
-  }
+    if (userConfig.brainDir) {
+      const brainsFunc = new LlmModelsFunc(BRAINS_FUNC_NAME, {rootDir: userConfig.brainDir, dbPath: '.brainsdb'})
+      ResServerTools.register(brainsFunc)
+      // brainsFunc.updateDBFromDir()
+    }
 
-  if (userConfig.apiUrl) {
-    llamaCpp.apiUrl = userConfig.apiUrl
+    if (userConfig.apiUrl) {
+      llamaCpp.apiUrl = userConfig.apiUrl
+    }
+  } catch (err) {
+    console.error('🚀 ~ initTools ~ err:', err)
+    throw err
   }
 }
