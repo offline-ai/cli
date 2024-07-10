@@ -2,7 +2,8 @@ import path from 'path'
 import {
   ServerTools as ToolFunc,
 } from '@isdk/ai-tool'
-import { AIModelQuantType, AIModelSettings, LlmModelsFunc } from '@isdk/ai-tool-llm'
+import { AIModelQuantType, AIModelSettings } from '@isdk/ai-tool-llm'
+import type { LlmModelsFunc } from '@isdk/ai-tool-model'
 // import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 // import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
 import { DownloadProgressEventName, DownloadStatusEventName, FileDownloadStatus, download } from '@isdk/ai-tool-downloader'
@@ -12,44 +13,51 @@ import EventEmitter from 'events'
 EventEmitter.defaultMaxListeners = 1000
 
 // note: need initTools() first
-export function upgradeBrains() {
+export async function upgradeBrains(url?: string) {
   const brains = ToolFunc.get(BRAINS_FUNC_NAME) as LlmModelsFunc
-  brains.updateDBFromDir()
+  const count = await brains.$refresh({url})
+  return count
 }
 
-export function listBrains(userConfig: any, flags: any) {
+export async function listBrains(userConfig: any, flags: any) {
   const brainDir = userConfig.brainDir
-  const result: any[] = searchBrains(brainDir, flags)
+  const result = await searchBrains(brainDir, flags)
   return result
 }
 
-export function searchBrains(brainDir: string, flags: any) {
+export async function searchBrains(brainDir: string, flags: any) {
   const brains = ToolFunc.get(BRAINS_FUNC_NAME) as LlmModelsFunc
-  const filter:any = flags.search ?? {}
-  const onlyFeatured = flags.onlyFeatured
-  if (!flags.all) {
-    if (flags.downloaded) {
-      filter.downloaded = {'=': true}
-    } else {
-      filter.$or = [{downloaded: {'!=': true}}, {downloaded: null}]
+  let result: AIModelSettings[]|undefined
+  if (flags.name && flags.name.startsWith('hf://')) {
+    const model = await brains.getModel(flags.name, flags.hubUrl)
+    if (model) {result = [model]}
+  } else {
+    const filter:any = flags.search ?? {}
+    const onlyFeatured = flags.onlyFeatured
+    if (!flags.all) {
+      if (flags.downloaded) {
+        filter.downloaded = {'=': true}
+      } else {
+        filter.$or = [{downloaded: {'!=': true}}, {downloaded: null}]
+      }
+      // filter.downloaded = flags.downloaded ? {'=': true} : {'!=': true}
+      // if (!flags.downloaded && onlyFeatured === undefined) {
+      //   // the defaults for online is true
+      //   onlyFeatured = true
+      // }
+
+      if (onlyFeatured) {
+        filter.featured = true
+      }
     }
-    // filter.downloaded = flags.downloaded ? {'=': true} : {'!=': true}
-    // if (!flags.downloaded && onlyFeatured === undefined) {
-    //   // the defaults for online is true
-    //   onlyFeatured = true
-    // }
 
-    if (onlyFeatured) {
-      filter.featured = true
+    if (flags.name) {
+      filter._id = {'$like': `%${flags.name}%`}
     }
-  }
 
-  if (flags.name) {
-    filter._id = {'$like': `%${flags.name}%`}
+    result = brains.$search({filter}) as AIModelSettings[]
   }
-
-  const result = brains.$search({filter})
-  return result as AIModelSettings[]
+  return result
 }
 
 export function printBrains(brains: AIModelSettings[], flags?: {count?: number}) {

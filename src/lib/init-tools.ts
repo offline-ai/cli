@@ -5,7 +5,8 @@ import {
   ResServerTools,
   ServerTools,
 } from '@isdk/ai-tool'
-import { LlmModelsFunc, llm } from '@isdk/ai-tool-llm'
+import { llm } from '@isdk/ai-tool-llm'
+import {LlmModelsFunc } from '@isdk/ai-tool-model'
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
 import { download } from '@isdk/ai-tool-downloader'

@@ -15,6 +15,7 @@
     "@isdk/ai-tool-downloader": "workspace:*",
     "@isdk/ai-tool-llm": "workspace:*",
     "@isdk/ai-tool-llm-llamacpp": "workspace:*",
+    "@isdk/ai-tool-model": "workspace:*",
     "@isdk/ai-tool-prompt": "workspace:*",
     "@isdk/ai-tool-sqlite": "workspace:*",
     "@isdk/detect-text-language": "^0.1.0",

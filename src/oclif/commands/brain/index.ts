@@ -28,6 +28,12 @@ export default class Brain extends AICommand {
       char: 'r',
       description: 'refresh the online brains list',
     }),
+    hubUrl: Flags.string({
+      char: 'u',
+      aliases: ['hub-url'],
+      description: 'the hub mirror url',
+      dependsOn: ['refresh'],
+    }),
   }
 
   static summary = '🧠 The AI Agent Brains(LLM) Manager.'
@@ -55,13 +61,15 @@ export default class Brain extends AICommand {
     await this.config.runHook('init_tools', {id: 'brain', userConfig})
 
     if (flags.refresh) {
-      upgradeBrains()
+      const count = await upgradeBrains(flags.hubUrl)
+      this.log(`${count} brains updated`)
+      return count
     }
 
     if (userConfig.banner && !isJson) {showBanner('Brain')}
     flags.name = args.name
     flags.downloaded = true
-    const result = listBrains(userConfig, flags)
+    const result = await listBrains(userConfig, flags)
     if (!isJson) {
       if (!result || result.length === 0) {
         this.log('No brains found')

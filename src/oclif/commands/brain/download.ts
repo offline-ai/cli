@@ -76,7 +76,7 @@ export default class DownloadBrainCommand extends AICommand {
     }
     flags.onlyFeatured = false
     flags.all = true
-    let brain: any = listBrains(userConfig, flags)
+    let brain: any = await listBrains(userConfig, flags)
     if (!brain || brain.length === 0) {
       this.log('No Such brains found')
       return

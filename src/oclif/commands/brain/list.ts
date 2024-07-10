@@ -50,6 +50,12 @@ export default class AIBrainListCommand extends AICommand {
       char: 'r',
       description: 'refresh the online brains list',
     }),
+    hubUrl: Flags.string({
+      char: 'u',
+      aliases: ['hub-url'],
+      description: 'the hub mirror url',
+      dependsOn: ['refresh'],
+    }),
   }
 
   async run(): Promise<any> {
@@ -60,12 +66,13 @@ export default class AIBrainListCommand extends AICommand {
     await this.config.runHook('init_tools', {id: 'brain', userConfig})
 
     if (flags.refresh) {
-      upgradeBrains()
+      const count = await upgradeBrains(flags.hubUrl)
+      this.log(`${count} brains updated`)
     }
 
     if (userConfig.banner && !isJson) {showBanner('Brain')}
     flags.name = args.name
-    const result = listBrains(userConfig, flags)
+    const result = await listBrains(userConfig, flags)
     if (!isJson) {
       if (!result || result.length === 0) {
         this.log('No brains found')
