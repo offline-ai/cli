@@ -2,7 +2,7 @@ import { Args, Flags } from '@oclif/core'
 import { AICommand } from '../../lib/ai-command.js'
 import { showBanner } from '../../lib/help.js'
 import { parseJsJson } from '@isdk/ai-tool'
-import { listBrains, printBrains, upgradeBrains } from '../../../lib/brain.js'
+import { listBrains, printBrains, upgradeBrains, verifyBrains } from '../../../lib/brain.js'
 
 export default class Brain extends AICommand {
   static args = {
@@ -34,6 +34,12 @@ export default class Brain extends AICommand {
       description: 'the hub mirror url',
       dependsOn: ['refresh'],
     }),
+    verifyQuant: Flags.boolean({
+      char: 'v',
+      aliases: ['verify-quant'],
+      description: 'whether verify quant when refresh',
+      dependsOn: ['refresh'],
+    }),
   }
 
   static summary = '🧠 The AI Agent Brains(LLM) Manager.'
@@ -61,7 +67,7 @@ export default class Brain extends AICommand {
     await this.config.runHook('init_tools', {id: 'brain', userConfig})
 
     if (flags.refresh) {
-      const count = await upgradeBrains(flags.hubUrl)
+      const count = await upgradeBrains(flags)
       this.log(`${count} brains updated`)
       return count
     }
@@ -70,6 +76,7 @@ export default class Brain extends AICommand {
     flags.name = args.name
     flags.downloaded = true
     const result = await listBrains(userConfig, flags)
+    if (result) { await verifyBrains(result) }
     if (!isJson) {
       if (!result || result.length === 0) {
         this.log('No brains found')

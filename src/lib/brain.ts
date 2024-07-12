@@ -13,10 +13,43 @@ import EventEmitter from 'events'
 EventEmitter.defaultMaxListeners = 1000
 
 // note: need initTools() first
-export async function upgradeBrains(url?: string) {
+export async function upgradeBrains(flags?: any) {
   const brains = ToolFunc.get(BRAINS_FUNC_NAME) as LlmModelsFunc
-  const count = await brains.$refresh({url})
-  return count
+  let _models: AIModelSettings[]|undefined
+  let shouldBreak: boolean|undefined
+
+  brains.on('brain:refresh', onRefresh)
+  process.on('SIGINT', interrupted)
+
+  try {
+    const count = await brains.$refresh(flags)
+    return count
+  } finally {
+    brains.off('brain:refresh', onRefresh)
+    process.off('SIGINT', interrupted)
+    if (shouldBreak) {console.log('saved.')}
+  }
+
+  function onRefresh(tool_name: string, act: string, model: AIModelSettings, models: AIModelSettings[]|string){
+    let s = model._id!
+    if (s.includes(':')) {s = '  ' + s}
+    if (Array.isArray(models)) {
+      _models = models
+    } else if(models && typeof models === 'string') {
+      s += ' ' + models
+    }
+    console.log(act, s)
+    if (shouldBreak) {this.result = true}
+  }
+
+  async function interrupted() {
+    if (_models) {
+      console.log('wait to exit...')
+      shouldBreak = true
+    } else {
+      process.exit(0)
+    }
+  }
 }
 
 export async function listBrains(userConfig: any, flags: any) {
@@ -58,6 +91,16 @@ export async function searchBrains(brainDir: string, flags: any) {
     result = brains.$search({filter}) as AIModelSettings[]
   }
   return result
+}
+
+export async function verifyBrains(brains: AIModelSettings[]) {
+  const brainFunc = ToolFunc.get(BRAINS_FUNC_NAME) as LlmModelsFunc
+  for (const brain of brains) {
+    const changed = await brainFunc.verifyFileExists(brain)
+    if (changed) {
+      brainFunc.put({id: brain._id, val: brain})
+    }
+  }
 }
 
 export function printBrains(brains: AIModelSettings[], flags?: {count?: number}) {

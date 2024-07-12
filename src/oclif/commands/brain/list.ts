@@ -66,7 +66,7 @@ export default class AIBrainListCommand extends AICommand {
     await this.config.runHook('init_tools', {id: 'brain', userConfig})
 
     if (flags.refresh) {
-      const count = await upgradeBrains(flags.hubUrl)
+      const count = await upgradeBrains(flags)
       this.log(`${count} brains updated`)
     }
 
