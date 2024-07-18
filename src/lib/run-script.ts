@@ -28,6 +28,7 @@ interface IRunScriptOptions {
   data?: any,
   apiUrl?: string,
   newChat?: boolean,
+  backupChat?: boolean,
   agentDirs?: string[],
   theme?: any,
   consoleClear?: boolean,
@@ -60,7 +61,7 @@ function findCreatedAt(messages: any[]) {
     }
   }
 }
-function renameOldFile(filename: string) {
+function renameOldFile(filename: string, backupChat?: boolean) {
   if (fs.existsSync(filename)) {
     const content = ConfigFile.loadSync(filename)
     let createdAtStr = findCreatedAt(content)
@@ -70,7 +71,12 @@ function renameOldFile(filename: string) {
     const basename = path.basename(filename, extName)
     // rename to history-2023-01-01T00_00_00_000Z.yaml
     createdAtStr = createdAt.toISO().replace(/[:.]/g, '_')
-    fs.renameSync(filename, path.join(dirname, `${basename}-${createdAtStr}${extName}`))
+    const newFileName = path.join(dirname, `${basename}-${createdAtStr}${extName}`)
+    if (backupChat) {
+      fs.cpSync(filename, newFileName)
+    } else {
+      fs.renameSync(filename, newFileName)
+    }
   }
 }
 export async function runScript(filename: string, options: IRunScriptOptions) {
@@ -95,7 +101,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
     process.exit(1)
   }
   const chatsFilename = script.getChatsFilename()
-  if (options.newChat && chatsFilename) { renameOldFile(chatsFilename) }
+  if ((options.newChat || options.backupChat) && chatsFilename) { renameOldFile(chatsFilename, options.backupChat) }
 
   let isSilence = false
 
