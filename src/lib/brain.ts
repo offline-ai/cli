@@ -4,15 +4,12 @@ import {
 } from '@isdk/ai-tool'
 import { AIModelQuantType, AIModelSettings } from '@isdk/ai-tool-llm'
 import type { LlmModelsFunc } from '@isdk/ai-tool-model'
-// import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
-// import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
 import { DownloadProgressEventName, DownloadStatusEventName, FileDownloadStatus, download } from '@isdk/ai-tool-downloader'
 import { BRAINS_FUNC_NAME } from './init-tools.js'
 import EventEmitter from 'events'
 
 EventEmitter.defaultMaxListeners = 1000
 
-// note: need initTools() first
 export async function upgradeBrains(flags?: any) {
   const brains = ToolFunc.get(BRAINS_FUNC_NAME) as LlmModelsFunc
   let _models: AIModelSettings[]|undefined
