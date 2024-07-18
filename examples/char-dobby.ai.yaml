@@ -1,5 +1,5 @@
 ---
-_id: char|default
+_id: char_dobby|default
 templateFormat: hf
 type: char
 prompt:
