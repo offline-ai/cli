@@ -95,7 +95,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
 
   let script
   try {
-    script = AIScriptEx.load(filename, {chatsDir: options.chatsDir})
+    script = AIScriptEx.loadFile(filename, {chatsDir: options.chatsDir})
   } catch(err) {
     console.error('Load script error:',err)
     process.exit(1)
@@ -142,7 +142,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   let retryCount = 0
 
   if (stream) {
-    runtime.on('llm-stream', async function(llmResult, content: string, count: number) {
+    runtime.on('llmStream', async function(llmResult, content: string, count: number) {
       const runtime = this.target as AIScriptEx
       let s = llmResult.content
 
