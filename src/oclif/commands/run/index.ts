@@ -76,6 +76,7 @@ export default class RunScript extends AICommand {
       return result
     } catch (error: any) {
       if (error) {
+        console.log('🚀 ~ RunScript ~ run ~ error:', error)
         this.error(error.message)
       }
     }
