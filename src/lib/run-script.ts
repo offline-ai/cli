@@ -95,7 +95,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
 
   let script
   try {
-    script = AIScriptEx.loadFile(filename, {chatsDir: options.chatsDir})
+    script = await AIScriptEx.loadFile(filename, {chatsDir: options.chatsDir})
   } catch(err) {
     console.error('Load script error:',err)
     process.exit(1)
@@ -128,11 +128,11 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   }
 
   const interrupted = async () => {
-    if (runtime.isAborted()) {
+    if (runtime.isToolAborted()) {
       await saveChatHistory()
       process.exit(0)
     } else {
-      runtime.abort()
+      runtime.abortTool()
     }
   }
   process.on('SIGINT', interrupted)
@@ -147,7 +147,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
       let s = llmResult.content
 
       if (quit) {
-        runtime.abort('quit')
+        runtime.abortTool('quit')
         process.emit('SIGINT')
       }
       if (count !== retryCount) {
