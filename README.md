@@ -1,19 +1,23 @@
-# ai-agent
+# ai-agent(WIP)
 
+> 【English|[中文](./README.cn.md)】
+---
 The AI agent script CLI
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/ai-agent.svg)](https://npmjs.org/package/@offline-ai/ai)
-[![Downloads/week](https://img.shields.io/npm/dw/ai-agent.svg)](https://npmjs.org/package/@offline-ai/ai)
+[![Version](https://img.shields.io/npm/v/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
+[![Downloads/week](https://img.shields.io/npm/dw/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
 
 **Features**:
 
 * User-friendly for ai development and creation of intelligent applications...
 * Low-code or even no-code solutions for rapid ai development...
-* Flexible, adding custom instructions within scripts and inter-script calls...
-* Data openness, granting access to input/output data and internal data within scripts...
+* Flexible, adding custom instructions within scripts, and inter-script calls...
+* The data is completely open to the script, and the input and output data, even the internal data, can be freely accessed in the script
 * Powerful, enabling event transmission seamlessly between client and server with numerous utility functions...
-* Secure, supporting encrypted execution and usage limits for scripts...
+* Secure, supporting encrypted execution and usage limits for scripts(TODO)...
+* The AI Agent Script follows the [Programmable Prompt Engine Specification](https://github.com/offline-ai/ppe).
+  * Visit the site for the detailed AI Agent script usage.
 
 Developing an intelligent application with AI Agent Script Engine involves just three steps:
 
@@ -27,7 +31,7 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 * Integrate the script into your ai application.
 
 <!-- toc -->
-* [ai-agent](#ai-agent)
+* [ai-agent(WIP)](#ai-agentwip)
 <!-- tocstop -->
 
 ## Quick Start
@@ -39,13 +43,14 @@ npm install -g @offline-ai/cli
 ai brain download QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2 -q Q4_0
 Downloading to ~/.local/share/ai/brain
 Downloading https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf... 5.61% 121977704 bytes
-1. https://hf-mirror.com/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
+1. https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
    ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
 done
 mkdir llamacpp
 cd llamacpp
-wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-bin-ubuntu-x64.zip
-unzip llama-b3091-bin-ubuntu-x64.zip
+#goto https://github.com/ggerganov/llama.cpp/releases/latest download latest release
+wget https://github.com/ggerganov/llama.cpp/releases/download/b3563/llama-b3563-bin-ubuntu-x64.zip
+unzip llama-b3563-bin-ubuntu-x64.zip
 ```
 
 ### Run
@@ -56,7 +61,7 @@ First run llama.cpp server
 #run llama.cpp server
 cd llamacpp/build/bin
 #set -ngl 0 if no gpu
-./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
+./llama-server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
 ```
 
 Now you can run your ai agent script, eg:
@@ -248,7 +253,7 @@ console.log(result)
 }
 ```
 
-Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/package/@isdk/ai-tool-agent)
+Specific script instruction manual see: [Programmable Prompt Engine Specification](https://github.com/offline-ai/ppe)
 
 ## Commands
 
@@ -275,6 +280,7 @@ Specific script instruction manual see: [ai-tool-agent](https://www.npmjs.com/pa
 * [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
 * [`ai plugins update`](#ai-plugins-update)
 * [`ai run [DATA]`](#ai-run-data)
+* [`ai test`](#ai-test)
 * [`ai version`](#ai-version)
 
 ## `ai agent`
@@ -343,7 +349,7 @@ _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomp
 ```
 USAGE
   $ ai brain [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-s
-    <value>] [-n <value>] [-r]
+    <value>] [-n <value>] [-u <value> -r] [-v ]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -354,6 +360,8 @@ FLAGS
   -n, --count=<value>     [default: 100] the max number of brains to list, 0 means all.
   -r, --refresh           refresh the online brains list
   -s, --search=<value>    the json filter to search for brains
+  -u, --hubUrl=<value>    the hub mirror url
+  -v, --verifyQuant       whether verify quant when refresh
       --[no-]banner       show banner
 
 GLOBAL FLAGS
@@ -385,8 +393,9 @@ _See code: [src/commands/brain/index.ts](https://github.com/offline-ai/cli/blob/
 ```
 USAGE
   $ ai brain dn [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-q
-    F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_
-    XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M] [-u <value>] [-d]
+    F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ
+    2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED
+    ] [-u <value>] [-d]
 
 ARGUMENTS
   NAME  the brain name to download
@@ -396,9 +405,9 @@ FLAGS
   -c, --config=<value>    the config file
   -d, --dryRun            dry run, do not download
   -q, --quant=<option>    the quantization of the model, defaults to 4bit
-                          <options: F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M
-                          |Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|I
-                          Q4_XS|IQ1_M>
+                          <options: F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K
+                          _M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_
+                          M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED>
   -u, --hubUrl=<value>    the hub mirror url
       --[no-]banner       show banner
 
@@ -427,8 +436,9 @@ EXAMPLES
 ```
 USAGE
   $ ai brain down [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-q
-    F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_
-    XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M] [-u <value>] [-d]
+    F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ
+    2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED
+    ] [-u <value>] [-d]
 
 ARGUMENTS
   NAME  the brain name to download
@@ -438,9 +448,9 @@ FLAGS
   -c, --config=<value>    the config file
   -d, --dryRun            dry run, do not download
   -q, --quant=<option>    the quantization of the model, defaults to 4bit
-                          <options: F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M
-                          |Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|I
-                          Q4_XS|IQ1_M>
+                          <options: F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K
+                          _M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_
+                          M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED>
   -u, --hubUrl=<value>    the hub mirror url
       --[no-]banner       show banner
 
@@ -469,8 +479,9 @@ EXAMPLES
 ```
 USAGE
   $ ai brain download [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-q
-    F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_
-    XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M] [-u <value>] [-d]
+    F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ
+    2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED
+    ] [-u <value>] [-d]
 
 ARGUMENTS
   NAME  the brain name to download
@@ -480,9 +491,9 @@ FLAGS
   -c, --config=<value>    the config file
   -d, --dryRun            dry run, do not download
   -q, --quant=<option>    the quantization of the model, defaults to 4bit
-                          <options: F32|F16|Q4_0|Q4_1|Q4_1SomeF16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M
-                          |Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_XS|Q2_KS|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|I
-                          Q4_XS|IQ1_M>
+                          <options: F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K
+                          _M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_
+                          M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED>
   -u, --hubUrl=<value>    the hub mirror url
       --[no-]banner       show banner
 
@@ -513,7 +524,7 @@ _See code: [src/commands/brain/download.ts](https://github.com/offline-ai/cli/bl
 ```
 USAGE
   $ ai brain list [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b
-    <value>] [-f] [-s <value>] [-n <value>] [-r]
+    <value>] [-f] [-s <value>] [-n <value>] [-u <value> -r]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -527,6 +538,7 @@ FLAGS
   -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
   -r, --refresh            refresh the online brains list
   -s, --search=<value>     the json filter to search for brains
+  -u, --hubUrl=<value>     the hub mirror url
       --[no-]banner        show banner
 
 GLOBAL FLAGS
@@ -545,7 +557,7 @@ _See code: [src/commands/brain/list.ts](https://github.com/offline-ai/cli/blob/v
 ```
 USAGE
   $ ai brain search [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b
-    <value>] [-f] [-s <value>] [-n <value>] [-r]
+    <value>] [-f] [-s <value>] [-n <value>] [-u <value> -r]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -559,6 +571,7 @@ FLAGS
   -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
   -r, --refresh            refresh the online brains list
   -s, --search=<value>     the json filter to search for brains
+  -u, --hubUrl=<value>     the hub mirror url
       --[no-]banner        show banner
 
 GLOBAL FLAGS
@@ -612,7 +625,7 @@ _See code: [src/commands/config/index.ts](https://github.com/offline-ai/cli/blob
 ```
 USAGE
   $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
-    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats]
+    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
     [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
 
 ARGUMENTS
@@ -626,6 +639,7 @@ FLAGS
   -f, --script=<value>         the ai-agent script file name or id
   -h, --histories=<value>      the chat histories folder to record
   -i, --[no-]interactive       interactive mode
+  -k, --backupChat             whether to backup chat history before start, defaults to false
   -l, --logLevel=<option>      the log level
                                <options: silence|fatal|error|warn|info|debug|trace>
   -m, --[no-]stream            stream mode, defaults to true
@@ -961,7 +975,7 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 ```
 USAGE
   $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
-    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-t <value> -i] [--no-chats]
+    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
     [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [--consoleClear]
 
 ARGUMENTS
@@ -975,6 +989,7 @@ FLAGS
   -f, --script=<value>         the ai-agent script file name or id
   -h, --histories=<value>      the chat histories folder to record
   -i, --[no-]interactive       interactive mode
+  -k, --backupChat             whether to backup chat history before start, defaults to false
   -l, --logLevel=<option>      the log level
                                <options: silence|fatal|error|warn|info|debug|trace>
   -m, --[no-]stream            stream mode, defaults to true
@@ -1005,6 +1020,54 @@ EXAMPLES
 ```
 
 _See code: [src/commands/run/index.ts](https://github.com/offline-ai/cli/blob/v0.0.14/src/commands/run/index.ts)_
+
+## `ai test`
+
+🔬 Run simple ai-agent fixtures to test(draft).
+
+```
+USAGE
+  $ ai test [--json] [-c <value>] [--banner] [-u <value>] [-s
+    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [--consoleClear]
+
+FLAGS
+  -a, --arguments=<value>      the json data which will be passed to the ai-agent script
+  -b, --brainDir=<value>       the brains(LLM) directory
+  -c, --config=<value>         the config file
+  -d, --dataFile=<value>       the data file which will be passed to the ai-agent script
+  -f, --script=<value>         the ai-agent fixture file path
+  -h, --histories=<value>      the chat histories folder to record
+  -i, --[no-]interactive       interactive mode
+  -k, --backupChat             whether to backup chat history before start, defaults to false
+  -l, --logLevel=<option>      the log level
+                               <options: silence|fatal|error|warn|info|debug|trace>
+  -m, --stream                 stream mode, defaults to false
+  -n, --[no-]newChat           whether to start a new chat history, defaults to false in interactive mode, true in
+                               non-interactive
+  -p, --promptDirs=<value>...  the prompts template directory
+  -s, --agentDirs=<value>...   the search paths for ai-agent script file
+  -t, --inputs=<value>         the input histories folder for interactive mode to record
+  -u, --api=<value>            the api URL
+      --[no-]banner            show banner
+      --[no-]consoleClear      Whether console clear after stream output, default to true in interactive, false to
+                               non-interactive
+      --no-chats               disable chat histories, defaults to false
+      --no-inputs              disable input histories, defaults to false
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  🔬 Run simple ai-agent fixtures to test(draft).
+
+  Execute fixtures file to test ai-agent script file and check result.
+
+EXAMPLES
+  $ ai test -f ./fixture.yaml -l info
+```
+
+_See code: [src/commands/test/index.ts](https://github.com/offline-ai/cli/blob/v0.0.14/src/commands/test/index.ts)_
 
 ## `ai version`
 

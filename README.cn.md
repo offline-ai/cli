@@ -1,10 +1,12 @@
 # ai-agent(WIP)
 
+> 【[English](./README.md)|中文】
+---
 AI Agent Script Engine 智能体脚本客户端
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/ai-agent.svg)](https://npmjs.org/package/@offline-ai/cli)
-[![Downloads/week](https://img.shields.io/npm/dw/ai-agent.svg)](https://npmjs.org/package/@offline-ai/cli)
+[![Version](https://img.shields.io/npm/v/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
+[![Downloads/week](https://img.shields.io/npm/dw/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
 
 AI Agent 脚本引擎特点:
 
@@ -13,7 +15,9 @@ AI Agent 脚本引擎特点:
 * 灵活,可以在脚本中自由添加新的指令,脚本之间可以自由调用...
 * 数据开放,在脚本中可以自由访问输入输出数据,以及内部数据...
 * 强大,事件能够在客户端和服务器端无感自由传递,诸多工具函数...
-* 安全,脚本支持加密执行,试用次数限制...
+* 安全,脚本支持加密执行,试用次数限制(TODO)...
+* 智能体脚本遵循[可编程提示词工程规范](https://github.com/offline-ai/ppe)
+  * 访问该站点查看详细脚本的用法
 
 使用AI Agent 脚本引擎开发一个智能应用只需要三步:
 
@@ -35,13 +39,14 @@ npm install -g @offline-ai/cli
 ai brain download QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2 -q Q4_0
 Downloading to ~/.local/share/ai/brain
 Downloading https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf... 5.61% 121977704 bytes
-1. https://hf-mirror.com/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
+1. https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
    ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
 done
 mkdir llamacpp
 cd llamacpp
-wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-bin-ubuntu-x64.zip
-unzip llama-b3091-bin-ubuntu-x64.zip
+# goto https://github.com/ggerganov/llama.cpp/releases/latest download latest release
+wget https://github.com/ggerganov/llama.cpp/releases/download/b3563/llama-b3563-bin-ubuntu-x64.zip
+unzip llama-b3563-bin-ubuntu-x64.zip
 ```
 
 ### Run
@@ -242,4 +247,4 @@ console.log(result)
 }
 ```
 
-具体脚本指令手册参见: [ai-tool-agent](https://www.npmjs.com/package/@isdk/ai-tool-agent)
+具体脚本指令手册参见: [可编程提示词工程规范](https://github.com/offline-ai/ppe)
