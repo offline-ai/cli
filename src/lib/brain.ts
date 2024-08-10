@@ -214,7 +214,7 @@ function getFileInfo(brain: AIModelSettings) {
     } else {
       downloaded = file.downloaded ? '[downloaded]' : ''
     }
-    result.push({quant: AIModelQuantType[file.quant!],file_name: path.basename(file.file_name!), count: file.count, file_size: file.file_size!, downloaded})
+    result.push({quant: AIModelQuantType[file.quant!],file_name: path.basename(file.location || file.file_name!), count: file.count, file_size: file.file_size!, downloaded})
   }
   return result
 }
