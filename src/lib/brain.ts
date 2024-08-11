@@ -125,8 +125,17 @@ export async function downloadBrain(brain: AIModelSettings, options: {
   logLevel?: string,
 }) {
   const quant = options.quant
+  const onProgress = options.onProgress
   const brains = ToolFunc.get(BRAINS_FUNC_NAME) as LlmModelsFunc
   const dryRun = options.dryRun
+
+  if (typeof onProgress === 'function') {
+    brains.on('model:'+DownloadStatusEventName, (_name: string, status: string, info: any) => {
+      if (info.old === info.quant) {delete info.old}
+      onProgress('status', status, info)
+    })
+  }
+
   let downTasks = await brains.$download({id: brain._id, quant, url: options.url, dryRun})
   if (downTasks) {
     if (!Array.isArray(downTasks)) {downTasks = [downTasks]}
@@ -142,8 +151,8 @@ export async function downloadBrain(brain: AIModelSettings, options: {
       let leftCount = downTasks.length
       const errs: string[] = []
       for (const downTask of downTasks) {
-        if (typeof options.onProgress === 'function') {
-          download.on(DownloadProgressEventName+':'+downTask!.id, options.onProgress)
+        if (typeof onProgress === 'function') {
+          download.on(DownloadProgressEventName+':'+downTask!.id, onProgress)
         }
         download.on(DownloadStatusEventName+':'+downTask!.id, function(_name: string, status: FileDownloadStatus, idInfo: {url: string, id: string, filepath: string}) {
           // console.log(_name, status, idInfo)

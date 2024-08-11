@@ -119,12 +119,20 @@ export default class DownloadBrainCommand extends AICommand {
     const quant = AIModelQuantType[flags.quant]
     const progresses: any = {}
     const onProgress = function(_name: string, progress: {percent:number, totalBytes:number, transferredBytes:number}, idInfo: {url: string, id?: string, filepath?: string}) {
+      if (_name === 'status') {
+        const status = progress as unknown as string
+        const info = idInfo as unknown as {url: string, quant: number, old: number}
+        const quant = AIModelQuantType[info.quant]
+        const old = AIModelQuantType[info.old]
+        logUpdate(status + ' ' + info.url + ' quant' + (info.old ? `(from ${old} to ${quant})` : `(${quant})`) )
+        return
+      }
       // console.log('🚀 ~ DownloadBrainCommand ~ onProgress ~ progress:', arguments)
       progresses[idInfo.url] = `Downloading ${idInfo.url}... ${(progress.percent * 100).toFixed(2)}% ${progress.transferredBytes} bytes`
       const info = Object.keys(progresses).map(k => progresses[k]).join('\n')
       logUpdate(info)
     }
-    this.log('Downloading to ' + userConfig.brainDir)
+    this.log(brain._id, flags.quant, 'Downloading to ' + userConfig.brainDir)
     let result: any[]
     try {
       result = await downloadBrain(brain, {

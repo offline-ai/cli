@@ -557,11 +557,12 @@ _See code: [src/commands/brain/list.ts](https://github.com/offline-ai/cli/blob/v
 
 ```
 USAGE
-  $ ai brain refresh [--json] [-c <value>] [--banner]
+  $ ai brain refresh [--json] [-b <value>] [-u <value>] [-v]
 
 FLAGS
-  -c, --config=<value>  the config file
-      --[no-]banner     show banner
+  -b, --brainDir=<value>  the brains(LLM) directory
+  -u, --hubUrl=<value>    the hub mirror url
+  -v, --verifyQuant       whether verify quant when refresh
 
 GLOBAL FLAGS
   --json  Format output as json.
