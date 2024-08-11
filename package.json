@@ -1,7 +1,7 @@
 {
   "name": "@offline-ai/cli",
   "description": "Your Offline(local) AI agents client",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "author": "Riceball LEE @snowyu",
   "bin": {
     "ai": "./bin/run.js"
