@@ -1,3 +1,4 @@
+import { ux } from '@oclif/core'
 import util from 'util'
 import fs from 'fs'
 import path from 'path'
@@ -11,7 +12,7 @@ import { AIScriptServer, LogLevel, LogLevelMap } from '@isdk/ai-tool-agent'
 import { detectTextLanguage as detectLang } from '@isdk/detect-text-language'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
 // import { initTools } from './init-tools.js'
-import { ux } from '@oclif/core'
+import { expandPath } from './load-config.js'
 
 class AIScriptEx extends AIScriptServer {
   $detectLang(text: string) {
@@ -91,7 +92,9 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   const scriptExtName = getMultiLevelExtname(filename, 2)
   const scriptBasename = path.basename(filename, scriptExtName)
 
-  AIScriptEx.searchPaths = Array.isArray(options.agentDirs) ? options.agentDirs : ['.']
+  if (Array.isArray(options.agentDirs)) {
+    AIScriptEx.searchPaths = options.agentDirs
+  }
 
   let script
   try {
