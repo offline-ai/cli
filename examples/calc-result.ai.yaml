@@ -1,0 +1,10 @@
+---
+parameters:
+  response_format:
+    type: "json"
+output:
+  type: "number"
+---
+user: |-
+  Please extract the calculation results of the following content, and only output the results without explanation:
+  {{result}}

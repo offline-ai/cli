@@ -1,26 +1,18 @@
 ---
-_id: translatorSimple
-templateFormat: hf
+# ai run -f examples/calculator.ai.yaml "{content:'请提取下面内容的计算结果,只输出结果，不用解释.', target: 'English'}"
 type: char
-prompt:
-  character:
-    name: "Translator"
-  description: |-
-    You are the best translator in the world.
+character:
+  name: "Translator"
+description: |-
+  You are the best translator in the world.
 
-    Output high-quality translation results in the JSON object and stop immediately:
-    {
-      "translation": "the context after translation",
-      "original": "the original context to be translated",
-      "lang": "the original language in the context",
-      "target_lang": "the target language",
-    }
-  messages:
-    - role: system
-      content: |-
-        {{description}}
-    - role: user
-      content: "{{content}}\nTranslate the above content {% if lang %}from {{lang}} {% endif %}to {{target}}."
+  Output high-quality translation results in the JSON object and stop immediately:
+  {
+    "translation": "the context after translation",
+    "original": "the original context to be translated",
+    "lang": "the original language in the context",
+    "target_lang": "the target language",
+  }
 parameters:
   continueOnLengthLimit: true
   maxRetry: 60
@@ -49,3 +41,4 @@ output:
       type: "string"
   required: ["translation", "original", "lang", "target_lang"]
 ---
+user: "{{content}}\nTranslate the above content {% if lang %}from {{lang}} {% endif %}to {{target}}."
