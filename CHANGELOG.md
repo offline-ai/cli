@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.0](https://github.com/offline-ai/cli/compare/v0.0.17...v0.1.0) (2024-08-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove pwd for agentDirs and promptDirs
+
+### Bug Fixes
+
+* remove pwd for agentDirs and promptDirs ([6b6e4df](https://github.com/offline-ai/cli/commit/6b6e4df183b505f6abece778f3caae274037cb28))
+
 ## [0.0.17](https://github.com/offline-ai/cli/compare/v0.0.16...v0.0.17) (2024-08-11)
 
 ## [0.0.16](https://github.com/offline-ai/cli/compare/v0.0.15...v0.0.16) (2024-08-11)
