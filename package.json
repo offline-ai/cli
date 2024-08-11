@@ -67,6 +67,7 @@
     "/bin",
     "/dist",
     "/examples",
+    "/lib",
     "/oclif.manifest.json",
     "/theme.json"
   ],
