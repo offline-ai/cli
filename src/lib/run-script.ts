@@ -189,7 +189,7 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
     runtime.$ready(true)
 
     // const spinner = cliSpinners.dots
-    const aiName = runtime.prompt?.character?.name || 'ai'
+    const aiName = runtime.character?.name || runtime.name || 'ai'
 
     const latestMessages = await runtime.getLatestMessages()
     if (latestMessages && latestMessages.length > 0) {
