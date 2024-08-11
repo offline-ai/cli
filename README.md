@@ -265,6 +265,7 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 * [`ai brain down [NAME]`](#ai-brain-down-name)
 * [`ai brain download [NAME]`](#ai-brain-download-name)
 * [`ai brain list [NAME]`](#ai-brain-list-name)
+* [`ai brain refresh`](#ai-brain-refresh)
 * [`ai brain search [NAME]`](#ai-brain-search-name)
 * [`ai config [ITEM_NAME]`](#ai-config-item_name)
 * [`ai config save [DATA]`](#ai-config-save-data)
@@ -549,6 +550,29 @@ ALIASES
 ```
 
 _See code: [src/commands/brain/list.ts](https://github.com/offline-ai/cli/blob/v0.0.14/src/commands/brain/list.ts)_
+
+## `ai brain refresh`
+
+🔄 refresh online brains.
+
+```
+USAGE
+  $ ai brain refresh [--json] [-c <value>] [--banner]
+
+FLAGS
+  -c, --config=<value>  the config file
+      --[no-]banner     show banner
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  🔄 refresh online brains.
+
+  refresh brain index from huggingface.co
+```
+
+_See code: [src/commands/brain/refresh.ts](https://github.com/offline-ai/cli/blob/v0.0.14/src/commands/brain/refresh.ts)_
 
 ## `ai brain search [NAME]`
 
