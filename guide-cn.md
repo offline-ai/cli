@@ -8,6 +8,56 @@
 
 所谓`人工智能体脚本`就是将智能体抽象出特定的任务脚本`库`,方便开发者使用.
 
+### 计算器智能体
+
+**警告:** 请勿使用AI进行数字运算，这不是AI所擅长的,这里只为演示智能体之间的调用.
+
+演示如何调用其它智能体. 首先需要一个能够计算的智能体脚本(`calculator.ai.yaml`),然后再从该智能体中提取结果(`calc-result.ai.yaml`).
+
+为啥需要两步: 要想提高计算的准确度,必须要用CoT让它一步一步的思考,如果让它直接输出答案,就非常容易出错.
+
+`calculator.ai.yaml`:
+
+```yaml
+---
+# 默认输入参数,便于测试,或者作为示例,这样不输入参数也不会出错
+expression: "1 + 2 * 3"
+---
+system: Please as a calculator to calculate the result of the following expression， think it step by step.
+# system: 请作为一个计算器，计算表达式结果, 一步一步的思考计算. # 也可以用中文
+---
+user: "{{expression}}"
+assistant: "[[thinking]]"
+# 将结果传给 calc-result.ai.yaml 处理
+-> calc-result
+```
+
+`calc-result.ai.yaml`:
+
+```yaml
+---
+parameters:
+  response_format:
+    type: "json"
+output:
+  type: "number"
+---
+user: |-
+  Please extract the calculation results of the following content, and only output the results without explanation:
+  {{result}}
+```
+
+运行(脚本在examples目录):
+
+```bash
+# `-s examples` 将 examples 目录加入到搜索目录,以便找到 `calc-result` 脚本.
+# `--no-stream` 禁止流式输出
+ai run -f examples/calculator.ai.yaml '{expression: "1+2*5"}' -s examples --no-stream
+11
+```
+
+### 翻译家智能体
+
 举一个简单的例子,如果我希望让人工智能自动翻译基于如下`json`格式的`i18n`资源:
 
 ```json
@@ -50,33 +100,26 @@ AI 应用开发第一条,在能够用代码实现或者必须要100%保证正确
 _id: translator
 templateFormat: hf
 type: char
-prompt:
-  character:
-    name: "Translator"
-  description: |-
-    You are the best translator in the world. You are helpful, kind, honest, good at writing, and never fails to answer any requests immediately and with precision.
+character:
+  name: "Translator"
+description: |-
+  You are the best translator in the world. You are helpful, kind, honest, good at writing, and never fails to answer any requests immediately and with precision.
 
-    Output high-quality translation results in the JSON object and stop immediately:
-    {
-      "translation": "翻译后的内容",
-      "original": "原文",
-      "lang": "原文语言",
-      "target": "目标语言",
-    }
-  messages:
-    - role: system
-      content: |-
-        {{description}}
-    - role: user
-      content: "{{content}}\nTranslate the above content {% if lang %}from {{lang}} {% endif %}to {{target}}."
-input:
+  Output high-quality translation results in the JSON object and stop immediately:
+  {
+    "translation": "翻译后的内容",
+    "original": "原文",
+    "lang": "原文语言",
+    "target": "目标语言",
+  }
+input: # 约定输入的参数
   # The content that needs to be translated.
   - content
   # The language of the content. "auto" means auto detect
   - lang
   # The target language.
   - target
-output:
+output: # 约定输出对象
   type: "object"
   properties:
     translation:
@@ -95,21 +138,24 @@ parameters:
     type: "json_object"
 llmReturnResult: content
 ---
+user: |-
+  "{{content}}
+  Translate the above content {% if lang %}from {{lang}} {% endif %}to {{target}}."
 ```
 
-只需要配置,不用一行代码,就可以搞定`翻译家`.
+只需要配置合模板,不用一行代码,就可以搞定`翻译家`.
 
 配置参数需要讲解么? 需要么? 不需要吧.
 
 * `_id`: 不用说了,该脚本的唯一识别标识
-* `type`: 脚本类型, char 表示脚色类型
+* `type`: 脚本类型, `char` 表示脚色类型
+* `character`: 当 `char` 类型的时候,这里用对象设置角色的其它信息
+  * `name`: 角色名
+* `description`: 在这里定义你的角色详细信息
 * `prompt`: 提示词相关配置
-  * `character`: 当 `char` 类型的时候,这里设置角色信息
-    * `name`: 角色名
-  * `description`: 你可以在这里自行定义提示词的模板变量,这里只是个示例,在消息中可以引用, 不过[jinja2](https://wsgzao.github.io/post/jinja/)的模板语法可能要学下.
   * `messages`: 不用说了吧,与大脑模型交互的消息提示列表,兼容OpenAI的消息提示
     * `role`: 消息的角色,有: `user`,表示用户(人)发的消息;`assistant`,表示ai发的消息;`system`表示系统提示消息
-    * `content`: 消息内容,这里就引用了提示中的模板变量`description`
+    * `content`: 消息内容,这里就引用了提示中的模板变量`description`,[jinja2](https://wsgzao.github.io/post/jinja/)的模板语法
 * `input`: 接下要约定这个脚本的输入,也就是待翻译的内容
   * `content`: 待翻译的正文内容
   * `lang`: 正文内容所用语言
