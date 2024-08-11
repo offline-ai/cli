@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.15](https://github.com/offline-ai/cli/compare/v0.0.14...v0.0.15) (2024-08-11)
+
+
+### Features
+
+* add --trace-warnings for develop ([9ac0630](https://github.com/offline-ai/cli/commit/9ac06306ee9f2ecf645ff5bc0e591ace5d5be48f))
+* add brain refresh command ([88590c7](https://github.com/offline-ai/cli/commit/88590c7aa4ff3876f6ae5560996fda626d5bb8fa))
+* add char type ([9b6a4f8](https://github.com/offline-ai/cli/commit/9b6a4f851bdd6007bb70d64901f0004a59b6bde1))
+* add new `backup-chat` option ([97039c5](https://github.com/offline-ai/cli/commit/97039c5a38431781f180f1d4db18a51fc7da7a3f))
+* add refresh models from huggingface directly ([57bcdfc](https://github.com/offline-ai/cli/commit/57bcdfc279da3cfdac77020dcd4008b6da598c31))
+* add test fixture command(draft) ([adcc9c9](https://github.com/offline-ai/cli/commit/adcc9c979f3cca616036fefccce4e5e7967e0034))
+* add translator-simple example ([860a65f](https://github.com/offline-ai/cli/commit/860a65f00d3f9993bebde3c3fa4d11a4b12eafdb))
+* **brain:** add verify quant callback ([d1a9eeb](https://github.com/offline-ai/cli/commit/d1a9eeb2f2c3f9a5182cc73d865077756ef3a4f7))
+* **refresh:** add hubUrl, verifyQuant, brainDir options to refresh brain ([85b0386](https://github.com/offline-ai/cli/commit/85b0386c17b8d5f810214912b9ee1e7e695bbf33))
+* show downloaded and filesize ([9faa2dc](https://github.com/offline-ai/cli/commit/9faa2dc0d7b103b29457416667a28a84bf2f8f31))
+
+
+### Bug Fixes
+
+* can not init error ([1f7b695](https://github.com/offline-ai/cli/commit/1f7b695d94a9773f478d24523e3554f7a1d6a783))
+* rename char dobby _id ([f5355ed](https://github.com/offline-ai/cli/commit/f5355edb3436a57c371e0fa18efc6f52712e3b79))
+* should show init error ([939f2cd](https://github.com/offline-ai/cli/commit/939f2cd72c776eef5c0d9a5cf6e883fd0895d334))
+* show error object to debug ([4868886](https://github.com/offline-ai/cli/commit/48688862421f635c790b77d1f7fc4ff2dfd67220))
+* use new character name spec. ([d89966c](https://github.com/offline-ai/cli/commit/d89966c4e435dbff010be48d414960606aedaacd))
+
+
+### Refactor
+
+* **brain:** check location first ([a4734b9](https://github.com/offline-ai/cli/commit/a4734b9213357fefdce6d371685e12549c8ac4f7))
+* change event name to llmStream ([321e009](https://github.com/offline-ai/cli/commit/321e009f41f0411a922209920dfac91f3b406d6a))
+* follow new ai-script ([50127cb](https://github.com/offline-ai/cli/commit/50127cb1fa4370cf5483d8882ef7fb7aedd79265))
+* upgradeBrains ([2466801](https://github.com/offline-ai/cli/commit/246680158345706f53e25055a1a63658996f380d))
+
 ## [0.0.14](https://github.com/offline-ai/cli/compare/v0.0.13...v0.0.14) (2024-07-08)
 
 
