@@ -247,5 +247,6 @@ cd llamacpp/build/bin
 现在, 你可以运行智能体脚本了:
 
 ```bash
+# interactive: 交互方式运行
 $ai run --interactive --script examples/char-dobby
 ```
