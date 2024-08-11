@@ -1,5 +1,4 @@
 ---
-_id: json|default
 templateFormat: hf
 type: extract  # 内容提取
 prompt:
