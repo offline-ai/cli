@@ -1,6 +1,7 @@
 ---
 # Never use the LLM to calculate Math, this is just a demo
-# ai run -f examples/calculator.ai.yaml '{expression: "1+2*5"}'
+# `-s examples` means to search the examples folder for the calc-result script.
+# ai run -f examples/calculator.ai.yaml '{expression: "1+2*5"}' -s examples
 expression: "1 + 2 * 3"
 ---
 system: Please as a calculator to calculate the result of the following expression， think it step by step.
