@@ -49,6 +49,13 @@ wget https://github.com/ggerganov/llama.cpp/releases/download/b3563/llama-b3563-
 unzip llama-b3563-bin-ubuntu-x64.zip
 ```
 
+升级更新:
+
+```bash
+# install again
+npm install -g @offline-ai/cli
+```
+
 ### Run
 
 首先需要运行 llama.cpp server:
