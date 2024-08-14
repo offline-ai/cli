@@ -1,14 +1,14 @@
 ---
 version: 0.1.0
 type: lib
-description: the file loader used in prompt
+description: "the file loader used in prompt. eg, 'user: summary the following file content: @file(document.md)'"
 tag:
   - file
   - loader
   - prompt
   - lib
 input:
-  - result: {required: true} # the file path
+  - result: {required: true} # The file path passed by the prompt
 output:
   type: "string"
 ---
