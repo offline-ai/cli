@@ -14,7 +14,7 @@ import { download } from '@isdk/ai-tool-downloader'
 export const BRAINS_FUNC_NAME = 'llm.brains'
 
 let initialized: boolean = false
-export function initTools(userConfig: any) {
+export async function initTools(userConfig: any) {
   if (initialized) return
 
   initialized = true
