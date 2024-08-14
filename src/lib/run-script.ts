@@ -12,7 +12,6 @@ import { AIScriptServer, LogLevel, LogLevelMap } from '@isdk/ai-tool-agent'
 import { detectTextLanguage as detectLang } from '@isdk/detect-text-language'
 import { prompt, setHistoryStore, HistoryStore } from './prompt.js'
 // import { initTools } from './init-tools.js'
-import { expandPath } from './load-config.js'
 
 class AIScriptEx extends AIScriptServer {
   $detectLang(text: string) {
@@ -97,8 +96,13 @@ export async function runScript(filename: string, options: IRunScriptOptions) {
   }
 
   let script
+  const aborter = new AbortController()
+  process.on('SIGINT', () => {
+    aborter.abort()}
+  )
+
   try {
-    script = await AIScriptEx.loadFile(filename, {chatsDir: options.chatsDir})
+    script = await AIScriptEx.loadFile(filename, {chatsDir: options.chatsDir}, {ABORT_SEARCH_SCRIPTS_SIGNAL: aborter.signal})
   } catch(err) {
     console.error('Load script error:',err)
     process.exit(1)
