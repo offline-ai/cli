@@ -1,0 +1,22 @@
+---
+type: lib
+description: the file loader used in prompt
+tag:
+  - file
+  - loader
+  - prompt
+  - lib
+input:
+  - result: {required: true} # the file path
+output:
+  type: "string"
+---
+!fn |-
+  async function loadFile() {
+    const fs = await import('fs');
+    const path = await import('path');
+    const filename = path.basename(this.result);
+    const content = fs.readFileSync(this.result, 'utf8');
+    return `filename: ${filename}\nfile content:\n${content}`
+  }
+$loadFile
