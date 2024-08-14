@@ -1,4 +1,5 @@
 ---
+version: 0.1.0
 type: lib
 description: the file loader used in prompt
 tag:

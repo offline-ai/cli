@@ -1,5 +1,5 @@
 ---
-templateFormat: hf
+version: 0.1.0
 type: type
 description: the type of the character
 tag:

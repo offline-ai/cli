@@ -1,6 +1,11 @@
 ---
-templateFormat: hf
-type: extract  # 内容提取
+version: 0.1.0
+type: lib
+description: extract json from text
+tag:
+  - json
+  - extract
+  - lib
 prompt:
   add_generation_prompt: true
   messages:
