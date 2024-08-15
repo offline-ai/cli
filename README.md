@@ -1,8 +1,8 @@
-# ai-agent(WIP)
+# Offline AI Client(WIP)
 
 > 【English|[中文](./README.cn.md)】
 ---
-The AI agent script CLI
+The AI agent script CLI for [Programmable Prompt Engine](https://github.com/offline-ai/ppe).
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
@@ -31,13 +31,15 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 * Integrate the script into your ai application.
 
 <!-- toc -->
-* [ai-agent(WIP)](#ai-agentwip)
-* [install again](#install-again)
+* [Offline AI Client(WIP)](#offline-ai-clientwip)
+* [Quick Start](#quick-start)
+* [Usage](#usage)
+* [Commands](#commands)
 <!-- tocstop -->
 
-## Quick Start
+# Quick Start
 
-### Install
+## Install
 
 ```bash
 npm install -g @offline-ai/cli
@@ -57,11 +59,11 @@ unzip llama-b3563-bin-ubuntu-x64.zip
 Upgrade:
 
 ```bash
-# install again
+#install again
 npm install -g @offline-ai/cli
 ```
 
-### Run
+## Run
 
 First run llama.cpp server
 
@@ -78,7 +80,7 @@ Now you can run your ai agent script, eg:
 $ai run --interactive --script examples/char-dobby
 ```
 
-## Usage
+# Usage
 
 Install the CLI globally:
 
@@ -263,34 +265,41 @@ console.log(result)
 
 Specific script instruction manual see: [Programmable Prompt Engine Specification](https://github.com/offline-ai/ppe)
 
-## Commands
+# Commands
 
 <!-- commands -->
-* [`ai agent`](#ai-agent)
-* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-* [`ai brain [NAME]`](#ai-brain-name)
-* [`ai brain dn [NAME]`](#ai-brain-dn-name)
-* [`ai brain down [NAME]`](#ai-brain-down-name)
-* [`ai brain download [NAME]`](#ai-brain-download-name)
-* [`ai brain list [NAME]`](#ai-brain-list-name)
-* [`ai brain refresh`](#ai-brain-refresh)
-* [`ai brain search [NAME]`](#ai-brain-search-name)
-* [`ai config [ITEM_NAME]`](#ai-config-item_name)
-* [`ai config save [DATA]`](#ai-config-save-data)
-* [`ai help [COMMAND]`](#ai-help-command)
-* [`ai plugins`](#ai-plugins)
-* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-* [`ai plugins link PATH`](#ai-plugins-link-path)
-* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-* [`ai plugins reset`](#ai-plugins-reset)
-* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-* [`ai plugins update`](#ai-plugins-update)
-* [`ai run [DATA]`](#ai-run-data)
-* [`ai test`](#ai-test)
-* [`ai version`](#ai-version)
+- [Offline AI Client(WIP)](#offline-ai-clientwip)
+- [Quick Start](#quick-start)
+  - [Install](#install)
+  - [Run](#run)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`ai agent`](#ai-agent)
+  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+  - [`ai brain [NAME]`](#ai-brain-name)
+  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
+  - [`ai brain down [NAME]`](#ai-brain-down-name)
+  - [`ai brain download [NAME]`](#ai-brain-download-name)
+  - [`ai brain list [NAME]`](#ai-brain-list-name)
+  - [`ai brain refresh`](#ai-brain-refresh)
+  - [`ai brain search [NAME]`](#ai-brain-search-name)
+  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
+  - [`ai config save [DATA]`](#ai-config-save-data)
+  - [`ai help [COMMAND]`](#ai-help-command)
+  - [`ai plugins`](#ai-plugins)
+  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+  - [`ai plugins link PATH`](#ai-plugins-link-path)
+  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+  - [`ai plugins reset`](#ai-plugins-reset)
+  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+  - [`ai plugins update`](#ai-plugins-update)
+  - [`ai run [DATA]`](#ai-run-data)
+  - [`ai test`](#ai-test)
+  - [`ai version`](#ai-version)
+- [Credit](#credit)
 
 ## `ai agent`
 
@@ -1122,3 +1131,9 @@ FLAG DESCRIPTIONS
 
 _See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.2.5/src/commands/version.ts)_
 <!-- commandsstop -->
+
+# Credit
+
+* [OpenAI](https://openai.com/)
+* [HuggingFace](https://huggingface.co/)
+* [llama-cpp](https://github.com/ggerganov/llama.cpp)

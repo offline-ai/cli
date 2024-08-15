@@ -1,8 +1,8 @@
-# ai-agent(WIP)
+# Offline AI Client(WIP)
 
 > 【[English](./README.md)|中文】
 ---
-AI Agent Script Engine 智能体脚本客户端
+[可编程提示引擎](https://github.com/offline-ai/ppe)的智能体脚本客户端
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
@@ -255,3 +255,9 @@ console.log(result)
 ```
 
 具体脚本指令手册参见: [可编程提示词工程规范](https://github.com/offline-ai/ppe)
+
+## Credit
+
+* [OpenAI](https://openai.com/)
+* [HuggingFace](https://huggingface.co/)
+* [llama-cpp](https://github.com/ggerganov/llama.cpp)
