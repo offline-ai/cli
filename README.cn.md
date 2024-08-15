@@ -101,7 +101,6 @@ USAGE
 * `ai brain list` 列表中显示的大脑列表,默认是经过`featured`过滤了的一部分列表, 如果要显示所有的大脑列表,请输入`--no-onlyFeatured`
 * `ai brain download` 下载支持自动续传
 
-
 ```bash
 #默认列出已经下载的大脑列表
 #等于 `ai brain list --downloaded`
