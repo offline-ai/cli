@@ -1,6 +1,6 @@
 {
   "name": "@offline-ai/cli",
-  "description": "Your Offline(local) AI agents client",
+  "description": "Your Offline(local) AI agent client for Programable Prompt Engine",
   "version": "0.1.3",
   "author": "Riceball LEE <snowyu.lee@gmail.com>",
   "bin": {
@@ -27,6 +27,8 @@
     "@offline-ai/cli-common": "workspace:*",
     "@offline-ai/cli-plugin-cmd-brain": "workspace:*",
     "@offline-ai/cli-plugin-cmd-config": "workspace:*",
+    "@offline-ai/cli-plugin-cmd-test": "workspace:*",
+    "@offline-ai/cli-plugin-core": "workspace:*",
     "ansi-colors": "^4.1.3",
     "better-sqlite3": "^11.1.2",
     "color-json": "^3.0.5",
@@ -69,7 +71,15 @@
     "/theme.json"
   ],
   "keywords": [
-    "oclif"
+    "oclif",
+    "prompt",
+    "ai",
+    "llm",
+    "programable prompt",
+    "agent",
+    "script",
+    "runner",
+    "CLI"
   ],
   "license": "MIT",
   "main": "dist/index.js",
@@ -79,15 +89,14 @@
     "dirname": "ai",
     "commands": "./dist/oclif/commands",
     "helpClass": "./dist/oclif/lib/help",
-    "hooks": {
-      "config:load": "./dist/oclif/hooks/init-tools"
-    },
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins",
       "@oclif/plugin-version",
       "@oclif/plugin-autocomplete",
       "@oclif/plugin-warn-if-update-available",
+      "@offline-ai/cli-plugin-core",
+      "@offline-ai/cli-plugin-cmd-test",
       "@offline-ai/cli-plugin-cmd-brain",
       "@offline-ai/cli-plugin-cmd-config"
     ],
