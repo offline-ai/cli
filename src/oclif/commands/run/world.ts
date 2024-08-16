@@ -1,6 +1,6 @@
 // import { color } from 'console-log-colors';
 import colors from 'ansi-colors'
-import cliSpinners from 'cli-spinners';
+// import cliSpinners from 'cli-spinners';
 // import {randomSpinner} from 'cli-spinners';
 
 import {Command} from '@oclif/core'
@@ -48,7 +48,7 @@ hello world! (./src/commands/run/world.ts)
     const store = new HistoryStore({ path: `his.json` })
 
     do {
-      const spinner = cliSpinners.mindblown
+      // const spinner = cliSpinners.mindblown
       const prompt = new Input({
         message: '',
         initial: '',
@@ -65,16 +65,16 @@ hello world! (./src/commands/run/world.ts)
           }
         },
         separator() {return ''},
-        prefix(state) {
-          return getFrame(spinner.frames, state.timer?.tick);
-        },
+        // prefix(state) {
+        //   return getFrame(spinner.frames, state.timer?.tick);
+        // },
         // separator(state) {
         //   return frame(rhythm, state.timer.tick)('❤');
         // },
-        timers: {
-          // separator: 250,
-          prefix: spinner.interval,
-        },
+        // timers: {
+        //   // separator: 250,
+        //   prefix: spinner.interval,
+        // },
 
       });
 

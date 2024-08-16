@@ -6,18 +6,14 @@ import {
   ServerTools,
 } from '@isdk/ai-tool'
 import { llm } from '@isdk/ai-tool-llm'
-import {LlmModelsFunc } from '@isdk/ai-tool-model'
 import { LlamaCppProviderName, llamaCpp } from '@isdk/ai-tool-llm-llamacpp'
 import { AIPromptsFunc, AIPromptsName } from '@isdk/ai-tool-prompt'
 import { download } from '@isdk/ai-tool-downloader'
+import type { Hook, Config } from '@oclif/core'
 
 export const BRAINS_FUNC_NAME = 'llm.brains'
 
-let initialized: boolean = false
-export async function initTools(userConfig: any) {
-  if (initialized) return
-
-  initialized = true
+export async function initTools(this: Hook.Context, userConfig: any, _config: Config) {
   try {
     const promptsFunc = new AIPromptsFunc(AIPromptsName, {dbPath: ':memory:', initDir: userConfig.promptsDir})
 
@@ -30,12 +26,6 @@ export async function initTools(userConfig: any) {
     ResServerTools.register(event)
     backendEventable(ResServerTools)
     ResServerTools.register(download)
-
-    if (userConfig.brainDir) {
-      const brainsFunc = new LlmModelsFunc(BRAINS_FUNC_NAME, {rootDir: userConfig.brainDir, dbPath: '.brainsdb'})
-      ResServerTools.register(brainsFunc)
-      // brainsFunc.updateDBFromDir()
-    }
 
     if (userConfig.apiUrl) {
       llamaCpp.apiUrl = userConfig.apiUrl

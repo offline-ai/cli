@@ -6,7 +6,7 @@ import { LogLevelMap, logLevel } from '@isdk/ai-tool-agent'
 import { AICommand, AICommonFlags } from '../../lib/ai-command.js'
 import {runScript} from '../../../lib/run-script.js'
 import { showBanner } from '../../lib/help.js'
-import { expandPath } from '../../../lib/load-config.js'
+import { expandPath } from '@offline-ai/cli-common'
 
 export default class RunScript extends AICommand {
   static args = {
@@ -44,11 +44,11 @@ export default class RunScript extends AICommand {
   }
 
   async run(): Promise<any> {
-    const opts = await this.parse(RunScript)
+    const opts = await this.parse(RunScript as any)
     const {flags} = opts
     // console.log('🚀 ~ RunScript ~ run ~ flags:', flags)
     const isJson = this.jsonEnabled()
-    const userConfig = this.loadConfig(flags.config, opts)
+    const userConfig = await this.loadConfig(flags.config, {...opts, skipLoadHook: true})
     logLevel.json = isJson
     const hasBanner = userConfig.banner ?? userConfig.interactive
     let script = userConfig.script
@@ -65,7 +65,7 @@ export default class RunScript extends AICommand {
     }
 
     try {
-      await this.config.runHook('init_tools', {id: 'run', userConfig})
+      await this.config.runHook('config:load', {id: 'run', userConfig})
       let result = await runScript(script, userConfig)
       if (LogLevelMap[userConfig.logLevel] >= LogLevelMap.info && result?.content) {
         result = result.content

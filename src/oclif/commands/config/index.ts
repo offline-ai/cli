@@ -1,5 +1,5 @@
 import { Args } from '@oclif/core'
-import { getXDGConfigs } from '../../../lib/load-config.js'
+import { getXDGConfigs } from '@offline-ai/cli-common'
 import { AICommand } from '../../lib/ai-command.js'
 import { showBanner } from '../../lib/help.js'
 import { get as getByPath } from 'lodash-es'
@@ -38,7 +38,7 @@ AI Configuration:
     const opts = await this.parse(AIConfigCommand)
     const {args, flags} = opts
     const isJson = this.jsonEnabled()
-    const userConfig = this.loadConfig(flags.config, opts)
+    const userConfig = await this.loadConfig(flags.config, {...opts, skipLoadHook: true})
     const hasBanner = flags.banner ?? userConfig.banner ?? true
     if (hasBanner && !isJson) {showBanner('Config')}
     this.log('AI Configuration Envs:')

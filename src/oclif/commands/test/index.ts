@@ -7,7 +7,7 @@ import { LogLevelMap, logLevel, parseFrontMatter, parseYaml } from '@isdk/ai-too
 import { AICommand, AICommonFlags } from '../../lib/ai-command.js'
 import {runScript} from '../../../lib/run-script.js'
 import { showBanner } from '../../lib/help.js'
-import { expandPath } from '../../../lib/load-config.js'
+import { expandPath } from '@offline-ai/cli-common'
 import { getKeysPath, getMultiLevelExtname } from '@isdk/ai-tool'
 import { get as getByPath, omit } from 'lodash-es'
 
@@ -33,11 +33,11 @@ export default class RunTest extends AICommand {
   }
 
   async run(): Promise<any> {
-    const opts = await this.parse(RunTest)
+    const opts = await this.parse(RunTest as any)
     const {flags} = opts
     // console.log('🚀 ~ RunScript ~ run ~ flags:', flags)
     const isJson = this.jsonEnabled()
-    const userConfig = this.loadConfig(flags.config, opts)
+    const userConfig = await this.loadConfig(flags.config, opts)
     logLevel.json = isJson
     const hasBanner = userConfig.banner ?? userConfig.interactive
     let script = userConfig.script
@@ -77,7 +77,7 @@ export default class RunTest extends AICommand {
       userConfig.logLevel = userConfig.interactive ? 'error' : 'warn'
     }
 
-    await this.config.runHook('init_tools', {id: 'run', userConfig})
+    // await this.config.runHook('init_tools', {id: 'run', userConfig})
 
     let failedCount = 0
     let passedCount = 0
