@@ -26,6 +26,7 @@
     "@oclif/plugin-warn-if-update-available": "^3.1.11",
     "@offline-ai/cli-common": "workspace:*",
     "@offline-ai/cli-plugin-cmd-brain": "workspace:*",
+    "@offline-ai/cli-plugin-cmd-config": "workspace:*",
     "ansi-colors": "^4.1.3",
     "better-sqlite3": "^11.1.2",
     "color-json": "^3.0.5",
@@ -87,7 +88,8 @@
       "@oclif/plugin-version",
       "@oclif/plugin-autocomplete",
       "@oclif/plugin-warn-if-update-available",
-      "@offline-ai/cli-plugin-cmd-brain"
+      "@offline-ai/cli-plugin-cmd-brain",
+      "@offline-ai/cli-plugin-cmd-config"
     ],
     "additionalHelpFlags": [
       "-h"
