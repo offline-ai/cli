@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.2.0](https://github.com/offline-ai/cli/compare/v0.1.3...v0.2.0) (2024-08-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* extract brain command and common funcs as packages
+* add version to lib
+
+### Features
+
+* add update check ([dd95ac7](https://github.com/offline-ai/cli/commit/dd95ac7e9c04cdfdb70a51feac5079c4c12dcaf6))
+* add version to lib ([c2465fa](https://github.com/offline-ai/cli/commit/c2465fa4401afdc550ceb4b919ea5ed896ed4d71))
+* **lib:** add the file loader lib used in prompt ([c4adec7](https://github.com/offline-ai/cli/commit/c4adec78a1825a897bab4c7345d746f1e44cb11a))
+
+
+### Bug Fixes
+
+* forget to register update plugin ([49602c9](https://github.com/offline-ai/cli/commit/49602c923d0541fbf9ce851d797db858173aa6f7))
+
+
+### Refactor
+
+* extract brain command and common funcs as packages ([901f5e3](https://github.com/offline-ai/cli/commit/901f5e320f0658ab9346751aedb8e7241b03b6ca))
+* extract command config to package ([9cdb906](https://github.com/offline-ai/cli/commit/9cdb906e656a264a456c7fcbeb0d6e428dc4da1a))
+* use async to init ([0ff5fd7](https://github.com/offline-ai/cli/commit/0ff5fd76ebde093bf50017b24c202bba0b0026a9))
+
 ## [0.1.3](https://github.com/offline-ai/cli/compare/v0.1.2...v0.1.3) (2024-08-14)
 
 
