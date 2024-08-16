@@ -16,7 +16,6 @@
     "@isdk/ai-tool-llm": "workspace:*",
     "@isdk/ai-tool-llm-llamacpp": "workspace:*",
     "@isdk/ai-tool-prompt": "workspace:*",
-    "@isdk/detect-text-language": "^0.1.0",
     "@oclif/core": "^4.0.17",
     "@oclif/plugin-autocomplete": "^3.2.0",
     "@oclif/plugin-help": "^6.2.8",
