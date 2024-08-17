@@ -35,6 +35,8 @@ assistant: "[[thinking]]"
 * `[[thinking]]` 表示一次高级AI替换,也就是说方括号的内容将被AI替换, 于此同时,方括号的内容`thinking`将作为模板数据变量存放AI替换的内容,可供后面的消息使用.
 * `->` 表示将当前结果传递给另一个智能体脚本,并等待返回结果.
 
+更详细的指令解释请参考: [可编程提示词工程规范](https://github.com/offline-ai/ppe/blob/main/README.cn.md)
+
 `calc-result.ai.yaml`:
 
 ```yaml
