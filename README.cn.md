@@ -32,6 +32,8 @@ AI Agent 脚本引擎特点:
 
 ## Quick Start
 
+* [快速上手编程值南](./guide-cn.md)
+
 ### Install
 
 ```bash
@@ -253,7 +255,7 @@ console.log(result)
 }
 ```
 
-具体脚本指令手册参见: [可编程提示词工程规范](https://github.com/offline-ai/ppe)
+具体脚本指令手册参见: [可编程提示词工程规范](https://github.com/offline-ai/ppe/blob/main/README.cn.md)
 
 ## Credit
 
