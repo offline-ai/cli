@@ -24,13 +24,16 @@
 expression: "1 + 2 * 3"
 ---
 system: Please as a calculator to calculate the result of the following expression， think it step by step.
-# system: 请作为一个计算器，计算表达式结果, 一步一步的思考计算. # 也可以用中文
+# system: 请作为一个计算器，计算表达式结果, 一步一步的思考计算. # 也可以用中文, 小规模尺寸的脑子建议用英文提示词
 ---
 user: "{{expression}}"
 assistant: "[[thinking]]"
 # 将结果传给 calc-result.ai.yaml 处理
 -> calc-result
 ```
+
+* `[[thinking]]` 表示一次高级AI替换,也就是说方括号的内容将被AI替换, 于此同时,方括号的内容`thinking`将作为模板数据变量存放AI替换的内容,可供后面的消息使用.
+* `->` 表示将当前结果传递给另一个智能体脚本,并等待返回结果.
 
 `calc-result.ai.yaml`:
 
