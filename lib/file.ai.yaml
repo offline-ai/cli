@@ -1,7 +1,7 @@
 ---
 version: 0.1.0
 type: lib
-description: "the file loader used in prompt. eg, 'user: summary the following file content: @file(document.md)'"
+description: "the simple text file loader used in prompt. eg, `user: summary the following file content: @file(document.md)`"
 tag:
   - file
   - loader
@@ -17,7 +17,8 @@ output:
     const fs = await import('fs');
     const path = await import('path');
     const filename = path.basename(this.result);
-    const content = fs.readFileSync(this.result, 'utf8');
+    const filepath = expandPath(this.result)
+    const content = fs.readFileSync(filepath, 'utf8');
     return `filename: ${filename}\nfile content:\n${content}`
   }
 $loadFile
