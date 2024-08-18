@@ -18,9 +18,10 @@ prompt:
         {{output}}
         ---
         THE CONTENT:
-        {{content}}
+        {{result or content}}
         ---
 input:
+  - result
   - content
   - output
   # - output: messages[1].content
