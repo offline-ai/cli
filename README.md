@@ -8,6 +8,8 @@ The AI agent script CLI for [Programmable Prompt Engine](https://github.com/offl
 [![Version](https://img.shields.io/npm/v/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
 [![Downloads/week](https://img.shields.io/npm/dw/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
 
+Enjoying this project? Please star it! 🌟
+
 **Features**:
 
 * User-friendly for ai development and creation of intelligent applications...

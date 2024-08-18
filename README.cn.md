@@ -8,6 +8,8 @@
 [![Version](https://img.shields.io/npm/v/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
 [![Downloads/week](https://img.shields.io/npm/dw/%40offline-ai%2Fcli.svg)](https://npmjs.org/package/@offline-ai/cli)
 
+觉得这个项目不错？请用点星来表示您的支持！🌟
+
 AI Agent 脚本引擎特点:
 
 * 简单,方便智能体开发,创建智能应用...
