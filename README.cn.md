@@ -28,11 +28,13 @@ AI Agent 脚本引擎特点:
    4. 选择合适的最大窗口正文长度(`content_size`), 一般 2048 足够, 这个参数也会影响模型的性能...
    5. 然后直接使用客户端(`@offline-ai/cli`)下载: `ai brain download`
 2. 创建应用的智能体脚本文件,使用客户端(`@offline-ai/cli`)调试智能体提示词
-3. 嵌入到自己的应用中
+3. 嵌入到自己的智能应用中
+4. 一键打包生成独立的智能应用(TODO)
 
 ## Quick Start
 
 * [快速上手编程值南](./guide-cn.md)
+* 更多的例子: [examples](./examples)
 
 ### Install
 
