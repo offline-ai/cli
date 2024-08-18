@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.2.1](https://github.com/offline-ai/cli/compare/v0.2.0...v0.2.1) (2024-08-18)
+
+
+### Features
+
+* **lib:** filepath can use env variable replace now in file.ai ([a8b7924](https://github.com/offline-ai/cli/commit/a8b792480401e629df822d7d0f2773b87414e2a5))
+
+
+### Bug Fixes
+
+* **lib:** json extractor can be called by other script ([9aa2db5](https://github.com/offline-ai/cli/commit/9aa2db532f2dd539c30c57e9232dad3380b189d7))
+
 ## [0.2.0](https://github.com/offline-ai/cli/compare/v0.1.3...v0.2.0) (2024-08-16)
 
 
