@@ -1,0 +1,30 @@
+features:
+  ☐ [feat] ai-tool-agent 为了在assistant提示词处理加上CoT支持的并对最终用户隐藏,必须允许脚本隐藏消息中的某段字符串.
+    约定: `<<[隐藏的消息]>>`
+  ✔ 在高级AI替换中构造函数描述? @done(24-08-20 08:52)
+  ✔ 在高级AI替换中,增加对替换的约束 @done(24-08-12 20:17)
+    `[[Category:|plant|animal]]`  支持单选, 多选
+    `[[Category:|plant|animal:2]]`  多选,至少选1, 最多选2
+    `[[Category:len=3:max_tokens=3]]` 限制字符串长度或token长度.
+  ✔ `~`前缀禁止格式化消息 @done(24-08-20 08:52)
+  ☐ 允许交互模式下输入json对象
+  ☐ 允许交互模式下输入多行
+  ☐ 初步实现插件添加命令
+    初始化$tool
+    为脚本添加指令的方式
+  ☐ 紧邻着的多个相同角色消息自动合并: mergeAdjacentSameRoleMessages
+  ☐ [feat]: 添加LLM新闻播报
+  ☐ [feat]: 自动下载更新运行llama.cpp应用
+    `ai brain run brain-name --provider llama.cpp --fg` fg: foreground
+    `ai provider `
+  ☐ [feat]: ai-agent: 根据IP决定是否用NPM Mirror 进行升级.
+  ✔ 新增 `->` 字符串指令,简化调用外部智能体脚本 @done(24-06-26 14:35)
+  ✔ 新增`backup-chat`（`-k`）参数，在启动的时候备份history file @done(24-07-18 08:56)
+  ☐ use github action create release package
+bugs:
+  glitch 当ctrl+c中断后的文字不会被clear,应ctrl+c会新起两行一行是单独一个ctrl+c
+  ✔ 提示消息被过滤掉了空行 @done(24-06-16 17:58)
+  没有保存历史记录,是因为没有加`-n`参数，仅当是`newChat`的时候才rename histroy file, 考虑新增一个参数(`backup`)用于备份history file
+  ✔ 如果加入的搜索目录是"/"目录,或者"$HOME"目录,存在太多的子目录,那么就会搜索很久没有反应.应该允许用户使用`Ctrl+C`终止. @done(24-08-13 08:34)
+  ✔ 当`[[VAR]]`输出，无法在消息中保留LLM配置的调试信息 @done(24-08-20 08:40)
+
