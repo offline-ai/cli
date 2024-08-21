@@ -21,8 +21,9 @@ features:
   ✔ 新增 `->` 字符串指令,简化调用外部智能体脚本 @done(24-06-26 14:35)
   ✔ 新增`backup-chat`（`-k`）参数，在启动的时候备份history file @done(24-07-18 08:56)
   ☐ use github action create release package
-  ✔ $ret params can be executed as part @done(24-08-20 21:15:47)
-  ✔ formatString @script should not add space if following is symbol char @done(24-08-20 21:15:47)
+  ✔ $ret params can be executed as part @done(24-08-20 21:15)
+  ✔ formatString @script should not add space if following is symbol char @done(24-08-20 21:15)
+  ✔ add LatestResult public readonly field @done(24-08-20 22:04)
 bugs:
   glitch 当ctrl+c中断后的文字不会被clear,应ctrl+c会新起两行一行是单独一个ctrl+c
   ✔ 提示消息被过滤掉了空行 @done(24-06-16 17:58)
