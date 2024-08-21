@@ -27,4 +27,4 @@ bugs:
   没有保存历史记录,是因为没有加`-n`参数，仅当是`newChat`的时候才rename histroy file, 考虑新增一个参数(`backup`)用于备份history file
   ✔ 如果加入的搜索目录是"/"目录,或者"$HOME"目录,存在太多的子目录,那么就会搜索很久没有反应.应该允许用户使用`Ctrl+C`终止. @done(24-08-13 08:34)
   ✔ 当`[[VAR]]`输出，无法在消息中保留LLM配置的调试信息 @done(24-08-20 08:40)
-
+  ✔ Circular reference detected in call external to external script bug @done(24-08-21 20:26)
