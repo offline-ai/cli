@@ -21,12 +21,13 @@ features:
   ✔ 新增 `->` 字符串指令,简化调用外部智能体脚本 @done(24-06-26 14:35)
   ✔ 新增`backup-chat`（`-k`）参数，在启动的时候备份history file @done(24-07-18 08:56)
   ☐ use github action create release package
-  ✔ $ret params can be executed as part enhancement @done(24-08-20 21:15:47)
+  ✔ $ret params can be executed as part @done(24-08-20 21:15:47)
+  ✔ formatString @script should not add space if following is symbol char @done(24-08-20 21:15:47)
 bugs:
   glitch 当ctrl+c中断后的文字不会被clear,应ctrl+c会新起两行一行是单独一个ctrl+c
   ✔ 提示消息被过滤掉了空行 @done(24-06-16 17:58)
   没有保存历史记录,是因为没有加`-n`参数，仅当是`newChat`的时候才rename histroy file, 考虑新增一个参数(`backup`)用于备份history file
   ✔ 如果加入的搜索目录是"/"目录,或者"$HOME"目录,存在太多的子目录,那么就会搜索很久没有反应.应该允许用户使用`Ctrl+C`终止. @done(24-08-13 08:34)
   ✔ 当`[[VAR]]`输出，无法在消息中保留LLM配置的调试信息 @done(24-08-20 08:40)
-  ✔ Circular reference detected in call external to external script bug @done(24-08-21 20:26)
-  ✔ [[VAR]] trigger infinite loop if LLM continue output [[VAR]] bug @done(24-08-21 18:09:50)
+  ✔ Circular reference detected in call external to external script @done(24-08-21 20:26)
+  ✔ [[VAR]] trigger infinite loop if LLM continue output [[VAR]] @done(24-08-21 18:09:50)
