@@ -35,3 +35,4 @@ bugs:
   ✔ Circular reference detected in call external to external script @done(24-08-21 20:26)
   ✔ [[VAR]] trigger infinite loop if LLM continue output [[VAR]] @done(24-08-21 18:09:50)
   ✔ "---" directive can be used in block @done(24-08-21 20:39)
+  ✔ the deffered message not be formatted if no AI running at last @done(24-08-21 20:40)
