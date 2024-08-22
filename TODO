@@ -26,6 +26,7 @@ features:
   ✔ add LatestResult public readonly field @done(24-08-20 22:04)
   ✔ refactor!: @script and -> use "content" name as input argument instead "result" @done(24-08-21 20:37)
   ✔ refactor!: execString for push/replace message return content string only @done(24-08-21 20:38)
+  ✔ add "userPreferredLanguage" option to translate the ai string result automatically @done(24-08-22 14:26)
 bugs:
   glitch 当ctrl+c中断后的文字不会被clear,应ctrl+c会新起两行一行是单独一个ctrl+c
   ✔ 提示消息被过滤掉了空行 @done(24-06-16 17:58)
@@ -36,3 +37,4 @@ bugs:
   ✔ [[VAR]] trigger infinite loop if LLM continue output [[VAR]] @done(24-08-21 18:09:50)
   ✔ "---" directive can be used in block @done(24-08-21 20:39)
   ✔ the deffered message not be formatted if no AI running at last @done(24-08-21 20:40)
+  ☐ `$exec`应该传递`llmStream`事件以便于显示外部脚本过程的流进度.
