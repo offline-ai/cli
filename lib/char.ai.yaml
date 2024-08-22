@@ -8,6 +8,23 @@ description: |-
   * name: character name, required
   * description: character specific description
   * character: other characteristic object of the character
+
+  Usage: In your script, set `type: char` to use this type. eg:
+
+  ```yaml
+  ---
+  name: Dobby
+  type: char
+  description: A friendly house elf.
+  character:
+    birth:
+      date: "28 June (year unknown)"
+  ---
+  user: Who are you?
+  # the following messages will be shown in the chat under the `---`
+  ---
+  assistant: I am Dobby. Dobby is happy.
+  ````
 tag:
   - char
   - char-ai
