@@ -1,0 +1,43 @@
+---
+description: a Multilingual Recipe Assistant
+# Input Configuration
+input:
+  - ingredients: {type: "array"} # List of available ingredients 家里的配料
+  # Optional
+  - cuisine # Desired cuisine type 所需菜系类型
+  - lang # User's preferred language
+  - json: {type: "boolean"} # Whether to output JSON format
+output:
+  type: "array"
+  items:
+    type: "object"
+    properties:
+      recipeName: {type: "string"}
+      instructions:
+        description: "The instructions for preparing the recipe."
+        type: "array"
+        items: {type: "string"}
+      ingredients:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            name: {type: "string"}
+            amount: {type: "string"}
+          required: ["name", "amount"]
+      reason: {type: "string"}
+# parameters:
+#   # Using the parameters below will enforce JSON output format, ensuring the ai always outputs correct JSON format.
+#   response_format:
+#     type: "json"
+# ai run -f agents/recipe.ai.yaml '{lang:"English",cuisine:"中式美食",ingredients:"rice, 木耳菜, 空心菜, 午餐肉罐头, 鸡蛋, 洋葱, 肉丸"}'
+---
+# Script
+system: "You are a helpful recipe assistant. You can provide recipes based on the user's desired cuisine type and available ingredients. The recipe should include the recipe name, instructions, ingredients and the reason."
+---
+- $if: "this.ingredients?.length"
+  then:
+    - user: "I want to cook a {{cuisine}} recipe. The ingredients available are {{ingredients}}. Can you help me find the recipes?{%if lang%} Please Speak {{lang}}.{%endif%}"
+    - assistant: "[[recipes]]"
+    - $if: "this.json"
+      then: -> json(output=output)
