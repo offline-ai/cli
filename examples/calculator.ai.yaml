@@ -4,8 +4,8 @@
 # ai run -f examples/calculator.ai.yaml '{expression: "1+2*5"}' -s examples
 expression: "1 + 2 * 3"
 ---
-system: Please as a calculator to calculate the result of the following expression， think it step by step.
+system: Please as a calculator to calculate the result of the following expression， calculate it step by step.
 ---
 user: "{{expression}}"
 assistant: "[[thinking]]"
--> calc-result
+-> extract-calc-result

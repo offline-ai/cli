@@ -6,5 +6,5 @@ output:
   type: "number"
 ---
 user: |-
-  Please extract the calculation results of the following content, and only output the results without explanation:
-  {{result}}
+  Please get the calculation result of the following content, and only output the result without explanation:
+  {{content}}

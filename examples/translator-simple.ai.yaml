@@ -1,6 +1,11 @@
 ---
-# ai run -f examples/calculator.ai.yaml "{content:'请提取下面内容的计算结果,只输出结果，不用解释.', target: 'English'}"
+# ai run -f examples/translator-simple.ai.yaml "{content:'请提取下面内容的计算结果,只输出结果，不用解释.', target: 'English'}"
 type: char
+tag:
+  - translate
+  - translator
+  - char
+  - lib
 character:
   name: "Translator"
 description: |-
@@ -18,14 +23,13 @@ parameters:
   maxRetry: 60
   response_format:
     type: "json"
-llmReturnResult: content
 input:
   # The content that needs to be translated.
-  - content
-  # The language of the content. "auto" means auto detect
-  - lang
+  - content: {required: true}
   # The target language.
-  - target
+  - target: {required: true}
+  # The language of the content.
+  - lang
 output:
   type: "object"
   properties:
