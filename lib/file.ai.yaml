@@ -8,7 +8,7 @@ tag:
   - prompt
   - lib
 input:
-  - result: {required: true} # The file path passed by the prompt
+  - content: {required: true} # The file path passed by the prompt
 output:
   type: "string"
 ---
@@ -16,8 +16,8 @@ output:
   async function loadFile() {
     const fs = await import('fs');
     const path = await import('path');
-    const filename = path.basename(this.result);
-    const filepath = expandPath(this.result)
+    const filename = path.basename(this.content);
+    const filepath = expandPath(this.content)
     const content = fs.readFileSync(filepath, 'utf8');
     return `filename: ${filename}\nfile content:\n${content}`
   }

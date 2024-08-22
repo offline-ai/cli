@@ -18,13 +18,11 @@ prompt:
         {{output}}
         ---
         THE CONTENT:
-        {{result or content}}
+        {{content}}
         ---
 input:
-  - result
   - content
   - output
-  # - output: messages[1].content
 output:
   type: "object"
   properties:
@@ -48,7 +46,6 @@ output:
       description: "Is the reviewer expressing anger?"
   required: ["sentiment", "products", "anger"]
 parameters:
-  stop_words: ['\n']
   response_format:
     type: "json_object"
 ProtectedStartup: [input, prompt.messages]
