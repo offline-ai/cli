@@ -47,9 +47,14 @@ parameters:
     # For API mode.
     - user: |-
         Output high-quality translation result before the completion delimiter "{{completion_delimiter}}".
+        {%- if content.length > 50 -%}
         Translate the following content {% if lang %}from {{lang}} {% endif %}to {{target}}.
         ---
+        {{content|trim}}
+        {%- else -%}
+        Translate the `"{{content|trim}}"` itself {% if lang %}from {{lang}} {% endif %}to {{target}}.
         {{content}}
+        {%- endif -%}
     - --- # First dialogue start and this will hide the above messages from output
     - assistant: "[[trans]]" # Return the last instruction's result always. So no need to `$ret: "?=this.prompt.trans"`
   else:
