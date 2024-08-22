@@ -1,0 +1,43 @@
+---
+version: 0.1.0
+type: lib
+description: |-
+  Summarize the content or a text file into a single sentence or headline that captures the essence of the document.
+  It takes a filepath as input and outputs a concise title that reflects the main theme or content.
+
+  eg, `Title: @titleify(document.md)`
+tag:
+  - titleify
+  - title
+  - summarize
+  - extract
+  - prompt
+  - lib
+input:
+  - content                  # The content to summarize
+  - file                     # The text file path if exists, it will load content from the file
+  - len: {type: "number"}    # the optional max length of the title
+output:
+  type: "string"
+parameters:
+  max_tokens: 128
+---
+- $if: "this.file"
+  then:
+    $set:
+      content: "@file({{file}})"
+- system: |-
+    Summarize the content provided by the user into some best titles that captures the essence of the document.
+---
+- $if: "this.content"
+  then:
+    - user: "{{content}}"
+    - assistant: "[[titles]]"
+    - ---
+    - user: "Titles:\n{{titles}}\nWhich title is the best title? Why?"
+    - assistant: "[[titleInfo]]"
+    - ---
+    - user: "{{titleInfo}}\nOutput the title only"
+    - assistant: "[[title]]"
+  else:
+    - assistant: "What's the content you want to titleify?"
