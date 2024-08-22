@@ -626,14 +626,33 @@ ALIASES
 
 ```
 USAGE
-  $ ai config [ITEM_NAME] [--json] [-c <value>] [--banner]
+  $ ai config [ITEM_NAME] [--json] [-u <value>] [-s <value>...] [-l
+    silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m]
+    [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
 
 ARGUMENTS
   ITEM_NAME  the config item name path to get
 
 FLAGS
-  -c, --config=<value>  the config file
-      --[no-]banner     show banner
+  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language, eg, en, zh, ja, ko, etc.
+  -a, --arguments=<value>              the json data which will be passed to the ai-agent script
+  -b, --brainDir=<value>               the brains(LLM) directory
+  -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
+  -f, --script=<value>                 the ai-agent script file name or id
+  -h, --histories=<value>              the chat histories folder to record
+  -i, --[no-]interactive               interactive mode
+  -k, --backupChat                     whether to backup chat history before start, defaults to false
+  -l, --logLevel=<option>              the log level
+                                       <options: silence|fatal|error|warn|info|debug|trace>
+  -m, --[no-]stream                    stream mode, defaults to true
+  -n, --[no-]newChat                   whether to start a new chat history, defaults to false in interactive mode, true
+                                       in non-interactive
+  -p, --promptDirs=<value>...          the prompts template directory
+  -s, --agentDirs=<value>...           the search paths for ai-agent script file
+  -t, --inputs=<value>                 the input histories folder for interactive mode to record
+  -u, --api=<value>                    the api URL
+      --no-chats                       disable chat histories, defaults to false
+      --no-inputs                      disable input histories, defaults to false
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -665,32 +684,33 @@ _See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli
 USAGE
   $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
 
 FLAGS
-  -a, --arguments=<value>      the json data which will be passed to the ai-agent script
-  -b, --brainDir=<value>       the brains(LLM) directory
-  -c, --config=<value>         the config file
-  -d, --dataFile=<value>       the data file which will be passed to the ai-agent script
-  -f, --script=<value>         the ai-agent script file name or id
-  -h, --histories=<value>      the chat histories folder to record
-  -i, --[no-]interactive       interactive mode
-  -k, --backupChat             whether to backup chat history before start, defaults to false
-  -l, --logLevel=<option>      the log level
-                               <options: silence|fatal|error|warn|info|debug|trace>
-  -m, --[no-]stream            stream mode, defaults to true
-  -n, --[no-]newChat           whether to start a new chat history, defaults to false in interactive mode, true in
-                               non-interactive
-  -p, --promptDirs=<value>...  the prompts template directory
-  -s, --agentDirs=<value>...   the search paths for ai-agent script file
-  -t, --inputs=<value>         the input histories folder for interactive mode to record
-  -u, --api=<value>            the api URL
-      --[no-]banner            show banner
-      --no-chats               disable chat histories, defaults to false
-      --no-inputs              disable input histories, defaults to false
+  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language, eg, en, zh, ja, ko, etc.
+  -a, --arguments=<value>              the json data which will be passed to the ai-agent script
+  -b, --brainDir=<value>               the brains(LLM) directory
+  -c, --config=<value>                 the config file
+  -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
+  -f, --script=<value>                 the ai-agent script file name or id
+  -h, --histories=<value>              the chat histories folder to record
+  -i, --[no-]interactive               interactive mode
+  -k, --backupChat                     whether to backup chat history before start, defaults to false
+  -l, --logLevel=<option>              the log level
+                                       <options: silence|fatal|error|warn|info|debug|trace>
+  -m, --[no-]stream                    stream mode, defaults to true
+  -n, --[no-]newChat                   whether to start a new chat history, defaults to false in interactive mode, true
+                                       in non-interactive
+  -p, --promptDirs=<value>...          the prompts template directory
+  -s, --agentDirs=<value>...           the search paths for ai-agent script file
+  -t, --inputs=<value>                 the input histories folder for interactive mode to record
+  -u, --api=<value>                    the api URL
+      --[no-]banner                    show banner
+      --no-chats                       disable chat histories, defaults to false
+      --no-inputs                      disable input histories, defaults to false
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -1015,34 +1035,36 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 USAGE
   $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [--consoleClear]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
+    [--consoleClear]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
 
 FLAGS
-  -a, --arguments=<value>      the json data which will be passed to the ai-agent script
-  -b, --brainDir=<value>       the brains(LLM) directory
-  -c, --config=<value>         the config file
-  -d, --dataFile=<value>       the data file which will be passed to the ai-agent script
-  -f, --script=<value>         the ai-agent script file name or id
-  -h, --histories=<value>      the chat histories folder to record
-  -i, --[no-]interactive       interactive mode
-  -k, --backupChat             whether to backup chat history before start, defaults to false
-  -l, --logLevel=<option>      the log level
-                               <options: silence|fatal|error|warn|info|debug|trace>
-  -m, --[no-]stream            stream mode, defaults to true
-  -n, --[no-]newChat           whether to start a new chat history, defaults to false in interactive mode, true in
-                               non-interactive
-  -p, --promptDirs=<value>...  the prompts template directory
-  -s, --agentDirs=<value>...   the search paths for ai-agent script file
-  -t, --inputs=<value>         the input histories folder for interactive mode to record
-  -u, --api=<value>            the api URL
-      --[no-]banner            show banner
-      --[no-]consoleClear      Whether console clear after stream output, default to true in interactive, false to
-                               non-interactive
-      --no-chats               disable chat histories, defaults to false
-      --no-inputs              disable input histories, defaults to false
+  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language, eg, en, zh, ja, ko, etc.
+  -a, --arguments=<value>              the json data which will be passed to the ai-agent script
+  -b, --brainDir=<value>               the brains(LLM) directory
+  -c, --config=<value>                 the config file
+  -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
+  -f, --script=<value>                 the ai-agent script file name or id
+  -h, --histories=<value>              the chat histories folder to record
+  -i, --[no-]interactive               interactive mode
+  -k, --backupChat                     whether to backup chat history before start, defaults to false
+  -l, --logLevel=<option>              the log level
+                                       <options: silence|fatal|error|warn|info|debug|trace>
+  -m, --[no-]stream                    stream mode, defaults to true
+  -n, --[no-]newChat                   whether to start a new chat history, defaults to false in interactive mode, true
+                                       in non-interactive
+  -p, --promptDirs=<value>...          the prompts template directory
+  -s, --agentDirs=<value>...           the search paths for ai-agent script file
+  -t, --inputs=<value>                 the input histories folder for interactive mode to record
+  -u, --api=<value>                    the api URL
+      --[no-]banner                    show banner
+      --[no-]consoleClear              Whether console clear after stream output, default to true in interactive, false
+                                       to non-interactive
+      --no-chats                       disable chat histories, defaults to false
+      --no-inputs                      disable input histories, defaults to false
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -1068,31 +1090,33 @@ _See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugi
 USAGE
   $ ai test [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [--consoleClear]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
+    [--consoleClear]
 
 FLAGS
-  -a, --arguments=<value>      the json data which will be passed to the ai-agent script
-  -b, --brainDir=<value>       the brains(LLM) directory
-  -c, --config=<value>         the config file
-  -d, --dataFile=<value>       the data file which will be passed to the ai-agent script
-  -f, --script=<value>         the ai-agent fixture file path
-  -h, --histories=<value>      the chat histories folder to record
-  -i, --[no-]interactive       interactive mode
-  -k, --backupChat             whether to backup chat history before start, defaults to false
-  -l, --logLevel=<option>      the log level
-                               <options: silence|fatal|error|warn|info|debug|trace>
-  -m, --stream                 stream mode, defaults to false
-  -n, --[no-]newChat           whether to start a new chat history, defaults to false in interactive mode, true in
-                               non-interactive
-  -p, --promptDirs=<value>...  the prompts template directory
-  -s, --agentDirs=<value>...   the search paths for ai-agent script file
-  -t, --inputs=<value>         the input histories folder for interactive mode to record
-  -u, --api=<value>            the api URL
-      --[no-]banner            show banner
-      --[no-]consoleClear      Whether console clear after stream output, default to true in interactive, false to
-                               non-interactive
-      --no-chats               disable chat histories, defaults to false
-      --no-inputs              disable input histories, defaults to false
+  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language, eg, en, zh, ja, ko, etc.
+  -a, --arguments=<value>              the json data which will be passed to the ai-agent script
+  -b, --brainDir=<value>               the brains(LLM) directory
+  -c, --config=<value>                 the config file
+  -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
+  -f, --script=<value>                 the ai-agent fixture file path
+  -h, --histories=<value>              the chat histories folder to record
+  -i, --[no-]interactive               interactive mode
+  -k, --backupChat                     whether to backup chat history before start, defaults to false
+  -l, --logLevel=<option>              the log level
+                                       <options: silence|fatal|error|warn|info|debug|trace>
+  -m, --stream                         stream mode, defaults to false
+  -n, --[no-]newChat                   whether to start a new chat history, defaults to false in interactive mode, true
+                                       in non-interactive
+  -p, --promptDirs=<value>...          the prompts template directory
+  -s, --agentDirs=<value>...           the search paths for ai-agent script file
+  -t, --inputs=<value>                 the input histories folder for interactive mode to record
+  -u, --api=<value>                    the api URL
+      --[no-]banner                    show banner
+      --[no-]consoleClear              Whether console clear after stream output, default to true in interactive, false
+                                       to non-interactive
+      --no-chats                       disable chat histories, defaults to false
+      --no-inputs                      disable input histories, defaults to false
 
 GLOBAL FLAGS
   --json  Format output as json.
