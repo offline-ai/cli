@@ -1,0 +1,58 @@
+---
+type: lib
+version: 0.1.0
+name: "Translator"
+description: |-
+  translate the content to the target language.
+tag:
+  - translate
+  - translator
+  - lib
+# Below is the input/output configuration
+input:       # the input items
+  # Language of the content to be translated, default is "auto" for automatic detection
+  - lang
+  # Required, the content to be translated
+  - content: {required: true}
+  # Required, Target language
+  - target: {required: true}
+output:
+  type: "object"
+  properties:
+    target_text:
+      type: "string"
+    source_text:
+      type: "string"
+    source_lang:
+      type: "string"
+    target_lang:
+      type: "string"
+  required: ["target_text", "source_text", "source_lang", "target_lang"]
+# Set the default value for the content and target input
+content: "I love my motherland and my hometown."
+target: "Chinese"
+completion_delimiter: "<|COMPLETE|>"
+# Optional configuration
+parameters:
+  # Using the parameters below will enforce JSON output format, ensuring the ai always outputs correct JSON format.
+  # response_format:
+  #   type: "json"
+# autoRunLLMIfPromptAvailable: false
+---
+# Below is the script content
+- system: |-
+    You are the best translator in the world.
+- $if: "this.content"
+  then:
+    # For API mode.
+    - user: |-
+        Output high-quality translation result before the completion delimiter "{{completion_delimiter}}".
+        Translate the following content {% if lang %}from {{lang}} {% endif %}to {{target}}.
+        ---
+        {{content}}
+    - --- # First dialogue start and this will hide the above messages from output
+    - assistant: "[[trans]]" # Return the last instruction's result always. So no need to `$ret: "?=this.prompt.trans"`
+  else:
+    # For multi-turn conversation in interactive mode.
+    - ---
+    - assistant: "I am the best translator in the world, what can I help you?"
