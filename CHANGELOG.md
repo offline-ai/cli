@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.0](https://github.com/offline-ai/cli/compare/v0.2.1...v0.3.0) (2024-08-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* follow the new spec using the "content" input instead of the old deprecated "result" input argument
+* execString for push/replace message return content string only. closes #11
+* @script and -> use "content" name as input argument instead "result". closes #10
+
+### Features
+
+* $ret params can be executed as part enhancement. closes [#7](https://github.com/offline-ai/cli/issues/7) ([1db4669](https://github.com/offline-ai/cli/commit/1db46695dc845df5968ba9a238bf786cefec1b0f))
+* add "aiPreferredLanguage" option to translate the user input string automatically ([db6b9c3](https://github.com/offline-ai/cli/commit/db6b9c39fb83637560d5bf8bbcc5f72b582d636e))
+* add "userPreferredLanguage" option to translate the ai string result automatically ([801d683](https://github.com/offline-ai/cli/commit/801d683c232ec2aceecff12250bdd8d6c5045e4b))
+* add AIHelp init ([b12a4d4](https://github.com/offline-ai/cli/commit/b12a4d4cf56aa8a6e49ada10f44a07266c3cb4e1))
+* add LatestResult public readonly field. close [#9](https://github.com/offline-ai/cli/issues/9) ([78cffd7](https://github.com/offline-ai/cli/commit/78cffd7c12bfff73afad1abfb2bce74938c8d9e7))
+* add translator lib ([cb8d54f](https://github.com/offline-ai/cli/commit/cb8d54ffc94aa65b0c0a2eedc716f255309c00fc))
+* **example:** add a Multilingual Recipe Assistant ([ccb4b81](https://github.com/offline-ai/cli/commit/ccb4b81b039649fad3c07b854e81cb9a99546186))
+* **example:** add demo howto the call the external agent script ([ecb8013](https://github.com/offline-ai/cli/commit/ecb801324a98c0075b399a9699dfb710f104056a))
+* **example:** add interactive mode support ([e13bab8](https://github.com/offline-ai/cli/commit/e13bab865a88e2eef728d7bcd5dce56bc7b43ca8))
+* **example:** add resolve-math-problem ([9773840](https://github.com/offline-ai/cli/commit/97738409018d8a72a59f252d2c092ae54fbcda76))
+* formatString [@script](https://github.com/script) should not add space if following is symbol char. closes [#8](https://github.com/offline-ai/cli/issues/8) ([bb16738](https://github.com/offline-ai/cli/commit/bb167382bbc931c340bc219834a1062642af532c))
+* **lib:** add titleify lib script ([f1c41a3](https://github.com/offline-ai/cli/commit/f1c41a39dd9a5ea72ec02db6d1de1c8492ccac76))
+* **lib:** add translate file supports to translator lib ([560e229](https://github.com/offline-ai/cli/commit/560e229c3407d14c691d8291532ab8ddf09038d7))
+
+
+### Bug Fixes
+
+* "---" directive can be used in block. closes [#12](https://github.com/offline-ai/cli/issues/12) ([47feda0](https://github.com/offline-ai/cli/commit/47feda024bc08fac0f5fb41d4fecb00c8309a44d))
+* [[VAR]] trigger infinite loop if LLM continue output [[VAR]]. closes [#5](https://github.com/offline-ai/cli/issues/5) ([8213908](https://github.com/offline-ai/cli/commit/8213908c1537c7d16794dc6023de2171dd18b696))
+* Circular reference detected in call external to external script. closes [#6](https://github.com/offline-ai/cli/issues/6) ([1e0bf23](https://github.com/offline-ai/cli/commit/1e0bf23a39f7b50e433063e423b3d021b2496a9e))
+* **example:** remove unused input ([1ab6381](https://github.com/offline-ai/cli/commit/1ab63817a1fab0bb8233e3b6e77216a3c1db70a4))
+* **lib:** could translate the short phrase ([8f0ab82](https://github.com/offline-ai/cli/commit/8f0ab82f58c4b918c92a6123b0844fa569632a76))
+* the deffered message not be formatted if no AI running at last. [#13](https://github.com/offline-ai/cli/issues/13) ([89e8e85](https://github.com/offline-ai/cli/commit/89e8e85fb690ad87746364a69f969e5ae767caf9))
+* When using [[VAR]], debugging information from the LLM configuration cannot be retained in the message. ([922cf20](https://github.com/offline-ai/cli/commit/922cf209f77e38dce5e5889c02f8082a24c249fb))
+
+
+### Refactor
+
+* [@script](https://github.com/script) and -> use "content" name as input argument instead "result". closes [#10](https://github.com/offline-ai/cli/issues/10) ([85a9226](https://github.com/offline-ai/cli/commit/85a922609914f2900a82f4293db47659f66e2aa8))
+* **example:** update ([a401a41](https://github.com/offline-ai/cli/commit/a401a4172a2100302f93e6839a1316438f055d72))
+* execString for push/replace message return content string only. closes [#11](https://github.com/offline-ai/cli/issues/11) ([838adb6](https://github.com/offline-ai/cli/commit/838adb60adc88a59ddc125ba3cedc7639a19316e))
+* follow the new spec using the "content" input instead of the old deprecated "result" input argument ([db154c5](https://github.com/offline-ai/cli/commit/db154c5f46ace8988ecae66e40460777134ce8d5))
+
 ## [0.2.1](https://github.com/offline-ai/cli/compare/v0.2.0...v0.2.1) (2024-08-18)
 
 
