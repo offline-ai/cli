@@ -1,10 +1,6 @@
 ---
 description: |-
-  Demonstrate how to call the translator
-# Set the default value for the content and target input
-content: "I love my motherland and my hometown."
-target: "Chinese"
-
+  Demonstrate how to call the translator script
 ---
 - "tell me a funny joke in English. Output the joke without any explanation."
 - assistant: "[[thinking]]"
