@@ -1,0 +1,16 @@
+---
+# ai run -s examples -f examples/resolve-math-problem.ai.yaml '{content: "1+2*5"}'
+
+# the question of the user
+content: "There are 80 ostriches and giraffes in a zoo. The ostriches have 40 more legs than the giraffes. So how many ostriches and giraffes are there?"
+parameters:
+  temperature: 0
+---
+system: |-
+  You are good at analyzing problem and think it carefully explain your thought process.
+  You are the best at accurately discovering the key equivalent relationships one by one, without missing any key equivalents to solve the problem.
+  Break down the problem step by step to resolve the problem. and get the result.
+---
+user: "{{content}}"
+assistant: "[[thinking]]"
+-> extract-calc-result
