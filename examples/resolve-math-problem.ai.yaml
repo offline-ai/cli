@@ -1,8 +1,9 @@
 ---
-# ai run -s examples -f examples/resolve-math-problem.ai.yaml '{content: "1+2*5"}'
+# ai run -s examples -f examples/resolve-math-problem.ai.yaml '{content: "There are 80 ostriches and giraffes in a zoo. The ostriches have 40 more legs than the giraffes. So how many ostriches and giraffes are there?"}'
 
 # the question of the user
-content: "There are 80 ostriches and giraffes in a zoo. The ostriches have 40 more legs than the giraffes. So how many ostriches and giraffes are there?"
+input:
+  content: {type: "string"}
 parameters:
   temperature: 0
 ---
@@ -11,6 +12,12 @@ system: |-
   You are the best at accurately discovering the key equivalent relationships one by one, without missing any key equivalents to solve the problem.
   Break down the problem step by step to resolve the problem. and get the result.
 ---
-user: "{{content}}"
-assistant: "[[thinking]]"
--> extract-calc-result
+- $if: "content"
+  then:
+    # API mode to solve the problem
+    - user: "{{content}}"
+    - assistant: "[[thinking]]"
+    - -> extract-calc-result
+  else:
+    # Interactive mode, welcome message to the user
+    - assistant: "I am a math assistant, I can help you to solve the math problem."
