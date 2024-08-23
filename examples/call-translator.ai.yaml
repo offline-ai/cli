@@ -1,6 +1,6 @@
 ---
 description: |-
-  call the translator
+  Demonstrate how to call the translator
 # Set the default value for the content and target input
 content: "I love my motherland and my hometown."
 target: "Chinese"
