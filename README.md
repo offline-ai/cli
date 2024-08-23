@@ -36,6 +36,8 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 <!-- toc -->
 * [Offline AI Client(WIP)](#offline-ai-clientwip)
 * [Quick Start](#quick-start)
+* [API mode, translate the TODO file to English](#api-mode-translate-the-todo-file-to-english)
+* [interactive mode](#interactive-mode)
 * [Usage](#usage)
 * [Commands](#commands)
 * [Credit](#credit)
@@ -285,38 +287,31 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 # Commands
 
 <!-- commands -->
-- [Offline AI Client(WIP)](#offline-ai-clientwip)
-- [Quick Start](#quick-start)
-  - [Install](#install)
-  - [Run](#run)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`ai agent`](#ai-agent)
-  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-  - [`ai brain [NAME]`](#ai-brain-name)
-  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
-  - [`ai brain down [NAME]`](#ai-brain-down-name)
-  - [`ai brain download [NAME]`](#ai-brain-download-name)
-  - [`ai brain list [NAME]`](#ai-brain-list-name)
-  - [`ai brain refresh`](#ai-brain-refresh)
-  - [`ai brain search [NAME]`](#ai-brain-search-name)
-  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
-  - [`ai config save [DATA]`](#ai-config-save-data)
-  - [`ai help [COMMAND]`](#ai-help-command)
-  - [`ai plugins`](#ai-plugins)
-  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-  - [`ai plugins link PATH`](#ai-plugins-link-path)
-  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-  - [`ai plugins reset`](#ai-plugins-reset)
-  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-  - [`ai plugins update`](#ai-plugins-update)
-  - [`ai run [DATA]`](#ai-run-data)
-  - [`ai test`](#ai-test)
-  - [`ai version`](#ai-version)
-- [Credit](#credit)
+* [`ai agent`](#ai-agent)
+* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+* [`ai brain [NAME]`](#ai-brain-name)
+* [`ai brain dn [NAME]`](#ai-brain-dn-name)
+* [`ai brain down [NAME]`](#ai-brain-down-name)
+* [`ai brain download [NAME]`](#ai-brain-download-name)
+* [`ai brain list [NAME]`](#ai-brain-list-name)
+* [`ai brain refresh`](#ai-brain-refresh)
+* [`ai brain search [NAME]`](#ai-brain-search-name)
+* [`ai config [ITEM_NAME]`](#ai-config-item_name)
+* [`ai config save [DATA]`](#ai-config-save-data)
+* [`ai help [COMMAND]`](#ai-help-command)
+* [`ai plugins`](#ai-plugins)
+* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+* [`ai plugins link PATH`](#ai-plugins-link-path)
+* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+* [`ai plugins reset`](#ai-plugins-reset)
+* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+* [`ai plugins update`](#ai-plugins-update)
+* [`ai run [DATA]`](#ai-run-data)
+* [`ai test`](#ai-test)
+* [`ai version`](#ai-version)
 
 ## `ai agent`
 
@@ -419,7 +414,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.2.1/src/commands/brain/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.2.2/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -550,7 +545,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.2.1/src/commands/brain/download.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.2.2/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -583,7 +578,7 @@ ALIASES
   $ ai brain search
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.2.1/src/commands/brain/list.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.2.2/src/commands/brain/list.ts)_
 
 ## `ai brain refresh`
 
@@ -607,7 +602,7 @@ DESCRIPTION
   refresh brain index from huggingface.co
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.2.1/src/commands/brain/refresh.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.2.2/src/commands/brain/refresh.ts)_
 
 ## `ai brain search [NAME]`
 
@@ -648,16 +643,21 @@ ALIASES
 USAGE
   $ ai config [ITEM_NAME] [--json] [-u <value>] [-s <value>...] [-l
     silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m]
-    [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
+    [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line]
 
 ARGUMENTS
   ITEM_NAME  the config item name path to get
 
 FLAGS
-  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language, eg, en, zh, ja, ko, etc.
+  -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
+                                       automatically, eg, en, etc.
+  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
+                                       automatically, eg, en, zh, ja, ko, etc.
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
+  -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
+                                       <options: true|false|line>
   -f, --script=<value>                 the ai-agent script file name or id
   -h, --histories=<value>              the chat histories folder to record
   -i, --[no-]interactive               interactive mode
@@ -694,7 +694,7 @@ EXAMPLES
   }
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.3/src/commands/config/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.4/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -704,17 +704,23 @@ _See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli
 USAGE
   $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>]
+    [-e true|false|line]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
 
 FLAGS
-  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language, eg, en, zh, ja, ko, etc.
+  -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
+                                       automatically, eg, en, etc.
+  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
+                                       automatically, eg, en, zh, ja, ko, etc.
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
   -c, --config=<value>                 the config file
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
+  -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
+                                       <options: true|false|line>
   -f, --script=<value>                 the ai-agent script file name or id
   -h, --histories=<value>              the chat histories folder to record
   -i, --[no-]interactive               interactive mode
@@ -736,7 +742,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.3/src/commands/config/save.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.4/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -1055,18 +1061,23 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 USAGE
   $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
-    [--consoleClear]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>]
+    [-e true|false|line] [--consoleClear]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
 
 FLAGS
-  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language, eg, en, zh, ja, ko, etc.
+  -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
+                                       automatically, eg, en, etc.
+  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
+                                       automatically, eg, en, zh, ja, ko, etc.
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
   -c, --config=<value>                 the config file
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
+  -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
+                                       <options: true|false|line>
   -f, --script=<value>                 the ai-agent script file name or id
   -h, --histories=<value>              the chat histories folder to record
   -i, --[no-]interactive               interactive mode
@@ -1100,7 +1111,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.3.0/src/commands/run/index.ts)_
+_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.4.0/src/commands/run/index.ts)_
 
 ## `ai test`
 
@@ -1110,15 +1121,20 @@ _See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugi
 USAGE
   $ ai test [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
-    [--consoleClear]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>]
+    [-e true|false|line] [--consoleClear]
 
 FLAGS
-  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language, eg, en, zh, ja, ko, etc.
+  -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
+                                       automatically, eg, en, etc.
+  -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
+                                       automatically, eg, en, zh, ja, ko, etc.
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
   -c, --config=<value>                 the config file
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
+  -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
+                                       <options: true|false|line>
   -f, --script=<value>                 the ai-agent fixture file path
   -h, --histories=<value>              the chat histories folder to record
   -i, --[no-]interactive               interactive mode
@@ -1150,7 +1166,7 @@ EXAMPLES
   $ ai test -f ./fixture.yaml -l info
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.2/src/commands/test/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.3/src/commands/test/index.ts)_
 
 ## `ai version`
 
