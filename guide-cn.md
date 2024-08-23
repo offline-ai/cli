@@ -4,15 +4,15 @@
 
 ## AI Agent Script Introduction
 
-`@offline-ai/cli` 是用JS开发的轻量级人工智能体脚本引擎(`ai-agent`)的解释器客户端.用以直接运行`人工智能体脚本`.
+`@offline-ai/cli` 是用JS开发的轻量级人工智能体脚本引擎(`ai-agent`)的解释器客户端.用以直接运行`人工智能体脚本`即[可编程提示词脚本](https://github.com/offline-ai/ppe/blob/main/README.cn.md).
 
 所谓`人工智能体脚本`就是将智能体抽象出特定的任务脚本`库`,方便开发者使用.
 
 ### 计算器智能体
 
-**警告:** 请勿使用AI进行数字运算，这不是AI所擅长的,这里只为演示智能体之间的调用.
+**警告:** 请勿使用AI进行数字运算，这不是AI大语言模型所擅长的,这里只为演示智能体脚本之间的调用.
 
-演示如何调用其它智能体. 首先需要一个能够计算的智能体脚本(`calculator.ai.yaml`),然后再从该智能体中提取结果(`calc-result.ai.yaml`).
+演示如何调用其它智能体. 首先需要一个能够计算的智能体脚本(`calculator.ai.yaml`),然后再从该智能体中提取结果(`extract-calc-result.ai.yaml`).
 
 为啥需要两步: 要想提高计算的准确度,必须要用CoT让它一步一步的思考,如果让它直接输出答案,就非常容易出错.
 
@@ -28,16 +28,16 @@ system: Please as a calculator to calculate the result of the following expressi
 ---
 user: "{{expression}}"
 assistant: "[[thinking]]"
-# 将结果传给 calc-result.ai.yaml 处理
--> calc-result
+# 将结果传给 extract-calc-result.ai.yaml 处理
+-> extract-calc-result
 ```
 
 * `[[thinking]]` 表示一次高级AI替换,也就是说方括号的内容将被AI替换, 于此同时,方括号的内容`thinking`将作为模板数据变量存放AI替换的内容,可供后面的消息使用.
 * `->` 表示将当前结果传递给另一个智能体脚本,并等待返回结果.
 
-更详细的指令解释请参考: [可编程提示词工程规范](https://github.com/offline-ai/ppe/blob/main/README.cn.md)
+更详细的脚本指令解释请参考: [可编程提示词工程规范](https://github.com/offline-ai/ppe/blob/main/README.cn.md)
 
-`calc-result.ai.yaml`:
+`extract-calc-result.ai.yaml`:
 
 ```yaml
 ---
@@ -52,7 +52,7 @@ user: |-
   {{result}}
 ```
 
-运行(脚本在examples目录):
+运行(脚本在`examples`目录):
 
 ```bash
 # `-s examples` 将 examples 目录加入到搜索目录,以便找到 `calc-result` 脚本.
@@ -61,7 +61,7 @@ ai run -f examples/calculator.ai.yaml '{expression: "1+2*5"}' -s examples --no-s
 11
 ```
 
-### 翻译家智能体
+### 简易翻译家智能体
 
 举一个简单的例子,如果我希望让人工智能自动翻译基于如下`json`格式的`i18n`资源:
 
@@ -102,29 +102,26 @@ AI 应用开发第一条,在能够用代码实现或者必须要100%保证正确
 
 ```yaml
 ---
-_id: translator
-templateFormat: hf
 type: char
-character:
-  name: "Translator"
+name: "Translator"
 description: |-
   You are the best translator in the world. You are helpful, kind, honest, good at writing, and never fails to answer any requests immediately and with precision.
 
   Output high-quality translation results in the JSON object and stop immediately:
   {
-    "translation": "翻译后的内容",
-    "original": "原文",
-    "lang": "原文语言",
-    "target": "目标语言",
+    "translation": "translated content",
+    "original": "original content",
+    "lang": "original language",
+    "target": "target language",
   }
-input: # 约定输入的参数
+input: # 翻译家的输入参数
   # The content that needs to be translated.
   - content
   # The language of the content. "auto" means auto detect
   - lang
   # The target language.
   - target
-output: # 约定输出对象
+output: # 翻译家的输出
   type: "object"
   properties:
     translation:
@@ -152,20 +149,19 @@ user: |-
 
 配置参数需要讲解么? 需要么? 不需要吧.
 
-* `_id`: 不用说了,该脚本的唯一识别标识
 * `type`: 脚本类型, `char` 表示脚色类型
-* `character`: 当 `char` 类型的时候,这里用对象设置角色的其它信息
-  * `name`: 角色名
+* `character`: 当 `char` 类型的时候,这里用对象设置角色的其它信息,这里没有使用。
+* `name`: 角色名
 * `description`: 在这里定义你的角色详细信息
 * `prompt`: 提示词相关配置
   * `messages`: 不用说了吧,与大脑模型交互的消息提示列表,兼容OpenAI的消息提示
     * `role`: 消息的角色,有: `user`,表示用户(人)发的消息;`assistant`,表示ai发的消息;`system`表示系统提示消息
     * `content`: 消息内容,这里就引用了提示中的模板变量`description`,[jinja2](https://wsgzao.github.io/post/jinja/)的模板语法
-* `input`: 接下要约定这个脚本的输入,也就是待翻译的内容
+* `input`: 这里约定这个脚本的输入,也就是待翻译的内容
   * `content`: 待翻译的正文内容
   * `lang`: 正文内容所用语言
   * `target`: 目标语言
-* `output`: 然后我们需要约定脚本的输出,当然你可以简单的约定输出翻译后的内容也行,就不需要这个,这里约定的是返回Json对象
+* `output`: 这里约定脚本的输出,当然你可以简单的约定输出翻译后的内容也行,就不需要这个,这里约定的是返回Json对象
   * `translation`: 这里返回翻译后的内容
   * `original`: 原文放这里,这是为了验证某个大脑的指令遵循能力,可以不用的
   * `lang`: 原文所用语言
@@ -185,6 +181,18 @@ user: |-
     * 注意: 当`output`和`type:json`同时被设置的时候,就会强制模型返回json object, 而非文本.
     * 如果没有设置`response_format`可以在调用参数中设置`forceJson:true`也是同样的效果.
 
+配置结束后，接下来的是脚本内容：
+
+```yaml
+user: |-
+  "{{content}}
+  Translate the above content {% if lang %}from {{lang}} {% endif %}to {{target}}."
+```
+
+该语句表示用户角色说的话（消息），消息内容可以使用[jinja2](https://wsgzao.github.io/post/jinja/)的模板语法。
+`|-` 是YAML语法，表示多行字符串，原样保留换行。
+
+
 让我们用用看. 首先确认后台已经在运行`llama.cpp`服务器:
 
 ```bash
@@ -197,24 +205,29 @@ cd llamacpp/build/bin
 确认完毕,现在试一试,翻译一段文字为葡萄牙语:
 
 ```bash
-ai run -f translator-simple.ai.yaml "{\
+ai run -f translator-simple.ai.yaml "{ \
   lang:'Chinese',\
-  content:'当我来到未来,首先看到的是城市中到处都是悬浮的飞行车,它们安静地在空中飞行,使道路不再拥堵。阳光透过智能玻璃照射进室内,天花板上是可以变换场景的投影。房间里弥漫着淡淡的芳香,这是嵌入墙壁的芳香发生器自动释放的。',\
+  content:'当我来到未来,首先看到的是城市中到处都是悬浮的飞行车,它们安静地在空中飞行,使道路不再拥堵。阳光透过智能玻璃照射进室内,天花板上是可以变换场景的投影。房间里弥漫着淡淡的芳香,这是嵌入墙壁的芳香发生器自动释放的。', \
   target: '葡萄牙语'}"
+
 {
   "lang": "中文",
   "original": "当我来到未来，首先看到的是城市中到处都是悬浮的飞行车，它们安静地在空中飞行，使道路不再拥堵。阳光透过智能玻璃照射进室内，天花板上是可以变换场景的投影。房间里弥漫着淡淡的芳香，这是嵌入墙壁的芳香发生器自动释放的。",
   "target": "português",
   "translation": "Quando chegamos às futuras gerações, a primeira coisa que vemos é que, em toda a cidade, há aerotránsportos pendentes flutuando na atmosfera, voando de forma tranquila, eliminando os congestionamentos nas estradas."
 }
+```
 
-#这里调用参数中设置了 forceJson: false, 不强制返回json, 让它自由发挥的结果
-#最后一直返回空行,被脚本引擎检测到后给强行终止了,这个检测参数endWithRepeatedSequence也是可以设置的.默认是末尾序列发现至少7次重复
+下面是调用参数中设置了 `forceJson: false`, 不强制返回json, 让它自由发挥的结果:
+最后一直返回空行,被脚本引擎检测到后给强行终止了,这个检测参数`endWithRepeatedSequence`也是可以设置的.默认值为`7`,表示末尾序列发现至少7次重复就终止。
+
+```bash
 ai run -f translator-simple.ai.yaml "{\
   forceJson: false, \
   lang:'Chinese', \
   content:'当我来到未来,首先看到的是城市中到处都是悬浮的飞行车,它 们安静地在空中飞行,使道路不再拥堵。阳光透过智能玻璃照射进室内,天花板上是可以变换场景的投影。房间里弥漫着淡淡的芳香,这是嵌入墙壁的芳香发生器自动释放的。', \
   target: '葡萄牙语'}"
+
 {
   "translation": "Quando chegarei ao futuro, inicialmente verrei carros voadores que flutuam em todos os lugares da cidade, e eles voam calmadamente no céu, o que não mais causa congestionamento nas es
 tradas. A luz do sol penetra pelas janelas inteligentes, e na parede há um projetor de imagens que pode mudar o ambiente.",
@@ -224,30 +237,8 @@ tradas. A luz do sol penetra pelas janelas inteligentes, e na parede há um proj
    "target": "português"
 }
 
-
-
-
-
-
-
-
-│[warn]:endWithRepeatedSequence 7 count found, you can set minTailRepeatCount to 0 to disable it or increase it! { content: "{
-│  "translation": "Quando chegarei ao futuro, inicialmente verrei carros voadores que flutuam em todos os lugares da cidade, e eles
-│  voam calmadamente no céu, o que não mais causa congestionamento nas estradas. A luz do sol penetra pelas janelas inteligentes, e
-│  na parede há um projetor de imagens que pode mudar o ambiente.",
-│  "original": "当我来到未来，首先看到的是城市中到处都是悬浮的飞行车，它们安静地在空中飞行，使道路不再拥堵。阳光透过智能玻璃照射进
-│  室内，天花板上是可以变换场景的投影。房间里弥漫着淡淡的香味，这是嵌入墙壁的香水发生器自动释放的。",
-│  "lang": "中文",
-│  "target": "português"
-│  }
-│
-│
-│
-│
-│
-│
-│  " }
-
+│[warn]:endWithRepeatedSequence "\n" 7 count found, you can set minTailRepeatCount to 0 to disable it or increase it! { content: "{
+│ ...
 │[warn]:<AbortError> The operation was aborted for endWithRepeatedSequence. { error: { code: 499, name: "AbortError", data: { what:
 ```
 
@@ -269,6 +260,7 @@ Downloading https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/r
 done
 mkdir llamacpp
 cd llamacpp
+# 以 Ubuntu x64 系统为例
 wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-bin-ubuntu-x64.zip
 unzip llama-b3091-bin-ubuntu-x64.zip
 ```
@@ -298,6 +290,7 @@ cd llamacpp/build/bin
 现在, 你可以运行智能体脚本了:
 
 ```bash
-# interactive: 交互方式运行
+# -i `--interactive`: 交互方式运行
+# -f `--script`: 指定脚本文件
 $ai run --interactive --script examples/char-dobby
 ```

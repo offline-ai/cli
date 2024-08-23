@@ -31,7 +31,7 @@ Developing an intelligent application with AI Agent Script Engine involves just 
   * Use the client (`@offline-ai/cli`) directly to download the AI brain: `ai brain download`
 * Create the ai application's agent script file and debug prompts using the client (`@offline-ai/cli`): `ai run -f your_script --interactive --loglevel info`.
 * Integrate the script into your ai application.
-* One-click packaging into standalone smart applications (TODO)
+* One-click packaging into standalone intelligent applications (TODO)
 
 <!-- toc -->
 * [Offline AI Client(WIP)](#offline-ai-clientwip)
@@ -42,6 +42,9 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 <!-- tocstop -->
 
 # Quick Start
+
+* [Quick Start Programming Guide](./guide.md)
+* [More examples](./examples)
 
 ## Install
 
@@ -69,7 +72,7 @@ npm install -g @offline-ai/cli
 
 ## Run
 
-First run llama.cpp server
+First run llama.cpp server(provider)
 
 ```bash
 #run llama.cpp server
@@ -272,31 +275,38 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 # Commands
 
 <!-- commands -->
-* [`ai agent`](#ai-agent)
-* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-* [`ai brain [NAME]`](#ai-brain-name)
-* [`ai brain dn [NAME]`](#ai-brain-dn-name)
-* [`ai brain down [NAME]`](#ai-brain-down-name)
-* [`ai brain download [NAME]`](#ai-brain-download-name)
-* [`ai brain list [NAME]`](#ai-brain-list-name)
-* [`ai brain refresh`](#ai-brain-refresh)
-* [`ai brain search [NAME]`](#ai-brain-search-name)
-* [`ai config [ITEM_NAME]`](#ai-config-item_name)
-* [`ai config save [DATA]`](#ai-config-save-data)
-* [`ai help [COMMAND]`](#ai-help-command)
-* [`ai plugins`](#ai-plugins)
-* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-* [`ai plugins link PATH`](#ai-plugins-link-path)
-* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-* [`ai plugins reset`](#ai-plugins-reset)
-* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-* [`ai plugins update`](#ai-plugins-update)
-* [`ai run [DATA]`](#ai-run-data)
-* [`ai test`](#ai-test)
-* [`ai version`](#ai-version)
+- [Offline AI Client(WIP)](#offline-ai-clientwip)
+- [Quick Start](#quick-start)
+  - [Install](#install)
+  - [Run](#run)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`ai agent`](#ai-agent)
+  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+  - [`ai brain [NAME]`](#ai-brain-name)
+  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
+  - [`ai brain down [NAME]`](#ai-brain-down-name)
+  - [`ai brain download [NAME]`](#ai-brain-download-name)
+  - [`ai brain list [NAME]`](#ai-brain-list-name)
+  - [`ai brain refresh`](#ai-brain-refresh)
+  - [`ai brain search [NAME]`](#ai-brain-search-name)
+  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
+  - [`ai config save [DATA]`](#ai-config-save-data)
+  - [`ai help [COMMAND]`](#ai-help-command)
+  - [`ai plugins`](#ai-plugins)
+  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+  - [`ai plugins link PATH`](#ai-plugins-link-path)
+  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+  - [`ai plugins reset`](#ai-plugins-reset)
+  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+  - [`ai plugins update`](#ai-plugins-update)
+  - [`ai run [DATA]`](#ai-run-data)
+  - [`ai test`](#ai-test)
+  - [`ai version`](#ai-version)
+- [Credit](#credit)
 
 ## `ai agent`
 

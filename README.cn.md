@@ -64,7 +64,7 @@ npm install -g @offline-ai/cli
 
 ### Run
 
-首先需要运行 llama.cpp server:
+首先需要运行 llama.cpp server 提供者(Provider):
 
 ```bash
 #run llama.cpp server

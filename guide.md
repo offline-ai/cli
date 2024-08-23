@@ -4,7 +4,7 @@ Objective: Organize a variety of intelligent agents into a reusable library of a
 
 ## AI Agent Script Introduction
 
-`@offline-ai/cli` is the interpreter client for the lightweight AI agent script engine (`ai-agent`) developed in JS, used to run `AI agent scripts` directly.
+`@offline-ai/cli` is the interpreter client for the Programmable Prompt Script Engine (`ai-agent`), used to directly run the `AI agent script`, which is [Programmable Prompt Script](https://github.com/offline-ai/ppe).
 
 An `AI agent script` abstracts agents into specific task script libraries, making them convenient for developers to use.
 
