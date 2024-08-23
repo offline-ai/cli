@@ -12,8 +12,10 @@ tag:
 input:       # the input items
   # Language of the content to be translated, default is "auto" for automatic detection
   - lang
-  # Required, the content to be translated
-  - content: {required: true}
+  # The text file path if exists, it will load content from the file
+  - file
+  # the content to be translated
+  - content
   # Required, Target language
   - target: {required: true}
 output:
@@ -34,12 +36,17 @@ target: "Chinese"
 completion_delimiter: "<|COMPLETE|>"
 # Optional configuration
 parameters:
+  max_tokens: -1
   # Using the parameters below will enforce JSON output format, ensuring the ai always outputs correct JSON format.
   # response_format:
   #   type: "json"
 # autoRunLLMIfPromptAvailable: false
 ---
 # Below is the script content
+- $if: "this.file"
+  then:
+    $set:
+      content: "@file({{file}})"
 - system: |-
     You are the best translator in the world.
 - $if: "this.content"
