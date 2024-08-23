@@ -73,10 +73,21 @@ cd llamacpp/build/bin
 ./llama-server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
 ```
 
-现在, 你可以运行智能体脚本了:
+现在你可以运行 AI 智能体脚本(可编程提示词)，例如，在`examples`目录下的`Dobby`角色:
 
 ```bash
+# 进入交互对话模式
 $ai run --interactive --script examples/char-dobby
+```
+
+直接运行 `translator` 脚本库:
+
+```bash
+# API 模式，将 TODO 文件翻译成英语
+$ai run -f translator "{file: './TODO', target: 'English'}"
+
+# 进入交互对话模式
+$ai run -if translator
 ```
 
 ## Usage

@@ -81,10 +81,20 @@ cd llamacpp/build/bin
 ./llama-server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
 ```
 
-Now you can run your ai agent script, eg:
+Now you can run your ai agent script, eg, the `Dobby` character:
 
 ```bash
 $ai run --interactive --script examples/char-dobby
+```
+
+run the `translator` script lib directly:
+
+```bash
+# API mode, translate the TODO file to English
+$ai run -f translator "{file: './TODO', target: 'English'}"
+
+# interactive mode
+$ai run -if translator
 ```
 
 # Usage
