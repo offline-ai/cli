@@ -109,7 +109,7 @@ $ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@offline-ai/cli/0.2.1 linux-x64 node-v20.14.0
+@offline-ai/cli/0.3.0 linux-x64 node-v20.14.0
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -339,7 +339,7 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.2.1/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.3.0/src/commands/agent/index.ts)_
 
 ## `ai autocomplete [SHELL]`
 

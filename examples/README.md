@@ -1,54 +1,65 @@
-# Examples
+# Programmable Prompt Engine (PPE) Script Examples 🤖
 
-* `calculator`: a simple calculator demo agent to demo use the `->` call the external script.
-  * **Purpose:**  It demonstrates how to use an LLM to calculate mathematical expressions.
+This directory contains a collection of example scripts to demonstrate the capabilities of the Programmable Prompt Engine (PPE). Each example showcases a different use case and highlights how to effectively leverage PPE's features.
+
+## Example Scripts
+
+* **`calculator`:**
+  * A simple calculator agent that demonstrates how to use the `->` operator to call external scripts.
   * **Workflow:**
-    * The LLM receives a mathematical expression as input (`content`).
-    * It processes the expression and outputs a thought process (`thinking`).
-    * A separate script (`extract-calc-result`) then extracts the final calculated result from the LLM's output.
-* `extract-calc-result`: This file defines an AI workflow for extracting the result of a calculated math problem from a given text.
+    1. The LLM receives a mathematical expression (`content`).
+    2. It processes the expression and outputs a thought process (`thinking`).
+    3. The `extract-calc-result` script then extracts the final calculated result from the LLM's output.
+* **`extract-calc-result`:**
+  * This script defines an AI workflow for extracting the result of a calculated math problem from text.
   * **Input:**  The script receives the LLM's output (`content`) as input.
-  * **Output:** The script outputs a JSON object containing:
-    * **`result`**: The final calculated result (can be a number, object, boolean, or string).
+  * **Output:** A JSON object containing:
+    * **`result`**: The final calculated result (number, object, boolean, or string).
     * **`steps`**:  A list of steps taken by the LLM during the calculation process.
-    * **`answer`**: The LLM's final answer, which can also be a number or string.
-* `resolve-math-problem.ai`: demo to resolve the math problem.
+    * **`answer`**: The LLM's final answer.
+* **`resolve-math-problem.ai`:**
+  * A demo agent for resolving math problems.
   * **Input:**  Takes a user's math problem as a string.
-  * **System:**  Instructs the AI to analyze the problem carefully, break it down step-by-step, and accurately identify key relationships to arrive at the solution.
   * **Workflow:**
-    * If a `content` is provided, it assumes an API call and starts the problem-solving process.
+    * If `content` is provided, it starts the problem-solving process.
     * If no `content` is provided, it greets the user and introduces itself as a math assistant.
-* `call-translator`: It aims to showcase how to invoke the `translator` script.
-* `char-dobby`: the character agent demo.
-* `recipe`: a Multilingual Recipe Assistant demo
+* **`call-translator`:**
+  * This example showcases how to invoke the `translator` lib script.
+* **`char-dobby`:**
+  * An interactive demo featuring a character agent named Dobby.
+  * Demonstrates the use of the `type` keyword in the configuration section.
+* **`recipe`:**
+  * A Multilingual Recipe Assistant demo
   * **Key Features:**
-    * **Multilingual Support:** The agent can understand and respond in multiple languages, as specified by the user's `lang` input.
-    * **Cuisine Specificity:** Users can request recipes from a specific cuisine type, indicated by the `cuisine` input.
-    * **Ingredient-Based Recommendations:** The core functionality is to suggest recipes based on a list of available ingredients provided by the user in the `ingredients` input.
-    * **JSON Output Format:** The agent can optionally output its response in JSON format, controlled by the `json` input.
+    * **Multilingual Support:** Understands and responds in multiple languages.
+    * **Cuisine Specificity:** Provides recipes from a specific cuisine.
+    * **Ingredient-Based Recommendations:** Suggests recipes based on available ingredients.
+    * **JSON Output Format:** Optionally outputs responses in JSON format.
   * **Input:**
-    * `ingredients`: A list of strings representing the available ingredients.
-    * `cuisine`: (Optional) A string specifying the desired cuisine type.
-    * `lang`: (Optional) A string indicating the user's preferred language.
-    * `json`: (Optional) A boolean flag indicating whether JSON output is desired.
+    * `ingredients`: A list of available ingredients.
+    * `cuisine`: (Optional) Desired cuisine type.
+    * `lang`: (Optional)  User's preferred language.
+    * `json`: (Optional) Boolean flag for JSON output.
   * **Output:**
     * An array of recipe objects, each containing:
-      * `recipeName`: A string representing the name of the recipe.
-      * `instructions`: An array of strings outlining the cooking steps.
-      * `ingredients`: An array of ingredient objects, each with `name` and `amount` properties.
-      * `reason`: A string explaining the rationale behind the recipe suggestion.
-* `translator-simple`: a simple translator agent demo.
-  * **Translation Task:** The primary function is to translate text from one language to another.
-  * **Input:** The AI takes three main inputs:
-    * `content`: The text to be translated (required).
-    * `target`: The target language for the translation (required).
-    * `lang`: The original language of the content (optional).
-  * **Output:** The AI returns a JSON object containing:
+      * `recipeName`: Name of the recipe.
+      * `instructions`: Cooking steps.
+      * `ingredients`: Ingredient list with `name` and `amount`.
+      * `reason`: Rationale behind the suggestion.
+* **`translator-simple`:**
+  * A simple translator agent demo.
+  * **Translation Task:** Translate text from one language to another.
+  * **Input:**
+    * `content`: Text to be translated (required).
+    * `target`: Target language (required).
+    * `lang`: Original language (optional).
+  * **Output:**
+    * A JSON object containing:
     * `translation`: The translated text.
     * `original`: The original text.
     * `lang`: The original language.
     * `target_lang`: The target language.
-    * `reason`: A string explaining the translation process (optional).
+    * `reason`: Explanation of the translation process (optional).
   * **Parameters:**
     * `continueOnLengthLimit`:  Allows translation to continue even if the text exceeds a length limit.
     * `maxRetry`: Specifies the maximum number of retries for the translation.

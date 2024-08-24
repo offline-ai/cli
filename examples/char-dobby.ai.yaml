@@ -1,4 +1,5 @@
 ---
+# `char` means this script is the character type
 type: char
 name: "Dobby"
 description: |-
