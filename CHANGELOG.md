@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.1](https://github.com/offline-ai/cli/compare/v0.3.0...v0.3.1) (2024-08-24)
+
+
+### Features
+
+* **lib:** add summary lib ([26f7bc9](https://github.com/offline-ai/cli/commit/26f7bc9fa8e05f3b261598092050008c077310a2))
+* **lib:** more detail added ([9db9162](https://github.com/offline-ai/cli/commit/9db9162fd986b46d5ad5f00c2d3284d9704e28f1))
+* **translator:** add source language detected automatically if no lang provided ([cfcc24c](https://github.com/offline-ai/cli/commit/cfcc24cbc2ebf46fe5b1720aa3d11a30844acb80))
+
 ## [0.3.0](https://github.com/offline-ai/cli/compare/v0.2.1...v0.3.0) (2024-08-23)
 
 
