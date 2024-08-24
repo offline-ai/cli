@@ -1,0 +1,46 @@
+---
+version: 0.1.0
+type: lib
+description: |-
+  Summarize the content or a text file in detail, capturing the key points and essence of the document.
+  It takes a filepath as input and outputs a concise summary that reflects the main theme or content.
+
+  It can be used in prompt. eg, `Summary: @summary(file=document.md)`
+
+  Or, run it directly:
+
+  ```bash
+  $ai run -f summary "{file: 'document.md'}"
+  ````
+tag:
+  - summary
+  - summarize
+  - extract
+  - prompt
+  - lib
+input:
+  - content                  # The content to summarize
+  - file                     # The text file path if exists, it will load content from the file
+  - len: {type: "number"}    # the optional max length of the summary, It is not precise, just an approximate number.
+len: -1                      # the default max length of the summary, -1 means no limit
+output:
+  type: "string"
+---
+- $if: "this.file"
+  then:
+    $set:
+      content: "@file({{file}})"
+- system: |-
+    Summarize the following content or file provided by the user in detail, capturing the key points and essence of the document.
+    {%- if len and len > 0 -%}
+    Keep the summary within {{len}} characters.
+    {%- endif -%}
+---
+- $if: "this.content"
+  then:
+    # API mode
+    - user: "{{content}}"
+    - assistant: "[[summary:max_tokens=len]]"
+  else:
+    # For multi-turn conversation in interactive mode.
+    - assistant: "What's the content you want to summarize?"
