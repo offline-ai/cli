@@ -414,7 +414,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.2/src/commands/brain/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.3/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -545,7 +545,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.2/src/commands/brain/download.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.3/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -578,7 +578,7 @@ ALIASES
   $ ai brain search
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.2/src/commands/brain/list.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.3/src/commands/brain/list.ts)_
 
 ## `ai brain refresh`
 
@@ -586,10 +586,11 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ```
 USAGE
-  $ ai brain refresh [--json] [-b <value>] [-u <value>] [-v]
+  $ ai brain refresh [--json] [-b <value>] [-u <value>] [-v] [-c <value>]
 
 FLAGS
   -b, --brainDir=<value>  the brains(LLM) directory
+  -c, --maxCount=<value>  [default: -1] the max number of brains to refresh, -1 means no limits
   -u, --hubUrl=<value>    the hub mirror url
   -v, --verifyQuant       whether verify quant when refresh
 
@@ -602,7 +603,7 @@ DESCRIPTION
   refresh brain index from huggingface.co
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.2/src/commands/brain/refresh.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.3/src/commands/brain/refresh.ts)_
 
 ## `ai brain search [NAME]`
 
