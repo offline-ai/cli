@@ -34,7 +34,6 @@
     "enquirer": "^2.4.1",
     "lodash-es": "^4.17.21",
     "log-update": "^6.1.0",
-    "luxon": "^3.5.0",
     "node-fetch-native": "^1.6.4",
     "util-ex": "2.0.0-alpha.18"
   },
