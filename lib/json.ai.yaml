@@ -1,7 +1,28 @@
 ---
 version: 0.1.0
 type: lib
-description: extract json from text
+description: |-
+  Extract the `content` as JSON according to the JSON Schema specified in `output`.
+  The JSON Schema is defined in the `output` field.
+
+  Usage:
+
+  ```yaml
+  ---
+  # define your JSON Schema
+  output:
+    type: "object"
+    ...
+  ---
+  ...
+  assistant: "[[THE_CONTENT]]"
+  # the assistant's response(`THE_CONTENT`) and output will be passed into the `json` script:
+  -> json(output=output)
+  ```
+  Or, run it directly:
+  ```bash
+  $ai run -f json "{content: '...', output: {...}}"
+  ```
 tag:
   - json
   - extract
@@ -21,8 +42,8 @@ prompt:
         {{content}}
         ---
 input:
-  - content
-  - output
+  - content # The content to extract
+  - output  # JSON Schema
 output:
   type: "object"
   properties:

@@ -9,7 +9,7 @@ description: |-
   * description: character specific description
   * character: other characteristic object of the character
 
-  Usage: In your script, set `type: char` to use this type. eg:
+  Usage: In your script, set `type: char` in front-matter configuration to use this type. eg:
 
   ```yaml
   ---

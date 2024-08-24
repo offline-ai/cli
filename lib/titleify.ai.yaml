@@ -2,10 +2,16 @@
 version: 0.1.0
 type: lib
 description: |-
-  Summarize the content or a text file into a single sentence or headline that captures the essence of the document.
+  Summarize the content or a text file into a single best title that captures the essence of the document.
   It takes a filepath as input and outputs a concise title that reflects the main theme or content.
 
-  eg, `Title: @titleify(document.md)`
+  It can be used in prompt. eg, `Title: @titleify(file=document.md)`
+
+  Or, run it directly:
+
+  ```bash
+  $ai run -f titleify "{file: 'document.md'}"
+  ````
 tag:
   - titleify
   - title
@@ -14,13 +20,12 @@ tag:
   - prompt
   - lib
 input:
-  - content                  # The content to summarize
+  - content                  # The content to titleify
   - file                     # The text file path if exists, it will load content from the file
-  - len: {type: "number"}    # the optional max length of the title
+  - len: {type: "number"}    # the optional max length of the title. It is not precise, just an approximate number.
 output:
   type: "string"
-parameters:
-  max_tokens: 128
+len: -1                      # the default max length of the title, -1 means no limit
 ---
 - $if: "this.file"
   then:
@@ -28,16 +33,24 @@ parameters:
       content: "@file({{file}})"
 - system: |-
     Summarize the content provided by the user into some best titles that captures the essence of the document.
+    {%- if len and len > 0 -%}
+    Keep the title within {{len}} characters.
+    {%- endif -%}
 ---
 - $if: "this.content"
   then:
+    # API mode
     - user: "{{content}}"
-    - assistant: "[[titles]]"
+    # get some titles
+    - assistant: "[[titles:max_tokens=len]]"
     - ---
     - user: "Titles:\n{{titles}}\nWhich title is the best title? Why?"
+    # choose the best one
     - assistant: "[[titleInfo]]"
     - ---
+    # output the best title
     - user: "{{titleInfo}}\nOutput the title only"
     - assistant: "[[title]]"
   else:
+    # For multi-turn conversation in interactive mode.
     - assistant: "What's the content you want to titleify?"

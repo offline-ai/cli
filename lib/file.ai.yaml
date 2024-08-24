@@ -1,7 +1,10 @@
 ---
 version: 0.1.0
 type: lib
-description: "the simple text file loader used in prompt. eg, `user: summary the following file content: @file(document.md)`"
+description: |-
+  the simple text file loader. You can use environment variables in file path, eg, "$HOME/documents/document.md".
+
+  It can be used in prompt. eg, `user: think about the following file content: @file(document.md)`
 tag:
   - file
   - loader
@@ -9,7 +12,7 @@ tag:
   - lib
 input:
   - content: {required: true} # The file path passed by the prompt
-output:
+output: # the file content
   type: "string"
 ---
 !fn |-
