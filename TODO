@@ -38,4 +38,5 @@ bugs:
   ✔ [[VAR]] trigger infinite loop if LLM continue output [[VAR]] @done(24-08-21 18:09:50)
   ✔ "---" directive can be used in block @done(24-08-21 20:39)
   ✔ the deffered message not be formatted if no AI running at last @done(24-08-21 20:40)
-  ☐ `$exec`应该传递`llmStream`事件以便于显示外部脚本过程的流进度.
+  ✔ `$exec`应该传递`llmStream`事件以便于显示外部脚本过程的流进度. @done(24-08-25 06:01)
+  ✔ can not work on Windows @done(24-08-25 06:01)
