@@ -87,6 +87,9 @@
     "dirname": "ai",
     "commands": "./dist/oclif/commands",
     "helpClass": "./dist/oclif/lib/help",
+    "hooks": {
+      "init": "./dist/oclif/hooks/init-tools"
+    },
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins",
