@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.6](https://github.com/offline-ai/cli/compare/v0.3.5...v0.3.6) (2024-08-25)
+
+
+### Bug Fixes
+
+* http proxy can not work ([649392c](https://github.com/offline-ai/cli/commit/649392ce7d775cf61044561a416056f00fdd3fb5))
+
 ## [0.3.5](https://github.com/offline-ai/cli/compare/v0.3.4...v0.3.5) (2024-08-24)
 
 ## [0.3.4](https://github.com/offline-ai/cli/compare/v0.3.3...v0.3.4) (2024-08-24)
