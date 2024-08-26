@@ -10,12 +10,6 @@
   "repository": "https://github.com/offline-ai/cli",
   "bugs": "https://github.com/@offline-ai/cli/issues",
   "dependencies": {
-    "@isdk/ai-tool": "workspace:*",
-    "@isdk/ai-tool-agent": "workspace:*",
-    "@isdk/ai-tool-downloader": "workspace:*",
-    "@isdk/ai-tool-llm": "workspace:*",
-    "@isdk/ai-tool-llm-llamacpp": "workspace:*",
-    "@isdk/ai-tool-prompt": "workspace:*",
     "@oclif/core": "^4.0.17",
     "@oclif/plugin-autocomplete": "^3.2.0",
     "@oclif/plugin-help": "^6.2.8",
