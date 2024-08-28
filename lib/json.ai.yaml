@@ -1,4 +1,5 @@
 ---
+# Below are the front-matter configuration
 version: 0.1.0
 type: lib
 description: |-
@@ -28,20 +29,6 @@ tag:
   - json
   - extract
   - lib
-prompt:
-  add_generation_prompt: true
-  messages:
-    - role: system
-      content: |-
-        Extract THE CONTENT input by the user as a JSON object according to THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS specified by the user:
-    - role: user
-      content: |-
-        THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS:
-        {{output}}
-        ---
-        THE CONTENT:
-        {{content}}
-        ---
 input:
   - content # The content to extract
   - output  # JSON Schema
@@ -78,3 +65,13 @@ output:
       description: "Is the reviewer expressing anger?"
   required: ["sentiment", "products", "anger"]
 ---
+# Below are the prompts script
+system: |-
+  Extract THE CONTENT input by the user as a JSON object according to THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS specified by the user:
+user: |-
+  THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS:
+  {{output}}
+  ---
+  THE CONTENT:
+  {{content}}
+  ---
