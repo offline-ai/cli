@@ -1,4 +1,4 @@
-# Offline AI Client(WIP)
+# Offline AI PPE CLI(WIP)
 
 > 【[English](./README.md)|中文】
 ---

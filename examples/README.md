@@ -5,7 +5,7 @@ This directory contains a collection of example scripts to demonstrate the capab
 ## Example Scripts
 
 * **`calculator`:**
-  * A simple calculator agent that demonstrates how to use the `->` operator to call external scripts.
+  * A simple calculator agent that demonstrates how to use the `->` operator to connect script outputs to subsequent scripts, creating complex workflows.
   * **Workflow:**
     1. The LLM receives a mathematical expression (`content`).
     2. It processes the expression and outputs a thought process (`thinking`).
