@@ -48,6 +48,61 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 * [Quick Start Programming Guide](./guide.md)
 * [More examples](./examples)
 
+## [PPE CLI Command](./guide/cli.md)
+
+`ai` is the shell CLI command to manage the brain(LLM) files and run a PPE agent script mainly.
+
+* Run script file command `ai run`, eg, `ai run -f calculator.ai.yaml "{content: '32+12*53'}"`
+  * `-f` is used to specify the script file.
+  * `{content: '32+12*53'}` is the optional json input to the script.
+  * Scripts will display intermediate echo outputs during processing when streaming output. This can be controlled with `--streamEcho true|line|false`.  To keep the displayed echo outputs, use `--no-consoleClear`.
+  * Script can be single YAML file (`.ai.yaml`) or directory.
+    * Directory must have an entry point script file with the same name as the directory. Other scripts in the directory can call each other.
+* Manage the brain files command `ai brain` include `ai brain download`, `ai brain list/search`.
+* Run `ai help` or `ai help [command]` to get more.
+
+## [Programmable Prompt Engine Language](./guide/lang.md)
+
+Programmable Prompt Engine (PPE) Language is a message-processing language, similar to the YAML format.
+
+PPE is designed to define AI prompt messages and their input/output configurations. It allows for the creation of a reusable and programmable prompt system akin to software engineering practices.
+
+### [I. Core Structure](./guide/core-lang.md)
+
+* Message-Based Dialogue: Defines interactions as a series of messages with roles (system, user, assistant).
+* YAML-Like: Syntax is similar to YAML, making it readable and easy to understand.
+* Dialogue Separation: Uses triple dashes (`---`) or asterisks (`***`) to clearly mark dialogue turns.
+
+### [II. Reusability & Configuration](./guide/lang-reuse.md)
+
+* **Input/Output Configuration (Front-Matter):** Defines input requirements (using `input` keyword) and expected output format (using `output` keyword with JSON Schema).
+* **Prompt Template:** Embeds variables from input configuration or prompt settings into messages using Jinja2 templates (`{{variable_name}}`).
+* **Custom Script Types:** Allows defining reusable script types (`type: type`) for code and configuration inheritance.
+
+### [III. AI Capabilities](./guide/lang-ai.md)
+
+* **Advanced AI Replacement:** Use double brackets (`[[Response]]`) to trigger AI execution, store the response in a variable (`prompt.Response`), and use it within the script.
+* **AI Parameter Control:** Fine-tune AI behavior by passing parameters within double brackets (e.g., `[[Answer:temperature=0.7]]`).
+* **Constrained AI Responses:** Limit AI outputs to a predefined set of options (e.g., `[[FRUITS:|Apple|Banana]]`).
+
+#### [IV. Message Text Formatting](./guide/lang-formatting.md)
+
+The role messages can be formatted using Jinja2 templates and advanced replacement features.
+
+* **Jinja2 Templates:**  Reference variables from input configuration or prompt settings using double curly braces (e.g., `{{name}}`).
+* **Advanced AI Replacement:** As described above, triggers AI execution and stores the response.
+* **External Script Replacement:**  Invoke external scripts using the `@` symbol (e.g., `@say_hi_script(param1=value1)`).
+* **Internal Instruction Replacement:**  Call internal instructions similarly (e.g., `@$instruction(param1=value1)`).
+* **Regular Expression Replacement:** Use `/RegExp/[RegOpts]:Answer[:index_or_group_name]` for pattern-based replacement on the `Answer` variable.
+
+### [V. Script Capabilities](./guide/lang-script.md)
+
+* **Chaining Outputs:** The `->` operator connect script outputs to subsequent instructions or scripts, creating complex workflows.
+* **Instruction Invocation:** The `$` prefix calls script instructions (e.g., `$fn: {param1:value1}`).
+* **Control Flow:** Directives like `$if`, `$pipe`, `$set`, `$get`, `$print`, `$echo` provide control flow mechanisms.
+* **Event-Driven Architecture:** Functions like `$on`, `$once`, `$emit` and `$off` enable event-based programming for flexible script behavior.
+* **JavaScript Extension:** The `!fn` directive allows declaring JavaScript functions to extend script functionality.
+
 ## Install
 
 ```bash
@@ -289,6 +344,13 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 <!-- commands -->
 - [Offline AI PPE CLI(WIP)](#offline-ai-ppe-cliwip)
 - [Quick Start](#quick-start)
+  - [PPE CLI Command](#ppe-cli-command)
+  - [Programmable Prompt Engine Language](#programmable-prompt-engine-language)
+    - [I. Core Structure](#i-core-structure)
+    - [II. Reusability \& Configuration](#ii-reusability--configuration)
+    - [III. AI Capabilities](#iii-ai-capabilities)
+      - [IV. Message Text Formatting](#iv-message-text-formatting)
+    - [V. Script Capabilities](#v-script-capabilities)
   - [Install](#install)
   - [Run](#run)
 - [Usage](#usage)
