@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.9](https://github.com/offline-ai/cli/compare/v0.3.8...v0.3.9) (2024-08-28)
+
+
+### Features
+
+* **example:** add cpp-expert char ([32a58a7](https://github.com/offline-ai/cli/commit/32a58a7c9b39bb5d145c1a52f936731874074e3c))
+* **lib:** abstract more to char ([d05ea53](https://github.com/offline-ai/cli/commit/d05ea537a51d52bf6d55fcb1f17c863b93ea6f2d))
+* **lib:** add get LLM supported langs list ([968ceba](https://github.com/offline-ai/cli/commit/968ceba69be14b26bfeec84ed2b17e70c5df98b9))
+* **lib:** add input WIP ([bba72ab](https://github.com/offline-ai/cli/commit/bba72ab9eb84d1fa1c484e4bfb9b9532c90ddcba))
+
+
+### Bug Fixes
+
+* **lib:** input return result ([3a78768](https://github.com/offline-ai/cli/commit/3a787683158bd2d97aafc74577f43d989259f151))
+* remove mark dialogue starts ([f8bddc4](https://github.com/offline-ai/cli/commit/f8bddc422173ba94f0dcba28bfe0070f7ca8b1c5))
+
 ## [0.3.8](https://github.com/offline-ai/cli/compare/v0.3.7...v0.3.8) (2024-08-25)
 
 ## [0.3.7](https://github.com/offline-ai/cli/compare/v0.3.6...v0.3.7) (2024-08-25)
