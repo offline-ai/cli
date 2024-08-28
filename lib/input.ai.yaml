@@ -1,0 +1,38 @@
+---
+version: 0.1.0
+type: lib
+description: |-
+  This script will wait for user input.
+tag:
+  - user
+  - input
+  - lib
+input:
+  - inputType # The input type: confirm, select, number, list, input, password
+  - question  # the message to show to the user
+  - value     # the initial(default) value of the input
+output:
+  type: 'object'
+  properties:
+    question: {type: 'string'}
+    answer: {type: 'string'}
+---
+- !fn |-
+  toText(value) {
+    if (value == null) {
+      return 'null';
+    }
+
+    if (typeof this.format === 'function') {
+      return this.format(value);
+    }
+    const t = typeof value;
+    switch (t) {
+      case 'boolean':
+        return value ? 'yes' : 'no';
+    }
+    return value
+  }
+- $set:
+    result: $consoleInput
+- $echo: "result.answer"
