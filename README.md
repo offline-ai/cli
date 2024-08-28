@@ -126,7 +126,7 @@ Note:
 
 * All quantification (compression) brain 🧠 models are uploaded by the user by themselves, so it cannot guarantee that these user quantitative (compressed) brain 🧠 models can be used
 * At present, the GGUF quantitative brain 🧠 model has been tens of thousands, and many of them are repeated.
-* `AI Brain List` Display the brain list, which is part of the list filtered by the`featured`. If you want to display all the brain list, use `--no-onlyFeatured` option.
+* `AI Brain List` Display the brain list, which is part of the list filtered by the `featured`. If you want to display all the brain list, use `--no-onlyFeatured` option.
 
 ```bash
 #list the downloaded brain list
@@ -309,7 +309,7 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 * [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
 * [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
 * [`ai plugins update`](#ai-plugins-update)
-* [`ai run [DATA]`](#ai-run-data)
+* [`ai run [FILE] [DATA]`](#ai-run-file-data)
 * [`ai test`](#ai-test)
 * [`ai version`](#ai-version)
 
@@ -549,7 +549,7 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ## `ai brain list [NAME]`
 
-📜 List downloaded or online brains, defaults to downloaded.
+📜 List downloaded or not downloaded brains, defaults to not downloaded.
 
 ```
 USAGE
@@ -560,7 +560,7 @@ ARGUMENTS
   NAME  the brain name to search
 
 FLAGS
-  -a, --all                list all brains(include downloaded and online)
+  -a, --all                list all brains(include downloaded)
   -b, --brainDir=<value>   the brains(LLM) directory
   -c, --config=<value>     the config file
   -d, --downloaded         list downloaded brains
@@ -573,16 +573,13 @@ FLAGS
 
 GLOBAL FLAGS
   --json  Format output as json.
-
-ALIASES
-  $ ai brain search
 ```
 
 _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.6/src/commands/brain/list.ts)_
 
 ## `ai brain refresh`
 
-🔄 refresh online brains.
+🔄 refresh/update online brains index.
 
 ```
 USAGE
@@ -598,16 +595,16 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  🔄 refresh online brains.
+  🔄 refresh/update online brains index.
 
-  refresh brain index from huggingface.co
+  refresh/update brain index from huggingface.co
 ```
 
 _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.6/src/commands/brain/refresh.ts)_
 
 ## `ai brain search [NAME]`
 
-📜 List downloaded or online brains, defaults to downloaded.
+🔍 Search brains offline, defaults to all.
 
 ```
 USAGE
@@ -618,7 +615,7 @@ ARGUMENTS
   NAME  the brain name to search
 
 FLAGS
-  -a, --all                list all brains(include downloaded and online)
+  -a, --[no-]all           list all brains(include downloaded)
   -b, --brainDir=<value>   the brains(LLM) directory
   -c, --config=<value>     the config file
   -d, --downloaded         list downloaded brains
@@ -631,10 +628,9 @@ FLAGS
 
 GLOBAL FLAGS
   --json  Format output as json.
-
-ALIASES
-  $ ai brain search
 ```
+
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.6/src/commands/brain/search.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -644,7 +640,8 @@ ALIASES
 USAGE
   $ ai config [ITEM_NAME] [--json] [-u <value>] [-s <value>...] [-l
     silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m]
-    [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line]
+    [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>] [-e
+    true|false|line]
 
 ARGUMENTS
   ITEM_NAME  the config item name path to get
@@ -652,6 +649,7 @@ ARGUMENTS
 FLAGS
   -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
                                        automatically, eg, en, etc.
+  -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
@@ -699,14 +697,14 @@ _See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli
 
 ## `ai config save [DATA]`
 
-💾 Save the configuration to file.
+💾 Save the current configuration to file which can be used to initialize config.
 
 ```
 USAGE
   $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>]
-    [-e true|false|line]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
+    [-A <value>] [-e true|false|line]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
@@ -714,6 +712,7 @@ ARGUMENTS
 FLAGS
   -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
                                        automatically, eg, en, etc.
+  -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
@@ -1054,23 +1053,25 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.0.19/src/commands/plugins/update.ts)_
 
-## `ai run [DATA]`
+## `ai run [FILE] [DATA]`
 
 💻 Run ai-agent script file.
 
 ```
 USAGE
-  $ ai run [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
-    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>]
-    [-e true|false|line] [--consoleClear]
+  $ ai run [FILE] [DATA] [--json] [-c <value>] [--banner] [-u <value>]
+    [-s <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
+    [-A <value>] [-e true|false|line] [--consoleClear]
 
 ARGUMENTS
+  FILE  the script file path, or the json data when `-f` switch is set
   DATA  the json data which will be passed to the ai-agent script
 
 FLAGS
   -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
                                        automatically, eg, en, etc.
+  -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
@@ -1121,12 +1122,13 @@ _See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugi
 USAGE
   $ ai test [--json] [-c <value>] [--banner] [-u <value>] [-s
     <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>]
-    [-e true|false|line] [--consoleClear]
+    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
+    [-A <value>] [-e true|false|line] [--consoleClear]
 
 FLAGS
   -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
                                        automatically, eg, en, etc.
+  -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
