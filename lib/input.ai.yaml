@@ -3,6 +3,8 @@ version: 0.1.0
 type: lib
 description: |-
   This script will wait for user input.
+  Currently the console input is only supported.
+  Browser input TODO.
 tag:
   - user
   - input
@@ -15,7 +17,7 @@ output:
   type: 'object'
   properties:
     question: {type: 'string'}
-    answer: {type: 'string'}
+    answer: {type: ['string', 'boolean', 'number', 'array', 'object']}
 ---
 - !fn |-
   toText(value) {
@@ -35,4 +37,5 @@ output:
   }
 - $set:
     result: $consoleInput
-- $echo: "result.answer"
+# - $print: ?=result
+- $echo: ?=result.answer
