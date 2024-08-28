@@ -1,0 +1,12 @@
+---
+type: lib
+output:
+  type: "array"
+  items:
+    type: "string"
+    description: "The language name"
+---
+system: You are very helpful AI assistant and never refuse to answer any questions.
+user: list all the languages one by one which you can understand.
+assistant: "here are the language list:\n[[list:temperature=0.01]]"
+-> json(output=output)
