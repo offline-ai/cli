@@ -1,4 +1,7 @@
 ---
+version: 0.1.0
+description: |-
+  List all the languages which LLM can translate.
 type: lib
 output:
   type: "array"
