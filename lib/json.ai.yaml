@@ -1,6 +1,6 @@
 ---
 # Below are the front-matter configuration
-version: 0.1.0
+version: 0.1.1
 type: lib
 description: |-
   Extract the `content` as JSON according to the JSON Schema specified in `output`.
@@ -33,6 +33,7 @@ input:
   - content # The content to extract
   - output  # JSON Schema
 parameters:
+  temperature: 0.01
   # force output to json object
   response_format:
     type: "json_object"
@@ -67,7 +68,7 @@ output:
 ---
 # Below are the prompts script
 system: |-
-  Extract THE CONTENT input by the user as a JSON object according to THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS specified by the user:
+  Accurately Extract THE CONTENT input by the user as a JSON object according to THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS specified by the user:
 user: |-
   THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS:
   {{output}}
