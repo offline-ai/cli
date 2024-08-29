@@ -20,29 +20,34 @@ tag:
   - prompt
   - lib
 input:
-  - content                  # The content to titleify
+  - content                  # The content to titleify or treat as user input
   - file                     # The text file path if exists, it will load content from the file
   - len: {type: "number"}    # the optional max length of the title. It is not precise, just an approximate number.
+  - temperature               # the optional temperature of the LLM.
 output:
   type: "string"
 len: -1                      # the default max length of the title, -1 means no limit
+temperature: 0.01             # the default temperature of the LLM.
 ---
 - $if: "this.file"
   then:
     $set:
-      content: "@file({{file}})"
+      fileContent: "@file({{file}})"
 - system: |-
     Summarize the content provided by the user into some best titles that captures the essence of the document.
     {%- if len and len > 0 -%}
     Keep the title within {{len}} characters.
-    {%- endif -%}
+    {% endif %}
+    {{fileContent}}
 ---
-- $if: "this.content"
+- $if: "this.content || this.fileContent"
   then:
     # API mode
-    - user: "{{content}}"
+    - $if: "this.content"
+      then:
+        user: "{{content}}"
     # get some titles
-    - assistant: "[[titles:max_tokens=len]]"
+    - assistant: "[[titles:max_tokens=len, temperature]]"
     - ---
     - user: "Titles:\n{{titles}}\nWhich title is the best title? Why?"
     # choose the best one
