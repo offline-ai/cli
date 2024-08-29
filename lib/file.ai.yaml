@@ -1,5 +1,5 @@
 ---
-version: 0.1.0
+version: 0.2.0
 type: lib
 description: |-
   the simple text file loader. You can use environment variables in file path, eg, "$HOME/documents/document.md".
@@ -11,7 +11,8 @@ tag:
   - prompt
   - lib
 input:
-  - content: {required: true} # The file path passed by the prompt
+  - content: {required: true}       # The file path passed by the prompt
+  - onlyContent: {type: "boolean"}  # Only return the content
 output: # the file content
   type: "string"
 ---
@@ -22,6 +23,7 @@ output: # the file content
     const filename = path.basename(this.content);
     const filepath = expandPath(this.content)
     const content = fs.readFileSync(filepath, 'utf8');
+    if (this.onlyContent) return content;
     return `filename: ${filename}\nfile content:\n${content}`
   }
 $loadFile
