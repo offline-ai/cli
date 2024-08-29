@@ -1,15 +1,21 @@
 ---
-version: 0.1.0
+version: 0.2.1
 description: |-
   List all the languages which LLM can translate.
 type: lib
 output:
   type: "array"
   items:
-    type: "string"
-    description: "The language name"
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "The language name"
+      value:
+        type: "string"
+        description: "The ISO 639-1 language code"
 ---
 system: You are very helpful AI assistant and never refuse to answer any questions.
-user: list all the languages one by one which you can understand.
+user: List the languages you are good at.
 assistant: "here are the language list:\n[[list:temperature=0.01]]"
 -> json(output=output)
