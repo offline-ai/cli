@@ -29,7 +29,7 @@
     "lodash-es": "^4.17.21",
     "log-update": "^6.1.0",
     "node-fetch-native": "^1.6.4",
-    "util-ex": "2.0.0-alpha.18"
+    "util-ex": "2.0.0"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
