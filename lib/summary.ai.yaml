@@ -19,7 +19,7 @@ tag:
   - prompt
   - lib
 input:
-  - content                   # The content to summarize or user input
+  - content                   # The content to summarize or treat as user input
   - file                      # The text file path if exists, it will load content from the file
   - len: {type: "number"}     # the optional max length of the summary, It is not precise, just an approximate number.
   - temperature               # the optional temperature of the LLM.
