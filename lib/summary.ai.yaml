@@ -1,5 +1,5 @@
 ---
-version: 0.1.0
+version: 0.2.0
 type: lib
 description: |-
   Summarize the content or a text file in detail, capturing the key points and essence of the document.
@@ -19,28 +19,33 @@ tag:
   - prompt
   - lib
 input:
-  - content                  # The content to summarize
-  - file                     # The text file path if exists, it will load content from the file
-  - len: {type: "number"}    # the optional max length of the summary, It is not precise, just an approximate number.
-len: -1                      # the default max length of the summary, -1 means no limit
+  - content                   # The content to summarize or user input
+  - file                      # The text file path if exists, it will load content from the file
+  - len: {type: "number"}     # the optional max length of the summary, It is not precise, just an approximate number.
+  - temperature               # the optional temperature of the LLM.
+len: -1                       # the default max length of the summary, -1 means no limit
+temperature: 0.01             # the default temperature of the LLM.
 output:
   type: "string"
 ---
 - $if: "this.file"
   then:
     $set:
-      content: "@file({{file}})"
+      fileContent: "@file({{file}})"
 - system: |-
-    Summarize the following content or file provided by the user in detail, capturing the key points and essence of the document.
+    Summarize the following content or file provided by the user in detail, capturing the key points and essence of it.
     {%- if len and len > 0 -%}
     Keep the summary within {{len}} characters.
-    {%- endif -%}
+    {% endif %}
+    {{fileContent}}
 ---
-- $if: "this.content"
+- $if: "this.content || this.fileContent"
   then:
     # API mode
-    - user: "{{content}}"
-    - assistant: "[[summary:max_tokens=len]]"
+    - $if: "this.content"
+      then:
+        user: "{{content}}"
+    - assistant: "[[summary:max_tokens=len, temperature=temperature]]"
   else:
     # For multi-turn conversation in interactive mode.
     - assistant: "What's the content you want to summarize?"
