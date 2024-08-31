@@ -1,5 +1,5 @@
 ---
-version: 0.2.0
+version: 0.2.1
 type: lib
 description: |-
   Summarize the content or a text file in detail, capturing the key points and essence of the document.
@@ -34,9 +34,10 @@ output:
       fileContent: "@file({{file}})"
 - system: |-
     Summarize the following content or file provided by the user in detail, capturing the key points and essence of it.
-    {%- if len and len > 0 -%}
+    {% if len and len > 0 %}
     Keep the summary within {{len}} characters.
     {% endif %}
+    ---
     {{fileContent}}
 ---
 - $if: "this.content || this.fileContent"
