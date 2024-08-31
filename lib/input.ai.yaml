@@ -11,7 +11,7 @@ tag:
   - lib
 input:
   - inputType # The input type: confirm, select, number, list, input, password
-  - question  # the message to show to the user
+  - content   # the message to show to the user
   - value     # the initial(default) value of the input
 output:
   type: 'object'
