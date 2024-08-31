@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.0](https://github.com/offline-ai/cli/compare/v0.3.9...v0.4.0) (2024-08-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* add guide as AI App
+
+### Features
+
+* **lib:** add onlyContent to load file lib ([2fa68ef](https://github.com/offline-ai/cli/commit/2fa68ef3498ca56b4df075bbd86f04138e2ee495))
+* **lib:** add terms option ([714e06c](https://github.com/offline-ai/cli/commit/714e06cc8fe909e4518e9801ba8f45d84a925655))
+* **lib:** pass file path by position argument ([083cc51](https://github.com/offline-ai/cli/commit/083cc51e537fbc8306db2a71c594cb8a211ce2ee))
+* **lib:** support_langs output as {name=lang, value=iso6391} array now ([56bdd5c](https://github.com/offline-ai/cli/commit/56bdd5cb7ff57df2b6b71707560785a5042cb445))
+
+
+### Bug Fixes
+
+* **lib:** add sep from file ([f4202ca](https://github.com/offline-ai/cli/commit/f4202ca2b80a44f1f5754ef9df3a0f344ff72814))
+* **lib:** inc short content length ([6b0d6a7](https://github.com/offline-ai/cli/commit/6b0d6a73647e25a57abb8213f5988c55b04adee0))
+* **lib:** sometimes LLM not extract content accurately ([67b2476](https://github.com/offline-ai/cli/commit/67b247640067f9339be9befa0b7774a0e83bfc42))
+
+
+### Refactor
+
+* add guide as AI App ([c0d0e0b](https://github.com/offline-ai/cli/commit/c0d0e0b75c07168447e5a1eb267c656e48ab24b1))
+
 ## [0.3.9](https://github.com/offline-ai/cli/compare/v0.3.8...v0.3.9) (2024-08-28)
 
 
