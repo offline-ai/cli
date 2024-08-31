@@ -1,6 +1,6 @@
 # [Programmable Prompt Engine Language](./lang.md)
 
-Programmable Prompt Engine (PPE) Language is a message-processing language, similar to the YAML format.
+Programmable Prompt Engine(PPE) Language is a message-processing language, similar to the YAML format.
 
 PPE is designed to define AI prompt messages and their input/output configurations. It allows for the creation of a reusable and programmable prompt system akin to software engineering practices.
 

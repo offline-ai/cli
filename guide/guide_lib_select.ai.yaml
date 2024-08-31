@@ -1,0 +1,29 @@
+---
+version: 0.0.1
+type: lib
+description: |-
+  select a file from a dir for the AI Guide
+input:
+  - dir: {type: ['string', 'array']}
+  - extname: {type: ['string', 'array']}
+output:
+  type: 'string'
+instruction: |-
+  - Summary the key points and essence of it
+  - Extract all links with title and description base on the markdown links from it
+dir: "../examples"
+extname: ".ai.yaml"
+---
+# - system: |-
+#     - Summarize the following file provided by the user in detail, capturing the key points and essence of it.
+#     - Extract all links with title and description base on the markdown links in the file
+#     - Output JSON format, following the JSON schema:
+#     {{output}}
+#     ---
+#     @file({{__dirname + file}})
+# - user: Output all urls with title in markdown format from the README.md
+# - assistant: "[[urls:temperature=0.01]]"
+# - -> summary(file={{__dirname + file}}, content)
+- -> summary(file={{__dirname + file}}, content=instruction) -> json(output=output)
+# - $|echo: ["summary", "links[0]"]
+

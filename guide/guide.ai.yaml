@@ -1,0 +1,48 @@
+---
+version: 0.0.1
+name: "Guide"
+description: |-
+  The AI guide for the PPE examples and lib scripts.
+autoRunLLMIfPromptAvailable: false
+Welcome: |-
+  I am an AI guide instructor, I will guide you to use Programmable Prompt Engine(PPE) scripts.
+IsServerRunning: Please make sure the brain(LLM) server has been started. Are you sure it's running?
+---
+- !fn# |-
+  function lang(iso6391) {
+    return this.languages.find(l => l.value === iso6391)?.name
+  }
+- !fn |-
+  async function toChoices({files}) {
+    let result = files.map(f => ({name: f.title, value: f.filepath}))
+    const target = this.$lang(this.preferLang)
+    if (this.preferLang !== 'en') {
+      for (let i = 0; i < result.length; i++) {
+        const item = result[i]
+        const trans = await this.$translate({content: item.name, target, lang: 'English'})
+        item.name = trans.split('\n')[0].trim()
+      }
+    }
+    result.push({name: await this.$translate({content: 'Exit', target, lang: 'English'}), value: 'quit'})
+    return result
+  }
+- $if: "!this.preferLang"
+  then:
+    - $if: "@input(inputType='confirm', content={{Welcome+'\n'+IsServerRunning}}, value=true, format=(answer) => answer ? 'Yes' : 'No')"
+      then:
+        - $set:
+          languages: "@support_langs"
+        - $set:
+          preferLang: "@input(inputType='AutoComplete', content='Which language do you prefer?', choices=languages, limit=10)"
+        - $if: "preferLang !== 'en'"
+          then:
+            # - $set:
+            #   ENV.USER_ENV.userPreferredLanguage: ?=preferLang
+            - $set:
+              GiveMeGoodBrain: "#I would translate content to {{preferLang | lang}} automatically. \\nBut remember an expert should have a good brain(LLM)."
+            - -> translator(content=GiveMeGoodBrain, target=preferLang) -> $print
+            - -> guide_lib_list(file="README.md") -> $set('catalog', content)
+            - $echo:  ?=catalog.summary
+            # Choose a topic
+            - -> translator(content=content+"\nPlease select what you want to know:", target=preferLang) -> $set('question')
+            - -> $toChoices(files=catalog.files) -> input(inputType='AutoComplete', content=question, choices=result, limit=10, memoized=false) -> guide_lib_explain(file=content, lang=preferLang)

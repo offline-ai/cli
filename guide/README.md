@@ -1,8 +1,8 @@
-# Programmable Prompt Engine (PPE) Agent Script Guide
+# Programmable Prompt Engine (PPE) Script Guide
 
-## [PPE CLI Command](./cli.md)
+## [Programmable Prompt Engine(PPE) CLI Command](./cli.md)
 
-`ai` is the shell CLI command to manage the brain(LLM) files and run a PPE agent script mainly.
+`ai` is the shell CLI command to manage the brain(LLM) files and run a PPE script mainly.
 
 * Run script file command `ai run`, eg, `ai run -f calculator.ai.yaml "{content: '32+12*53'}"`
   * `-f` is used to specify the script file.
@@ -19,25 +19,25 @@ Programmable Prompt Engine (PPE) Language is a message-processing language, simi
 
 PPE is designed to define AI prompt messages and their input/output configurations. It allows for the creation of a reusable and programmable prompt system akin to software engineering practices.
 
-### [I. Core Structure](./core-lang.md)
+### [Programmable Prompt Engine Language - Core Structure](./core-lang.md)
 
 * Message-Based Dialogue: Defines interactions as a series of messages with roles (system, user, assistant).
 * YAML-Like: Syntax is similar to YAML, making it readable and easy to understand.
 * Dialogue Separation: Uses triple dashes (`---`) or asterisks (`***`) to clearly mark dialogue turns.
 
-### [II. Reusability & Configuration](./lang-reuse.md)
+### [Programmable Prompt Engine Language - Reusability & Configuration](./lang-reuse.md)
 
 * **Input/Output Configuration (Front-Matter):** Defines input requirements (using `input` keyword) and expected output format (using `output` keyword with JSON Schema).
 * **Prompt Template:** Embeds variables from input configuration or prompt settings into messages using Jinja2 templates (`{{variable_name}}`).
 * **Custom Script Types:** Allows defining reusable script types (`type: type`) for code and configuration inheritance.
 
-### [III. AI Capabilities](./lang-ai.md)
+### [Programmable Prompt Engine Language - AI Capabilities](./lang-ai.md)
 
 * **Advanced AI Replacement:** Use double brackets (`[[Response]]`) to trigger AI execution, store the response in a variable (`prompt.Response`), and use it within the script.
 * **AI Parameter Control:** Fine-tune AI behavior by passing parameters within double brackets (e.g., `[[Answer:temperature=0.7]]`).
 * **Constrained AI Responses:** Limit AI outputs to a predefined set of options (e.g., `[[FRUITS:|Apple|Banana]]`).
 
-#### [IV. Message Text Formatting](./lang-formatting.md)
+#### [Programmable Prompt Engine Language - Message Text Formatting](./lang-formatting.md)
 
 The role messages can be formatted using Jinja2 templates and advanced replacement features.
 
@@ -47,7 +47,7 @@ The role messages can be formatted using Jinja2 templates and advanced replaceme
 * **Internal Instruction Replacement:**  Call internal instructions similarly (e.g., `@$instruction(param1=value1)`).
 * **Regular Expression Replacement:** Use `/RegExp/[RegOpts]:Answer[:index_or_group_name]` for pattern-based replacement on the `Answer` variable.
 
-### [V. Script Capabilities](./lang-script.md)
+### [V. Programmable Prompt Engine Language Script Capabilities](./lang-script.md)
 
 * **Chaining Outputs:** The `->` operator connect script outputs to subsequent instructions or scripts, creating complex workflows.
 * **Instruction Invocation:** The `$` prefix calls script instructions (e.g., `$fn: {param1:value1}`).
@@ -61,7 +61,9 @@ The role messages can be formatted using Jinja2 templates and advanced replaceme
 * **Auto LLM Execution:** If a script contains prompt messages (`system`, `user`) and the LLM (`$AI`) hasn't been invoked, PPE will automatically call the LLM at the end.
 * **Final Instruction Output:** The output of the last instruction in a script determines the script's final return value.
 
-## Examples
+## [Examples Code Analysis](../examples/)
+
+A series of examples are provided in the `examples` directory for the language learning.
 
 `calculator.ai.yaml`:
 
@@ -89,3 +91,7 @@ Run it:
 ai run -f calculator.ai.yaml "{content: '32+12*53'}"
 668
 ```
+
+## [Built-in Libraries Code Analysis](../lib/)
+
+PPE provides a series of built-in libraries in the `lib` directory for common tasks. These libraries can also be regarded as code examples of the language.

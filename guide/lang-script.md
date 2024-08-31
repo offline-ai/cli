@@ -1,6 +1,6 @@
-# Programmable Prompt Engine Language Script Capabilities
+# Programmable Prompt Engine(PPE) Language Script Capabilities
 
-Programmable Prompt Engine (PPE) Language is a message-processing language, similar to the YAML format.
+Programmable Prompt Engine(PPE) Language is a message-processing language, similar to the YAML format.
 
 PPE is designed to define AI prompt messages and their input/output configurations. It allows for the creation of a reusable and programmable prompt system akin to software engineering practices.
 
@@ -60,7 +60,7 @@ assistant: "[[JOKE]]"
 
 ### Script File and Directory
 
-An agent script can be a single file or an entire directory. If it is a file, the filename must end with `.ai.yaml`. If it's a directory, it must contain a script file with the same name as the directory to serve as the entry point. Additionally, other script files within the same directory can call each other.
+A PPE script can be a single file or an entire directory. If it is a file, the filename must end with `.ai.yaml`. If it's a directory, it must contain a script file with the same name as the directory to serve as the entry point. Additionally, other script files within the same directory can call each other.
 
 For example, if there is a directory named `a-dir`, the entry point script file should be named `a-dir/a-dir.ai.yaml`.
 

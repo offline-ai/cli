@@ -1,0 +1,13 @@
+---
+version: 0.0.1
+description: |-
+  The AI Guide Catalog
+input:
+  - lang
+---
+- -> guide_lib_list(file="README.md")
+# save the catalog into `catalog` variable
+- $|set:  catalog
+- $echo:  ?=catalog.summary
+# -> translator(target=lang)
+# - "$print": "?='\\n🚀 ~ 🚀 ~ 🚀 ~ Hello: ' + catalog.summary"

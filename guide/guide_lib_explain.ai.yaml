@@ -1,0 +1,29 @@
+---
+version: 0.0.1
+type: instructor
+name: instructor
+description: |-
+  Explain a file in the guide.
+input:
+  - file
+  - lang  # the target language
+file: "README.md"
+---
+- $if: "this.file === 'quit'"
+  then:
+    - user: "Thank you."
+    - assistant: "Good bye. It was a pleasure speaking with you. About the Programmable Prompt Engine(PPE) Language[[bye]]"
+    - -> trans(lang, content=messages[messages.length-1].content) -> $ret
+- $if: "this.file !== 'README.md'"
+  then:
+    - user: |-
+        @file({{__dirname+file}})
+        ---
+        Summarize the content in detail, capturing the key points and essence of it.
+    - assistant: "[[summary:temperature=0.01]]"
+    - -> trans(lang) -> $print(content)
+    - -> translator(content="\nDo you have any questions?", target=lang) -> $set('question')
+    - $if: "@input(inputType='confirm', content=question, memoized=false)"
+      then:
+        - -> translator(content="What do you want to know?", target=lang) -> input(memoized=false)
+    - $echo: "@guide"

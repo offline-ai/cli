@@ -77,7 +77,7 @@ cd build/bin
 ./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/your-brain-model.gguf
 ```
 
-Now you can run your AI agent script:
+Now you can run your AI script:
 
 ```bash
 #you can config the search agent paths in `agentDirs` config or add `-s your_search_path` to argument .
@@ -154,7 +154,7 @@ EXAMPLES
 
 ### `ai brain`
 
-🧠 The AI Agent Brains(LLM) Manager.
+🧠 The AI Brains(LLM) Manager.
 
 ```
 USAGE
@@ -178,10 +178,10 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  🧠 The AI Agent Brains(LLM) Manager.
+  🧠 The AI Brains(LLM) Manager.
 
 
-  Manage AI Agent brains 🧠 here.
+  Manage AI brains 🧠 here.
   📜 List downloaded or online brains
   🔎 search for brains
   📥 download brains
@@ -197,7 +197,7 @@ EXAMPLES
 
 ## `ai brain download [NAME]`
 
-🧠 The AI Agent Brains(LLM) Downloader.
+🧠 The AI Brains(LLM) Downloader.
 
 ```
 USAGE
@@ -224,7 +224,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  🧠 The AI Agent Brains(LLM) Downloader.
+  🧠 The AI Brains(LLM) Downloader.
 
 
   📥 download 🧠 brains to brainDir.

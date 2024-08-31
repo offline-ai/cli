@@ -1,0 +1,45 @@
+---
+version: 0.0.1
+type: lib
+description: |-
+  List all urls for the AI Guide
+input:
+  - file
+output:
+  type: 'object'
+  properties:
+    summary:
+      type: 'string'
+      description: extract the summary part from the content.
+    files:
+      type: 'array'
+      items:
+        type: 'object'
+        properties:
+          filepath:
+            type: 'string'
+            description: the file path from the markdown link.
+          title:
+            type: 'string'
+            description: the title from markdown link
+          description:
+            type: 'string'
+            description: the description for the link
+instruction: |-
+  - Summary the key points and essence of it
+  - Extract all links with title and description base on the markdown links from it
+file: "README.md"
+---
+# - system: |-
+#     - Summarize the following file provided by the user in detail, capturing the key points and essence of it.
+#     - Extract all links with title and description base on the markdown links in the file
+#     - Output JSON format, following the JSON schema:
+#     {{output}}
+#     ---
+#     @file({{__dirname + file}})
+# - user: Output all urls with title in markdown format from the README.md
+# - assistant: "[[urls:temperature=0.01]]"
+# - -> summary(file={{__dirname + file}}, content)
+- -> summary(file={{__dirname + file}}, content=instruction) -> json(output=output)
+# - $|echo: ["summary", "links[0]"]
+

@@ -164,7 +164,7 @@ $ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@offline-ai/cli/0.3.8 linux-x64 node-v20.14.0
+@offline-ai/cli/0.3.9 linux-x64 node-v20.14.0
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -394,7 +394,7 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.3.8/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.3.9/src/commands/agent/index.ts)_
 
 ## `ai autocomplete [SHELL]`
 
@@ -429,7 +429,7 @@ _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomp
 
 ## `ai brain [NAME]`
 
-🧠 The AI Agent Brains(LLM) Manager.
+🧠 The AI Brains(LLM) Manager.
 
 ```
 USAGE
@@ -453,10 +453,10 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  🧠 The AI Agent Brains(LLM) Manager.
+  🧠 The AI Brains(LLM) Manager.
 
 
-  Manage AI Agent brains 🧠 here.
+  Manage AI brains 🧠 here.
   📜 List downloaded or online brains
   🔎 search for brains
   📥 download brains
@@ -473,7 +473,7 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ## `ai brain dn [NAME]`
 
-🧠 The AI Agent Brains(LLM) Downloader.
+🧠 The AI Brains(LLM) Downloader.
 
 ```
 USAGE
@@ -500,7 +500,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  🧠 The AI Agent Brains(LLM) Downloader.
+  🧠 The AI Brains(LLM) Downloader.
 
 
   📥 download 🧠 brains to brainDir.
@@ -516,7 +516,7 @@ EXAMPLES
 
 ## `ai brain down [NAME]`
 
-🧠 The AI Agent Brains(LLM) Downloader.
+🧠 The AI Brains(LLM) Downloader.
 
 ```
 USAGE
@@ -543,7 +543,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  🧠 The AI Agent Brains(LLM) Downloader.
+  🧠 The AI Brains(LLM) Downloader.
 
 
   📥 download 🧠 brains to brainDir.
@@ -559,7 +559,7 @@ EXAMPLES
 
 ## `ai brain download [NAME]`
 
-🧠 The AI Agent Brains(LLM) Downloader.
+🧠 The AI Brains(LLM) Downloader.
 
 ```
 USAGE
@@ -586,7 +586,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  🧠 The AI Agent Brains(LLM) Downloader.
+  🧠 The AI Brains(LLM) Downloader.
 
 
   📥 download 🧠 brains to brainDir.
@@ -1171,7 +1171,7 @@ _See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugi
 
 ## `ai test`
 
-🔬 Run simple ai-agent fixtures to test(draft).
+🔬 Run simple AI fixtures to test(draft).
 
 ```
 USAGE
@@ -1192,7 +1192,7 @@ FLAGS
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
   -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
                                        <options: true|false|line>
-  -f, --script=<value>                 the ai-agent fixture file path
+  -f, --script=<value>                 the AI fixture file path
   -h, --histories=<value>              the chat histories folder to record
   -i, --[no-]interactive               interactive mode
   -k, --backupChat                     whether to backup chat history before start, defaults to false
@@ -1215,9 +1215,9 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  🔬 Run simple ai-agent fixtures to test(draft).
+  🔬 Run simple AI fixtures to test(draft).
 
-  Execute fixtures file to test ai-agent script file and check result.
+  Execute fixtures file to test AI script file and check result.
 
 EXAMPLES
   $ ai test -f ./fixture.yaml -l info

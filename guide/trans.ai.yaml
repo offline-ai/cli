@@ -1,0 +1,18 @@
+---
+version: 0.0.1
+type: lib
+description: |-
+  translate the English content to the language if the language is not English.
+input:
+  - lang    # the target language(iso6391 code)
+  - content # the English content to translate
+lang: en
+content: "This is a test."
+---
+- $if: "lang !== 'en'"
+  then:
+    - $set:
+        lang: "$getLanguageFromIso6391(lang)"
+    - $echo: "@translator(content=content, terms='- PPE: Programmable Prompt Engine', lang='English', target=lang)"
+  else:
+    - $echo: ?=content
