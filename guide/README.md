@@ -19,7 +19,7 @@ Programmable Prompt Engine (PPE) Language is a message-processing language, simi
 
 PPE is designed to define AI prompt messages and their input/output configurations. It allows for the creation of a reusable and programmable prompt system akin to software engineering practices.
 
-### [Programmable Prompt Engine Language - Core Structure](./core-lang.md)
+### [Programmable Prompt Engine Language - Core Structure](./lang-core.md)
 
 * Message-Based Dialogue: Defines interactions as a series of messages with roles (system, user, assistant).
 * YAML-Like: Syntax is similar to YAML, making it readable and easy to understand.
