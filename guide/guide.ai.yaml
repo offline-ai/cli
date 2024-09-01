@@ -30,10 +30,13 @@ IsServerRunning: Please make sure the brain(LLM) server has been started. Are yo
   }
 - $if: "@input(inputType='confirm', content={{Welcome+'\n'+IsServerRunning}}, value=true, format=(answer) => answer ? 'Yes' : 'No')"
   then:
+    # call support_langs to get the supported languages from LLM and assign it to the languages variable.
     - $set:
       languages: "@support_langs"
     - $set:
+      # call input to get the preferLang from user and assign it to the preferLang variable.
       preferLang: "@input(inputType='AutoComplete', content='Which language do you prefer?', choices=languages, limit=10)"
+      # `#` prefix means format the template string immediately and assign it to the variable.
       GiveMeGoodBrain: "#I would translate content to {{preferLang | lang}} automatically. \\nBut remember an expert should have a good brain(LLM)."
     - $if: "preferLang !== 'en'"
       then:
@@ -43,8 +46,12 @@ IsServerRunning: Please make sure the brain(LLM) server has been started. Are yo
       else:
         - -> $echo(content=GiveMeGoodBrain)
     - -> $print
+    # call guide_lib_list to get the catalog from the README.md and assign it to the catalog variable.
     - -> guide_lib_list(file="README.md") -> $set('catalog', content)
-    - $echo:  ?=catalog.summary
-    # Choose a topic
+    # echo the catalog summary as the latest content
+    - $echo: ?=catalog.summary
+    # call translator to translate the content to the preferLang and assign it to the question variable.
     - -> translator(content=content+"\nPlease select what you want to know:", target=preferLang) -> $set('question')
-    - -> $toChoices(files=catalog.files) -> input(inputType='AutoComplete', content=question, choices=result, limit=10, memoized=false) -> guide_lib_explain(file=content, lang=preferLang)
+    # call user-defined js instruction `toChoices` to get the choices from the catalog and pass it the the `choices` argument of the input.
+    # the input will list the catalog as the choices. The user can select the file to explain.
+    - -> $toChoices(files=catalog.files) -> input(inputType='AutoComplete', content=question, choices=content, limit=10, memoized=false) -> guide_lib_explain(file=content, lang=preferLang)
