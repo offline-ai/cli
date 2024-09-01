@@ -47,7 +47,7 @@ The role messages can be formatted using Jinja2 templates and advanced replaceme
 * **Internal Instruction Replacement:**  Call internal instructions similarly (e.g., `@$instruction(param1=value1)`).
 * **Regular Expression Replacement:** Use `/RegExp/[RegOpts]:Answer[:index_or_group_name]` for pattern-based replacement on the `Answer` variable.
 
-### [V. Programmable Prompt Engine Language Script Capabilities](./lang-script.md)
+### [Programmable Prompt Engine Language - Script Capabilities](./lang-script.md)
 
 * **Chaining Outputs:** The `->` operator connect script outputs to subsequent instructions or scripts, creating complex workflows.
 * **Instruction Invocation:** The `$` prefix calls script instructions (e.g., `$fn: {param1:value1}`).
