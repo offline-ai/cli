@@ -23,9 +23,13 @@ file: "README.md"
         Summarize the content in detail, capturing the key points and essence of it.
     - assistant: "[[summary:temperature=0.01]]"
     - -> trans(lang) -> $print(content)
-    - -> translator(content="\nDo you have any questions?", target=lang) -> $set('question')
-    - $if: "@input(inputType='confirm', content=question, memoized=false)"
+    - -> titleify(content=summary) -> trans(lang) -> $set('title')
+    - -> trans(content="\nDo you have any questions", lang) -> $set('question')
+    - $if: "@input(inputType='confirm', content=question + ' ' + title, memoized=false, format=(answer) => answer ? 'Yes' : 'No')"
       then:
-        - -> translator(content="What do you want to know?", target=lang) -> input(memoized=false)
+        - -> translator(content="What do you want to know?", target=lang) -> input(memoized=false) -> $set('question') -> $print()
+        - user: "{{question}}"
+        - assistant: "Let me explain it more clearly: [[answer:temperature=0.01]]"
+        - -> trans(lang) -> $print(content)
     # call guide.ai.yaml lib to return main entry point
     - $echo: "@guide"
