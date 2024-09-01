@@ -12,7 +12,8 @@ file: "README.md"
 - $if: "this.file === 'quit'"
   then:
     - user: "Thank you."
-    - assistant: "Good bye. It was a pleasure speaking with you. About the Programmable Prompt Engine(PPE) Language[[bye]]"
+    - assistant: "[[Bye:|Good bye|Bye|Bye-bye:random]]. [[Greeting:|It was a pleasure speaking with you|Have a nice day|Have a wonderful day:random]]. About the Programmable Prompt Engine(PPE) Language[[info]]"
+    # - -> $print(content=messages[messages.length-1].content)
     - -> trans(lang, content=messages[messages.length-1].content) -> $ret
 - $if: "this.file !== 'README.md'"
   then:
@@ -26,4 +27,5 @@ file: "README.md"
     - $if: "@input(inputType='confirm', content=question, memoized=false)"
       then:
         - -> translator(content="What do you want to know?", target=lang) -> input(memoized=false)
+    # call guide.ai.yaml lib to return main entry point
     - $echo: "@guide"
