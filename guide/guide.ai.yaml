@@ -37,12 +37,13 @@ IsServerRunning: Please make sure the brain(LLM) server has been started. Are yo
       # call input to get the preferLang from user and assign it to the preferLang variable.
       preferLang: "@input(inputType='AutoComplete', content='Which language do you prefer?', choices=languages, limit=10)"
       # `#` prefix means format the template string immediately and assign it to the variable.
-      GiveMeGoodBrain: "#I would translate content to {{preferLang | lang}} automatically. \\nBut remember an expert should have a good brain(LLM)."
+      GiveMeGoodBrain: "\\n[Start Guide]An expert should have a good brain(LLM)."
     - $if: "preferLang !== 'en'"
       then:
         # - $set:
         #   ENV.USER_ENV.userPreferredLanguage: ?=preferLang
-        - -> translator(content=GiveMeGoodBrain, target=preferLang)
+        - $echo: "#I will translate the content to {{preferLang | lang}} automatically.\n"
+        - -> translator(content=content+GiveMeGoodBrain, target=preferLang)
       else:
         - -> $echo(content=GiveMeGoodBrain)
     - -> $print
