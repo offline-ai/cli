@@ -2,6 +2,8 @@
 parameters:
   response_format:
     type: "json"
+input:
+  - content
 output:
   type: "object"
   properties:
