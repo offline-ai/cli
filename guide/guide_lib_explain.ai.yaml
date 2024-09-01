@@ -15,4 +15,4 @@ autoRunLLMIfPromptAvailable: false
 - $if: "this.$isDir(__dirname+this.file)"
   then:
     -> guide_lib_select(dir=file) -> $set('file')
-- -> guide_lib_explain_file(file=file, lang=lang)
+- -> guide_lib_explain_file(file=file, lang=lang, memoized=false)
