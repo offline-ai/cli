@@ -1,5 +1,5 @@
 ---
-version: 0.1.0
+version: 0.1.1
 type: lib
 description: |-
   Summarize the content or a text file into a single best title that captures the essence of the document.
@@ -54,7 +54,7 @@ temperature: 0.01             # the default temperature of the LLM.
     - assistant: "[[titleInfo]]"
     - ---
     # output the best title
-    - user: "{{titleInfo}}\nOutput the title only"
+    - user: "{{titleInfo}}\nOutput one title only"
     - assistant: "[[title]]"
   else:
     # For multi-turn conversation in interactive mode.
