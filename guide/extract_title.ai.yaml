@@ -1,0 +1,17 @@
+---
+input:
+  - content                  # The content to titleify
+  - len: {type: "number"}    # the optional max length of the title. It is not precise, just an approximate number.
+  - temperature              # the optional temperature of the LLM.
+len: -1                      # the default max length of the title, -1 means no limit
+temperature: 0.01            # the default temperature of the LLM.
+---
+- system: |-
+    Extract the title from the markdown content provided by the user.
+    {%- if len and len > 0 -%}
+    Keep the title within {{len}} characters.
+    {% endif %}
+    Output the title ONLY. DO NOT EXPLAIN.
+- user: |-
+    {{content}}
+- assistant: "[[titles:max_tokens=len, temperature]]"
