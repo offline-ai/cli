@@ -2,7 +2,7 @@
 version: 0.0.1
 name: "Guide"
 description: |-
-  The AI guide for the PPE examples and lib scripts.
+  The AI guide main entry for the PPE examples and lib scripts.
 autoRunLLMIfPromptAvailable: false
 Welcome: |-
   I am an AI guide instructor, I will guide you to use Programmable Prompt Engine(PPE) scripts.
@@ -22,27 +22,29 @@ IsServerRunning: Please make sure the brain(LLM) server has been started. Are yo
         const trans = await this.$translate({content: item.name, target, lang: 'English'})
         item.name = trans.split('\n')[0].trim()
       }
+      result.push({name: await this.$translate({content: 'Exit', target, lang: 'English'}), value: 'quit'})
+    } else {
+      result.push({name: 'Exit', value: 'quit'})
     }
-    result.push({name: await this.$translate({content: 'Exit', target, lang: 'English'}), value: 'quit'})
     return result
   }
-- $if: "!this.preferLang"
+- $if: "@input(inputType='confirm', content={{Welcome+'\n'+IsServerRunning}}, value=true, format=(answer) => answer ? 'Yes' : 'No')"
   then:
-    - $if: "@input(inputType='confirm', content={{Welcome+'\n'+IsServerRunning}}, value=true, format=(answer) => answer ? 'Yes' : 'No')"
+    - $set:
+      languages: "@support_langs"
+    - $set:
+      preferLang: "@input(inputType='AutoComplete', content='Which language do you prefer?', choices=languages, limit=10)"
+      GiveMeGoodBrain: "#I would translate content to {{preferLang | lang}} automatically. \\nBut remember an expert should have a good brain(LLM)."
+    - $if: "preferLang !== 'en'"
       then:
-        - $set:
-          languages: "@support_langs"
-        - $set:
-          preferLang: "@input(inputType='AutoComplete', content='Which language do you prefer?', choices=languages, limit=10)"
-        - $if: "preferLang !== 'en'"
-          then:
-            # - $set:
-            #   ENV.USER_ENV.userPreferredLanguage: ?=preferLang
-            - $set:
-              GiveMeGoodBrain: "#I would translate content to {{preferLang | lang}} automatically. \\nBut remember an expert should have a good brain(LLM)."
-            - -> translator(content=GiveMeGoodBrain, target=preferLang) -> $print
-            - -> guide_lib_list(file="README.md") -> $set('catalog', content)
-            - $echo:  ?=catalog.summary
-            # Choose a topic
-            - -> translator(content=content+"\nPlease select what you want to know:", target=preferLang) -> $set('question')
-            - -> $toChoices(files=catalog.files) -> input(inputType='AutoComplete', content=question, choices=result, limit=10, memoized=false) -> guide_lib_explain(file=content, lang=preferLang)
+        # - $set:
+        #   ENV.USER_ENV.userPreferredLanguage: ?=preferLang
+        - -> translator(content=GiveMeGoodBrain, target=preferLang)
+      else:
+        - -> $echo(content=GiveMeGoodBrain)
+    - -> $print
+    - -> guide_lib_list(file="README.md") -> $set('catalog', content)
+    - $echo:  ?=catalog.summary
+    # Choose a topic
+    - -> translator(content=content+"\nPlease select what you want to know:", target=preferLang) -> $set('question')
+    - -> $toChoices(files=catalog.files) -> input(inputType='AutoComplete', content=question, choices=result, limit=10, memoized=false) -> guide_lib_explain(file=content, lang=preferLang)
