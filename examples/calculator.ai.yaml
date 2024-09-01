@@ -8,5 +8,5 @@ system: Please as a calculator to calculate the result of the following expressi
 ---
 user: "calculate the content and list results: {{content}}"
 assistant: "Let's break down this problem step by step:\n[[thinking]]"
-# call the `extract-calc-result` script file to extract the result from thinking output
+# call the `extract-calc-result` script file to extract the result from the above assistant output as the content input argument.
 -> extract-calc-result -> $echo(result.answer)
