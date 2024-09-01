@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.1](https://github.com/offline-ai/cli/compare/v0.4.0...v0.4.1) (2024-09-01)
+
+
+### Features
+
+* **guide:** add light version to extract title ([be20e9b](https://github.com/offline-ai/cli/commit/be20e9bcc5c9ab6f49a5e6b4871ca6ed7d65143b))
+* **guide:** add titleify and allow user ask a quiz ([c25ef50](https://github.com/offline-ai/cli/commit/c25ef50ae956cd220714eaad8be1bc81e525a847))
+* **guide:** demo select local ([f51c7d0](https://github.com/offline-ai/cli/commit/f51c7d0ad90aae8396307d236f3e3bc4ba0073a6))
+* **guide:** now can interactive simply ([bcbf065](https://github.com/offline-ai/cli/commit/bcbf065eb7b9d9ac89131602f89a8ae8ed633015))
+* **guide:** select a file from dir ([6a62b76](https://github.com/offline-ai/cli/commit/6a62b76d00ee512bce69b57cc5e404382f053ea3))
+
+
+### Bug Fixes
+
+* **example:** add input to more clearly explain ([911654d](https://github.com/offline-ai/cli/commit/911654d2b17dbcf7f6fbb1edf3746ea752ea9660))
+* **guide:** can not work on english ([66c3167](https://github.com/offline-ai/cli/commit/66c3167f9334964ad14a9fb7be7017deef958c59))
+* **guide:** lang-core link error in README ([e902e71](https://github.com/offline-ai/cli/commit/e902e71eaf756249ea999c953a2cdfb8335bc970))
+* **guide:** minor changes ([1b35c96](https://github.com/offline-ai/cli/commit/1b35c967d7cdb1f49078a734eb368ef563be6b7f))
+* **guide:** should not memoized to guide_lib_explain_file ([457490b](https://github.com/offline-ai/cli/commit/457490b45b0a48a0348d838367e70c8969a8e49a))
+* **lib:** only output title do not explain ([c6cad4c](https://github.com/offline-ai/cli/commit/c6cad4cfdf9466742b8220d7a2e6947355a4f8ea))
+* **lib:** sometimes can not output one title only ([e901682](https://github.com/offline-ai/cli/commit/e9016827bc9aacab5f07d156a01535e033aa2736))
+
+
+### Refactor
+
+* **guide:** extract guide_lib_explain_file ([0aa7d96](https://github.com/offline-ai/cli/commit/0aa7d968445e657e5f1a122ffc02f4b6f3c4d9e7))
+
 ## [0.4.0](https://github.com/offline-ai/cli/compare/v0.3.9...v0.4.0) (2024-08-31)
 
 
