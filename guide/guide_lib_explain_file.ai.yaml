@@ -1,0 +1,40 @@
+---
+version: 0.0.1
+type: instructor
+name: instructor
+parameters:
+  temperature: 0.01
+description: |-
+  Explain a file in the guide.
+input:
+  - file
+  - lang  # the target language
+file: "README.md"
+---
+- $if: "this.file === 'quit'"
+  then:
+    - user: "Thank you."
+    - assistant: "[[Bye:|Good bye|Bye|Bye-bye:random]]. [[Greeting:|It was a pleasure speaking with you|Have a nice day|Have a wonderful day:random]]. About the Programmable Prompt Engine(PPE) Language[[info]]"
+    # - -> $print(content=messages[messages.length-1].content)
+    # call translator to translate the content to the language and return/exit.
+    - -> trans(lang) -> $ret
+- user: |-
+    {%if file != 'README.md'%}
+    @file({{__dirname+file}})
+    ---
+    {%endif%}
+    Summarize the content in detail, capturing the key points and essence of it.
+- assistant: "[[summary:temperature=0.01]]"
+- -> trans(lang) -> $print(content)
+# - -> titleify(content=summary) -> trans(lang) -> $set('title')
+- -> extract_title(content=summary) -> trans(lang) -> $set('title')
+- -> trans(content="Do you have any questions about this file?", lang) -> $set('anyQuestion')
+- $while: "@input(inputType='confirm', content=anyQuestion + ' ' + title, memoized=false, format=(answer) => answer ? 'Yes' : 'No')"
+  do:
+    - ---
+    - -> trans(content="What do you want to know?", lang) -> input(memoized=false) -> $set('question') -> $print()
+    - user: "{{question}}"
+    - assistant: "Let me explain it more clearly: [[answer:temperature=0.01]]"
+    - -> trans(lang) -> $print(content)
+# call guide.ai.yaml lib to return main entry point
+# - $echo: "@guide"
