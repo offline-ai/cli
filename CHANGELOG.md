@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.2](https://github.com/offline-ai/cli/compare/v0.4.1...v0.4.2) (2024-09-02)
+
+
+### Features
+
+* **guide:** add Invocation of External Scripts section ([feedc42](https://github.com/offline-ai/cli/commit/feedc426abdfa867b88a75ad60e7925e8547e569))
+
+
+### Refactor
+
+* **guide:** move guide to lib/ ([20e969a](https://github.com/offline-ai/cli/commit/20e969a87873c17f15ae719c87125336d4b6774f))
+
 ## [0.4.1](https://github.com/offline-ai/cli/compare/v0.4.0...v0.4.1) (2024-09-01)
 
 
