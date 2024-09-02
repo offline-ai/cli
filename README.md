@@ -471,7 +471,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.9/src/commands/brain/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.10/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -602,7 +602,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.9/src/commands/brain/download.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.10/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -632,7 +632,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.9/src/commands/brain/list.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.10/src/commands/brain/list.ts)_
 
 ## `ai brain refresh`
 
@@ -657,7 +657,7 @@ DESCRIPTION
   refresh/update brain index from huggingface.co
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.9/src/commands/brain/refresh.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.10/src/commands/brain/refresh.ts)_
 
 ## `ai brain search [NAME]`
 
@@ -687,7 +687,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.9/src/commands/brain/search.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.10/src/commands/brain/search.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -750,7 +750,7 @@ EXAMPLES
   }
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.11/src/commands/config/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.12/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -799,7 +799,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.11/src/commands/config/save.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.12/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -1169,7 +1169,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.7.0/src/commands/run/index.ts)_
+_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.7.1/src/commands/run/index.ts)_
 
 ## `ai test`
 
@@ -1225,7 +1225,7 @@ EXAMPLES
   $ ai test -f ./fixture.yaml -l info
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.10/src/commands/test/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.11/src/commands/test/index.ts)_
 
 ## `ai version`
 
