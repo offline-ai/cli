@@ -41,3 +41,4 @@ bugs:
   ✔ `$exec`应该传递`llmStream`事件以便于显示外部脚本过程的流进度. @done(24-08-25 06:01)
   ✔ can not work on Windows @done(24-08-25 06:01)
   ☐ ai brain can not list downloaded
+  ☐ ai brain refresh can not work if no maxCount option

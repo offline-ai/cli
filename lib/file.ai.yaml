@@ -1,10 +1,10 @@
 ---
-version: 0.2.2
+version: 0.3.0
 type: lib
 description: |-
   the simple text file loader. You can use environment variables in file path, eg, "$HOME/documents/document.md".
 
-  It can be used in prompt. eg, `user: think about the following file content: @file(document.md)`
+  It can be used in prompt. eg, `user: "think about the following file content: @file(document.md)"`
 tag:
   - file
   - loader
@@ -22,10 +22,17 @@ output: # the file content
     const fs = await import('fs');
     const path = await import('path');
     let filepath = this.content || this[0]
-    const filename = path.basename(filepath);
-    filepath = expandPath(filepath)
-    const content = fs.readFileSync(filepath, 'utf8');
-    if (this.onlyContent) return content;
-    return `filename: ${filename}\nfile content:\n${content}`
+    if (!filepath) {throw new Error('No file path provided.')}
+    if (filepath.startsWith('https://') || filepath.startsWith('http://')) {
+      const content = await fetch(filepath).then(res => res.text());
+      if (this.onlyContent) return content;
+      return `url: ${filepath}\nfile content:\n${content}`
+    } else {
+      const filename = path.basename(filepath);
+      filepath = expandPath(filepath)
+      const content = fs.readFileSync(filepath, 'utf8');
+      if (this.onlyContent) return content;
+      return `filename: ${filename}\nfile content:\n${content}`
+    }
   }
 $loadFile
