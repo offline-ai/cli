@@ -1,0 +1,26 @@
+---
+version: 0.1.0
+type: lib
+description: |-
+  the simple fetch web page content from url.
+
+  It can be used in prompt. eg, `user: "think about the following web content: @url(https://www.example.com)"`
+tag:
+  - url
+  - loader
+  - prompt
+  - lib
+input:
+  - 0                               # The url passed by the prompt(position argument)
+  - content                         # The url passed by the prompt
+  - onlyContent: {type: "boolean"}  # Only return the content
+output: # the web page content
+  type: "string"
+---
+!fn |-
+  async function loadUrl() {
+    let url = this.content || this[0]
+    const content = await fetch(url).then(res => res.text())
+    return `web url: ${url}\nweb content:\n${content}`
+  }
+$loadUrl
