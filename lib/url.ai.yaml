@@ -1,5 +1,5 @@
 ---
-version: 0.1.0
+version: 0.2.0
 type: lib
 description: |-
   the simple fetch web page content from url.
@@ -13,6 +13,7 @@ tag:
 input:
   - 0                               # The url passed by the prompt(position argument)
   - content                         # The url passed by the prompt
+  - sslVerify: {type: "boolean"}
   - onlyContent: {type: "boolean"}  # Only return the content
 output: # the web page content
   type: "string"
@@ -20,7 +21,13 @@ output: # the web page content
 !fn |-
   async function loadUrl() {
     let url = this.content || this[0]
-    const content = await fetch(url).then(res => res.text())
+    let options = {}
+    if (!this.sslVerify && url.startsWith('https://')) {
+      const https = await import('https');
+      const agent = new https.Agent({ rejectUnauthorized: false })
+      options.agent = agent
+    }
+    const content = await fetch(url, options).then(res => res.text())
     return `web url: ${url}\nweb content:\n${content}`
   }
 $loadUrl
