@@ -66,6 +66,7 @@ ai run -f examples/calculator.ai.yaml '{expression: "1+2*5"}' -s examples --no-s
 Let's take a simple example. If I want AI to automatically translate `i18n` resources based on the following `json` format:
 
 ```json
+// your_i18n.json
 {
    "en": {
      "Accept": "Accept",
@@ -243,6 +244,28 @@ tradas. A luz do sol penetra pelas janelas inteligentes, e na parede há um proj
 ```
 
 Alright, the agent script has successfully returned a JSON result. How to automatically translate the above language resources, do you need to continue?
+
+```yaml
+!fn |-
+  function toJson({content}) {
+    // convert content string to json object
+    const result = JSON.parse(content)
+    return result
+  }
+!fn |-
+  async function i18n_trans({en, target}) {
+    const result = {}
+    if (en) {
+      for (const [key, value] of Object.entries(en)) {
+        // call the translator agent script in the library
+        const translated = await this.$exec({id: 'translator', args: {content: value, target, lang: 'English'}})
+        result[key] = translated.trim()
+      }
+      return result
+    }
+  }
+-> file("your_i18n.json", onlyContent=true) -> $toJson -> $i18n_trans(target="中文")
+```
 
 ## Quick Start
 

@@ -66,6 +66,7 @@ ai run -f examples/calculator.ai.yaml '{expression: "1+2*5"}' -s examples --no-s
 举一个简单的例子,如果我希望让人工智能自动翻译基于如下`json`格式的`i18n`资源:
 
 ```json
+// your_i18n.json
 {
    "en": {
      "Accept": "Accept",
@@ -243,6 +244,28 @@ tradas. A luz do sol penetra pelas janelas inteligentes, e na parede há um proj
 ```
 
 好了,智能体脚本已经能够成功的返回json结果了,那么如何自动对上面的语言资源进行翻译,还需要继续么?
+
+```yaml
+!fn |-
+  function toJson({content}) {
+    // convert content string to json object
+    const result = JSON.parse(content)
+    return result
+  }
+!fn |-
+  async function i18n_trans({en, target}) {
+    const result = {}
+    if (en) {
+      for (const [key, value] of Object.entries(en)) {
+        // call the translator agent script in the library
+        const translated = await this.$exec({id: 'translator', args: {content: value, target, lang: 'English'}})
+        result[key] = translated.trim()
+      }
+      return result
+    }
+  }
+-> file("your_i18n.json", onlyContent=true) -> $toJson -> $i18n_trans(target="中文")
+```
 
 balabala,说了这么多,如何安装,请看下面:
 
