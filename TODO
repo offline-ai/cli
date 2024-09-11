@@ -18,6 +18,7 @@ features:
     `ai brain run brain-name --provider llama.cpp --fg` fg: foreground
     `ai provider `
   ☐ [feat]: ai-agent: 根据IP决定是否用NPM Mirror 进行升级.
+  ☐ 需要一个好的方法导入js函数包.供内置js函数使用.以及脚本使用?
   ✔ 新增 `->` 字符串指令,简化调用外部智能体脚本 @done(24-06-26 14:35)
   ✔ 新增`backup-chat`（`-k`）参数，在启动的时候备份history file @done(24-07-18 08:56)
   ☐ use github action create release package

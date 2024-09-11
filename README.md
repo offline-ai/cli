@@ -50,7 +50,7 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 * [Guide AI App](./lib/guide/) - WIP
   * `ai run guide --streamEcho line` in the project root folder to run the guide
 
-## [PPE CLI Command](./guide/cli.md)
+## [PPE CLI Command](./lib/guide/cli.md)
 
 `ai` is the shell CLI command to manage the brain(LLM) files and run a PPE agent script mainly.
 
@@ -63,31 +63,31 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 * Manage the brain files command `ai brain` include `ai brain download`, `ai brain list/search`.
 * Run `ai help` or `ai help [command]` to get more.
 
-## [Programmable Prompt Engine Language](./guide/lang.md)
+## [Programmable Prompt Engine Language](./lib/guide/lang.md)
 
 Programmable Prompt Engine (PPE) Language is a message-processing language, similar to the YAML format.
 
 PPE is designed to define AI prompt messages and their input/output configurations. It allows for the creation of a reusable and programmable prompt system akin to software engineering practices.
 
-### [I. Core Structure](./guide/core-lang.md)
+### [I. Core Structure](./lib/guide/core-lang.md)
 
 * Message-Based Dialogue: Defines interactions as a series of messages with roles (system, user, assistant).
 * YAML-Like: Syntax is similar to YAML, making it readable and easy to understand.
 * Dialogue Separation: Uses triple dashes (`---`) or asterisks (`***`) to clearly mark dialogue turns.
 
-### [II. Reusability & Configuration](./guide/lang-reuse.md)
+### [II. Reusability & Configuration](./lib/guide/lang-reuse.md)
 
 * **Input/Output Configuration (Front-Matter):** Defines input requirements (using `input` keyword) and expected output format (using `output` keyword with JSON Schema).
 * **Prompt Template:** Embeds variables from input configuration or prompt settings into messages using Jinja2 templates (`{{variable_name}}`).
 * **Custom Script Types:** Allows defining reusable script types (`type: type`) for code and configuration inheritance.
 
-### [III. AI Capabilities](./guide/lang-ai.md)
+### [III. AI Capabilities](./lib/guide/lang-ai.md)
 
 * **Advanced AI Replacement:** Use double brackets (`[[Response]]`) to trigger AI execution, store the response in a variable (`prompt.Response`), and use it within the script.
 * **AI Parameter Control:** Fine-tune AI behavior by passing parameters within double brackets (e.g., `[[Answer:temperature=0.7]]`).
 * **Constrained AI Responses:** Limit AI outputs to a predefined set of options (e.g., `[[FRUITS:|Apple|Banana]]`).
 
-#### [IV. Message Text Formatting](./guide/lang-formatting.md)
+#### [IV. Message Text Formatting](./lib/guide/lang-formatting.md)
 
 The role messages can be formatted using Jinja2 templates and advanced replacement features.
 
@@ -97,7 +97,7 @@ The role messages can be formatted using Jinja2 templates and advanced replaceme
 * **Internal Instruction Replacement:**  Call internal instructions similarly (e.g., `@$instruction(param1=value1)`).
 * **Regular Expression Replacement:** Use `/RegExp/[RegOpts]:Answer[:index_or_group_name]` for pattern-based replacement on the `Answer` variable.
 
-### [V. Script Capabilities](./guide/lang-script.md)
+### [V. Script Capabilities](./lib/guide/lang-script.md)
 
 * **Chaining Outputs:** The `->` operator connect script outputs to subsequent instructions or scripts, creating complex workflows.
 * **Instruction Invocation:** The `$` prefix calls script instructions (e.g., `$fn: {param1:value1}`).
@@ -344,31 +344,45 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 # Commands
 
 <!-- commands -->
-* [`ai agent`](#ai-agent)
-* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-* [`ai brain [NAME]`](#ai-brain-name)
-* [`ai brain dn [NAME]`](#ai-brain-dn-name)
-* [`ai brain down [NAME]`](#ai-brain-down-name)
-* [`ai brain download [NAME]`](#ai-brain-download-name)
-* [`ai brain list [NAME]`](#ai-brain-list-name)
-* [`ai brain refresh`](#ai-brain-refresh)
-* [`ai brain search [NAME]`](#ai-brain-search-name)
-* [`ai config [ITEM_NAME]`](#ai-config-item_name)
-* [`ai config save [DATA]`](#ai-config-save-data)
-* [`ai help [COMMAND]`](#ai-help-command)
-* [`ai plugins`](#ai-plugins)
-* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-* [`ai plugins link PATH`](#ai-plugins-link-path)
-* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-* [`ai plugins reset`](#ai-plugins-reset)
-* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-* [`ai plugins update`](#ai-plugins-update)
-* [`ai run [FILE] [DATA]`](#ai-run-file-data)
-* [`ai test`](#ai-test)
-* [`ai version`](#ai-version)
+- [Offline AI PPE CLI(WIP)](#offline-ai-ppe-cliwip)
+- [Quick Start](#quick-start)
+  - [PPE CLI Command](#ppe-cli-command)
+  - [Programmable Prompt Engine Language](#programmable-prompt-engine-language)
+    - [I. Core Structure](#i-core-structure)
+    - [II. Reusability \& Configuration](#ii-reusability--configuration)
+    - [III. AI Capabilities](#iii-ai-capabilities)
+      - [IV. Message Text Formatting](#iv-message-text-formatting)
+    - [V. Script Capabilities](#v-script-capabilities)
+  - [Install](#install)
+  - [Run](#run)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`ai agent`](#ai-agent)
+  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+  - [`ai brain [NAME]`](#ai-brain-name)
+  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
+  - [`ai brain down [NAME]`](#ai-brain-down-name)
+  - [`ai brain download [NAME]`](#ai-brain-download-name)
+  - [`ai brain list [NAME]`](#ai-brain-list-name)
+  - [`ai brain refresh`](#ai-brain-refresh)
+  - [`ai brain search [NAME]`](#ai-brain-search-name)
+  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
+  - [`ai config save [DATA]`](#ai-config-save-data)
+  - [`ai help [COMMAND]`](#ai-help-command)
+  - [`ai plugins`](#ai-plugins)
+  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+  - [`ai plugins link PATH`](#ai-plugins-link-path)
+  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+  - [`ai plugins reset`](#ai-plugins-reset)
+  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+  - [`ai plugins update`](#ai-plugins-update)
+  - [`ai run [FILE] [DATA]`](#ai-run-file-data)
+  - [`ai test`](#ai-test)
+  - [`ai version`](#ai-version)
+- [Credit](#credit)
 
 ## `ai agent`
 
