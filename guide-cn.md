@@ -20,15 +20,20 @@
 
 ```yaml
 ---
-# 默认输入参数,便于测试,或者作为示例,这样不输入参数也不会出错
+# Front-matter 配置区域:
+input:
+  - expression: {required: true} # 必填的输入参数
+# 设置默认输入参数值,便于测试,或者作为示例,这样不输入参数也不会出错
 expression: "1 + 2 * 3"
 ---
-system: Please as a calculator to calculate the result of the following expression， think it step by step.
+# 脚本区域:
+system: Please as a calculator to calculate the result of the following expression， Think step by step.
 # system: 请作为一个计算器，计算表达式结果, 一步一步的思考计算. # 也可以用中文, 小规模尺寸的脑子建议用英文提示词
----
+---  # 新起始会话分隔线
 user: "{{expression}}"
+# [[thinking]] 表示进行一次高级AI替换.
 assistant: "[[thinking]]"
-# 将结果传给 extract-calc-result.ai.yaml 处理
+# 将AI thinking的结果传给 extract-calc-result.ai.yaml 脚本提取计算结果后返回
 -> extract-calc-result
 ```
 
