@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.0](https://github.com/offline-ai/cli/compare/v0.4.3...v0.5.0) (2024-09-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* freeze the lib folder, move lib folder to @offline-ai/cli-plugin-core package
+* freeze the lib folder, move lib to plugin-core
+* extract lib to plugin-core package
+
+### Features
+
+* extract lib to plugin-core package ([e2cb4af](https://github.com/offline-ai/cli/commit/e2cb4afa270ca727b0bedab5cc378e48abfd7331))
+* **lib:** add sslVerify option ([2132272](https://github.com/offline-ai/cli/commit/2132272369233701f440f7c8a31ff82601527837))
+* **lib:** add url lib ([e748836](https://github.com/offline-ai/cli/commit/e7488366c0018cd616893fdfe72788c858adcbf4))
+* **lib:** add url supports to file lib ([7eaf3e4](https://github.com/offline-ai/cli/commit/7eaf3e47e906008e5c6a883461d1b082a2e9bbb6))
+
+
+### Refactor
+
+* freeze the lib folder, move lib folder to @offline-ai/cli-plugin-core package ([68324cc](https://github.com/offline-ai/cli/commit/68324cc85351420e0373333bf2016966b343229e))
+* freeze the lib folder, move lib to plugin-core ([64616c3](https://github.com/offline-ai/cli/commit/64616c3589ee3a443dd8f659a578067ed3852548))
+
 ## [0.4.3](https://github.com/offline-ai/cli/compare/v0.4.2...v0.4.3) (2024-09-02)
 
 ## [0.4.2](https://github.com/offline-ai/cli/compare/v0.4.1...v0.4.2) (2024-09-02)
