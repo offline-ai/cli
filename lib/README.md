@@ -2,6 +2,10 @@
 
 This directory contains a collection of Programmable Prompt Engine (PPE) Script Runtime Library files.
 
+**NOTE**:
+
+The Current PPE Script Runtime Libraries Directory has been moved to the `@offline-ai/cli-plugin-core` package.
+
 ## char type
 
 **Introduction:**
