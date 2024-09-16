@@ -346,45 +346,31 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 # Commands
 
 <!-- commands -->
-- [Offline AI PPE CLI(WIP)](#offline-ai-ppe-cliwip)
-- [Quick Start](#quick-start)
-  - [PPE CLI Command](#ppe-cli-command)
-  - [Programmable Prompt Engine Language](#programmable-prompt-engine-language)
-    - [I. Core Structure](#i-core-structure)
-    - [II. Reusability \& Configuration](#ii-reusability--configuration)
-    - [III. AI Capabilities](#iii-ai-capabilities)
-      - [IV. Message Text Formatting](#iv-message-text-formatting)
-    - [V. Script Capabilities](#v-script-capabilities)
-  - [Install](#install)
-  - [Run](#run)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`ai agent`](#ai-agent)
-  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-  - [`ai brain [NAME]`](#ai-brain-name)
-  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
-  - [`ai brain down [NAME]`](#ai-brain-down-name)
-  - [`ai brain download [NAME]`](#ai-brain-download-name)
-  - [`ai brain list [NAME]`](#ai-brain-list-name)
-  - [`ai brain refresh`](#ai-brain-refresh)
-  - [`ai brain search [NAME]`](#ai-brain-search-name)
-  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
-  - [`ai config save [DATA]`](#ai-config-save-data)
-  - [`ai help [COMMAND]`](#ai-help-command)
-  - [`ai plugins`](#ai-plugins)
-  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-  - [`ai plugins link PATH`](#ai-plugins-link-path)
-  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-  - [`ai plugins reset`](#ai-plugins-reset)
-  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-  - [`ai plugins update`](#ai-plugins-update)
-  - [`ai run [FILE] [DATA]`](#ai-run-file-data)
-  - [`ai test`](#ai-test)
-  - [`ai version`](#ai-version)
-- [Credit](#credit)
+* [`ai agent`](#ai-agent)
+* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+* [`ai brain [NAME]`](#ai-brain-name)
+* [`ai brain dn [NAME]`](#ai-brain-dn-name)
+* [`ai brain down [NAME]`](#ai-brain-down-name)
+* [`ai brain download [NAME]`](#ai-brain-download-name)
+* [`ai brain list [NAME]`](#ai-brain-list-name)
+* [`ai brain refresh`](#ai-brain-refresh)
+* [`ai brain search [NAME]`](#ai-brain-search-name)
+* [`ai config [ITEM_NAME]`](#ai-config-item_name)
+* [`ai config save [DATA]`](#ai-config-save-data)
+* [`ai help [COMMAND]`](#ai-help-command)
+* [`ai plugins`](#ai-plugins)
+* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+* [`ai plugins link PATH`](#ai-plugins-link-path)
+* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+* [`ai plugins reset`](#ai-plugins-reset)
+* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+* [`ai plugins update`](#ai-plugins-update)
+* [`ai run [FILE] [DATA]`](#ai-run-file-data)
+* [`ai test`](#ai-test)
+* [`ai version`](#ai-version)
 
 ## `ai agent`
 
@@ -487,7 +473,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.11/src/commands/brain/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.12/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -618,7 +604,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.11/src/commands/brain/download.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.12/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -648,7 +634,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.11/src/commands/brain/list.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.12/src/commands/brain/list.ts)_
 
 ## `ai brain refresh`
 
@@ -673,7 +659,7 @@ DESCRIPTION
   refresh/update brain index from huggingface.co
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.11/src/commands/brain/refresh.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.12/src/commands/brain/refresh.ts)_
 
 ## `ai brain search [NAME]`
 
@@ -703,7 +689,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.11/src/commands/brain/search.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.12/src/commands/brain/search.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -712,9 +698,9 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 ```
 USAGE
   $ ai config [ITEM_NAME] [--json] [-u <value>] [-s <value>...] [-l
-    silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m]
-    [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>] [-e
-    true|false|line]
+    silence|fatal|error|warn|info|verbose|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats] [--no-inputs
+    ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>]
+    [-e true|false|line] [-e <value>]
 
 ARGUMENTS
   ITEM_NAME  the config item name path to get
@@ -730,12 +716,13 @@ FLAGS
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
   -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
                                        <options: true|false|line>
+  -e, --streamEchoChars=<value>        stream echo max characters limit, defaults to no limit
   -f, --script=<value>                 the ai-agent script file name or id
   -h, --histories=<value>              the chat histories folder to record
   -i, --[no-]interactive               interactive mode
   -k, --backupChat                     whether to backup chat history before start, defaults to false
   -l, --logLevel=<option>              the log level
-                                       <options: silence|fatal|error|warn|info|debug|trace>
+                                       <options: silence|fatal|error|warn|info|verbose|debug|trace>
   -m, --[no-]stream                    stream mode, defaults to true
   -n, --[no-]newChat                   whether to start a new chat history, defaults to false in interactive mode, true
                                        in non-interactive
@@ -766,7 +753,7 @@ EXAMPLES
   }
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.13/src/commands/config/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.14/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -775,9 +762,9 @@ _See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli
 ```
 USAGE
   $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>] [-s
-    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
-    [-A <value>] [-e true|false|line]
+    <value>...] [-l silence|fatal|error|warn|info|verbose|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i]
+    [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
+    [-L <value>] [-A <value>] [-e true|false|line] [-e <value>]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
@@ -794,12 +781,13 @@ FLAGS
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
   -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
                                        <options: true|false|line>
+  -e, --streamEchoChars=<value>        stream echo max characters limit, defaults to no limit
   -f, --script=<value>                 the ai-agent script file name or id
   -h, --histories=<value>              the chat histories folder to record
   -i, --[no-]interactive               interactive mode
   -k, --backupChat                     whether to backup chat history before start, defaults to false
   -l, --logLevel=<option>              the log level
-                                       <options: silence|fatal|error|warn|info|debug|trace>
+                                       <options: silence|fatal|error|warn|info|verbose|debug|trace>
   -m, --[no-]stream                    stream mode, defaults to true
   -n, --[no-]newChat                   whether to start a new chat history, defaults to false in interactive mode, true
                                        in non-interactive
@@ -815,7 +803,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.13/src/commands/config/save.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.14/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -1133,9 +1121,9 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 ```
 USAGE
   $ ai run [FILE] [DATA] [--json] [-c <value>] [--banner] [-u <value>]
-    [-s <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
-    [-A <value>] [-e true|false|line] [--consoleClear]
+    [-s <value>...] [-l silence|fatal|error|warn|info|verbose|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i]
+    [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
+    [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [--consoleClear]
 
 ARGUMENTS
   FILE  the script file path, or the json data when `-f` switch is set
@@ -1153,12 +1141,13 @@ FLAGS
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
   -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
                                        <options: true|false|line>
+  -e, --streamEchoChars=<value>        stream echo max characters limit, defaults to no limit
   -f, --script=<value>                 the ai-agent script file name or id
   -h, --histories=<value>              the chat histories folder to record
   -i, --[no-]interactive               interactive mode
   -k, --backupChat                     whether to backup chat history before start, defaults to false
   -l, --logLevel=<option>              the log level
-                                       <options: silence|fatal|error|warn|info|debug|trace>
+                                       <options: silence|fatal|error|warn|info|verbose|debug|trace>
   -m, --[no-]stream                    stream mode, defaults to true
   -n, --[no-]newChat                   whether to start a new chat history, defaults to false in interactive mode, true
                                        in non-interactive
@@ -1185,7 +1174,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.7.2/src/commands/run/index.ts)_
+_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.8.0/src/commands/run/index.ts)_
 
 ## `ai test`
 
@@ -1194,9 +1183,9 @@ _See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugi
 ```
 USAGE
   $ ai test [--json] [-c <value>] [--banner] [-u <value>] [-s
-    <value>...] [-l silence|fatal|error|warn|info|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i] [--no-chats]
-    [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
-    [-A <value>] [-e true|false|line] [--consoleClear]
+    <value>...] [-l silence|fatal|error|warn|info|verbose|debug|trace] [-h <value>] [-n] [-k] [-t <value> -i]
+    [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
+    [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [--consoleClear]
 
 FLAGS
   -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
@@ -1210,12 +1199,13 @@ FLAGS
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
   -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
                                        <options: true|false|line>
+  -e, --streamEchoChars=<value>        stream echo max characters limit, defaults to no limit
   -f, --script=<value>                 the AI fixture file path
   -h, --histories=<value>              the chat histories folder to record
   -i, --[no-]interactive               interactive mode
   -k, --backupChat                     whether to backup chat history before start, defaults to false
   -l, --logLevel=<option>              the log level
-                                       <options: silence|fatal|error|warn|info|debug|trace>
+                                       <options: silence|fatal|error|warn|info|verbose|debug|trace>
   -m, --stream                         stream mode, defaults to false
   -n, --[no-]newChat                   whether to start a new chat history, defaults to false in interactive mode, true
                                        in non-interactive
@@ -1241,7 +1231,7 @@ EXAMPLES
   $ ai test -f ./fixture.yaml -l info
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.12/src/commands/test/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.13/src/commands/test/index.ts)_
 
 ## `ai version`
 
