@@ -58,16 +58,18 @@ parameters:
     $set:
       content: "@file({{file}})"
 - system: |-
-    You are the best translator in the world.
+    You are the best master of translation in the world.
 - $if: "this.content"
   then:
     # For API mode.
+    - $set:
+        source: "?=content"
     - $if: "!this.lang || this.lang === 'auto'"
       then:
         $set:
           lang: "?=this.$detectLang(content.slice(0, 120))"
     - user: |-
-        Output high-quality translation result before the completion delimiter "{{completion_delimiter}}".
+        Think carefully. Output very high-quality translation result before the completion delimiter "{{completion_delimiter}}".
         {% if terms %}
         Translation according to terms:
         {{terms}}
@@ -83,6 +85,7 @@ parameters:
         {%- endif -%}
     - --- # First dialogue start and this will hide the above messages from output
     - assistant: "[[trans]]" # Return the last instruction's result always. So no need to `$ret: "?=this.prompt.trans"`
+    # - -> json(output=output, content='source_lang:'+lang +'\nsource_text:' + source + '\ntarget_lang:'+target + '\ntarget_text:' + content)
   else:
     # For multi-turn conversation in interactive mode.
     - ---

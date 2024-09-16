@@ -71,6 +71,7 @@ system: |-
   Accurately Extract THE CONTENT input by the user as a JSON object according to THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS specified by the user:
 user: |-
   THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS:
+  json-schema:
   {{output}}
   ---
   THE CONTENT:
