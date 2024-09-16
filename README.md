@@ -47,8 +47,10 @@ Developing an intelligent application with AI Agent Script Engine involves just 
 
 * [Quick Start Programming Guide](./guide.md)
 * [More examples](./examples)
-* [Guide AI App](./lib/guide/) - WIP
-  * `ai run guide --streamEcho line` in the project root folder to run the guide
+* AI Applications written in PPE Language:
+  * [AI Guide App For PPE Guide](./lib/guide/) - WIP
+    * `ai run guide --streamEcho line` in the project root folder to run the guide
+  * [AI Terminal Shell](https://github.com/offline-ai/ai-shell)
 
 ## [PPE CLI Command](./lib/guide/cli.md)
 

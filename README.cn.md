@@ -37,8 +37,10 @@ AI Agent 脚本引擎特点:
 
 * [快速上手编程值南](./guide-cn.md)
 * 更多的例子: [examples](./examples)
-* [智能编程指南 - AI 应用](./lib/guide/) - WIP
-  * 在项目根目录下运行 `ai run guide --streamEcho line`
+* 使用 PPE Language 编写的 AI 应用程序：
+  * [PPE 的 智能编程指南](./lib/guide/)
+    * 在项目根目录下运行 `ai run guide --streamEcho line` 来启动指南
+  * [人工智能终端 shell](https://github.com/offline-ai/ai-shell)
 
 ### Install
 
