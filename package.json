@@ -1,7 +1,7 @@
 {
   "name": "@offline-ai/cli",
   "description": "Your Offline(local) AI agent client for Programable Prompt Engine",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "author": "Riceball LEE <snowyu.lee@gmail.com>",
   "bin": {
     "ai": "./bin/run.js"
