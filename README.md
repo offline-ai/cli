@@ -12,7 +12,6 @@ Enjoying this project? Please star it! 🌟
 
 **Features**:
 
-
 * Programmable Prompt Engineering (PPE) language is a simple and natural scripting language designed for handling prompt information. This language is used to develop various agents that can be reused, inherited, combined, or called.
 * Achieve or approximate the performance of ChatGPT 4 with open-source LLMs of medium to small scale (35B-4B parameters).
 * User-friendly for ai development and creation of intelligent applications...
