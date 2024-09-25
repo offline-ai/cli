@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.5](https://github.com/offline-ai/cli/compare/v0.5.4...v0.5.5) (2024-09-25)
+
+
+### Features
+
+* **example:** add Original Auto generation Prompt by Claude ([d3b9f08](https://github.com/offline-ai/cli/commit/d3b9f0808be5609cd7ca1ffab3381d19ba8be4e6))
+
 ## [0.5.4](https://github.com/offline-ai/cli/compare/v0.5.3...v0.5.4) (2024-09-19)
 
 ## [0.5.3](https://github.com/offline-ai/cli/compare/v0.5.2...v0.5.3) (2024-09-18)
