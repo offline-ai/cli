@@ -44,6 +44,17 @@ AI Agent 脚本引擎特点:
   * [PPE 的 智能编程指南](./lib/guide/)
     * 在项目根目录下运行 `ai run guide --streamEcho line` 来启动指南
   * [人工智能终端 shell](https://github.com/offline-ai/ai-shell)
+* LLM 推理提供者:
+  * `llamacpp`: llama.cpp server 作为默认的本地 LLM 提供者. 如果没有提供`provider`,就是`llamacpp`
+  * `openai`: 也支持 OpenAI兼容 服务 API 提供者.
+    * `--provider openai://chatgpt-4o-latest --apiKey “sk-XXX”`
+
+注意: OpenAI兼容 服务 API 提供者的限制
+
+1. OpenAI 必须是`gpt-4o` `2024-07-18`之后的大模型才支持（json-schema）。在此之前，仅能保证 `json` 支持，无法保证schema.
+2. `siliconflow` 的所有模型只保证json,不保证schema.
+   * `--provider openai://Qwen/Qwen2.5-Coder-7B-Instruct -u https://api.siliconflow.cn/ --apiKey “sk-XXX” ...`
+3. `[[Fruit:|Apple|Banana]]`: 让AI强制单选或多选语法，将失效
 
 ### Install
 
