@@ -349,45 +349,31 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 # Commands
 
 <!-- commands -->
-- [Offline AI PPE CLI(WIP)](#offline-ai-ppe-cliwip)
-- [Quick Start](#quick-start)
-  - [PPE CLI Command](#ppe-cli-command)
-  - [Programmable Prompt Engine Language](#programmable-prompt-engine-language)
-    - [I. Core Structure](#i-core-structure)
-    - [II. Reusability \& Configuration](#ii-reusability--configuration)
-    - [III. AI Capabilities](#iii-ai-capabilities)
-      - [IV. Message Text Formatting](#iv-message-text-formatting)
-    - [V. Script Capabilities](#v-script-capabilities)
-  - [Install](#install)
-  - [Run](#run)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`ai agent`](#ai-agent)
-  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-  - [`ai brain [NAME]`](#ai-brain-name)
-  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
-  - [`ai brain down [NAME]`](#ai-brain-down-name)
-  - [`ai brain download [NAME]`](#ai-brain-download-name)
-  - [`ai brain list [NAME]`](#ai-brain-list-name)
-  - [`ai brain refresh`](#ai-brain-refresh)
-  - [`ai brain search [NAME]`](#ai-brain-search-name)
-  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
-  - [`ai config save [DATA]`](#ai-config-save-data)
-  - [`ai help [COMMAND]`](#ai-help-command)
-  - [`ai plugins`](#ai-plugins)
-  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-  - [`ai plugins link PATH`](#ai-plugins-link-path)
-  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-  - [`ai plugins reset`](#ai-plugins-reset)
-  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-  - [`ai plugins update`](#ai-plugins-update)
-  - [`ai run [FILE] [DATA]`](#ai-run-file-data)
-  - [`ai test`](#ai-test)
-  - [`ai version`](#ai-version)
-- [Credit](#credit)
+* [`ai agent`](#ai-agent)
+* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+* [`ai brain [NAME]`](#ai-brain-name)
+* [`ai brain dn [NAME]`](#ai-brain-dn-name)
+* [`ai brain down [NAME]`](#ai-brain-down-name)
+* [`ai brain download [NAME]`](#ai-brain-download-name)
+* [`ai brain list [NAME]`](#ai-brain-list-name)
+* [`ai brain refresh`](#ai-brain-refresh)
+* [`ai brain search [NAME]`](#ai-brain-search-name)
+* [`ai config [ITEM_NAME]`](#ai-config-item_name)
+* [`ai config save [DATA]`](#ai-config-save-data)
+* [`ai help [COMMAND]`](#ai-help-command)
+* [`ai plugins`](#ai-plugins)
+* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+* [`ai plugins link PATH`](#ai-plugins-link-path)
+* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+* [`ai plugins reset`](#ai-plugins-reset)
+* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+* [`ai plugins update`](#ai-plugins-update)
+* [`ai run [FILE] [DATA]`](#ai-run-file-data)
+* [`ai test`](#ai-test)
+* [`ai version`](#ai-version)
 
 ## `ai agent`
 
@@ -490,7 +476,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.16/src/commands/brain/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.17/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -621,7 +607,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.16/src/commands/brain/download.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.17/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -651,7 +637,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.16/src/commands/brain/list.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.17/src/commands/brain/list.ts)_
 
 ## `ai brain refresh`
 
@@ -676,7 +662,7 @@ DESCRIPTION
   refresh/update brain index from huggingface.co
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.16/src/commands/brain/refresh.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.17/src/commands/brain/refresh.ts)_
 
 ## `ai brain search [NAME]`
 
@@ -706,7 +692,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.16/src/commands/brain/search.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.17/src/commands/brain/search.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -717,7 +703,7 @@ USAGE
   $ ai config [ITEM_NAME] [--json] [-u <value>] [--apiKey <value>] [-s
     <value>...] [-l trace|debug|verbose|info|warn|error|fatal|silence] [--histories <value>] [-n] [-k] [-t <value> -i]
     [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
-    [-L <value>] [-A <value>] [-e true|false|line] [-e <value>]
+    [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [-P <value>]
 
 ARGUMENTS
   ITEM_NAME  the config item name path to get
@@ -728,6 +714,7 @@ FLAGS
   -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
+  -P, --provider=<value>               the LLM provider, defaults to llamacpp
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
@@ -771,7 +758,7 @@ EXAMPLES
   }
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.18/src/commands/config/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.19/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -782,7 +769,7 @@ USAGE
   $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>]
     [--apiKey <value>] [-s <value>...] [-l trace|debug|verbose|info|warn|error|fatal|silence] [--histories <value>] [-n]
     [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b
-    <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-e <value>]
+    <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [-P <value>]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
@@ -793,6 +780,7 @@ FLAGS
   -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
+  -P, --provider=<value>               the LLM provider, defaults to llamacpp
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
   -c, --config=<value>                 the config file
@@ -822,7 +810,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.18/src/commands/config/save.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.19/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -1142,7 +1130,7 @@ USAGE
   $ ai run [FILE] [DATA] [--json] [-c <value>] [--banner] [-u <value>]
     [--apiKey <value>] [-s <value>...] [-l trace|debug|verbose|info|warn|error|fatal|silence] [--histories <value>] [-n]
     [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b
-    <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [--consoleClear]
+    <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [-P <value>] [--consoleClear]
 
 ARGUMENTS
   FILE  the script file path, or the json data when `-f` switch is set
@@ -1154,6 +1142,7 @@ FLAGS
   -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
+  -P, --provider=<value>               the LLM provider, defaults to llamacpp
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
   -c, --config=<value>                 the config file
@@ -1194,7 +1183,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.8.5/src/commands/run/index.ts)_
+_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.8.6/src/commands/run/index.ts)_
 
 ## `ai test`
 
@@ -1205,7 +1194,7 @@ USAGE
   $ ai test [--json] [-c <value>] [--banner] [-u <value>] [--apiKey
     <value>] [-s <value>...] [-l trace|debug|verbose|info|warn|error|fatal|silence] [--histories <value>] [-n] [-k] [-t
     <value> -i] [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p
-    <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [--consoleClear]
+    <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [-P <value>] [--consoleClear]
 
 FLAGS
   -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
@@ -1213,6 +1202,7 @@ FLAGS
   -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
+  -P, --provider=<value>               the LLM provider, defaults to llamacpp
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
   -c, --config=<value>                 the config file
@@ -1252,7 +1242,7 @@ EXAMPLES
   $ ai test -f ./fixture.yaml -l info
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.17/src/commands/test/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.18/src/commands/test/index.ts)_
 
 ## `ai version`
 
