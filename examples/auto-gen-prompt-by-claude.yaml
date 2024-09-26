@@ -4,7 +4,7 @@ description: |-
 
   Usage:
   ```bash
-  ai run auto-gen-prompt-by-claude.ai.yaml "{task: 'Act as an excellent science fiction writer to write long science fiction novel', params: ['theme']}"
+  ai run auto-gen-prompt-by-claude.ai.yaml "{task: 'Split the text into paragraphs'}"
   ```
 创:
   者: Claude<https://anthropic.com/metaprompt-notebook/>
