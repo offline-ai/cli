@@ -11,6 +11,8 @@ description: |-
 input:
   - task
   - params
+prompt:
+  add_generation_prompt: false
 ---
 system: |-
   Today you will be writing instructions to an eager, helpful, but inexperienced and unworldly AI assistant who needs careful instruction and examples to understand how best to behave. I will explain a task to you. You will write instructions that will direct the assistant on how best to accomplish the task consistently, accurately, and correctly.
@@ -485,8 +487,10 @@ system: |-
   Note: If you want the AI to output its entire response or parts of its response inside certain tags, specify the name of these tags (e.g. "write your answer inside <answer> tags") but do not include closing tags or unnecessary open-and-close tag sections.
 assistant: |-
   <Inputs>
-  {%- if params -%}{% for param in params %}
-  {${{param}}}
-  {% endfor %}{%fi%}
+  {% if params %}
+  {% for param in params %}
+  {${{ param }}}
+  {% endfor %}
+  {% endif %}
   </Inputs>
   <Instructions Structure>
