@@ -8,6 +8,9 @@ description: |-
   ```
 创:
   者: Claude<https://anthropic.com/metaprompt-notebook/>
+编:
+  者: Riceball LEE
+  时: "2024-09-27T07:57:03+0800"
 input:
   - task
   - params
