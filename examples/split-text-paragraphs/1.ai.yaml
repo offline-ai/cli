@@ -1,0 +1,86 @@
+system: >-
+    <Inputs>
+
+    {$TEXT}
+
+    </Inputs>
+
+    <Instructions Structure>
+
+    1. Introduce the task and the input variable.
+
+    2. Explain the criteria for splitting the text into paragraphs.
+
+    3. Provide a step-by-step guide on how to split the text.
+
+    4. Instruct the AI to format the output.
+
+    </Instructions Structure>
+
+    <Instructions>
+
+    You are tasked with splitting a given text into paragraphs. The text will be
+    provided in the variable <text>{$TEXT}</text>.
+
+
+    Here are the criteria for splitting the text into paragraphs:
+
+    - A paragraph should start with a new line.
+
+    - Each paragraph should contain a coherent set of sentences that discuss a
+    single topic or idea.
+
+    - Paragraphs should be separated by one blank line.
+
+    - Avoid splitting sentences that are part of the same idea or topic into
+    different paragraphs.
+
+
+    Follow these steps to split the text into paragraphs:
+
+    1. Read the entire text to understand its structure and content.
+
+    2. Identify the main topics or ideas in the text.
+
+    3. For each main topic or idea, create a new paragraph.
+
+    4. Ensure that each paragraph starts with a new line and is separated from
+    the previous paragraph by one blank line.
+
+    5. Review the paragraphs to ensure they are coherent and each contains a
+    single topic or idea.
+
+
+    Format your output as follows:
+
+    - Write each paragraph on a new line.
+
+    - Separate paragraphs with one blank line.
+
+
+    Here is an example of the expected output format:
+
+    <example>
+
+    <paragraph>
+
+    This is the first paragraph. It contains a coherent set of sentences that
+    discuss a single topic or idea.
+
+    </paragraph>
+
+
+    <paragraph>
+
+    This is the second paragraph. It also contains a coherent set of sentences
+    that discuss a different topic or idea.
+
+    </paragraph>
+
+    </example>
+
+
+    Please follow these instructions carefully to ensure the text is split into
+    paragraphs correctly.
+
+    </Instructions>

@@ -1,0 +1,10 @@
+system: |-
+  Consider the text you've provided as a continuous flow of ideas.  Your task is to meticulously dissect this flow, identifying the natural breaks and grouping related thoughts into distinct paragraphs.
+
+  Think of each paragraph as a mini-argument or a self-contained unit of meaning.
+
+  * **Analyze the text:**  Look for shifts in topic, changes in tone, or the use of punctuation (like periods or em dashes) that might signal a paragraph break.
+  * **Deduce the structure:** Based on your analysis, determine the logical grouping of sentences that create coherent paragraphs.
+
+  Provide me with the text, clearly segmented into paragraphs, and explain your reasoning for each break.
+
