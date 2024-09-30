@@ -23,6 +23,8 @@ Enjoying this project? Please star it! 🌟
 * Enable the local deployment and execution of large language models (LLMs) such as LLaMA, Qwen, Gemma, Phi, GLM, Mistral, and more.
 * The AI Agent Script follows the [Programmable Prompt Engine Specification](https://github.com/offline-ai/ppe).
   * Visit the site for the detailed AI Agent script usage.
+* [PPE Fixtures Unit Test](https://github.com/offline-ai/cli-plugin-cmd-test.js)
+  * Unit Test Fixture Demo: https://github.com/offline-ai/cli/tree/main/examples/split-text-paragraphs
 
 Developing an intelligent application with AI Agent Script Engine involves just three steps:
 
@@ -181,7 +183,7 @@ $ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@offline-ai/cli/0.5.7 linux-x64 node-v20.17.0
+@offline-ai/cli/0.5.8 linux-x64 node-v20.17.0
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -359,31 +361,45 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 # Commands
 
 <!-- commands -->
-* [`ai agent`](#ai-agent)
-* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-* [`ai brain [NAME]`](#ai-brain-name)
-* [`ai brain dn [NAME]`](#ai-brain-dn-name)
-* [`ai brain down [NAME]`](#ai-brain-down-name)
-* [`ai brain download [NAME]`](#ai-brain-download-name)
-* [`ai brain list [NAME]`](#ai-brain-list-name)
-* [`ai brain refresh`](#ai-brain-refresh)
-* [`ai brain search [NAME]`](#ai-brain-search-name)
-* [`ai config [ITEM_NAME]`](#ai-config-item_name)
-* [`ai config save [DATA]`](#ai-config-save-data)
-* [`ai help [COMMAND]`](#ai-help-command)
-* [`ai plugins`](#ai-plugins)
-* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-* [`ai plugins link PATH`](#ai-plugins-link-path)
-* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-* [`ai plugins reset`](#ai-plugins-reset)
-* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-* [`ai plugins update`](#ai-plugins-update)
-* [`ai run [FILE] [DATA]`](#ai-run-file-data)
-* [`ai test [FILE]`](#ai-test-file)
-* [`ai version`](#ai-version)
+- [Offline AI PPE CLI(WIP)](#offline-ai-ppe-cliwip)
+- [Quick Start](#quick-start)
+  - [PPE CLI Command](#ppe-cli-command)
+  - [Programmable Prompt Engine Language](#programmable-prompt-engine-language)
+    - [I. Core Structure](#i-core-structure)
+    - [II. Reusability \& Configuration](#ii-reusability--configuration)
+    - [III. AI Capabilities](#iii-ai-capabilities)
+      - [IV. Message Text Formatting](#iv-message-text-formatting)
+    - [V. Script Capabilities](#v-script-capabilities)
+  - [Install](#install)
+  - [Run](#run)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`ai agent`](#ai-agent)
+  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+  - [`ai brain [NAME]`](#ai-brain-name)
+  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
+  - [`ai brain down [NAME]`](#ai-brain-down-name)
+  - [`ai brain download [NAME]`](#ai-brain-download-name)
+  - [`ai brain list [NAME]`](#ai-brain-list-name)
+  - [`ai brain refresh`](#ai-brain-refresh)
+  - [`ai brain search [NAME]`](#ai-brain-search-name)
+  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
+  - [`ai config save [DATA]`](#ai-config-save-data)
+  - [`ai help [COMMAND]`](#ai-help-command)
+  - [`ai plugins`](#ai-plugins)
+  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+  - [`ai plugins link PATH`](#ai-plugins-link-path)
+  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+  - [`ai plugins reset`](#ai-plugins-reset)
+  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+  - [`ai plugins update`](#ai-plugins-update)
+  - [`ai run [FILE] [DATA]`](#ai-run-file-data)
+  - [`ai test [FILE]`](#ai-test-file)
+  - [`ai version`](#ai-version)
+- [Credit](#credit)
 
 ## `ai agent`
 
@@ -411,7 +427,7 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.5.7/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.5.8/src/commands/agent/index.ts)_
 
 ## `ai autocomplete [SHELL]`
 

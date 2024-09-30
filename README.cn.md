@@ -23,6 +23,8 @@ AI Agent 脚本引擎特点:
 * 让本机运行 LLM 大模型, 并且支持本地部署 LLM 大模型（LLaMA, Qwen, Gemma, Phi, GLM, Mistral, ...）
 * 智能体脚本遵循[可编程提示词工程规范](https://github.com/offline-ai/ppe/blob/main/README.cn.md)
   * 访问该站点查看详细脚本的用法
+* [可编程提示词工程测试用例单元测试](https://github.com/offline-ai/cli-plugin-cmd-test.js)
+  * Fixtures Demo: https://github.com/offline-ai/cli/tree/main/examples/split-text-paragraphs
 
 使用AI Agent 脚本引擎开发一个智能应用只需要三步:
 
