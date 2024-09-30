@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.8](https://github.com/offline-ai/cli/compare/v0.5.7...v0.5.8) (2024-09-30)
+
+
+### Features
+
+* add demo split-text-paragraphs by autoPrompt ([5959399](https://github.com/offline-ai/cli/commit/5959399fcd25cd16923ef0c42f994eadbaa6d84f))
+
+
+### Bug Fixes
+
+* can not pass params option ([dfded56](https://github.com/offline-ai/cli/commit/dfded569ac99693e75887046d9f0eea9ca02b258))
+* demo ([3f6bcc9](https://github.com/offline-ai/cli/commit/3f6bcc98a203a62a37743172a73325dbea510665))
+
 ## [0.5.7](https://github.com/offline-ai/cli/compare/v0.5.6...v0.5.7) (2024-09-25)
 
 ## [0.5.6](https://github.com/offline-ai/cli/compare/v0.5.5...v0.5.6) (2024-09-25)
