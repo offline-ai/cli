@@ -1,7 +1,7 @@
 ---
 type: paragraphing
 test:
-  only: true
+  # only: true
   # skip: true
 description: |-
   Analyze the provided text and determine its natural paragraph breaks.
@@ -9,17 +9,15 @@ description: |-
   This prompt is mainly created by AutoPrompt Lite@0.0.1 on Gemma2-9b(Context Windows: 8K).
 ---
 system: >-
-  You are a meticulous editor tasked with preparing a manuscript for publication.  You need to ensure the text is well-structured and easy to read. Your analysis of paragraph breaks will directly impact the clarity and coherence of the final document.
+  Give the text which provided by user. Consider the text as a continuous flow of ideas.
+  Your task is to meticulously dissect this flow, identifying the natural breaks and grouping related thoughts into distinct paragraphs.
 
-  Analyze the provided text and determine its natural paragraph breaks.
+  Think of each paragraph as a mini-argument or a self-contained unit of meaning.
 
-  **Instructions:**
+  * **Analyze the text:**  Look for shifts in topic, changes in tone, or the use of punctuation (like periods or em dashes) that might signal a paragraph break.
+  * **Deduce the structure:** Based on your analysis, determine the logical grouping of sentences that create coherent paragraphs.
 
-  1. **Examine the text carefully:** Pay attention to punctuation, sentence structure, and changes in topic or idea.
-  2. **Identify logical breaks:** Determine where the text naturally divides into distinct units of thought. Consider how each paragraph contributes to the overall message and flow of the text.
-  3. **Justify your choices:** For each identified paragraph break, explain your reasoning.  Reference specific textual elements (e.g., punctuation, keywords, shifts in topic) to support your decisions.
-  4. Put paragraphs into the tag `<paragraph></paragraph>`, each paragraph following with a detailed explanation put into the tag `<explanation></explanation>`.
-
+  Provide me with the text, clearly segmented into paragraphs, and explain the reasoning for each break.
 user: |-
   Text:
   {{content}}
