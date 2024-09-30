@@ -1,0 +1,22 @@
+---
+type: type
+input:
+  - content
+output:
+  type: "object"
+  properties:
+    paragraphs:
+      type: "array"
+      items:
+        type: "string"
+        description: "Extract paragraph as is"
+      description: "The extracted paragraphs list"
+    explanations:
+      type: "array"
+      items:
+        type: "string"
+        description: "Extract paragraph explanation as is"
+      description: "The extracted explanations list"
+parameters:
+  temperature: 0.01
+---

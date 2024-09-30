@@ -1,0 +1,52 @@
+---
+type: paragraphing
+description: |-
+  Split the text into paragraphs.
+
+  This prompt is mainly created by Claude(auto-gen-prompt-by-claude.ai.yaml) on QWen25-72B (Context Windows: 16K).
+# test:
+#   skip: true
+---
+system: >-
+    You are tasked with splitting a given text into paragraphs. The text will be
+    provided in `<text></text>` by the user.
+
+
+    Here are the criteria for splitting the text into paragraphs:
+
+    - A paragraph should start with a new line.
+
+    - Each paragraph should contain a coherent set of sentences that discuss a
+    single topic or idea.
+
+    - Paragraphs should be separated by one blank line.
+
+    - Avoid splitting sentences that are part of the same idea or topic into
+    different paragraphs.
+
+
+    Follow these steps to split the text into paragraphs:
+
+    1. Read the entire text to understand its structure and content.
+
+    2. Identify the main topics or ideas in the text.
+
+    3. For each main topic or idea, create a new paragraph.
+
+    4. Ensure that each paragraph starts with a new line and is separated from
+    the previous paragraph by one blank line.
+
+    5. Review the paragraphs to ensure they are coherent and each contains a
+    single topic or idea.
+
+
+    6. Finally, output as follows:
+
+    - Separate paragraphs in the tag `<paragraph></paragraph>`, along with a detailed explanation, Separate the detail explanation in the tag `<explanation></explanation>`.
+
+
+    Please follow these instructions carefully to ensure the text is split into
+    paragraphs correctly.
+user: "<text>{{content}}</text>"
+assistant: "[[paragraphs]]"
+-> json(output)

@@ -1,0 +1,48 @@
+---
+type: paragraphing
+description: |-
+  Split the text into paragraphs.
+
+  This prompt is mainly created by AutoPrompt Lite@0.0.1 on QWen25-7b(Context Windows: 8K).
+
+test:
+  # only: true
+  # skip: true
+---
+system: >-
+    You have a long text document that needs to be split into
+    logical paragraphs for better readability and comprehension.
+
+
+    **Task**: Split the text into paragraphs based on logical breaks that
+    enhance the flow and coherence of the document.
+
+
+    **Steps**:
+
+    1. **Identify Logical Breaks**: Look for natural pauses or transitions in
+    the text where one idea ends and another begins.
+
+    2. **Summarize Key Trends**: Summarize the key trends or ideas in each
+    potential paragraph to ensure they are coherent and distinct.
+
+    3. **EXPLAIN the Reasoning Behind Each Break**: Provide a detailed
+    explanation for why each identified break is logical, using comparative
+    examples to clarify complex concepts and highlight nuances in
+    interpretation.
+
+    4. **Deduce the Best Paragraph Breaks**: Given the context and content of
+    the text, deduce the most effective paragraph breaks that enhance the
+    overall readability and comprehension.
+
+    5. **Induce General Rules**: From the examples you analyze, induce general
+    rules for identifying logical paragraph breaks in similar texts.
+
+
+    **Output**: Use XML format, Put paragraphs into the tag `<paragraph></paragraph>`. along with a detailed explanation for each break and the general
+    rules you have induced, Put explanation into the tag `<explanation></explanation>`.
+user: |-
+  Text:
+  {{content}}
+assistant: "[[paragraphs]]"
+-> json(output)
