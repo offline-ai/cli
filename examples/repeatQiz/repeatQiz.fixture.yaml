@@ -1,0 +1,64 @@
+- input:
+    content: |-
+      蒂姆获得晋升，月薪 20000 美元的基础上加薪 5%。还给了他相当于半个月工资的奖金。他一年能赚多少钱？最后回答:"The Answer is number."
+    language: 中文
+  output: !re /The Answer is 262500[.。*]*$/
+- input:
+    content: >-
+      科尔比喜欢看电影，他的父母每个月都会给他 150 美元用于看电影。周五和周六的电影票价格为 10 美元。其他任何一天的电影
+      票价格为 7 美元。爆米花售价 8 美元，盒装糖果售价 2 美元。如果他已经在周五或周六看了 5 部电影，其他日子看了 8 部电影，已经吃了 2 桶爆米花和 4 盒糖果，今天是这个月的最后一天，也是星期五，他想确保今天晚上他还能买
+      到一桶爆米花和一盒糖果后，他还能看多少部电影？ 最后在文末输出: "The Answer is number."
+    language: 中文
+  output: !re /The Answer is 1[.。*]*$/
+- input:
+    content: |-
+      Colby loves going to the movies and every month his parents give him $150 to spend at the movies. Tickets for Fridays and
+      Saturdays cost $10. Tickets for any other day cost $7. Popcorn costs $8 and boxes of candy cost $2. It is the last day of the
+      month and it's a Friday. He wants to make sure he gets a popcorn and box of candy that night. How many movies can he see if
+      he already saw 5 movies on a Friday or Saturday, 8 movies on other days, had 2 tubs of popcorn, and four boxes of candy that
+      month?
+      Think it carefully. At last output the answer: "The Answer is number."
+    # prefix: "Let's break it down carefully one by one:"
+  output: !re /The Answer is 1[.。*]*$/
+- input:
+    content: >-
+      Mike was a pen pal with 5 people. He stopped being penpals with 2 of them. They each send 2 letters a week that are 5 pages
+      long. He responds in kind. He can write a page every 6 minutes. How many hours does he spend writing a week?
+      At last output the answer: "The Answer is number."
+  output: !re /The Answer is 3[.。*]*$/
+- input:
+    content: |-
+      Terri is knitting a sweater with two sleeves, a collar, and a decorative rosette. The body of the sweater takes 900 stitches to
+      complete, the collar takes a tenth of that number of stitches, and the rosette takes twice as many as the collar. The whole sweater
+      is an 1800-stitch project. How many stitches does each sleeve take?
+      At last output the answer: "The Answer is number."
+  output: !re /The Answer is 315[.。*'"]*$/
+- input:
+    content: |-
+      Would a nickel fit inside a koala pouch?
+      At last output the answer: "The Answer is yes/no."
+  output: !re /The Answer is yes[.。*]*$/i
+  skip: true
+- input:
+    content: 一枚硬币正面朝上。汉克没有翻转硬币。珍妮没有翻转硬币。弗兰基翻转了硬币。伊莎翻转了硬币。硬币还是正面吗？最后回答true或false。
+    language: 中文
+  output: !re /true/
+- input:
+    content: |-
+      Yesterday was April 30, 2021. What is the date tomorrow in MM/DD/YYYY?
+      At last output the answer: "The Answer is MM/DD/YYYY."
+  output: !re /The Answer is 05\/02\/2021[.。*]*$/i
+  skip: true
+- input:
+    content: |-
+      Ned had to wash 9 short sleeve shirts and 21 long sleeve shirts before school. If he had only washed 29 of them by the time school started, how many did he not wash?
+      At last output the answer: "The Answer is number."
+  output: !re /The Answer is 1[.。*]*$/i
+  skip: true
+- input:
+    content: |-
+      A trader sold an article at a profit of 20% for Rs.360. What is the cost price of the article?
+      Answer Choices: A) 270, B) 300, C) 280, D) 320, E) 315
+      At last output the answer: "My choice is A/B/C/D/E."
+  output: !re /My choice is [*]*B[.。*]*$/i
+  skip: true

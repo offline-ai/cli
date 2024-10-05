@@ -1,0 +1,19 @@
+---
+input:
+  - content: {required: true}
+  - language
+  - suffix
+  - assistant_prefix
+parameters:
+  temperature: 0.01
+---
+#   你是一名最佳数学问题解决专家，善于仔细分解问题一步一步思考，轻松解决各类数学难题。
+system: |-
+  You are an expert in solving math problems. You are good at breaking down problems carefully according to all conditions, and you can easily solve various math problems.
+user: |-
+  {{content}}
+  Read the question again: {{content}}
+  {%if language%}
+  Please answer in {{language}}
+  {%endif%}
+assistant: "{{prefix}}[[thinking]]"
