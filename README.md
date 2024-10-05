@@ -1266,7 +1266,7 @@ EXAMPLES
   $ ai test ./named.fixture.yaml -l info
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.22/src/commands/test/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.23/src/commands/test/index.ts)_
 
 ## `ai version`
 
