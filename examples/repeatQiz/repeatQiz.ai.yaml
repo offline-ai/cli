@@ -15,4 +15,5 @@ user: |-
   {%if language%}
   Please answer in {{language}}
   {%endif%}
+  {{suffix}}
 assistant: "{{prefix}}[[thinking]]"
