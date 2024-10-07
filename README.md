@@ -452,21 +452,21 @@ _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomp
 
 ```
 USAGE
-  $ ai brain [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-s
-    <value>] [-n <value>] [-u <value> -r] [-v ]
+  $ ai brain [NAME] [--json] [--config <value>] [--banner] [-b <value>]
+    [-s <value>] [-n <value>] [-u <value> -r] [-v ]
 
 ARGUMENTS
   NAME  the brain name to search
 
 FLAGS
   -b, --brainDir=<value>  the brains(LLM) directory
-  -c, --config=<value>    the config file
   -n, --count=<value>     [default: 100] the max number of brains to list, 0 means all.
   -r, --refresh           refresh the online brains list
   -s, --search=<value>    the json filter to search for brains
   -u, --hubUrl=<value>    the hub mirror url
   -v, --verifyQuant       whether verify quant when refresh
       --[no-]banner       show banner
+      --config=<value>    the config file
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -488,7 +488,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.21/src/commands/brain/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.22/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -496,17 +496,16 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ```
 USAGE
-  $ ai brain dn [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-q
-    F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ
-    2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED
-    ] [-u <value>] [-d]
+  $ ai brain dn [NAME] [--json] [--config <value>] [--banner] [-b <value>]
+    [-q F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XX
+    S|IQ2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUE
+    SSED] [-u <value>] [-d]
 
 ARGUMENTS
   NAME  the brain name to download
 
 FLAGS
   -b, --brainDir=<value>  the brains(LLM) directory
-  -c, --config=<value>    the config file
   -d, --dryRun            dry run, do not download
   -q, --quant=<option>    the quantization of the model, defaults to 4bit
                           <options: F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K
@@ -514,6 +513,7 @@ FLAGS
                           M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED>
   -u, --hubUrl=<value>    the hub mirror url
       --[no-]banner       show banner
+      --config=<value>    the config file
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -539,17 +539,16 @@ EXAMPLES
 
 ```
 USAGE
-  $ ai brain down [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-q
-    F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ
-    2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED
-    ] [-u <value>] [-d]
+  $ ai brain down [NAME] [--json] [--config <value>] [--banner] [-b <value>]
+    [-q F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XX
+    S|IQ2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUE
+    SSED] [-u <value>] [-d]
 
 ARGUMENTS
   NAME  the brain name to download
 
 FLAGS
   -b, --brainDir=<value>  the brains(LLM) directory
-  -c, --config=<value>    the config file
   -d, --dryRun            dry run, do not download
   -q, --quant=<option>    the quantization of the model, defaults to 4bit
                           <options: F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K
@@ -557,6 +556,7 @@ FLAGS
                           M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED>
   -u, --hubUrl=<value>    the hub mirror url
       --[no-]banner       show banner
+      --config=<value>    the config file
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -582,17 +582,16 @@ EXAMPLES
 
 ```
 USAGE
-  $ ai brain download [NAME] [--json] [-c <value>] [--banner] [-b <value>] [-q
-    F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ
-    2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED
-    ] [-u <value>] [-d]
+  $ ai brain download [NAME] [--json] [--config <value>] [--banner] [-b <value>]
+    [-q F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XX
+    S|IQ2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUE
+    SSED] [-u <value>] [-d]
 
 ARGUMENTS
   NAME  the brain name to download
 
 FLAGS
   -b, --brainDir=<value>  the brains(LLM) directory
-  -c, --config=<value>    the config file
   -d, --dryRun            dry run, do not download
   -q, --quant=<option>    the quantization of the model, defaults to 4bit
                           <options: F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K
@@ -600,6 +599,7 @@ FLAGS
                           M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED>
   -u, --hubUrl=<value>    the hub mirror url
       --[no-]banner       show banner
+      --config=<value>    the config file
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -619,7 +619,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.21/src/commands/brain/download.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.22/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -627,7 +627,7 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ```
 USAGE
-  $ ai brain list [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b
+  $ ai brain list [NAME] [--json] [--config <value>] [--banner] [-d] [-a] [-b
     <value>] [-f] [-s <value>] [-n <value>] [-u <value> -r]
 
 ARGUMENTS
@@ -636,7 +636,6 @@ ARGUMENTS
 FLAGS
   -a, --all                list all brains(include downloaded)
   -b, --brainDir=<value>   the brains(LLM) directory
-  -c, --config=<value>     the config file
   -d, --downloaded         list downloaded brains
   -f, --[no-]onlyFeatured  only list featured brains
   -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
@@ -644,12 +643,13 @@ FLAGS
   -s, --search=<value>     the json filter to search for brains
   -u, --hubUrl=<value>     the hub mirror url
       --[no-]banner        show banner
+      --config=<value>     the config file
 
 GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.21/src/commands/brain/list.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.22/src/commands/brain/list.ts)_
 
 ## `ai brain refresh`
 
@@ -674,7 +674,7 @@ DESCRIPTION
   refresh/update brain index from huggingface.co
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.21/src/commands/brain/refresh.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.22/src/commands/brain/refresh.ts)_
 
 ## `ai brain search [NAME]`
 
@@ -682,7 +682,7 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ```
 USAGE
-  $ ai brain search [NAME] [--json] [-c <value>] [--banner] [-d] [-a] [-b
+  $ ai brain search [NAME] [--json] [--config <value>] [--banner] [-d] [-a] [-b
     <value>] [-f] [-s <value>] [-n <value>] [-u <value> -r]
 
 ARGUMENTS
@@ -691,7 +691,6 @@ ARGUMENTS
 FLAGS
   -a, --[no-]all           list all brains(include downloaded)
   -b, --brainDir=<value>   the brains(LLM) directory
-  -c, --config=<value>     the config file
   -d, --downloaded         list downloaded brains
   -f, --[no-]onlyFeatured  only list featured brains
   -n, --count=<value>      [default: 100] the max number of brains to list, 0 means all.
@@ -699,12 +698,13 @@ FLAGS
   -s, --search=<value>     the json filter to search for brains
   -u, --hubUrl=<value>     the hub mirror url
       --[no-]banner        show banner
+      --config=<value>     the config file
 
 GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.21/src/commands/brain/search.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.3.22/src/commands/brain/search.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -715,7 +715,7 @@ USAGE
   $ ai config [ITEM_NAME] [--json] [-u <value>] [--apiKey <value>] [-s
     <value>...] [--logLevelMaxLen <value> -l trace|debug|verbose|info|notice|warn|error|fatal|silence] [--histories
     <value>] [-n] [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a
-    <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [-P <value>]
+    <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-C <value>] [-P <value>]
 
 ARGUMENTS
   ITEM_NAME  the config item name path to get
@@ -723,6 +723,7 @@ ARGUMENTS
 FLAGS
   -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
                                        automatically, eg, en, etc.
+  -C, --streamEchoChars=<value>        [default: 80] stream echo max characters limit
   -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
@@ -730,9 +731,8 @@ FLAGS
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
-  -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
+  -e, --streamEcho=<option>            [default: line] stream echo mode, defaults to true
                                        <options: true|false|line>
-  -e, --streamEchoChars=<value>        stream echo max characters limit, defaults to no limit
   -f, --script=<value>                 the ai-agent script file name or id
   -i, --[no-]interactive               interactive mode
   -k, --backupChat                     whether to backup chat history before start, defaults to false
@@ -771,7 +771,7 @@ EXAMPLES
   }
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.23/src/commands/config/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.24/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -779,11 +779,11 @@ _See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli
 
 ```
 USAGE
-  $ ai config save [DATA] [--json] [-c <value>] [--banner] [-u <value>]
+  $ ai config save [DATA] [--json] [--config <value>] [--banner] [-u <value>]
     [--apiKey <value>] [-s <value>...] [--logLevelMaxLen <value> -l
     trace|debug|verbose|info|notice|warn|error|fatal|silence] [--histories <value>] [-n] [-k] [-t <value> -i]
     [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
-    [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [-P <value>]
+    [-L <value>] [-A <value>] [-e true|false|line] [-C <value>] [-P <value>]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
@@ -791,17 +791,16 @@ ARGUMENTS
 FLAGS
   -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
                                        automatically, eg, en, etc.
+  -C, --streamEchoChars=<value>        [default: 80] stream echo max characters limit
   -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
   -P, --provider=<value>               the LLM provider, defaults to llamacpp
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
-  -c, --config=<value>                 the config file
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
-  -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
+  -e, --streamEcho=<option>            [default: line] stream echo mode, defaults to true
                                        <options: true|false|line>
-  -e, --streamEchoChars=<value>        stream echo max characters limit, defaults to no limit
   -f, --script=<value>                 the ai-agent script file name or id
   -i, --[no-]interactive               interactive mode
   -k, --backupChat                     whether to backup chat history before start, defaults to false
@@ -816,6 +815,7 @@ FLAGS
   -u, --api=<value>                    the api URL
       --apiKey=<value>                 the api key (optional)
       --[no-]banner                    show banner
+      --config=<value>                 the config file
       --histories=<value>              the chat histories folder to record
       --logLevelMaxLen=<value>         the max length of log item to display
       --no-chats                       disable chat histories, defaults to false
@@ -825,7 +825,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.23/src/commands/config/save.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.1.24/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -1142,11 +1142,11 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 
 ```
 USAGE
-  $ ai run [FILE] [DATA] [--json] [-c <value>] [--banner] [-u <value>]
-    [--apiKey <value>] [-s <value>...] [--logLevelMaxLen <value> -l
+  $ ai run [FILE] [DATA] [--json] [--config <value>] [--banner] [-u
+    <value>] [--apiKey <value>] [-s <value>...] [--logLevelMaxLen <value> -l
     trace|debug|verbose|info|notice|warn|error|fatal|silence] [--histories <value>] [-n] [-k] [-t <value> -i]
     [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
-    [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [-P <value>] [--consoleClear]
+    [-L <value>] [-A <value>] [-e true|false|line] [-C <value>] [-P <value>] [--consoleClear]
 
 ARGUMENTS
   FILE  the script file path, or the json data when `-f` switch is set
@@ -1155,17 +1155,16 @@ ARGUMENTS
 FLAGS
   -A, --aiPreferredLanguage=<value>    the ISO 639-1 code for the AI preferred language to translate the user input
                                        automatically, eg, en, etc.
+  -C, --streamEchoChars=<value>        [default: 80] stream echo max characters limit
   -D, --data=<value>...                the data which will be passed to the ai-agent script: key1=value1 key2=value2
   -L, --userPreferredLanguage=<value>  the ISO 639-1 code for the user preferred language to translate the AI result
                                        automatically, eg, en, zh, ja, ko, etc.
   -P, --provider=<value>               the LLM provider, defaults to llamacpp
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
-  -c, --config=<value>                 the config file
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
-  -e, --streamEcho=<option>            [default: true] stream echo mode, defaults to true
+  -e, --streamEcho=<option>            [default: line] stream echo mode, defaults to true
                                        <options: true|false|line>
-  -e, --streamEchoChars=<value>        stream echo max characters limit, defaults to no limit
   -f, --script=<value>                 the ai-agent script file name or id
   -i, --[no-]interactive               interactive mode
   -k, --backupChat                     whether to backup chat history before start, defaults to false
@@ -1180,6 +1179,7 @@ FLAGS
   -u, --api=<value>                    the api URL
       --apiKey=<value>                 the api key (optional)
       --[no-]banner                    show banner
+      --config=<value>                 the config file
       --[no-]consoleClear              Whether console clear after stream echo output, default to true
       --histories=<value>              the chat histories folder to record
       --logLevelMaxLen=<value>         the max length of log item to display
@@ -1200,7 +1200,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.8.10/src/commands/run/index.ts)_
+_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.8.11/src/commands/run/index.ts)_
 
 ## `ai test [FILE]`
 
@@ -1208,11 +1208,12 @@ _See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugi
 
 ```
 USAGE
-  $ ai test [FILE] [--json] [-c <value>] [--banner] [-u <value>]
+  $ ai test [FILE] [--json] [--config <value>] [--banner] [-u <value>]
     [--apiKey <value>] [-s <value>...] [--logLevelMaxLen <value> -l
     trace|debug|verbose|info|notice|warn|error|fatal|silence] [--histories <value>] [-n] [-k] [-t <value> ] [--no-chats]
     [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>]
-    [-A <value>] [-e true|false|line] [-e <value>] [-P <value>] [--consoleClear] [-i <value>...] [-e <value>...] [-g]
+    [-A <value>] [-e true|false|line] [-e <value>] [-P <value>] [--consoleClear] [-i <value>...] [-x <value>...] [-g]
+    [-c <value>]
 
 ARGUMENTS
   FILE  the test fixtures file path
@@ -1226,9 +1227,10 @@ FLAGS
   -P, --provider=<value>               the LLM provider, defaults to llamacpp
   -a, --arguments=<value>              the json data which will be passed to the ai-agent script
   -b, --brainDir=<value>               the brains(LLM) directory
-  -c, --config=<value>                 the config file
+  -c, --runCount=<value>               [default: 1] The number of times to run the test case to check if the results are
+                                       consistent with the previous run, and to record the counts of matching and
+                                       non-matching results
   -d, --dataFile=<value>               the data file which will be passed to the ai-agent script
-  -e, --excludeIndex=<value>...        the index of the fixture to exclude from running
   -e, --streamEcho=<option>            [default: line] stream echo mode, defaults to true
                                        <options: true|false|line>
   -e, --streamEchoChars=<value>        [default: 80] stream echo max characters limit, defaults to no limit
@@ -1245,8 +1247,10 @@ FLAGS
   -s, --agentDirs=<value>...           the search paths for ai-agent script file
   -t, --inputs=<value>                 the input histories folder for interactive mode to record
   -u, --api=<value>                    the api URL
+  -x, --excludeIndex=<value>...        the index of the fixture to exclude from running
       --apiKey=<value>                 the api key (optional)
       --[no-]banner                    show banner
+      --config=<value>                 the config file
       --[no-]consoleClear              Whether console clear after stream output, default to true in interactive, false
                                        to non-interactive
       --histories=<value>              the chat histories folder to record
@@ -1266,7 +1270,7 @@ EXAMPLES
   $ ai test ./named.fixture.yaml -l info
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.25/src/commands/test/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.1.26/src/commands/test/index.ts)_
 
 ## `ai version`
 
