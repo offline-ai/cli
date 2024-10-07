@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.13](https://github.com/offline-ai/cli/compare/v0.5.12...v0.5.13) (2024-10-07)
+
+
+### Bug Fixes
+
+* **example:** change temperature to 0 for reproduce result ([2c0e743](https://github.com/offline-ai/cli/commit/2c0e743075fbd0c207d3d86f343aaa6e982bcb17))
+
 ## [0.5.12](https://github.com/offline-ai/cli/compare/v0.5.11...v0.5.12) (2024-10-06)
 
 ## [0.5.11](https://github.com/offline-ai/cli/compare/v0.5.10...v0.5.11) (2024-10-06)
