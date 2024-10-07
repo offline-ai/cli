@@ -5,7 +5,8 @@ input:
   - suffix
   - assistant_prefix
 parameters:
-  temperature: 0.01
+  temperature: 0
+  memoized: false
 ---
 system: |-
   You are an expert in solving math problems. You are good at breaking down problems carefully according to all conditions, and you can easily solve various math problems.
