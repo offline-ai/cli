@@ -58,6 +58,50 @@ AI Agent 脚本引擎特点:
    * `--provider openai://Qwen/Qwen2.5-Coder-7B-Instruct -u https://api.siliconflow.cn/ --apiKey “sk-XXX” ...`
 3. `[[Fruit:|Apple|Banana]]`: 让AI强制单选或多选语法，将失效
 
+## [Programmable Prompt Engine Language](./lib/guide/lang.md)
+
+可编程提示引擎 (PPE) 语言是一种消息处理语言，类似于 YAML 格式。
+
+PPE 设计用于定义 AI 提示消息及其输入/输出配置。它允许创建一个可重用且可编程的提示系统，类似于软件工程实践。
+
+### [I. 核心结构](./lib/guide/core-lang.md)
+
+* **基于消息的对话**：将交互定义为一系列带有角色（系统(system)、用户(user)、助手(assistant)）的消息。
+* **类似 YAML 的语法**：语法类似于 YAML，使其易于阅读和理解。
+* **对话分隔**: 使用三个减号 (`---`) 或星号 (`***`) 清楚地标记对话轮次。
+
+### [II. 可重用性和配置](./lib/guide/lang-reuse.md)
+
+* **Input/Output 配置 (Front-Matter)**: 使用 `input` 关键字定义输入要求，使用 `output` 关键字和 JSON 模式定义预期输出格式。
+* **提示模板**: 使用 Jinja2 模板（`{{variable_name}}`）将输入配置或提示设置中的变量嵌入消息中。
+* **自定义脚本类型**: 允许定义可重用的脚本类型（`type: type`），以实现代码和配置的继承。
+
+### [III. AI Capabilities](./lib/guide/lang-ai.md)
+
+* **高级 AI 替换:** 使用双括号（`[[Response]]`）触发 AI 执行，将响应存储在变量（`prompt.Response`）中，并在脚本中使用。
+* **AI 参数控制:** 通过双括号内传递参数（例如 `[[Answer:temperature=0.7]]`）微调 AI 行为。
+* **约束 AI 响应:** 限制 AI 输出为预定义的选项集（例如 `[[FRUITS:|Apple|Banana]]`）。
+
+#### [IV. 消息文本格式化](./lib/guide/lang-formatting.md)
+
+角色消息可以使用 Jinja2 模板和高级替换功能进行格式化。
+
+* **Jinja2 模板:** 使用双大括号（例如 `{{name}}`）引用输入配置或提示设置中的变量。
+* **高级 AI 替换:** 如上所述，触发 AI 执行并存储响应。
+* **外部脚本替换:** 使用 `@` 符号调用外部脚本（例如 `@say_hi_script(param1=value1)`）。
+* **内部指令替换:** 类似地调用内部指令（例如 `@$instruction(param1=value1)`）。
+* **正则表达式替换:** 使用 `/RegExp/[RegOpts]:Answer[:index_or_group_name]` 对 `Answer` 变量进行基于模式的替换。
+
+### [V. Script Capabilities](./lib/guide/lang-script.md)
+
+* **链式输出:** `->` 运算符将脚本输出连接到后续指令或脚本，创建复杂的流程。
+* **指令调用:** 使用 `$` 前缀调用脚本指令（例如 `$fn: {param1:value1}` 或 `$fn(param1=value1)`）。
+* **控制流:** 指令如 `$if`、`$pipe`、`$while`、`$match` 提供控制流机制。
+* **事件驱动架构:** 函数如 `$on`、`$once`、`$emit` 和 `$off` 启用基于事件的编程，使脚本行为更加灵活。
+* **脚本扩展:**
+  * `!fn` 指令允许声明 `JavaScript`/`Python` 等语言的函数以扩展脚本功能。(注： 目前只实现 `JavaScript` 函数)
+  * [`import` configuration](https://github.com/offline-ai/ppe/tree/main?tab=readme-ov-file#import) 允许导入外部脚本和模块。
+
 ### Install
 
 ```bash

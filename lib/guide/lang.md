@@ -103,6 +103,11 @@ The role messages can be formatted using Jinja2 templates and advanced replaceme
 * The `->` operator chains script outputs as inputs to subsequent external scripts.
 * The `$` prefix calls script instructions (e.g., `$fn: {param1:value1}`).
 
+### Script Extension
+
+* The `!fn` directive allows declaring JavaScript functions to extend script functionality.
+* [`import` configuration](https://github.com/offline-ai/ppe/tree/main?tab=readme-ov-file#import) allows importing external scripts and modules.
+
 ### Custom Script Types
 
 PPE enables defining custom script types (`type: type`) for code reuse and configuration inheritance.

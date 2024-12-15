@@ -117,10 +117,12 @@ The role messages can be formatted using Jinja2 templates and advanced replaceme
 ### [V. Script Capabilities](./lib/guide/lang-script.md)
 
 * **Chaining Outputs:** The `->` operator connect script outputs to subsequent instructions or scripts, creating complex workflows.
-* **Instruction Invocation:** The `$` prefix calls script instructions (e.g., `$fn: {param1:value1}`).
-* **Control Flow:** Directives like `$if`, `$pipe`, `$set`, `$get`, `$print`, `$echo` provide control flow mechanisms.
+* **Instruction Invocation:** The `$` prefix calls script instructions (e.g., `$fn: {param1:value1}` or `$fn(param1=value1)`).
+* **Control Flow:** Directives like `$if`, `$pipe`, `$while`, `$match` provide control flow mechanisms.
 * **Event-Driven Architecture:** Functions like `$on`, `$once`, `$emit` and `$off` enable event-based programming for flexible script behavior.
-* **JavaScript Extension:** The `!fn` directive allows declaring JavaScript functions to extend script functionality.
+* **Script Extension:**
+  * The `!fn` directive allows declaring JavaScript functions to extend script functionality.
+  * [`import` configuration](https://github.com/offline-ai/ppe/tree/main?tab=readme-ov-file#import) allows importing external scripts and modules.
 
 ## Install
 
@@ -183,7 +185,7 @@ $ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@offline-ai/cli/0.5.12 linux-x64 node-v20.17.0
+@offline-ai/cli/0.5.13 linux-x64 node-v20.17.0
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -361,31 +363,45 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 # Commands
 
 <!-- commands -->
-* [`ai agent`](#ai-agent)
-* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-* [`ai brain [NAME]`](#ai-brain-name)
-* [`ai brain dn [NAME]`](#ai-brain-dn-name)
-* [`ai brain down [NAME]`](#ai-brain-down-name)
-* [`ai brain download [NAME]`](#ai-brain-download-name)
-* [`ai brain list [NAME]`](#ai-brain-list-name)
-* [`ai brain refresh`](#ai-brain-refresh)
-* [`ai brain search [NAME]`](#ai-brain-search-name)
-* [`ai config [ITEM_NAME]`](#ai-config-item_name)
-* [`ai config save [DATA]`](#ai-config-save-data)
-* [`ai help [COMMAND]`](#ai-help-command)
-* [`ai plugins`](#ai-plugins)
-* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-* [`ai plugins link PATH`](#ai-plugins-link-path)
-* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-* [`ai plugins reset`](#ai-plugins-reset)
-* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-* [`ai plugins update`](#ai-plugins-update)
-* [`ai run [FILE] [DATA]`](#ai-run-file-data)
-* [`ai test [FILE]`](#ai-test-file)
-* [`ai version`](#ai-version)
+- [Offline AI PPE CLI(WIP)](#offline-ai-ppe-cliwip)
+- [Quick Start](#quick-start)
+  - [PPE CLI Command](#ppe-cli-command)
+  - [Programmable Prompt Engine Language](#programmable-prompt-engine-language)
+    - [I. Core Structure](#i-core-structure)
+    - [II. Reusability \& Configuration](#ii-reusability--configuration)
+    - [III. AI Capabilities](#iii-ai-capabilities)
+      - [IV. Message Text Formatting](#iv-message-text-formatting)
+    - [V. Script Capabilities](#v-script-capabilities)
+  - [Install](#install)
+  - [Run](#run)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`ai agent`](#ai-agent)
+  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+  - [`ai brain [NAME]`](#ai-brain-name)
+  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
+  - [`ai brain down [NAME]`](#ai-brain-down-name)
+  - [`ai brain download [NAME]`](#ai-brain-download-name)
+  - [`ai brain list [NAME]`](#ai-brain-list-name)
+  - [`ai brain refresh`](#ai-brain-refresh)
+  - [`ai brain search [NAME]`](#ai-brain-search-name)
+  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
+  - [`ai config save [DATA]`](#ai-config-save-data)
+  - [`ai help [COMMAND]`](#ai-help-command)
+  - [`ai plugins`](#ai-plugins)
+  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+  - [`ai plugins link PATH`](#ai-plugins-link-path)
+  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+  - [`ai plugins reset`](#ai-plugins-reset)
+  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+  - [`ai plugins update`](#ai-plugins-update)
+  - [`ai run [FILE] [DATA]`](#ai-run-file-data)
+  - [`ai test [FILE]`](#ai-test-file)
+  - [`ai version`](#ai-version)
+- [Credit](#credit)
 
 ## `ai agent`
 
@@ -413,7 +429,7 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.5.12/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.5.13/src/commands/agent/index.ts)_
 
 ## `ai autocomplete [SHELL]`
 

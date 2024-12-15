@@ -8,6 +8,10 @@ PPE is designed to define AI prompt messages and their input/output configuratio
 * YAML-Like: PPE uses a syntax similar to YAML, making it human-readable and relatively easy to learn.
 * Dialogue Separation: Triple dashes (`---`) or asterisks (`***`) clearly mark the beginning of new dialogue turns, ensuring context is managed effectively.
 
+## Instruction Invocation
+
+The `$` prefix calls script instructions (e.g., `$fn: {param1:value1}`, or `$fn(param1=value)`).
+
 ## Chains Invocation of Agent Scripts Or Instructions
 
 Within messages, results can be forwarded to other agents.
@@ -58,13 +62,98 @@ assistant: "[[JOKE]]"
 * Call internal instruction with `$` prefix
 * If the script returns a value of type `string`/`boolean`/`number`, that return value will be placed to the `content` field. If the return value is an `object`, its contents will be directly passed to the agent.
 
-### Script File and Directory
+## Script Extension
+
+### Declare Functions in Scripts
+
+* The `!fn` directive allows declaring `JavaScript`/`Python`/... functions to extend script functionality.
+
+```yaml
+!fn |-
+  function func1 ({arg1, arg2}) {
+  }
+# The function keyword can be omitted:
+!fn |-
+  func1 ({arg1, arg2}) {
+  }
+```
+
+The function body is `javascript`. In the definition function, `async require(moduleFilename)` can be used to load local esm js file in the format.
+
+```yaml
+!fn |-
+  async myTool ({arg1, arg2}) {
+  const tool = await require(__dirname + '/myTool.js')
+  return tool.myTool({arg1, arg2})
+  }
+```
+
+If you need to use other languages, you should specify the language:
+
+```yaml
+!fn |-
+  [python] def func1(arg1, arg2):
+    return arg1 + arg2
+```
+
+**Note**:
+
+* `__dirname`: is the directory where the prompt script file is located.
+* `__filename`: is the prompt script file path.
+* In the function, you can use `this` to get all the methods of the current script's runtime.
+* All custom functions must be referenced by `$`. For example, in the example above, `func1` is defined, so `$func1` must be used when calling
+* Currently only supports JavaScript, planning to add support for Python, Ruby, etc.
+
+### Import External scripts and modules
+
+* The `import` configuration to import functions and declarations in other script file
+
+Import one file:
+
+```yaml
+---
+import: "js_package_name"
+---
+```
+
+Import many files Use Array Format:
+
+```yaml
+---
+import:
+  - "js_package_name"
+  - "js/script/path.js": ['func1', 'func2', {func3: 'asFunc3'}] # Import only the specified functions
+  - 'ruby-funcs.rb'
+  - "agent.ai.yaml": "asName" # Import the script and rename it to "$asName"
+---
+```
+
+Use Object Format:
+
+```yaml
+---
+import: # Object Format
+  "js_package_name": "*"
+  "js/script/path.js": ['func1', 'func2']
+  "agent.ai.yaml": "asName"
+---
+```
+
+**Note**:
+
+* the default is js module if not extension name provided.
+* The relative path is the folder of the current ai script, not the CWD(current working dir)
+* When the imported declaration is a function, it automatically adds the prefix "$" to function names without a prefix
+* If the function `initializeModule` exists in the module and is imported, it will be automatically executed after the module loads.
+* Currently, only `javascript` support has been implemented.
+
+## Script File and Directory
 
 A PPE script can be a single file or an entire directory. If it is a file, the filename must end with `.ai.yaml`. If it's a directory, it must contain a script file with the same name as the directory to serve as the entry point. Additionally, other script files within the same directory can call each other.
 
 For example, if there is a directory named `a-dir`, the entry point script file should be named `a-dir/a-dir.ai.yaml`.
 
-### Essential Tips
+## Essential Tips
 
 * Script Return Value: The script's final command's output determines its return value.
 * Auto-Execution: Scripts ending with prompts but no explicit `$AI` call will automatically execute `$AI` at the end, configurable via `autoRunLLMIfPromptAvailable`.
