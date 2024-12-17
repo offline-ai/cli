@@ -18,7 +18,7 @@ description: |-
   # begin your script prompts
   ...
   assistant: "[[THE_CONTENT]]"
-  # the assistant's response(`THE_CONTENT`) will be passed into the `json` script as `content` input:
+  # the assistant's response(`THE_CONTENT`) will be chained passed into the `json` script as `content` input:
   -> json(output=output)
   ```
   Or, run it directly:
@@ -32,48 +32,29 @@ tag:
 input:
   - content # The content to extract
   - output  # JSON Schema
+  - background
 parameters:
-  temperature: 0.01
+  temperature: 0
   # force output to json object
   response_format:
     type: "json_object"
 ProtectedStartup: [input, prompt.messages]
-# following are the default input values to demo
-content: >-
-  Needed a nice lamp for my bedroom, and this one had additional storage and not too high of a price point. Got it fast.
-  The string to our lamp broke during the transit and the company happily sent over a new one. Came within a few days as well. It was easy to put together.
-  I had a missing part, so I contacted their support and they very quickly got me the missing piece! Lumina seems to me to be a great company that cares about their customers and products!!
-output:
-  type: "object"
-  properties:
-    sentiment:
-      type: "string"
-      description: "Sentiment (positive or negative)"
-    products:
-      type: "array"
-      items:
-        type: "object"
-        properties:
-          name:
-            type: "string"
-            description: "Name of the product"
-          brand:
-            type: "string"
-            description: "Company that made the product"
-      description: "Products mentioned in the review"
-    anger:
-      type: "boolean"
-      description: "Is the reviewer expressing anger?"
-  required: ["sentiment", "products", "anger"]
+excludeModels:
+  - /(?:^|[-_.])(smollm)(?:\d+(?:[.]\d+)?)?(?:$|[-_.])/i
+  - /^llama-3.2-3b/i
+# import:
+#   - ./json-to-text.js:
+#       jsonToText: 'template$objToText'
 ---
 # Below are the prompts script
 system: |-
-  Accurately Extract THE CONTENT input by the user as a JSON object according to THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS specified by the user:
+  Accurately Extract THE INPUT CONTENT by the user as a JSON object according to THE JSON FIELDS in json schema format specified by the user:
 user: |-
-  THE OUTPUT JSON CONTENT FIELDS REQUIREMENTS:
-  json-schema:
+  {{background}}
+  THE JSON FIELDS IN JSON SCHEMA FORMAT:
   {{output}}
   ---
-  THE CONTENT:
+
+  THE INPUT CONTENT:
   {{content}}
   ---

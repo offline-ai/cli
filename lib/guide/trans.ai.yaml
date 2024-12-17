@@ -13,6 +13,6 @@ content: "This is a test."
   then:
     - $set:
         lang: "$getLanguageFromIso6391(lang)"
-    - $echo: "@translator(content=content, terms='- PPE: Programmable Prompt Engine', lang='English', target=lang)"
+    - $echo: "[[@translator(content=content, terms='- PPE: Programmable Prompt Engine', lang='English', target=lang)]]"
   else:
     - $echo: ?=content

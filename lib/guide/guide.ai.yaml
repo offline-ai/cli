@@ -28,14 +28,14 @@ IsServerRunning: Please make sure the brain(LLM) server has been started. Are yo
     }
     return result
   }
-- $if: "@input(inputType='confirm', content={{Welcome+'\n'+IsServerRunning}}, value=true, format=(answer) => answer ? 'Yes' : 'No')"
+- $if: "[[@input(inputType='confirm', content={{Welcome+'\n'+IsServerRunning}}, value=true, format=(answer) => answer ? 'Yes' : 'No')]]"
   then:
     # call support_langs to get the supported languages from LLM and assign it to the languages variable.
     - $set:
-      languages: "@support_langs"
+      languages: "[[@support_langs]]"
     - $set:
       # call input to get the preferLang from user and assign it to the preferLang variable.
-      preferLang: "@input(inputType='AutoComplete', content='Which language do you prefer?', choices=languages, limit=10)"
+      preferLang: "[[@input(inputType='AutoComplete', content='Which language do you prefer?', choices=languages, limit=10)]]"
       # `#` prefix means format the template string immediately and assign it to the variable.
       GiveMeGoodBrain: "\n[Start Guide]An expert should have a good brain(LLM)."
     - $if: "preferLang !== 'en'"

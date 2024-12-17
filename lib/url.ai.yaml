@@ -4,30 +4,20 @@ type: lib
 description: |-
   the simple fetch web page content from url.
 
-  It can be used in prompt. eg, `user: "think about the following web content: @url(https://www.example.com)"`
+  It can be used in prompt. eg, `user: "think about the following web content: [[@url(https://www.example.com)]]"`
 tag:
   - url
   - loader
   - prompt
   - lib
 input:
-  - 0                               # The url passed by the prompt(position argument)
-  - content                         # The url passed by the prompt
+  - content: {index: 0}             # The url passed by the prompt, index: the position argument
+  - maxSize: {type: "number"}       # truncate the content to this size if exists
   - sslVerify: {type: "boolean"}
   - onlyContent: {type: "boolean"}  # Only return the content
 output: # the web page content
   type: "string"
+import:
+  './load-url.js': ['loadUrl']
 ---
-!fn |-
-  async function loadUrl() {
-    let url = this.content || this[0]
-    let options = {}
-    if (!this.sslVerify && url.startsWith('https://')) {
-      const https = await import('https');
-      const agent = new https.Agent({ rejectUnauthorized: false })
-      options.agent = agent
-    }
-    const content = await fetch(url, options).then(res => res.text())
-    return `web url: ${url}\nweb content:\n${content}`
-  }
 $loadUrl

@@ -4,7 +4,7 @@ version: 0.1.1
 name: "Translator"
 description: |-
   Translate the content or a file to the target language.
-  It can be used in prompt. eg, `assistant: "Translation: @translator(file='document.md', target='English')"`
+  It can be used in prompt. eg, `assistant: "Translation: [[@translator(file='document.md', target='English')]]"`
 
   Or, run it directly:
 
@@ -56,7 +56,7 @@ parameters:
 - $if: "this.file"
   then:
     $set:
-      content: "@file({{file}})"
+      content: "[[@file({{file}})]]"
 - system: |-
     You are the best master of translation in the world.
 - $if: "this.content"

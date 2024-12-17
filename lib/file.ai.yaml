@@ -4,42 +4,21 @@ type: lib
 description: |-
   the simple text file loader. You can use environment variables in file path, eg, "$HOME/documents/document.md".
 
-  It can be used in prompt. eg, `user: "think about the following file content: @file(document.md)"`
+  It can be used in prompt. eg, `user: "think about the following file content: [[@file(document.md)]]"`
 tag:
   - file
+  - url
   - loader
   - prompt
   - lib
 input:
-  - 0                               # The file path passed by the prompt(position argument)
-  - content                         # The file path passed by the prompt
+  - content: {index: 0}             # The file path passed by the prompt, index: the position argument
+  - maxSize: {type: "number"}       # truncate the file content to this size if exists
   - sslVerify: {type: "boolean"}
   - onlyContent: {type: "boolean"}  # Only return the content
 output: # the file content
   type: "string"
+import:
+  './load-file.js': ['loadFile']
 ---
-!fn |-
-  async function loadFile() {
-    const fs = await import('fs');
-    const path = await import('path');
-    let filepath = this.content || this[0]
-    if (!filepath) {throw new Error('No file path provided.')}
-    if (filepath.startsWith('https://') || filepath.startsWith('http://')) {
-      let options = {}
-      if (!this.sslVerify && filepath.startsWith('https://')) {
-        const https = await import('https');
-        const agent = new https.Agent({ rejectUnauthorized: false })
-        options.agent = agent
-      }
-      const content = await fetch(filepath, options).then(res => res.text());
-      if (this.onlyContent) return content;
-      return `url: ${filepath}\nfile content:\n${content}`
-    } else {
-      const filename = path.basename(filepath);
-      filepath = expandPath(filepath)
-      const content = fs.readFileSync(filepath, 'utf8');
-      if (this.onlyContent) return content;
-      return `filename: ${filename}\nfile content:\n${content}`
-    }
-  }
 $loadFile

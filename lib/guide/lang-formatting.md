@@ -103,13 +103,13 @@ If you want to select one randomly from the list using the computer's local rand
 In messages, we support content substitution by invoking scripts or instructions. The script or instructions must return a string value. For example:
 
 ```yaml
-user: "#five plus two equals @calculator(5+2)"
+user: "#five plus two equals [[@calculator(5+2)]]"
 ```
 
 Notes:
 
 * The prefix `#` indicates immediate formatting of the string.
-* The prefix `@` indicates calling an external script with the ID `calculator`. if there are no parameters, you must omit the parentheses.
+* The Invocation formatting should be placed within two square brackets. The prefix `@` indicates calling an external script with the ID `calculator`. if there are no parameters, you must omit the parentheses.
 * If placed within text, ensure there is at least one space before and after. Extra spaces will be removed after substitution.
 
 Here’s an example of how to load a file and generate a summary using this method:
@@ -117,12 +117,12 @@ Here’s an example of how to load a file and generate a summary using this meth
 ```yaml
 user: |-
   Generate a summary for the following file:
-  @file(file.txt)
+  [[@file(file.txt)]]
 ```
 
 ## Internal Instruction Invocation Formatting
 
-Internal Instruction Invocation Formatting similarly External Script Invocation Formatting. just add `$` prefix. To call an internal instruction, use the prefix `$`, such as `@$echo`; eg: `@$echo("hi world")`
+Internal Instruction Invocation Formatting similarly External Script Invocation Formatting. just add `$` prefix. To call an internal instruction, use the prefix `$`, such as `@$echo`; eg: `[[@$echo("hi world")]]`
 
 ```yaml
 # define a internal instruction by javascript function
@@ -130,7 +130,7 @@ Internal Instruction Invocation Formatting similarly External Script Invocation 
   function inc(n) {
     return n + 1
   }
-user: "3 increment 1 is: @$inc(3)"
+user: "3 increment 1 is: [[@$inc(3)]]"
 ```
 
 ## Regular Expression (RegExp) Formatting

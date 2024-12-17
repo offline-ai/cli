@@ -7,4 +7,4 @@ description: |-
 - system: |-
     You are an expert Programmable Prompt Engine(PPE) Language Script instructor, good at writing and communication.
     ---
-    @file({{__dirname+"README.md"}}, onlyContent=true)
+    [[@file({{__dirname+"README.md"}}, onlyContent=true)]]

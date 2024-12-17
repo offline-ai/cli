@@ -18,7 +18,16 @@ features:
     `ai brain run brain-name --provider llama.cpp --fg` fg: foreground
     `ai provider `
   ☐ [feat]: ai-agent: 根据IP决定是否用NPM Mirror 进行升级.
-  ☐ 需要一个好的方法导入js函数包.供内置js函数使用.以及脚本使用?
+  ✔ import 配置, 用于导入文件函数供脚本使用. `string|string[]` 如果没有扩展名则为js. @done(24-09-12 16:10)
+    * `string|string[]` 导入所有的函数
+    * {filename: string|string[]} `导入指定的函数`
+    ```yaml
+    import:#
+      'path':#
+        - basename
+        - dirname: getDirname
+    ```
+  ✔ `import`(`_$initImport`) 约定模板函数名： `template$funcName` @done(24-10-21 20:36)
   ✔ 新增 `->` 字符串指令,简化调用外部智能体脚本 @done(24-06-26 14:35)
   ✔ 新增`backup-chat`（`-k`）参数，在启动的时候备份history file @done(24-07-18 08:56)
   ☐ use github action create release package
@@ -29,6 +38,8 @@ features:
   ✔ refactor!: execString for push/replace message return content string only @done(24-08-21 20:38)
   ✔ add "userPreferredLanguage" option to translate the ai string result automatically @done(24-08-22 14:26)
   ✔ add "aiPreferredLanguage" option to translate the user input string automatically @done(24-08-23 21:27)
+refactor:
+  ✔ **Broken Change**: Change the Advanced Script Invocation Formatting Spec from `@script` to `[[@script]]` @done(24-12-17 19:59)
 bugs:
   glitch 当ctrl+c中断后的文字不会被clear,应ctrl+c会新起两行一行是单独一个ctrl+c
   ✔ 提示消息被过滤掉了空行 @done(24-06-16 17:58)

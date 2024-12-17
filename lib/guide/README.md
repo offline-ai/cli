@@ -43,15 +43,15 @@ The role messages can be formatted using Jinja2 templates and advanced replaceme
 
 * **Jinja2 Templates:**  Reference variables from input configuration or prompt settings using double curly braces (e.g., `{{name}}`).
 * **Advanced AI Replacement:** As described above, triggers AI execution and stores the response.
-* **External Script Replacement:**  Invoke external scripts using the `@` symbol (e.g., `@say_hi_script(param1=value1)`).
-* **Internal Instruction Replacement:**  Call internal instructions similarly (e.g., `@$instruction(param1=value1)`).
+* **External Script Replacement:**  Invoke external scripts using the `@` symbol (e.g., `[[@say_hi_script(param1=value1)]]`).
+* **Internal Instruction Replacement:**  Call internal instructions similarly (e.g., `[[@$instruction(param1=value1)]]`).
 * **Regular Expression Replacement:** Use `/RegExp/[RegOpts]:Answer[:index_or_group_name]` for pattern-based replacement on the `Answer` variable.
 
 ### [Programmable Prompt Engine Language - Script Capabilities](./lang-script.md)
 
 * **Chaining Outputs:** The `->` operator connect script outputs to subsequent instructions or scripts, creating complex workflows.
 * **Instruction Invocation:** The `$` prefix calls script instructions (e.g., `$fn: {param1:value1}`).
-* **Control Flow:** Directives like `$if`, `$pipe`, `$set`, `$get`, `$print`, `$echo` provide control flow mechanisms.
+* **Control Flow:** Directives like `$if`, `$while`, `$for`, `$match` provide control flow mechanisms.
 * **Event-Driven Architecture:** Functions like `$on`, `$once`, `$emit` and `$off` enable event-based programming for flexible script behavior.
 * **JavaScript Extension:** The `!fn` directive allows declaring JavaScript functions to extend script functionality.
 

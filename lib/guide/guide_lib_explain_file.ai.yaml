@@ -20,7 +20,7 @@ file: "README.md"
     - -> trans(lang) -> $ret
 - user: |-
     {%if file != 'README.md'%}
-    @file({{__dirname+file}})
+    [[@file({{__dirname+file}})]]
     ---
     {%endif%}
     Summarize the content in detail, capturing the key points and essence of it.
@@ -29,7 +29,7 @@ file: "README.md"
 # - -> titleify(content=summary) -> trans(lang) -> $set('title')
 - -> extract_title(content=summary) -> trans(lang) -> $set('title')
 - -> trans(content="Do you have any questions about this file?", lang) -> $set('anyQuestion')
-- $while: "@input(inputType='confirm', content=anyQuestion + ' ' + title, memoized=false, format=(answer) => answer ? 'Yes' : 'No')"
+- $while: "[[@input(inputType='confirm', content=anyQuestion + ' ' + title, memoized=false, format=(answer) => answer ? 'Yes' : 'No')]]"
   do:
     - ---
     - -> trans(content="What do you want to know?", lang) -> input(memoized=false) -> $set('question') -> $print()
@@ -37,4 +37,4 @@ file: "README.md"
     - assistant: "Let me explain it more clearly: [[answer:temperature=0.01]]"
     - -> trans(lang) -> $print(content)
 # call guide.ai.yaml lib to return main entry point
-# - $echo: "@guide"
+# - $echo: "[[@guide]]"

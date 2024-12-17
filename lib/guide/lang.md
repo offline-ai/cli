@@ -94,8 +94,8 @@ The role messages can be formatted using Jinja2 templates and advanced replaceme
   * **AI Parameter Passing:** AI parameters can be passed within double brackets (e.g., `[[Answer:temperature=0.7]]`).
   * **Constrained AI Responses:** Double brackets can enforce that AI responses are limited to specific options (e.g., `[[FRUITS:|Apple|Banana]]`).
 * **Script and Instruction Replacement:** call the script or instruction in the message text. The script or instruction's output is then replaced into the message text.
-  * **External Script Replacement:** External scripts can be invoked using the `@` symbol (e.g., `@say_hi_script(param1=value1, p2=v2)`, it will be replaced by `hi`).
-  * **Internal Instruction Replacement:**  Internal instructions can be called and replaced similarly (e.g., `@$instruction(param1=value1)`).
+  * **External Script Replacement:** External scripts can be invoked using the `@` symbol (e.g., `[[@say_hi_script(param1=value1, p2=v2)]]`, it will be replaced by `hi`).
+  * **Internal Instruction Replacement:**  Internal instructions can be called and replaced similarly (e.g., `[[@$instruction(param1=value1)]]`).
 * **Regular Expression Replacement:** `/RegExp/[RegOpts]:Answer[:index_or_group_name]` allows for pattern-based replacement on the `Answer` variable.
 
 ### Chaining and Script Function Calls

@@ -1,11 +1,11 @@
 ---
-version: 0.2.1
+version: 0.2.2
 type: lib
 description: |-
   Summarize the content or a text file in detail, capturing the key points and essence of the document.
   It takes a filepath as input and outputs a concise summary that reflects the main theme or content.
 
-  It can be used in prompt. eg, `Summary: @summary(file=document.md)`
+  It can be used in prompt. eg, `Summary: [[@summary(file=document.md)]]`
 
   Or, run it directly:
 
@@ -21,6 +21,7 @@ tag:
 input:
   - content                   # The content to summarize or treat as user input
   - file                      # The text file path if exists, it will load content from the file
+  - instruction               # the optional addtional instruction
   - len: {type: "number"}     # the optional max length of the summary, It is not precise, just an approximate number.
   - temperature               # the optional temperature of the LLM.
 len: -1                       # the default max length of the summary, -1 means no limit
@@ -31,11 +32,13 @@ output:
 - $if: "this.file"
   then:
     $set:
-      fileContent: "@file({{file}})"
+      fileContent: "[[@file({{file}})]]"
 - system: |-
     Summarize the following content or file provided by the user in detail, capturing the key points and essence of it.
     {% if len and len > 0 %}
     Keep the summary within {{len}} characters.
+    {% endif %}
+    {% if instruction %}{{instruction}}
     {% endif %}
     ---
     {{fileContent}}

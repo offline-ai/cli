@@ -191,13 +191,13 @@ In messages, we support content substitution by invoking scripts or instructions
 ```yaml
 # the `#` prefix means immediate formatting
 # call the `calculator.ai.yaml` script with the parameter '5+2'
-user: "#five plus two equals @calculator('5+2')"
+user: "#five plus two equals [[@calculator('5+2')]]"
 ```
 
 Notes:
 
 * The prefix `#` indicates immediate formatting of the string.
-* The prefix `@` indicates calling an external script with the ID `calculator`. if there are no parameters, you must omit the parentheses.
+* The Invocation formatting should be placed within two square brackets. The prefix `@` indicates calling an external script with the ID `calculator`. if there are no parameters, you must omit the parentheses.
 * If placed within text, ensure there is at least one space before and after. Extra spaces will be removed after substitution.
 
 Here’s an example of how to load a file and generate a summary using this method:
@@ -205,5 +205,5 @@ Here’s an example of how to load a file and generate a summary using this meth
 ```yaml
 user: |-
   Generate a summary for the following file:
-  @file(file.txt)
+  [[@file(file.txt)]]
 ```

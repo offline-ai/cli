@@ -26,8 +26,8 @@ output:
             type: 'string'
             description: the description for the link
 instruction: |-
-  - Summary the key points and essence of it
   - Extract all links with title and description base on the markdown links from it
+  - Output summary and links list
 file: "README.md"
 ---
 # - system: |-
@@ -36,10 +36,10 @@ file: "README.md"
 #     - Output JSON format, following the JSON schema:
 #     {{output}}
 #     ---
-#     @file({{__dirname + file}})
+#     [[@file({{__dirname + file}})]]
 # - user: Output all urls with title in markdown format from the README.md
 # - assistant: "[[urls:temperature=0.01]]"
 # - -> summary(file={{__dirname + file}}, content)
-- -> summary(file={{__dirname + file}}, content=instruction) -> json(output=output)
+- -> summary(file={{__dirname + file}}, instruction) -> json(output=output)
 # - $|echo: ["summary", "links[0]"]
 

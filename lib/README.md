@@ -2,10 +2,6 @@
 
 This directory contains a collection of Programmable Prompt Engine (PPE) Script Runtime Library files.
 
-**NOTE**:
-
-The Current PPE Script Runtime Libraries Directory has been moved to the `@offline-ai/cli-plugin-core` package.
-
 ## char type
 
 **Introduction:**
@@ -48,13 +44,13 @@ assistant: I am Dobby. Dobby is happy.
 
 **Introduction:**
 
-This file defines a simple text file loader library for the Programmable Prompt Engine (PPE).
+This file defines a simple text file/url loader library for the Programmable Prompt Engine (PPE).
 
 **Key Functionality:**
 
-* **Loads text files:** Reads the contents of text files specified by a file path.
+* **Loads text files:** Reads the contents of text files specified by a file path or url.
 * **Environment Variable Support:** Allows use of environment variables within file paths (e.g., "$HOME/documents/document.md").
-* **Prompt Integration:** Designed to be integrated into PPE prompts, allowing users to reference file content directly within prompts (e.g., `user: summary the following file content: @file(document.md)`).
+* **Prompt Integration:** Designed to be integrated into PPE prompts, allowing users to reference file content directly within prompts (e.g., `user: summary the following file content: [[@file(document.md)]]`).
 
 **Input Configuration:**
 
@@ -67,14 +63,14 @@ This file defines a simple text file loader library for the Programmable Prompt 
 **Usage Example:**
 
 ```yaml
-user: summary the following file content: @file(document.md)
+user: summary the following file content: [[@file(document.md)]]
 ```
 
 This prompt instructs the PPE to load the content of "document.md" and then summarize the loaded text.
 
 **Workflow:**
 
-1. The PPE encounters the `@file(document.md)` directive in the prompt.
+1. The PPE encounters the `[[@file(document.md)]]` directive in the prompt.
 2. The PPE invokes the `file.ai.yaml` library.
 3. The library uses the `loadFile()` function to read the file content from "document.md" (resolving any environment variables in the path).
 4. The loaded content is returned as a string, formatted with the filename and content.
@@ -188,7 +184,7 @@ The library provides two usage examples:
 
 **Usage Example:**
 
-* **Inline Prompt:** `Title: @titleify(file=document.md)`
+* **Inline Prompt:** `Title: [[@titleify(file=document.md)]]`
 * **Command-Line Execution:**
 
   ```bash
@@ -197,7 +193,7 @@ The library provides two usage examples:
 
 **Workflow:**
 
-1. **Input Processing:** The script first checks if a "file" input is provided. If so, it loads the content from the specified file path using the `@file()` function.
+1. **Input Processing:** The script first checks if a "file" input is provided. If so, it loads the content from the specified file path using the `[[@file()]]` function.
 2. **Summarization:** The loaded content is then passed to a summarization engine (represented by `[[titles:max_tokens=len]]`). This engine likely utilizes a large language model to generate several potential titles based on the input text and the desired length.
 3. **Title Selection:** The script interacts with the user (in an interactive mode) to select the best title from the generated options.
 4. **Output:** Finally, the chosen title is returned as the output of the "titleify" function.
@@ -242,7 +238,7 @@ $ai run --no-chats -f translator "{content:'我爱我的祖国和故乡.', targe
 - **Integration within a prompt:**
 
 ```yaml
-assistant: "Translate: @translator(file='document.md', target='English')"
+assistant: "Translate: [[@translator(file='document.md', target='English')]]"
 ```
 
 **Workflow:**
@@ -251,3 +247,30 @@ assistant: "Translate: @translator(file='document.md', target='English')"
 2. If the source language is not specified, it attempts to automatically detect it.
 3. It then constructs a prompt for a language model, instructing it to translate the input text into the target language.
 4. The translated text, along with the original text, source language, and target language, are returned as an object.
+
+## url
+
+**Introduction:**
+
+This file defines a simple fetch url library for the Programmable Prompt Engine (PPE).
+
+**Key Functionality:**
+
+* **Loads web content from url:** Reads the content specified by a url path.
+* **Prompt Integration:** Designed to be integrated into PPE prompts, allowing users to reference url content directly within prompts (e.g., `user: summary the following web page: [[@url("https://example.com/page.html")]]`).
+
+**Input Configuration:**
+
+* **`content`:** (Required) A string representing the url to fetch.
+
+**Output Configuration:**
+
+* **`type: "string"`:** Returns the loaded web content as a string. The output is formatted with the `web url` and `web content` separated by a newline.
+
+**Usage Example:**
+
+```yaml
+user: summary the following web content: [[@url("https://example.com/page.html")]]
+```
+
+This prompt instructs the PPE to load the content from "https://example.com/page.html" and then summarize the loaded text.

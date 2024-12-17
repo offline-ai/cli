@@ -5,7 +5,7 @@ description: |-
   Summarize the content or a text file into a single best title that captures the essence of the document.
   It takes a filepath as input and outputs a concise title that reflects the main theme or content.
 
-  It can be used in prompt. eg, `Title: @titleify(file=document.md)`
+  It can be used in prompt. eg, `Title: [[@titleify(file=document.md)]]`
 
   Or, run it directly:
 
@@ -32,7 +32,7 @@ temperature: 0.01            # the default temperature of the LLM.
 - $if: "this.file"
   then:
     $set:
-      fileContent: "@file({{file}})"
+      fileContent: "[[@file({{file}})]]"
 - system: |-
     Summarize the content provided by the user into some best titles that captures the essence of the document.
     {%- if len and len > 0 -%}
