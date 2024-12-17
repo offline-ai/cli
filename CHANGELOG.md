@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.0](https://github.com/offline-ai/cli/compare/v0.5.19...v0.6.0) (2024-12-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* Change the Advanced Script Invocation Formatting Spec from `@script` to `[[@script]]`
+
+### Refactor
+
+* Change the Advanced Script Invocation Formatting Spec from `[@script](https://github.com/script)` to `[[[@script](https://github.com/script)]]` ([a6bb6f2](https://github.com/offline-ai/cli/commit/a6bb6f23e8a4c05205b6ac9d67f901b478f75e00))
+
 ## [0.5.19](https://github.com/offline-ai/cli/compare/v0.5.18...v0.5.19) (2024-12-17)
 
 ## [0.5.18](https://github.com/offline-ai/cli/compare/v0.5.17...v0.5.18) (2024-12-17)
