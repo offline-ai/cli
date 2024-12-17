@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.19](https://github.com/offline-ai/cli/compare/v0.5.18...v0.5.19) (2024-12-17)
+
 ## [0.5.18](https://github.com/offline-ai/cli/compare/v0.5.17...v0.5.18) (2024-12-17)
 
 ## [0.5.17](https://github.com/offline-ai/cli/compare/v0.5.16...v0.5.17) (2024-12-17)
