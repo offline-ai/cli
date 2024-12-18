@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.1](https://github.com/offline-ai/cli/compare/v0.6.0...v0.6.1) (2024-12-18)
+
+
+### Features
+
+* add group chat in message content ([c3fe558](https://github.com/offline-ai/cli/commit/c3fe558260a4f0c4d3ed217c3c1032d696e9862c))
+
 ## [0.6.0](https://github.com/offline-ai/cli/compare/v0.5.19...v0.6.0) (2024-12-17)
 
 
