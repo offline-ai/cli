@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.0](https://github.com/offline-ai/cli/compare/v0.6.2...v0.7.0) (2024-12-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* Change the Advanced RegExp Formatting Spec from `/.../` to `[[/.../]]`
+
+### Refactor
+
+* Change the Advanced RegExp Formatting Spec from `/.../` to `[[/.../]]` ([c8d082b](https://github.com/offline-ai/cli/commit/c8d082b33f55931ddf1102ab82da6dbf08ccd4ee))
+
 ## [0.6.2](https://github.com/offline-ai/cli/compare/v0.6.1...v0.6.2) (2024-12-18)
 
 ## [0.6.1](https://github.com/offline-ai/cli/compare/v0.6.0...v0.6.1) (2024-12-18)
