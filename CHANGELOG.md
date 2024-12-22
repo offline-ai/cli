@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.8.0](https://github.com/offline-ai/cli/compare/v0.7.0...v0.8.0) (2024-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* Change the `import` Spec from `jsModule` to `js:jsModule`
+
+### Refactor
+
+* Change the `import` Spec from `jsModule` to `js:jsModule` ([c8dd5c9](https://github.com/offline-ai/cli/commit/c8dd5c9ccc3061de43cef83ea71ccb71ed5cb2b1))
+
 ## [0.7.0](https://github.com/offline-ai/cli/compare/v0.6.2...v0.7.0) (2024-12-19)
 
 
