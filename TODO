@@ -39,9 +39,11 @@ features:
   ✔ add "userPreferredLanguage" option to translate the ai string result automatically @done(24-08-22 14:26)
   ✔ add "aiPreferredLanguage" option to translate the user input string automatically @done(24-08-23 21:27)
   ✔ add group chat in message content @done(24-12-18 17:44)
+  ✔ add `export` configuration spepcification @done(24-12-22 19:29)
 refactor:
   ✔ **Broken Change**: Change the Advanced Script Invocation Formatting Spec from `@script` to `[[@script]]` @done(24-12-17 19:59)
   ✔ **Broken Change**: Change the Advanced RegExp Formatting Spec from `/.../` to `[[/.../]]` @done(24-12-19 11:14)
+  ✔ **Broken Change**: Change the `import` Spec from `jsModule` to `js:jsModule` @done(24-12-22 19:28)
 bugs:
   glitch 当ctrl+c中断后的文字不会被clear,应ctrl+c会新起两行一行是单独一个ctrl+c
   ✔ 提示消息被过滤掉了空行 @done(24-06-16 17:58)
