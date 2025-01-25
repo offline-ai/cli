@@ -25,6 +25,7 @@ AI Agent 脚本引擎特点:
   * 访问该站点查看详细脚本的用法
 * [可编程提示词工程测试用例单元测试](https://github.com/offline-ai/cli-plugin-cmd-test.js)
   * Fixtures Demo: https://github.com/offline-ai/cli/tree/main/examples/split-text-paragraphs
+* 智能缓存LLM大模型以及智能体调用结果，加速运行以及减少tokens开销
 
 使用AI Agent 脚本引擎开发一个智能应用只需要三步:
 
@@ -34,7 +35,7 @@ AI Agent 脚本引擎特点:
    3. 选择合适的量化程度,量化(压缩)程度越大,速度越快,体积越小,精度越差...
    4. 选择合适的最大窗口正文长度(`content_size`), 一般 2048 足够, 这个参数也会影响模型的性能...
    5. 然后直接使用客户端(`@offline-ai/cli`)下载: `ai brain download`
-2. 创建应用的智能体脚本文件,使用客户端(`@offline-ai/cli`)调试智能体提示词
+2. 创建应用的智能体脚本文件,使用客户端(`@offline-ai/cli`)调试智能体提示词: `ai run your_script.ai.yaml --interactive --loglevel info`.
 3. 嵌入到自己的智能应用中
 4. 一键打包生成独立的智能应用(TODO)
 
@@ -44,7 +45,7 @@ AI Agent 脚本引擎特点:
 * 更多的例子: [examples](./examples)
 * 使用 PPE Language 编写的 AI 应用程序：
   * [PPE 的 智能编程指南](./lib/guide/)
-    * 在项目根目录下运行 `ai run guide --streamEcho line` 来启动指南
+    * 在项目根目录下运行 `ai run guide` 来启动指南
   * [人工智能终端 shell](https://github.com/offline-ai/ai-shell)
 * LLM 推理提供者:
   * `llamacpp`: llama.cpp server 作为默认的本地 LLM 提供者. 如果没有提供`provider`,就是`llamacpp`
