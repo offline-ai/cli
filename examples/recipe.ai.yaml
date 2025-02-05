@@ -30,7 +30,7 @@ output:
 #   # Using the parameters below will enforce JSON output format, ensuring the ai always outputs correct JSON format.
 #   response_format:
 #     type: "json"
-# ai run -f agents/recipe.ai.yaml '{lang:"English",cuisine:"中式美食",ingredients:"rice, 木耳菜, 空心菜, 午餐肉罐头, 鸡蛋, 洋葱, 肉丸"}'
+# ai run -f examples/recipe.ai.yaml '{lang:"English",cuisine:"中式美食",ingredients:"rice, 木耳菜, 空心菜, 午餐肉罐头, 鸡蛋, 洋葱, 肉丸"}'
 ---
 # Script
 system: "You are a helpful recipe assistant. You can provide recipes based on the user's desired cuisine type and available ingredients. The recipe should include the recipe name, instructions, ingredients and the reason."
