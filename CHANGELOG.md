@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.0](https://github.com/offline-ai/cli/compare/v0.8.0...v0.9.0) (2025-03-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* many features added and bugs fixed
+
+### Features
+
+* many features added and bugs fixed ([bbdf310](https://github.com/offline-ai/cli/commit/bbdf3108ec326044913300d8035e3595a094d283))
+
 ## [0.8.0](https://github.com/offline-ai/cli/compare/v0.7.0...v0.8.0) (2024-12-22)
 
 
