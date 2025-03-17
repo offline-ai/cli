@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.5](https://github.com/offline-ai/cli/compare/v0.9.4...v0.9.5) (2025-03-17)
+
+
+### Features
+
+* add software_company example(not finished) ([7c169eb](https://github.com/offline-ai/cli/commit/7c169eb30c7bc8525ec620885018e1dc010273ea))
+
 ## [0.9.4](https://github.com/offline-ai/cli/compare/v0.9.3...v0.9.4) (2025-03-17)
 
 ## [0.9.3](https://github.com/offline-ai/cli/compare/v0.9.2...v0.9.3) (2025-03-17)
