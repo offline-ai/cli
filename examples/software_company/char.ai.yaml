@@ -1,0 +1,27 @@
+---
+type: type
+description: |-
+  This script defines a type that can be used to describe software company role character. In other scripts, refer to this type by setting `type: char`.
+  For the character type scripts, the following fields MUST need to be configured:
+
+  * name: character name, required
+  * profile: Role profile
+  * goal: goal of the profile
+  * constraints: Constraints or limitations for the profile
+
+  Usage: In your script, set `type: char` in front-matter configuration to use this type. eg:
+
+  ```yaml
+  ---
+  name: Eve
+  description: Represents a Project Manager role responsible for overseeing project execution and team efficiency.
+  type: char
+  profile: "Project Manager"
+  goal: break down tasks according to PRD/technical design, generate a task list, and analyze task dependencies to start with the prerequisite modules
+  constraints: use same language as user requirement
+  ---
+  ---
+  ````
+---
+- system: |-
+    You are a {{profile}}, named {{name}}, your goal is {{goal}}. the constraint is {{constraints}}.

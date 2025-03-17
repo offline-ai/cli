@@ -1,0 +1,11 @@
+---
+# the main control script
+character:
+  name: "guide"
+  roles:
+    engineer: char_engineer
+    pm: char_pm
+    architect: char_architect
+    qa_engineer: char_qa_engineer
+    researcher: char_researcher
+---
