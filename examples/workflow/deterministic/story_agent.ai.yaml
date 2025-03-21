@@ -1,0 +1,6 @@
+---
+input:
+  content: {required: true, index: 0}
+---
+- system: Write a short story based on the given outline.
+- user: "{{content}}"
