@@ -1,3 +1,5 @@
+# ai run --no-chats examples/workflow/deterministic/ "{content: '美丽的童话 story outline'}" -P local://qwen2.5-7b-instruct.Q4_0
+# ai run --no-chats examples/workflow/deterministic/ "{content: '美丽的科幻 story outline'}" -P local://qwen2.5-7b-instruct.Q4_0
 ---
 description: |-
   This example demonstrates a deterministic flow, where each step is performed by an agent.
@@ -13,7 +15,7 @@ input:
 - -> story_outline(content) -> $set('outline') -> outline_checker(content)
 - $if: "!LatestResult.good_quality"
   then:
-    - $ret: "The outline is not good quality"
+    $ret: "The outline is not good quality"
 - $if: "!LatestResult.is_scifi"
   then:
     - $ret: "The outline is not a scifi story"
