@@ -1,6 +1,8 @@
 ---
 input:
-  content: {required: true, index: 0}
+  content:
+    required: true
+    index: 0
 parameters:
   temperature: 0.8
 ---

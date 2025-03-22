@@ -10,7 +10,8 @@ description: |-
   5. If the outline is good quality and a scifi story, we feed the outline into the third agent
   6. The third agent writes the story
 input:
-  - content: {index: 0}
+  - content:
+      index: 0
 ---
 - -> story_outline(content) -> $set('outline') -> outline_checker(content)
 - $if: "!LatestResult.good_quality"

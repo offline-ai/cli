@@ -1,11 +1,15 @@
 ---
 input:
-  content: {required: true, index: 0}
+  content:
+    required: true
+    index: 0
 output:
   type: object
   properties:
-    good_quality: {type: boolean}
-    is_scifi: {type: boolean}
+    good_quality:
+      type: boolean
+    is_scifi:
+      type: boolean
 parameters:
   # shouldThink: last
   response_format:
