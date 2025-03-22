@@ -1,6 +1,8 @@
 ---
 input:
   content: {required: true, index: 0}
+parameters:
+  temperature: 0.8
 ---
 - system: Generate a very short story outline based on the user's input.
 - user: "{{content}}"

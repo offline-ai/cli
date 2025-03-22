@@ -7,17 +7,17 @@ output:
     good_quality: {type: boolean}
     is_scifi: {type: boolean}
 parameters:
+  # shouldThink: last
   response_format:
     type: json
-content: >-
-  故事名：《月光下的小鹿》
+# content: >-
+#   故事名：《月光下的小鹿》
 
-  在一片被月光照亮的森林里，住着一只名叫莉莉的小鹿。莉莉拥有一双能听懂动物语言的耳朵，她用这双耳朵帮助森林里的动物们解决了很多问题。
-  一天，森林里突然来了一只迷路的小狐狸，它找不到回家的路。莉莉和森林里的朋友们一起，用智慧和勇气帮助小狐狸找到了回家的路。从此，
-  小狐狸和莉莉成为了最好的朋友，而莉莉也成为了森林里最受欢迎的小鹿。
+#   在一片被月光照亮的森林里，住着一只名叫莉莉的小鹿。莉莉拥有一双能听懂动物语言的耳朵，她用这双耳朵帮助森林里的动物们解决了很多问题。
+#   一天，森林里突然来了一只迷路的小狐狸，它找不到回家的路。莉莉和森林里的朋友们一起，用智慧和勇气帮助小狐狸找到了回家的路。从此，
+#   小狐狸和莉莉成为了最好的朋友，而莉莉也成为了森林里最受欢迎的小鹿。
 ---
+# - $print: "?=`Outline='${content}'\n\n`"
 - system: |-
     Read the given story outline, and judge the quality. Also, determine if it is a scifi story.
-    Output JSON Format:
-    {{output}}
 - user: "{{content}}"
