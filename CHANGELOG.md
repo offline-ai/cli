@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.0](https://github.com/offline-ai/cli/compare/v0.9.10...v0.10.0) (2025-04-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Change the local provider as default
+
+### Refactor
+
+* Change the local provider as default ([68aa1c9](https://github.com/offline-ai/cli/commit/68aa1c92ac62607f8502e3a73f26c20ba5ea4d76))
+
 ## [0.9.10](https://github.com/offline-ai/cli/compare/v0.9.9...v0.9.10) (2025-03-23)
 
 ## [0.9.9](https://github.com/offline-ai/cli/compare/v0.9.8...v0.9.9) (2025-03-23)
