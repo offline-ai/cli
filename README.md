@@ -211,7 +211,7 @@ $ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@offline-ai/cli/0.9.10 linux-x64 node-v20.18.0
+@offline-ai/cli/0.9.10 linux-x64 node-v20.18.3
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -480,8 +480,8 @@ _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomp
 
 ```
 USAGE
-  $ ai brain [NAME] [--json] [--config <value>] [--banner] [-b <value>] [-s <value>] [-n <value>] [-u
-    <value> -r] [-v ]
+  $ ai brain [NAME] [--json] [--config <value>] [--banner] [-b <value>]
+    [-s <value>] [-n <value>] [-u <value> -r] [-v ]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -516,7 +516,7 @@ EXAMPLES
   $ ai brain download <brain-name>
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.10/src/commands/brain/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.11/src/commands/brain/index.ts)_
 
 ## `ai brain dn [NAME]`
 
@@ -524,10 +524,10 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ```
 USAGE
-  $ ai brain dn [NAME] [--json] [--config <value>] [--banner] [-b <value>] [-q
-    F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ
-    2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED
-    |Q4_K_L|Q3_K_XL|Q2_K_L] [-u <value>] [-d] [-r]
+  $ ai brain dn [NAME] [--json] [--config <value>] [--banner] [-b <value>]
+    [-q F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XX
+    S|IQ2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUE
+    SSED|Q4_K_L|Q3_K_XL|Q2_K_L] [-u <value>] [-d] [-r]
 
 ARGUMENTS
   NAME  the brain name to download
@@ -568,10 +568,10 @@ EXAMPLES
 
 ```
 USAGE
-  $ ai brain down [NAME] [--json] [--config <value>] [--banner] [-b <value>] [-q
-    F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ
-    2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED
-    |Q4_K_L|Q3_K_XL|Q2_K_L] [-u <value>] [-d] [-r]
+  $ ai brain down [NAME] [--json] [--config <value>] [--banner] [-b <value>]
+    [-q F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XX
+    S|IQ2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUE
+    SSED|Q4_K_L|Q3_K_XL|Q2_K_L] [-u <value>] [-d] [-r]
 
 ARGUMENTS
   NAME  the brain name to download
@@ -612,10 +612,10 @@ EXAMPLES
 
 ```
 USAGE
-  $ ai brain download [NAME] [--json] [--config <value>] [--banner] [-b <value>] [-q
-    F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XXS|IQ
-    2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUESSED
-    |Q4_K_L|Q3_K_XL|Q2_K_L] [-u <value>] [-d] [-r]
+  $ ai brain download [NAME] [--json] [--config <value>] [--banner] [-b <value>]
+    [-q F32|F16|Q4_0|Q4_1|Q4_1_SOME_F16|Q8_0|Q5_0|Q5_1|Q2_K|Q3_K_S|Q3_K_M|Q3_K_L|Q4_K_S|Q4_K_M|Q5_K_S|Q5_K_M|Q6_K|IQ2_XX
+    S|IQ2_XS|Q2_K_S|IQ3_XS|IQ3_XXS|IQ1_S|IQ4_NL|IQ3_S|IQ3_M|IQ2_S|IQ2_M|IQ4_XS|IQ1_M|BF16|Q4_0_4_4|Q4_0_4_8|Q4_0_8_8|GUE
+    SSED|Q4_K_L|Q3_K_XL|Q2_K_L] [-u <value>] [-d] [-r]
 
 ARGUMENTS
   NAME  the brain name to download
@@ -650,7 +650,7 @@ EXAMPLES
   $ ai brain download <brain-name> [-q <QUANT>]
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.10/src/commands/brain/download.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.11/src/commands/brain/download.ts)_
 
 ## `ai brain list [NAME]`
 
@@ -658,8 +658,8 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ```
 USAGE
-  $ ai brain list [NAME] [--json] [--config <value>] [--banner] [-d] [-a] [-b <value>] [-f] [-s <value>] [-n
-    <value>] [-u <value> -r]
+  $ ai brain list [NAME] [--json] [--config <value>] [--banner] [-d] [-a] [-b
+    <value>] [-f] [-s <value>] [-n <value>] [-u <value> -r]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -680,7 +680,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.10/src/commands/brain/list.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.11/src/commands/brain/list.ts)_
 
 ## `ai brain refresh`
 
@@ -705,7 +705,7 @@ DESCRIPTION
   refresh/update brain index from huggingface.co
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.10/src/commands/brain/refresh.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.11/src/commands/brain/refresh.ts)_
 
 ## `ai brain search [NAME]`
 
@@ -713,8 +713,8 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ```
 USAGE
-  $ ai brain search [NAME] [--json] [--config <value>] [--banner] [-d] [-a] [-b <value>] [-f] [-s <value>] [-n
-    <value>] [-u <value> -r]
+  $ ai brain search [NAME] [--json] [--config <value>] [--banner] [-d] [-a] [-b
+    <value>] [-f] [-s <value>] [-n <value>] [-u <value> -r]
 
 ARGUMENTS
   NAME  the brain name to search
@@ -735,7 +735,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.10/src/commands/brain/search.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-plugin-cmd-brain.js/blob/v0.4.11/src/commands/brain/search.ts)_
 
 ## `ai config [ITEM_NAME]`
 
@@ -743,10 +743,11 @@ _See code: [@offline-ai/cli-plugin-cmd-brain](https://github.com/offline-ai/cli-
 
 ```
 USAGE
-  $ ai config [ITEM_NAME] [--json] [-u <value>] [--apiKey <value>] [-s <value>...] [--logLevelMaxLen <value>
-    -l trace|debug|verbose|info|notice|warn|error|fatal|print|silence] [--histories <value>] [-n] [-k] [-t <value> -i]
-    [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
-    [-L <value>] [-A <value>] [-e true|false|line] [-C <value>] [-P <value>]
+  $ ai config [ITEM_NAME] [--json] [-u <value>] [--apiKey <value>] [-s
+    <value>...] [--logLevelMaxLen <value> -l trace|debug|verbose|info|notice|warn|error|fatal|print|silence]
+    [--histories <value>] [-n] [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D
+    <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-C <value>]
+    [-P <value>]
 
 ARGUMENTS
   ITEM_NAME  the config item name path to get
@@ -792,8 +793,7 @@ DESCRIPTION
 
 EXAMPLES
   # list all configurations
-
-    $ ai config
+  $ ai config
 
   # get the brainDir config item
   $ ai config brainDir
@@ -803,7 +803,7 @@ EXAMPLES
   }
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.2.10/src/commands/config/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.2.11/src/commands/config/index.ts)_
 
 ## `ai config save [DATA]`
 
@@ -811,10 +811,11 @@ _See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli
 
 ```
 USAGE
-  $ ai config save [DATA] [--json] [--config <value>] [--banner] [-u <value>] [--apiKey <value>] [-s <value>...]
-    [--logLevelMaxLen <value> -l trace|debug|verbose|info|notice|warn|error|fatal|print|silence] [--histories <value>]
-    [-n] [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>]
-    [-b <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-C <value>] [-P <value>]
+  $ ai config save [DATA] [--json] [--config <value>] [--banner] [-u <value>]
+    [--apiKey <value>] [-s <value>...] [--logLevelMaxLen <value> -l
+    trace|debug|verbose|info|notice|warn|error|fatal|print|silence] [--histories <value>] [-n] [-k] [-t <value> -i]
+    [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
+    [-L <value>] [-A <value>] [-e true|false|line] [-C <value>] [-P <value>]
 
 ARGUMENTS
   DATA  the json data which will be passed to the ai-agent script
@@ -856,7 +857,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.2.10/src/commands/config/save.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-config](https://github.com/offline-ai/cli-plugin-cmd-config.js/blob/v0.2.11/src/commands/config/save.ts)_
 
 ## `ai help [COMMAND]`
 
@@ -1174,11 +1175,11 @@ _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/
 
 ```
 USAGE
-  $ ai run [FILE] [DATA] [--json] [--config <value>] [--banner] [-u <value>] [--apiKey <value>] [-s
-    <value>...] [--logLevelMaxLen <value> -l trace|debug|verbose|info|notice|warn|error|fatal|print|silence]
-    [--histories <value>] [-n] [-k] [-t <value> -i] [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D
-    <value>...] [-a <value>] [-b <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-C <value>]
-    [-P <value>] [--consoleClear]
+  $ ai run [FILE] [DATA] [--json] [--config <value>] [--banner] [-u
+    <value>] [--apiKey <value>] [-s <value>...] [--logLevelMaxLen <value> -l
+    trace|debug|verbose|info|notice|warn|error|fatal|print|silence] [--histories <value>] [-n] [-k] [-t <value> -i]
+    [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
+    [-L <value>] [-A <value>] [-e true|false|line] [-C <value>] [-P <value>] [--consoleClear]
 
 ARGUMENTS
   FILE  the script file path, or the json data when `-f` switch is set
@@ -1232,7 +1233,7 @@ EXAMPLES
   │[info]:Start Script: ...
 ```
 
-_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.10.10/src/commands/run/index.ts)_
+_See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugin-core.js/blob/v0.11.0/src/commands/run/index.ts)_
 
 ## `ai test [FILE]`
 
@@ -1240,11 +1241,12 @@ _See code: [@offline-ai/cli-plugin-core](https://github.com/offline-ai/cli-plugi
 
 ```
 USAGE
-  $ ai test [FILE] [--json] [--config <value>] [--banner] [-u <value>] [--apiKey <value>] [-s <value>...]
-    [--logLevelMaxLen <value> -l trace|debug|verbose|info|notice|warn|error|fatal|print|silence] [--histories <value>]
-    [-n] [-k] [-t <value> ] [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b
-    <value>] [-p <value>...] [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [-P <value>] [--consoleClear]
-    [-i <value>...] [-x <value>...] [-g] [-c <value>] [--checkSchema]
+  $ ai test [FILE] [--json] [--config <value>] [--banner] [-u <value>]
+    [--apiKey <value>] [-s <value>...] [--logLevelMaxLen <value> -l
+    trace|debug|verbose|info|notice|warn|error|fatal|print|silence] [--histories <value>] [-n] [-k] [-t <value> ]
+    [--no-chats] [--no-inputs ] [-m] [-f <value>] [-d <value>] [-D <value>...] [-a <value>] [-b <value>] [-p <value>...]
+    [-L <value>] [-A <value>] [-e true|false|line] [-e <value>] [-P <value>] [--consoleClear] [-i <value>...] [-x
+    <value>...] [-g] [-c <value>] [--checkSchema]
 
 ARGUMENTS
   FILE  the test fixtures file path
@@ -1302,7 +1304,7 @@ EXAMPLES
   $ ai test ./named.fixture.yaml -l info
 ```
 
-_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.3.10/src/commands/test/index.ts)_
+_See code: [@offline-ai/cli-plugin-cmd-test](https://github.com/offline-ai/cli-plugin-cmd-test.js/blob/v0.3.11/src/commands/test/index.ts)_
 
 ## `ai version`
 
