@@ -73,6 +73,7 @@ refactor:
   ✔ **Broken Change**: Change the Advanced Script Invocation Formatting Spec from `@script` to `[[@script]]` @done(24-12-17 19:59)
   ✔ **Broken Change**: Change the Advanced RegExp Formatting Spec from `/.../` to `[[/.../]]` @done(24-12-19 11:14)
   ✔ **Broken Change**: Change the `import` Spec from `jsModule` to `js:jsModule` @done(24-12-22 19:28)
+  ✔ **Broken Change**: Change the local provider as default @done(25-04-04 17:35)
 bugs:
   glitch 当ctrl+c中断后的文字不会被clear,应ctrl+c会新起两行一行是单独一个ctrl+c
   ✔ 提示消息被过滤掉了空行 @done(24-06-16 17:58)
