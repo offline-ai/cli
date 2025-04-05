@@ -26,24 +26,53 @@ AI Agent 脚本引擎特点:
 * [可编程提示词工程测试用例单元测试](https://github.com/offline-ai/cli-plugin-cmd-test.js)
   * Fixtures Demo: https://github.com/offline-ai/cli/tree/main/examples/split-text-paragraphs
 * 智能缓存LLM大模型以及智能体调用结果，加速运行以及减少tokens开销
-* 内置本地LLM提供者(llama.cpp): 不再需要额外安装llama.cpp server.
-  * `ai brain download hf://bartowski/Qwen_QwQ-32B-GGUF -q q4_0`
-  * `ai run example.ai.yaml -P local://bartowski-qwq-32b.Q4_0.gguf`
-  * 可以在PPE脚本中指定或任意切换LLM大模型文件了
+* 支持多LLM服务提供商：
+  * （**推荐**）**内置本地LLM提供商（llama.cpp）**作为默认选项，以保护知识的安全性和隐私。
+    * 首先下载GGUF模型文件：`ai brain download hf://bartowski/Qwen_QwQ-32B-GGUF -q q4_0`
+    * 使用默认的大脑模型文件运行：`ai run example.ai.yaml`
+    * 使用指定的模型文件运行：`ai run example.ai.yaml -P local://bartowski-qwq-32b.Q4_0.gguf`
+  * 兼容OpenAI的服务提供商：
+    * OpenAI: `ai run example.ai.yaml -P openai://chatgpt-4o-latest --apiKey “sk-XXX”`
+    * DeepSeek: `ai run example.ai.yaml -P openai://deepseek-chat -u https://api.deepseek.com/ --apiKey “sk-XXX”`
+    * Siliconflow: `ai run example.ai.yaml -P openai://Qwen/Qwen2.5-Coder-7B-Instruct -u https://api.siliconflow.cn/ --apiKey “sk-XXX”`
+    * Anthropic(Claude): `ai run example.ai.yaml -P openai://claude-3-7-sonnet-latest -u https://api.anthropic.com/v1/ --apiKey “sk-XXX”`
+  * [llama-cpp服务器(llama-server)提供商](https://github.com/ggml-org/llama.cpp/tree/master/examples/server)：`ai run example.ai.yaml -P llamacpp`
+    * llama-cpp服务器不支持指定模型名称，它是在启动llama-server时通过 model 参数指定的。
+  * 您可以在PPE脚本中指定或任意切换*LLM模型或提供商*:
+
+  ```yaml
+  ---
+  parameters:
+    model: openai://deepseek-chat
+    apiUrl: https://api.deepseek.com/
+    apiKey: "sk-XXX"
+  ---
+  system: You are a helpful assistant.
+  user: "tell me a joke"
+  --- # first dialog begin
+  assistant: "[[AI]]"
+  --- # reset to first
+  assistant: "[[AI:model='openai://claude-3-7-sonnet-latest',apiUrl='https://api.anthropic.com/v1/',apiKey='sk-XXX']]"
+  --- # reset to first
+  assistant: "[[AI:model='local://bartowski-qwq-32b.Q4_0.gguf']]"
+  ```
+
+* **内置本地LLM提供商(llama.cpp)** 功能特性
   * 默认自动检测内存和GPU，并默认使用最佳计算层，自动分配gpu-layers以及上下文窗口大小（会采用尽可能大的值），以便从硬件中获得最佳性能，无需手动配置任何内容。
     * 建议上下文窗口自行配置
   * 系统安全:系统模板反注入（避免越狱）支持
-* 大模型通用工具调用（Tool Funcs）支持(仅限内置本地LLM提供者)
-  * 无需大模型专门训练即可支持，要求大模型指令遵循能力强
-  * 最小适配3B模型，推荐使用7B及以上
-  * 双重权限控制:
-    1. 脚本设定AI能够使用的工具列表
-    2. 用户设定脚本能使用的工具列表
-* 大模型通用思维模式（`shouldThink`）支持(仅限内置本地LLM提供者):
-  * 无需大模型专门训练即可支持，要求大模型指令遵循能力强
-  * 先回答再思考（`last`）
-  * 先思考再回答(`first`)
-  * 深度思考后再回答（`deep`）: 7B及以上
+  * 任意大模型通用工具调用（Tool Funcs）支持
+    * 无需大模型专门训练即可支持，要求大模型指令遵循能力强
+    * 最小适配3B模型，推荐使用7B及以上
+    * 双重权限控制:
+      1. 脚本设定AI能够使用的工具列表
+      2. 用户设定脚本能使用的工具列表
+  * 任意大模型通用思维模式（`shouldThink`）支持
+    * 无需大模型专门训练即可支持，要求大模型指令遵循能力强
+    * 最小适配3B模型，推荐使用7B及以上
+    * 先回答再思考（`last`）
+    * 先思考再回答(`first`)
+    * 深度思考后再回答（`deep`）: 7B及以上
 * Package 支持
 * PPE支持直接调用 wasm
 * 多种结构化响应输出格式类型(`response_format.type`)支持:

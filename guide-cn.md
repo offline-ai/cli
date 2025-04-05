@@ -198,17 +198,7 @@ user: |-
 该语句表示用户角色说的话（消息），消息内容可以使用[jinja2](https://wsgzao.github.io/post/jinja/)的模板语法。
 `|-` 是YAML语法，表示多行字符串，原样保留换行。
 
-
-让我们用用看. 首先确认后台已经在运行`llama.cpp`服务器:
-
-```bash
-#run llama.cpp server
-cd llamacpp/build/bin
-#set -ngl 0 if no gpu
-./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
-```
-
-确认完毕,现在试一试,翻译一段文字为葡萄牙语:
+让我们用用看. 现在试一试,翻译一段文字为葡萄牙语:
 
 ```bash
 ai run -f translator-simple.ai.yaml "{ \
@@ -279,18 +269,8 @@ balabala,说了这么多,如何安装,请看下面:
 ### Install
 
 ```bash
+# 安装
 npm install -g @offline-ai/cli
-ai brain download QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2 -q Q4_0
-Downloading to ~/.local/share/ai/brain
-Downloading https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf... 5.61% 121977704 bytes
-1. https://hf-mirror.com/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
-   ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
-done
-mkdir llamacpp
-cd llamacpp
-# 以 Ubuntu x64 系统为例
-wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-bin-ubuntu-x64.zip
-unzip llama-b3091-bin-ubuntu-x64.zip
 ```
 
 ### 下载脑子🧠
@@ -306,16 +286,8 @@ done
 
 ### Run
 
-首先需要运行 llama.cpp server:
-
-```bash
-#run llama.cpp server
-cd llamacpp/build/bin
-#set -ngl 0 if no gpu
-./llama-server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
-```
-
-现在, 你可以运行智能体脚本了:
+现在, 打开命令行终端，你可以运行智能体脚本了:
+第一次运行会让你设置默认脑子。
 
 ```bash
 # -i `--interactive`: 交互方式运行

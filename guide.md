@@ -196,16 +196,9 @@ user: |-
 This statement represents what the user (role) says (message), and the message content can use [jinja2](https://wsgzao.github.io/post/jinja/) template syntax.
 `|-` is YAML syntax, indicating a multi-line string with line breaks preserved.
 
-Let's give it a try. First, confirm that the background `llama.cpp` brain server is already running:
+Let's give it a try.
 
-```bash
-#run llama.cpp server
-cd llamacpp/build/bin
-#set -ngl 0 if no gpu
-./server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
-```
-
-Confirmed. Now, let's try translating a piece of text into Portuguese:
+Now, let's try translating a piece of text into Portuguese:
 
 ```bash
 ai run -f translator-simple.ai.yaml "{ \
@@ -273,17 +266,6 @@ Alright, the agent script has successfully returned a JSON result. How to automa
 
 ```bash
 npm install -g @offline-ai/cli
-ai brain download QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2 -q Q4_0
-Downloading to ~/.local/share/ai/brain
-Downloading https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf... 5.61% 121977704 bytes
-1. https://hf-mirror.com/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
-   ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
-done
-mkdir llamacpp
-cd llamacpp
-# Example for Ubuntu x64 system
-wget https://github.com/ggerganov/llama.cpp/releases/download/b3091/llama-b3091-bin-ubuntu-x64.zip
-unzip llama-b3091-bin-ubuntu-x64.zip
 ```
 
 ### Download Brain(LLM) File 🧠
@@ -298,15 +280,6 @@ done
 ```
 
 ### Run
-
-First, you need to run the llama.cpp brain(LLM) server in background:
-
-```bash
-#run llama.cpp server
-cd llamacpp/build/bin
-#set -ngl 0 if no gpu
-./llama-server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
-```
 
 Now, you can run the agent script:
 

@@ -26,24 +26,50 @@ Enjoying this project? Please star it! 🌟
 * [PPE Fixtures Unit Test](https://github.com/offline-ai/cli-plugin-cmd-test.js)
   * Unit Test Fixture Demo: https://github.com/offline-ai/cli/tree/main/examples/split-text-paragraphs
 * Smart caching of LLM large models and intelligent agent invocation results to accelerate execution and reduce token expenses.
-* Builtin local LLM provider(llama.cpp): No need to install llama.cpp server additionally.
-  * `ai brain download hf://bartowski/Qwen_QwQ-32B-GGUF -q q4_0`
-  * `ai run example.ai.yaml -P local://bartowski-qwq-32b.Q4_0.gguf`
-  * You can specify or arbitrarily switch LLM large model files in the PPE script.
+* Support for Multi LLM Service Providers:
+  * (**Recommended**) Builtin local LLM provider(llama.cpp) as default to protect the security and privacy of the knowledge.
+    * Download GGUF model file first: `ai brain download hf://bartowski/Qwen_QwQ-32B-GGUF -q q4_0`
+    * Run with the default brain model file: `ai run example.ai.yaml`
+    * Run with specified the model file: `ai run example.ai.yaml -P local://bartowski-qwq-32b.Q4_0.gguf`
+  * OpenAI Compatible Service Provider:
+    * OpenAI: `ai run example.ai.yaml -P openai://chatgpt-4o-latest --apiKey “sk-XXX”`
+    * DeepSeek: `ai run example.ai.yaml -P openai://deepseek-chat -u https://api.deepseek.com/ --apiKey “sk-XXX”`
+    * Siliconflow: `ai run example.ai.yaml -P openai://Qwen/Qwen2.5-Coder-7B-Instruct -u https://api.siliconflow.cn/ --apiKey “sk-XXX”`
+    * Anthropic(Claude): `ai run example.ai.yaml -P openai://claude-3-7-sonnet-latest -u https://api.anthropic.com/v1/ --apiKey “sk-XXX”`
+  * [llama-cpp Server(llama-server) Provider](https://github.com/ggml-org/llama.cpp/tree/master/examples/server): `ai run example.ai.yaml -P llamacpp`
+    * llama-cpp Server does not support specifying model name, It is specified with the model parameter when llama-server is started.
+  * You can specify or arbitrarily switch *LLM model or provider* in the PPE script.
+
+  ```yaml
+  ---
+  parameters:
+    model: openai://deepseek-chat
+    apiUrl: https://api.deepseek.com/
+    apiKey: "sk-XXX"
+  ---
+  system: You are a helpful assistant.
+  user: "tell me a joke"
+  ---
+  assistant: "[[AI]]"
+  ---
+  assistant: "[[AI:model='local://bartowski-qwq-32b.Q4_0.gguf']]"
+  ```
+
+* Builtin local LLM provider(llama.cpp) **Features**:
   * By default, it automatically detects memory and GPU, and uses the best computing layer by default. It automatically allocates gpu - layers and context window size (it will adopt the largest possible value) to get the best performance from the hardware without manually configuring anything.
     * It is recommended to configure the context window yourself.
   * System security: Support for system template anti-injection (to avoid jailbreaking).
-* Support for general tool invocation (Tool Funcs) of large models (only for builtin local LLM provider):
-  * Can be supported without specific training of large models, requiring strong instruction - following ability of the large model.
-  * Minimum adaptation for 3B models, recommended to use 7B and above.
-  * Dual permission control:
-    1. Scripts set the list of tools AI can use.
-    2. Users set the list of tools scripts can use.
-* Support for General Thinking Mode (`shouldThink`) of large models (only for builtin local LLM provider):
-  * Can be supported without specific training of large models, requiring strong instruction - following ability of the large model.
-  * Answer first then think (`last`).
-  * Think first then answer(`first`).
-  * Think deeply then answer(`deep`): 7B and above.
+  * Support for general tool invocation (Tool Funcs) of any LLM models (only for **builtin local LLM provider**):
+    * Can be supported without specific training of LLM, requiring LLM can accurately follow instructions.
+    * Minimum adaptation for 3B model, recommended to use 7B and above.
+    * Dual permission control:
+      1. Scripts set the list of tools AI can use.
+      2. Users set the list of tools scripts can use.
+  * Support for General Thinking Mode (`shouldThink`) of large models (only for **builtin local LLM provider**):
+    * Can be supported without specific training of LLM, requiring LLM can accurately follow instructions.
+    * Answer first then think (`last`).
+    * Think first then answer(`first`).
+    * Think deeply then answer(`deep`): 7B and above.
 * Package support.
 * PPE supports direct invocation of wasm.
 * Support for multiple structured response output format types(`response_format.type`):
@@ -58,7 +84,7 @@ Developing an intelligent application with AI Agent Script Engine involves just 
   * Select a parameter size based on your application's requirements; larger sizes offer better quality but consume more resources and increase response time...
   * Choose the model's expertise: Different models are trained with distinct methods and datasets, resulting in unique capabilities...
   * Optimize quantization: Higher levels of quantization (compression) result in faster speed and smaller size, but potentially lower accuracy...
-  * Decide on the optimal context window size (`content_size`): Typically, 2048 is sufficient; this parameter also influences model performance...
+  * Decide on the optimal context window size (`max_tokens`): Typically, 2048 is sufficient; this parameter also influences model performance...
   * Use the client (`@offline-ai/cli`) directly to download the AI brain: `ai brain download`
 * Create the ai application's agent script file and debug prompts using the client (`@offline-ai/cli`): `ai run your_script.ai.yaml --interactive --loglevel info`.
 * Integrate the script into your ai application.
@@ -160,11 +186,6 @@ Downloading https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/r
 1. https://huggingface.co/QuantFactory/Phi-3-mini-4k-instruct-GGUF-v2/resolve/main/Phi-3-mini-4k-instruct.Q4_0.gguf
    ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
 done
-mkdir llamacpp
-cd llamacpp
-#goto https://github.com/ggerganov/llama.cpp/releases/latest download latest release
-wget https://github.com/ggerganov/llama.cpp/releases/download/b3563/llama-b3563-bin-ubuntu-x64.zip
-unzip llama-b3563-bin-ubuntu-x64.zip
 ```
 
 Upgrade:
@@ -176,16 +197,7 @@ npm install -g @offline-ai/cli
 
 ## Run
 
-First run llama.cpp server(provider)
-
-```bash
-#run llama.cpp server
-cd llamacpp/build/bin
-#set -ngl 0 if no gpu
-./llama-server -t 4 -c 4096 -ngl 33 -m ~/.local/share/ai/brain/phi-3-mini-4k-instruct.Q4_0.gguf
-```
-
-Now you can run your ai agent script, eg, the `Dobby` character:
+run your ai agent script, eg, the `Dobby` character:
 
 ```bash
 $ai run --interactive --script examples/char-dobby
@@ -211,7 +223,7 @@ $ npm install -g @offline-ai/cli
 $ ai COMMAND
 running command...
 $ ai (--version)
-@offline-ai/cli/0.10.0 linux-x64 node-v20.18.3
+@offline-ai/cli/0.10.1 linux-x64 node-v20.18.3
 $ ai --help [COMMAND]
 USAGE
   $ ai COMMAND
@@ -389,31 +401,45 @@ Specific script instruction manual see: [Programmable Prompt Engine Specificatio
 # Commands
 
 <!-- commands -->
-* [`ai agent`](#ai-agent)
-* [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
-* [`ai brain [NAME]`](#ai-brain-name)
-* [`ai brain dn [NAME]`](#ai-brain-dn-name)
-* [`ai brain down [NAME]`](#ai-brain-down-name)
-* [`ai brain download [NAME]`](#ai-brain-download-name)
-* [`ai brain list [NAME]`](#ai-brain-list-name)
-* [`ai brain refresh`](#ai-brain-refresh)
-* [`ai brain search [NAME]`](#ai-brain-search-name)
-* [`ai config [ITEM_NAME]`](#ai-config-item_name)
-* [`ai config save [DATA]`](#ai-config-save-data)
-* [`ai help [COMMAND]`](#ai-help-command)
-* [`ai plugins`](#ai-plugins)
-* [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
-* [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
-* [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
-* [`ai plugins link PATH`](#ai-plugins-link-path)
-* [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
-* [`ai plugins reset`](#ai-plugins-reset)
-* [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
-* [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
-* [`ai plugins update`](#ai-plugins-update)
-* [`ai run [FILE] [DATA]`](#ai-run-file-data)
-* [`ai test [FILE]`](#ai-test-file)
-* [`ai version`](#ai-version)
+- [Offline AI PPE CLI(WIP)](#offline-ai-ppe-cliwip)
+- [Quick Start](#quick-start)
+  - [PPE CLI Command](#ppe-cli-command)
+  - [Programmable Prompt Engine Language](#programmable-prompt-engine-language)
+    - [I. Core Structure](#i-core-structure)
+    - [II. Reusability \& Configuration](#ii-reusability--configuration)
+    - [III. AI Capabilities](#iii-ai-capabilities)
+      - [IV. Message Text Formatting](#iv-message-text-formatting)
+    - [V. Script Capabilities](#v-script-capabilities)
+  - [Install](#install)
+  - [Run](#run)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`ai agent`](#ai-agent)
+  - [`ai autocomplete [SHELL]`](#ai-autocomplete-shell)
+  - [`ai brain [NAME]`](#ai-brain-name)
+  - [`ai brain dn [NAME]`](#ai-brain-dn-name)
+  - [`ai brain down [NAME]`](#ai-brain-down-name)
+  - [`ai brain download [NAME]`](#ai-brain-download-name)
+  - [`ai brain list [NAME]`](#ai-brain-list-name)
+  - [`ai brain refresh`](#ai-brain-refresh)
+  - [`ai brain search [NAME]`](#ai-brain-search-name)
+  - [`ai config [ITEM_NAME]`](#ai-config-item_name)
+  - [`ai config save [DATA]`](#ai-config-save-data)
+  - [`ai help [COMMAND]`](#ai-help-command)
+  - [`ai plugins`](#ai-plugins)
+  - [`ai plugins add PLUGIN`](#ai-plugins-add-plugin)
+  - [`ai plugins:inspect PLUGIN...`](#ai-pluginsinspect-plugin)
+  - [`ai plugins install PLUGIN`](#ai-plugins-install-plugin)
+  - [`ai plugins link PATH`](#ai-plugins-link-path)
+  - [`ai plugins remove [PLUGIN]`](#ai-plugins-remove-plugin)
+  - [`ai plugins reset`](#ai-plugins-reset)
+  - [`ai plugins uninstall [PLUGIN]`](#ai-plugins-uninstall-plugin)
+  - [`ai plugins unlink [PLUGIN]`](#ai-plugins-unlink-plugin)
+  - [`ai plugins update`](#ai-plugins-update)
+  - [`ai run [FILE] [DATA]`](#ai-run-file-data)
+  - [`ai test [FILE]`](#ai-test-file)
+  - [`ai version`](#ai-version)
+- [Credit](#credit)
 
 ## `ai agent`
 
@@ -441,7 +467,7 @@ EXAMPLES
   $ ai agent publish <agent-name>
 ```
 
-_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.10.0/src/commands/agent/index.ts)_
+_See code: [src/commands/agent/index.ts](https://github.com/offline-ai/cli/blob/v0.10.1/src/commands/agent/index.ts)_
 
 ## `ai autocomplete [SHELL]`
 
