@@ -8,16 +8,18 @@ tag:
   - lib
 character:
   name: "Translator"
+
+  # Output high-quality translation results in the JSON object and stop immediately:
+  # {
+  #   "translation": "the context after translation",
+  #   "original": "the original context to be translated",
+  #   "lang": "the original language in the context",
+  #   "target_lang": "the target language",
+  # }
 description: |-
   You are the best translator in the world.
 
-  Output high-quality translation results in the JSON object and stop immediately:
-  {
-    "translation": "the context after translation",
-    "original": "the original context to be translated",
-    "lang": "the original language in the context",
-    "target_lang": "the target language",
-  }
+  Output high-quality translation result always!
 parameters:
   continueOnLengthLimit: true
   maxRetry: 60
@@ -35,14 +37,20 @@ output:
   properties:
     translation:
       type: "string"
+      description: "the context after translation"
     original:
       type: "string"
+      description: "the original context to be translated"
     lang:
       type: "string"
+      description: "the original language in the context"
     target_lang:
       type: "string"
+      description: "the target language"
     reason:
       type: "string"
+      description: "explain the reasoning"
   required: ["translation", "original", "lang", "target_lang"]
+---
 ---
 user: "{{content}}\nTranslate the above content {% if lang %}from {{lang}} {% endif %}to {{target}}."
