@@ -196,7 +196,7 @@ cd llamacpp/build/bin
 
 ```bash
 # 进入交互对话模式
-$ai run --interactive --script examples/char-dobby
+$ai run --interactive --script examples/char-dobby.ai.yaml
 ```
 
 直接运行 `translator` 脚本库:
@@ -316,14 +316,14 @@ cd build/bin
 #默认脚本的搜索路径是当前目录和`~/.local/share/ai/agent`目录 . 你可以在`agentDirs`中配置, 或者直接在命令行中指定,注意命令行指定将覆盖配置文件中的设置.
 #`-f` means the agent file
 #`-i` means 进入交互模式, char-dobby 是一个角色智能体脚本,扮演哈利波特中的dobby.
-$ai run -if examples/char-dobby
+$ai run -if examples/char-dobby.ai.yaml
 Dobby: I am Dobby. Dobby is happy.
 You: intro yourself pls.
 Dobby: I am Dobby. I'm a brave and loyal house-elf, and I'm very proud to be a free elf. I love socks and wearing mismatched pairs.
 
 #在命令行上输入内容(content)和内容的json schema 规范(output), 它就会产出该内容对应的json数据.
 #注意其生成质量受所选脑子🧠的影响.
-$ai run -f examples/json '{content: "I recently purchased the Razer BlackShark V2 X Gaming Headset, and it has significantly enhanced my gaming experience. This headset offers incredible sound quality, comfort, and features that are perfect for any serious gamer. Here’s why I highly recommend it: The 7.1 surround sound feature is a game-changer. The audio quality is superb, providing a truly immersive experience. I can clearly hear directional sounds, which is crucial for competitive gaming. The depth and clarity of the sound make it feel like I’m right in the middle of the action. The 50mm drivers deliver powerful, high-quality sound. The bass is deep and punchy without being overwhelming, while the mids and highs are crisp and clear. This balance makes the headset versatile, not only for gaming but also for listening to music and watching movies.", "output":{"type":"object","properties":{"sentiment":{"type":"string","description":"Sentiment (positive or negative)"},"products":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string","description":"Name of the product"},"brand":{"type":"string","description":"Company that made the product"}}},"description":"Products mentioned in the review"},"anger":{"type":"boolean","description":"Is the reviewer expressing anger?"}},"required":["sentiment","products","anger"]}}'
+$ai run -f examples/json.ai.yaml '{content: "I recently purchased the Razer BlackShark V2 X Gaming Headset, and it has significantly enhanced my gaming experience. This headset offers incredible sound quality, comfort, and features that are perfect for any serious gamer. Here’s why I highly recommend it: The 7.1 surround sound feature is a game-changer. The audio quality is superb, providing a truly immersive experience. I can clearly hear directional sounds, which is crucial for competitive gaming. The depth and clarity of the sound make it feel like I’m right in the middle of the action. The 50mm drivers deliver powerful, high-quality sound. The bass is deep and punchy without being overwhelming, while the mids and highs are crisp and clear. This balance makes the headset versatile, not only for gaming but also for listening to music and watching movies.", "output":{"type":"object","properties":{"sentiment":{"type":"string","description":"Sentiment (positive or negative)"},"products":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string","description":"Name of the product"},"brand":{"type":"string","description":"Company that made the product"}}},"description":"Products mentioned in the review"},"anger":{"type":"boolean","description":"Is the reviewer expressing anger?"}},"required":["sentiment","products","anger"]}}'
 
 {
   "sentiment": "positive",
@@ -351,7 +351,7 @@ import { AIScriptServer } from '@isdk/ai-tool-agent';
 
 // 配置你的脚本搜索路径
 AIScriptEx.searchPaths = ['.']
-const script = AIScriptServer.load('examples/json')
+const script = AIScriptServer.load('examples/json.ai.yaml')
 // 设置默认为大模型流式响应
 script.llmStream = stream
 

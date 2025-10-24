@@ -7,7 +7,12 @@ export default defineConfig({
   // splitting: true,
   // sourcemap: true,
   clean: true,
-  minify: 'terser',
+  // minify: 'terser',
+  // esbuildOptions: (options) => {
+  //   options.banner = {
+  //       js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);",
+  //   }
+  // },
   terserOptions: {
     // compress: {
     //   drop_console: true,
